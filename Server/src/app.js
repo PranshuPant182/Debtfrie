@@ -24,5 +24,10 @@ app.use('/api/payment', paymentRoutes);
 const contactFormRoutes = require('./routes/contactForm');
 app.use('/api', contactFormRoutes); // handles /submit-form
 
+// Root route for basic API check
+app.get('/', (req, res) => {
+    res.send('API WORKING');
+});
+
 
 module.exports = app;
