@@ -1,0 +1,304 @@
+import React, { useState } from 'react'
+import Layout from '../Layout'
+import { useForm } from 'react-hook-form';
+import images from '../../utils/images'
+import ThankYouModal from '../../components/ThankYouModal';
+
+function ContactUs() {
+
+  const [showThankYou, setShowThankYou] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const loadRazorpayScript = () =>
+    new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+
+
+  const onSubmit = async (formData) => {
+    setIsLoading(true);
+    const res = await loadRazorpayScript();
+    if (!res) {
+      alert("Failed to load Razorpay SDK");
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      // const orderRes = await fetch("http://localhost:3000/api/payment/create-order", {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      // });
+
+      const orderRes = await fetch(`${import.meta.env.VITE_API_BASE_URL}/payment/create-order`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const { order } = await orderRes.json();
+
+      const options = {
+        key: import.meta.env.VITE_RAZORPAY_KEY,
+        amount: order.amount,
+        currency: order.currency,
+        name: "DebtFree",
+        description: "Form Submission Fee",
+        order_id: order.id,
+        handler: async function (response) {
+
+          const saveRes = await fetch(`${import.meta.env.VITE_API_BASE_URL}/submit-form`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ formData, paymentInfo: response }),
+          });
+
+
+          const result = await saveRes.json();
+          setIsLoading(false); //  stop loader after success
+
+          if (result.success) {
+            setShowThankYou(true);
+          } else {
+            alert("Payment success, but failed to submit form.");
+          }
+        },
+        modal: {
+          ondismiss: () => {
+            setIsLoading(false); // stop loader if user closes/cancels Razorpay popup
+          },
+        },
+        prefill: {
+          name: formData.fullName,
+          email: formData.email,
+          contact: formData.phone,
+        },
+        theme: { color: "#3399cc" },
+      };
+
+      const rzp1 = new window.Razorpay(options);
+      rzp1.open();
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Something went wrong.");
+      setIsLoading(false);
+    }
+  };
+
+
+  return (
+    <Layout>
+      <div className="flex flex-col lg:flex-row w-full min-h-screen bg-white px-4 py-8 lg:px-20 gap-8">
+        {/* Left Side - Office Info */}
+        <div className="lg:w-1/2 w-full sm:mt-16">
+          <h1 className="text-3xl sm:text-5xl font-bold text-gray-900 mb-4" style={{
+            fontFamily: 'Youth',
+            fontWeight: 900,
+            lineHeight: '100%',
+            letterSpacing: '0%',
+          }}>
+            Talk to Our <span className="text-blue-600">Debt-Free Expert</span>
+          </h1>
+          <p className="text-gray-600 mb-6 text-md sm:text-xl" style={{
+            fontFamily: 'gilroy',
+            fontWeight: 400,
+            lineHeight: '100%',
+            letterSpacing: '0%',
+          }}>
+            Have questions about managing debt, financial planning, or becoming debt-free? Fill out the form, and our experts will get in touch with you.
+            <br /><br />
+            <span className="text-blue-600 font-semibold">Register now for just ₹50!</span>
+          </p>
+
+          <h2 className="text-2xl font-semibold text-gray-800 mb-2" style={{
+            fontFamily: 'Youth',
+            fontWeight: 900,
+            lineHeight: '100%',
+            letterSpacing: '0%',
+          }}>Our Office</h2>
+          <img src={images.ContactUs} alt="Our Office" className="w-full rounded-lg mb-6" />
+
+          <div className="text-gray-700" style={{
+            fontFamily: 'gilroy',
+            fontWeight: 400,
+            lineHeight: '100%',
+            letterSpacing: '0%',
+          }}>
+            <h3 className="font-semibold text-xl sm:text-3xl mb-4">Need help with a query?</h3>
+            <p className='text-lg ga'><strong>Support Email</strong><br />support@debtfrie.com</p>
+            <p className="mt-2 text-lg" ><strong>Customer Helpline</strong><br />+91 98765 43210 [Mon – Sat, 10AM – 7PM]</p>
+            <p className="mt-4 text-lg" >Need assistance? We're here to help you take control of your finances. Contact us today.</p>
+          </div>
+        </div>
+
+        {/* Right Side - Form */}
+        <div className="lg:w-1/2 w-full sm:mt-10">
+          <h2 className="text-3xl font-semibold text-gray-900 mb-6" style={{
+            fontFamily: 'Youth',
+            fontWeight: 900,
+            lineHeight: '100%',
+            letterSpacing: '0%',
+          }}>Contact Form</h2>
+
+          <p className="text-lg text-black mb-6" style={{
+            fontFamily: 'gilroy',
+            fontWeight: 400,
+            lineHeight: '100%',
+            letterSpacing: '0%',
+          }}
+          >
+            Fill out the form below, and our team will get back to you promptly. Let's<br /> connect and create solutions together.
+          </p>
+
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            {/* 1. Full Name */}
+            <div>
+              <label className="block text-base font-medium mb-3">Full Name <span className='text-red-600'>*</span></label>
+              <input {...register("fullName", { required: "Full name is required." })}
+                placeholder="Enter your full name"
+                className="w-full px-4 py-3 bg-[#f1f2f6] text-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500" />
+              {errors.fullName && <p className="text-red-600 text-sm mt-1">{errors.fullName.message}</p>}
+            </div>
+
+            {/* 2. Mobile Number */}
+            <div>
+              <label className="block text-base font-medium mb-3">Mobile Number <span className='text-red-600'>*</span></label>
+              <input {...register("phone", {
+                required: "Phone number is required.",
+                pattern: {
+                  value: /^[0-9]{10}$/,
+                  message: "Enter a valid 10-digit mobile number"
+                }
+              })}
+                placeholder="Enter your contact number"
+                className="w-full px-4 py-3 bg-[#f1f2f6] text-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500" />
+              {errors.phone && <p className="text-red-600 text-sm mt-1">{errors.phone.message}</p>}
+            </div>
+
+            {/* 3. Email */}
+            <div>
+              <label className="block text-base font-medium mb-3">Email ID <span className='text-red-600'>*</span></label>
+              <input type="email" {...register("email", { required: "Email is required." })}
+                placeholder="Enter your email"
+                className="w-full px-4 py-3 bg-[#f1f2f6] text-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500" />
+              {errors.email && <p className="text-red-600 text-sm mt-1">{errors.email.message}</p>}
+            </div>
+
+            {/* 4. City of Residence */}
+            <div>
+              <label className="block text-base font-medium mb-3">City of Residence</label>
+              <select {...register("city")} className="w-full px-4 py-3 bg-[#f1f2f6] text-gray-600 rounded-xl">
+                <option value="">Select your city</option>
+                <option value="Delhi NCR">Delhi NCR</option>
+                <option value="Kolkata">Kolkata</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Pune">Pune</option>
+                <option value="Bangalore">Bangalore</option>
+                <option value="Chennai">Chennai</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Gujarat">Gujarat</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            {/* 5. Monthly Income */}
+            <div>
+              <label className="block text-base font-medium mb-3">Monthly Income</label>
+              <select {...register("monthlyIncome")} className="w-full px-4 py-3 bg-[#f1f2f6] text-gray-600 rounded-xl">
+                <option value="">Select income bracket</option>
+                <option value="No Income">Currently No Income</option>
+                <option value="<15000">Less than ₹15,000</option>
+                <option value="15000-20000">₹15,000 – ₹20,000</option>
+                <option value="20000-40000">₹20,000 – ₹40,000</option>
+                <option value="40000-60000">₹40,000 – ₹60,000</option>
+                <option value="60000-80000">₹60,000 – ₹80,000</option>
+                <option value="80000-100000">₹80,000 – ₹1,00,000</option>
+                <option value=">100000">Above ₹1,00,000</option>
+              </select>
+            </div>
+
+            {/* 6. Credit Card Dues */}
+            <div>
+              <label className="block text-base font-medium mb-3">Outstanding Credit Card Dues</label>
+              <select {...register("creditCardDues")} className="w-full px-4 py-3 bg-[#f1f2f6] text-gray-600 rounded-xl">
+                <option value="">Select option</option>
+                <option value="None">No Credit Card Dues</option>
+                <option value="<1L">Less than ₹1 Lakh</option>
+                <option value="1-5L">₹1 – ₹5 Lakhs</option>
+                <option value="5-10L">₹5 – ₹10 Lakhs</option>
+                <option value="10-15L">₹10 – ₹15 Lakhs</option>
+                <option value="15-20L">₹15 – ₹20 Lakhs</option>
+                <option value=">20L">More than ₹20 Lakhs</option>
+              </select>
+            </div>
+
+            {/* 7. Personal Loan Dues */}
+            <div>
+              <label className="block text-base font-medium mb-3">Outstanding Personal Loan Dues</label>
+              <select {...register("loanDues")} className="w-full px-4 py-3 bg-[#f1f2f6] text-gray-600 rounded-xl">
+                <option value="">Select option</option>
+                <option value="None">No Personal Loan Dues</option>
+                <option value="<1L">Less than ₹1 Lakh</option>
+                <option value="1-2L">₹1 – ₹2 Lakhs</option>
+                <option value="2-5L">₹2 – ₹5 Lakhs</option>
+                <option value="5-10L">₹5 – ₹10 Lakhs</option>
+                <option value="10-15L">₹10 – ₹15 Lakhs</option>
+                <option value="15-20L">₹15 – ₹20 Lakhs</option>
+                <option value="20-30L">₹20 – ₹30 Lakhs</option>
+                <option value=">30L">Above ₹30 Lakhs</option>
+              </select>
+            </div>
+
+            {/* 8. EMI Bounce Status */}
+            <div>
+              <label className="block text-base font-medium mb-3">EMI Bounce Status</label>
+              <select {...register("emiBounce")} className="w-full px-4 py-3 bg-[#f1f2f6] text-gray-600 rounded-xl">
+                <option value="">Select option</option>
+                <option value="None">No EMI Bounce</option>
+                <option value="1">1 EMI Bounce</option>
+                <option value="2">2 EMI Bounces</option>
+                <option value="3">3 EMI Bounces</option>
+                <option value=">3">More than 3 EMI Bounces</option>
+              </select>
+            </div>
+
+            {/* 9. Additional Comments */}
+            <div>
+              <label className="block text-base font-medium mb-3">Additional Queries or Comments</label>
+              <textarea
+                {...register("additionalInfo")}
+                placeholder="Write any questions or details you'd like to share..."
+                rows={4}
+                className="w-full px-4 py-3 bg-[#f1f2f6] text-gray-600 rounded-xl resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+
+            {/* Submit Button */}
+            <button type="submit" className="text-[14px] bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-700 mt-4">
+              Pay and Submit your request
+            </button>
+          </form>
+
+          <ThankYouModal visible={showThankYou} onClose={() => setShowThankYou(false)} />
+        </div>
+        {isLoading && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+            <div className="w-16 h-16 border-4 border-blue-400 border-dashed rounded-full animate-spin"></div>
+            <p className="ml-4 text-white font-semibold text-lg">Processing...</p>
+          </div>
+        )}
+      </div>
+    </Layout>
+  )
+}
+
+export default ContactUs

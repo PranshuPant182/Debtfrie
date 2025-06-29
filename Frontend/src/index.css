@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+
+.bg-hero-image {
+  background-image: url('./../public/images/Linesbg.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.bg-hero-image_2 {
+  background-image: url('./../public/images/linesbg2.png');
+  background-size: cover;
+  background-position: center;
+}
+
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out forwards;
+}
+
+
+
+@font-face {
+  font-family: 'gilroy';
+  src: url('/fonts/gilroy-medium.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Youth';
+  src: url('/fonts/Youth-Medium.otf') format('opentype');
+  font-style: normal;
+  font-weight: 900;
+}
+
+@layer utilities {
+  @keyframes scroll {
+    0% {
+      transform: translateX(0%);
+    }
+
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-scroll {
+    animation: scroll 30s linear infinite;
+  }
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
