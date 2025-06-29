@@ -10,7 +10,7 @@ import Idea from '../assets/Images/idea.png';
 import Verified from '../assets/Images/verified.png';
 import Video from '../assets/Images/video.png';
 import backgroundLines from '../assets/Images/backgroundLines.png';
-import PigiBank from '../assets/Images/Pigibank.png';
+import PigiBank from '../assets/Images/pigibank.png';
 import Calendar from '../assets/Images/calendar.png';
 import Note from '../assets/Images/note.png';
 import Arrow from '../assets/Images/arrow.png';
