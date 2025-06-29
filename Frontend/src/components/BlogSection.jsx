@@ -59,7 +59,7 @@ const BlogSection = ({ title }) => {
     };
 
     useEffect(() => {
-        fetch("http://localhost:3000/api/blogs")
+        fetch(`${import.meta.env.VITE_API_BASE_URL}/blogs`)
             .then(res => res.json())
             .then(data => {
                 const fallbackImages = [blog1, blog2, blog3];
