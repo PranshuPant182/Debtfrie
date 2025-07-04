@@ -12,6 +12,7 @@ router.post('/create-order', async (req, res) => {
     const options = {
         // amount: 5000, // 50 INR in paisa
         amount: 100, // 50 INR in paisa
+        
         currency: 'INR',
         receipt: 'receipt_order_' + new Date().getTime(),
     };
