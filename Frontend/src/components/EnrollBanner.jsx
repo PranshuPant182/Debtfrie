@@ -10,7 +10,7 @@ function EnrollBanner() {
         className="cursor-pointer bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-center px-6 py-4 rounded-xl shadow-lg hover:scale-105 transition-transform duration-300"
         style={{ fontFamily: 'gilroy', fontWeight: 500 }}
       >
-        Enroll today for just ₹50
+        Enroll today for just ₹49
       </div>
     </div>
   );

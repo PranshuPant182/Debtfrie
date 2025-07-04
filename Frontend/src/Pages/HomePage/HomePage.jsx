@@ -370,7 +370,7 @@ function HomePage() {
                                 Are you facing difficulties in paying off your <span className="font-semibold text-blue-600">EMIs</span>?
                             </p>
                             <p className="text-blue-600 font-semibold text-sm mb-6" style={{ fontFamily: 'gilroy' }}>
-                                Register now for just ₹50!
+                                Register now for just ₹49!
                             </p>
                             <div className="flex justify-center gap-4">
                                 <button
