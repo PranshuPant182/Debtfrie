@@ -7,12 +7,12 @@ router.post("/submit-form", async (req, res) => {
 
   // SMTP config for GoDaddy
   const transporter = nodemailer.createTransport({
-    host: process.env.EMAIL_HOST,
-    port: parseInt(process.env.EMAIL_PORT),
-    secure: process.env.EMAIL_SECURE === "true",
+    host: "smtpout.secureserver.net",
+    port: 465,                // OR 587 if 465 fails
+    secure: true,
     auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
+      user: "Official@debtfrie.in",
+      pass: "Debtfrie#9266",
     },
   });
 
