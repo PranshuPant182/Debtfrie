@@ -5,7 +5,7 @@ import FAQAccordion from '../../components/Faq'
 import images from '../../utils/images'
 import StepSlider2 from '../../components/Slider2'
 import { useNavigate } from 'react-router-dom'
-import DebtCalculator_Resolution from '../../components/calculator_Resolution'
+import DebtCalculator_Resolution from '../../components/Calculator_Resolution'
 
 
 function DebtResolution() {
