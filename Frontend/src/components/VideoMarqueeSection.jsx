@@ -1,10 +1,11 @@
 import { useRef } from 'react';
 
 const videoData = [
-    { id: 1, title: 'Credit Score Tips', url: 'https://youtu.be/X4HcuMtu5zc?si=6Ti5ZoKS8vkmSXwt', thumbnail: 'https://img.youtube.com/vi/X4HcuMtu5zc/hqdefault.jpg' },
-    { id: 2, title: 'Debt Management', url: 'https://youtu.be/X4HcuMtu5zc?si=6Ti5ZoKS8vkmSXwt', thumbnail: 'https://img.youtube.com/vi/X4HcuMtu5zc/hqdefault.jpg' },
-    { id: 3, title: 'Financial Freedom', url: 'https://youtu.be/X4HcuMtu5zc?si=6Ti5ZoKS8vkmSXwt', thumbnail: 'https://img.youtube.com/vi/X4HcuMtu5zc/hqdefault.jpg' },
-    // Add more videos here
+    { id: 1, title: 'Struggling with EMIs? This Is Your WayOut!', url: 'https://youtube.com/shorts/xfcW5GTe13Y?si=66GMGiBXT4xrncbH', thumbnail: 'https://img.youtube.com/vi/xfcW5GTe13Y/hqdefault.jpg' },
+    { id: 2, title: 'Recovery Agents Doing What They Do Best!', url: 'https://youtube.com/shorts/fzQtC9ZTlLQ?si=7-T4Z2U8K5mLf8Qa', thumbnail: 'https://img.youtube.com/vi/fzQtC9ZTlLQ/hqdefault.jpg' },
+    { id: 3, title: 'What is Loan Settlement?', url: 'https://youtube.com/shorts/ruqcfS1dZVs?si=vyokt4EwbJw-u6GV', thumbnail: 'https://img.youtube.com/vi/ruqcfS1dZVs/hqdefault.jpg' },
+    { id: 4, title: 'The Hidden Truth Behind "No Cost EMI"!', url: 'https://youtube.com/shorts/dnwPiicw4ns?si=fny3iJppEN18ChPQ', thumbnail: 'https://img.youtube.com/vi/dnwPiicw4ns/hqdefault.jpg' },
+    { id: 5, title: 'Banks Are HIDING This About Loans', url: 'https://youtube.com/shorts/m7qMPc15TQ0?si=ooW2bfc-XE0nPWmx', thumbnail: 'https://img.youtube.com/vi/m7qMPc15TQ0/hqdefault.jpg' },
 ];
 
 export default function VideoMarqueeSection() {
@@ -38,13 +39,13 @@ export default function VideoMarqueeSection() {
                     {[...videoData, ...videoData].map((video, index) => (
                         <div
                             key={`${video.id}-${index}`}
-                            className="min-w-[300px] bg-white rounded-xl shadow-lg hover:scale-105 transition-transform cursor-pointer"
+                            className="max-w-[230px] bg-white rounded-xl shadow-lg hover:scale-105 transition-transform cursor-pointer"
                             onClick={() => window.open(video.url, '_blank')}
                         >
                             <img
                                 src={video.thumbnail}
                                 alt={video.title}
-                                className="w-full h-96 object-cover rounded-t-xl"
+                                className="w-full h-72 object-cover rounded-t-xl"
                             />
                             <div className="p-4" style={{ fontFamily: 'gilroy' }}>
                                 <h3 className="text-md font-semibold text-gray-800">{video.title}</h3>

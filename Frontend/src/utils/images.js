@@ -36,6 +36,9 @@ import ContactUs from '../assets/Images/contactUs.png';
 import Favicon from '../assets/Images/favicon.png';
 import phone from '../assets/Images/Phone.png';
 import LinesBG from '../assets/Images/Linesbg.png';
+import barCouncil_logo from '../assets/Images/barCouncil logo.png';
+import MCA_logo from '../assets/Images/MCA_logo.png';
+
 
 import Prem_Jha from '../assets/Images/Testimonial/Prem Jha.jpg';
 import Sanjeev_Kumar from '../assets/Images/Testimonial/Sanjeev Kumar.jpg';
@@ -97,4 +100,6 @@ export default {
     Sahil_Gautam:Sahil_Gautam,
     Rakesh_Rawat:Rakesh_Rawat,
     Subhajit_Mandal:Subhajit_Mandal,
+    barCouncil_logo:barCouncil_logo,
+    MCA_logo:MCA_logo,
 };

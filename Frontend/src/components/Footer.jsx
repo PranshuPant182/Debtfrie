@@ -1,6 +1,8 @@
 import React from 'react';
 import images from '../utils/images';
 import { faFacebook, faInstagram, faXTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faYoutube, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
 
@@ -49,6 +51,18 @@ function Footer() {
                                 <span>+91 9266990923 / +91 120-4210615</span>
                             </div>
                             <div className="flex items-start gap-2">
+                                <FontAwesomeIcon icon={faWhatsapp} className="text-green-500 text-lg mt-1" />
+                                <a
+                                    href="https://wa.me/919266990923"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="hover:underline"
+                                >
+                                    +91 92669 90923
+                                </a>
+                            </div>
+
+                            <div className="flex items-start gap-2">
                                 <span className="text-lg">📧</span>
                                 <span>official@debtfrie.in</span>
                             </div>
@@ -75,8 +89,11 @@ function Footer() {
                         <ul className="space-y-3 text-gray-400 text-sm" style={{ fontFamily: 'gilroy' }}>
                             <li onClick={() => navigate('/')} className="hover:text-white cursor-pointer">Home</li>
                             <li onClick={() => navigate('/aboutUs')} className="hover:text-white cursor-pointer">About Us</li>
+                            <li onClick={() => navigate('/debtResolution')} className="hover:text-white cursor-pointer">Debt Resolution</li>
+                            <li onClick={() => navigate('/debtRestructuring')} className="hover:text-white cursor-pointer">Debt Restructuring</li>
+                            <li onClick={() => navigate('/blog')} className="hover:text-white cursor-pointer">Reading Room</li>
                             <li onClick={() => navigate('/contactus')} className="hover:text-white cursor-pointer">Contact Us</li>
-                            <li className="hover:text-white cursor-pointer">Client Testimonials</li>
+                            {/* <li className="hover:text-white cursor-pointer">Client Testimonials</li> */}
                         </ul>
                     </div>
 
@@ -84,8 +101,8 @@ function Footer() {
                     <div>
                         <h3 className="text-lg font-medium mb-4">Our Services</h3>
                         <ul className="space-y-3 text-gray-400 text-sm" style={{ fontFamily: 'gilroy' }}>
-                            <li onClick={()=> navigate('/debtResolution')}>Debt Resolution</li>
-                            <li onClick={()=> navigate('/debtRestructuring')}>Debt Restructuring</li>
+                            <li onClick={() => navigate('/debtResolution')}>Debt Resolution</li>
+                            <li onClick={() => navigate('/debtRestructuring')}>Debt Restructuring</li>
                             <li>Debt Settlements</li>
                             <li>Legal Support</li>
                             <li>Anti-Harassment</li>
@@ -107,21 +124,41 @@ function Footer() {
                             <li><a href="https://www.instagram.com/debtfrie" target="_blank" rel="noreferrer" className="hover:text-white">Instagram</a></li>
                             <li><a href="https://www.facebook.com/share/19Q4GZ7dTe" target="_blank" rel="noreferrer" className="hover:text-white">Facebook</a></li>
                             <li><a href="https://x.com/Debtfrie" target="_blank" rel="noreferrer" className="hover:text-white">Twitter</a></li>
+                            <li><a href="https://www.linkedin.com/posts/debtfrie_struggling-to-pay-your-business-emis-or-bnpl-activity-7346870740043878401-cJP3" target="_blank" rel="noreferrer" className="hover:text-white">LinkedIn</a></li>
+                            <li><a href="https://youtube.com/@debtfrie?si=mJlk4JGq7NIzB2U4" target="_blank" rel="noreferrer" className="hover:text-white">YouTube</a></li>
                         </ul>
+
                         <div className="flex space-x-4 mt-4">
                             <a href="https://www.facebook.com/share/19Q4GZ7dTe" target="_blank" className="hover:scale-110 transition"><FontAwesomeIcon icon={faFacebook} size="xl" /></a>
                             <a href="https://x.com/Debtfrie" target="_blank" className="hover:scale-110 transition"><FontAwesomeIcon icon={faXTwitter} size="xl" /></a>
                             <a href="https://www.instagram.com/debtfrie" target="_blank" className="hover:scale-110 transition"><FontAwesomeIcon icon={faInstagram} size="xl" /></a>
+                            <a href="https://www.linkedin.com/posts/debtfrie_struggling-to-pay-your-business-emis-or-bnpl-activity-7346870740043878401-cJP3" target="_blank" className="hover:scale-110 transition"><FontAwesomeIcon icon={faLinkedin} size="xl" /></a>
+                            <a href="https://youtube.com/@debtfrie?si=mJlk4JGq7NIzB2U4" target="_blank" className="hover:scale-110 transition"><FontAwesomeIcon icon={faYoutube} size="xl" /></a>
                         </div>
+
                     </div>
+                </div>
+            </div>
+
+            {/* Awards & Accreditations */}
+            <div className="border-t border-gray-800 bg-[#02102f] px-6 py-8">
+                <h3 className="text-white text-lg md:text-xl font-semibold text-center mb-6" style={{ fontFamily: 'gilroy' }}>
+                    Awards & Accreditations
+                </h3>
+                <div className="flex flex-wrap justify-center items-center gap-6">
+                    <img src={images.MCA_logo} alt="Award 1" className="h-12 sm:h-16 object-contain" />
+                    <img src={images.barCouncil_logo} alt="Award 2" className="h-12 sm:h-16 object-contain" />
+                    {/* <img src={images.Award3} alt="Award 3" className="h-12 sm:h-16 object-contain" /> */}
                 </div>
             </div>
 
 
             {/* Bottom Bar */}
             <div className="border-t border-gray-800 bg-[#02102f] text-center py-6 text-gray-400 text-sm" style={{ fontFamily: 'gilroy' }}>
-                2024 Design Mnks. All rights reserved
+                GSTIN: 09ABBCA5615N1ZF &nbsp;|&nbsp; Powered by Advocentia Financial Resolutions Pvt. Ltd. &nbsp;|&nbsp; © 2024 Design Mnks. All rights reserved.
             </div>
+
+
         </footer>
     );
 }

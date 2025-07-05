@@ -54,7 +54,7 @@ const DebtCalculator_Restructuring = () => {
                         <input
                             type="range"
                             min="0"
-                            max="1000000"
+                            max="10000000"
                             step="1000"
                             value={creditCardDebt}
                             onChange={(e) => setCreditCardDebt(Number(e.target.value))}
@@ -74,7 +74,7 @@ const DebtCalculator_Restructuring = () => {
                         <input
                             type="range"
                             min="0"
-                            max="2000000"
+                            max="10000000"
                             step="1000"
                             value={personalLoanDebt}
                             onChange={(e) => setPersonalLoanDebt(Number(e.target.value))}
@@ -120,20 +120,20 @@ const DebtCalculator_Restructuring = () => {
                                 />
                                 <text
                                     x="50"
-                                    y="48"
+                                    y="52"
                                     textAnchor="middle"
-                                    className="fill-blue-500 text-[12px] font-bold"
+                                    className="fill-blue-500 text-[10px] font-bold"
                                 >
                                     ₹{savings.toLocaleString()}
                                 </text>
-                                <text
+                                {/* <text
                                     x="50"
                                     y="64"
                                     textAnchor="middle"
                                     className="fill-green-500 text-[8px] font-bold"
                                 >
                                     Less in Interest
-                                </text>
+                                </text> */}
                             </svg>
                         </div>
 

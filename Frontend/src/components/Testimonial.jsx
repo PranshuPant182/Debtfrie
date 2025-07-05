@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import images from '../utils/images';
+import testimonials from '../data/testimonialsData';
 
 const TestimonialsSection = () => {
     const naviagate = useNavigate()
@@ -10,70 +11,70 @@ const TestimonialsSection = () => {
     const [selectedTestimonial, setSelectedTestimonial] = useState(null);
 
 
-    // Sample testimonial data
-    const testimonials = [
-        {
-            id: 1,
-            name: "Subhajit Mandal",
-            image: images.Subhajit_Mandal,
-            quote: `I don’t usually write reviews, but I felt compelled to share my experience with Debt Frie because they’ve genuinely changed my life.
+//     // Sample testimonial data
+//     const testimonials = [
+//         {
+//             id: 1,
+//             name: "Subhajit Mandal",
+//             image: images.Subhajit_Mandal,
+//             quote: `I don’t usually write reviews, but I felt compelled to share my experience with Debt Frie because they’ve genuinely changed my life.
 
-When I first approached them, I was overwhelmed by debt — credit cards, personal loans, and the constant stress that comes with financial uncertainty. I’ll admit, I was skeptical. I’d seen too many companies promise relief only to charge hidden fees or make matters worse. But Debt Frie proved to be different.
+// When I first approached them, I was overwhelmed by debt — credit cards, personal loans, and the constant stress that comes with financial uncertainty. I’ll admit, I was skeptical. I’d seen too many companies promise relief only to charge hidden fees or make matters worse. But Debt Frie proved to be different.
 
-Every advisor I spoke with demonstrated a deep, practical understanding of financial freedom and stability — not just in theory, but in how they approached every conversation and solution. I never felt judged or pressured, only supported.
+// Every advisor I spoke with demonstrated a deep, practical understanding of financial freedom and stability — not just in theory, but in how they approached every conversation and solution. I never felt judged or pressured, only supported.
 
-If you're struggling with debt and want genuine help from people who truly get it, I can't recommend Debt Frie enough. They don’t just solve the problem — they guide you toward a stronger, more confident financial future.`,
+// If you're struggling with debt and want genuine help from people who truly get it, I can't recommend Debt Frie enough. They don’t just solve the problem — they guide you toward a stronger, more confident financial future.`,
 
-        },
-        {
-            id: 2,
-            name: "Rakesh Rawat",
-            image: images.Rakesh_Rawat,
-            quote: "सर मैडम बहुत अच्छा लगा। आप लोगों से मुझे बहुत मदद मिल रही है। Very good! बहुत-बहुत धन्यवाद आप लोगों का।",
-        },
-        {
-            id: 3,
-            name: "Sahil Gautam",
-            image: images.Sahil_Gautam,
-            quote: `I recently had the pleasure of working with Aditi Ma’am and Yash Sir from Debt Frie for a loan against my credit card and personal loan.
+//         },
+//         {
+//             id: 2,
+//             name: "Rakesh Rawat",
+//             image: images.Rakesh_Rawat,
+//             quote: "सर मैडम बहुत अच्छा लगा। आप लोगों से मुझे बहुत मदद मिल रही है। Very good! बहुत-बहुत धन्यवाद आप लोगों का।",
+//         },
+//         {
+//             id: 3,
+//             name: "Sahil Gautam",
+//             image: images.Sahil_Gautam,
+//             quote: `I recently had the pleasure of working with Aditi Ma’am and Yash Sir from Debt Frie for a loan against my credit card and personal loan.
 
-Their professionalism and expertise were truly impressive. They guided me through the entire process with clarity and care, ensuring a seamless and stress-free experience.
+// Their professionalism and expertise were truly impressive. They guided me through the entire process with clarity and care, ensuring a seamless and stress-free experience.
 
-Their deep knowledge of loan structures, prompt communication, and exceptional negotiation skills led to highly favorable terms. I’m sincerely grateful for the efforts of the Debt Frie team and wholeheartedly recommend their services to anyone seeking trusted, effective assistance with loan recovery or restructuring.`,
-        },
-        {
-            id: 4,
-            name: "Omshanker Pandey",
-            image: images.Omshanker_Pandey,
-            quote: `My name is Om Shanker Pandey, and I am currently working with Debt Frie for my loan solution.
+// Their deep knowledge of loan structures, prompt communication, and exceptional negotiation skills led to highly favorable terms. I’m sincerely grateful for the efforts of the Debt Frie team and wholeheartedly recommend their services to anyone seeking trusted, effective assistance with loan recovery or restructuring.`,
+//         },
+//         {
+//             id: 4,
+//             name: "Omshanker Pandey",
+//             image: images.Omshanker_Pandey,
+//             quote: `My name is Om Shanker Pandey, and I am currently working with Debt Frie for my loan solution.
 
-I was deeply trapped in multiple loans and felt overwhelmed by the burden of financial obligations. From the very beginning, the Debt Frie team has supported me with care, professionalism, and genuine concern.
+// I was deeply trapped in multiple loans and felt overwhelmed by the burden of financial obligations. From the very beginning, the Debt Frie team has supported me with care, professionalism, and genuine concern.
 
-Their guidance has given me hope and confidence that I’ll soon be free from this financial trap. I am truly grateful to the entire supporting staff and the company for standing by me during this critical phase.
+// Their guidance has given me hope and confidence that I’ll soon be free from this financial trap. I am truly grateful to the entire supporting staff and the company for standing by me during this critical phase.
 
-Once I overcome my situation with their help, I will always remain thankful for their support.`,
+// Once I overcome my situation with their help, I will always remain thankful for their support.`,
 
-        },
-        {
-            id: 5,
-            name: "Sanjeev Kumar",
-            image: images.Sanjeev_Kumar,
-            quote: `I had been struggling with credit card issues for a long time, unable to even manage the minimum payments. The constant harassment through calls and messages had become overwhelming. But ever since I joined Debt Frie, everything changed. With your guidance and support, those troubling days are finally behind me.
-                    No one harasses me anymore, and I’m incredibly grateful for your help in settling my credit card. Thank you so much to the entire Debt Frie team for standing by me—I truly appreciate your support.
-                    `,
+//         },
+//         {
+//             id: 5,
+//             name: "Sanjeev Kumar",
+//             image: images.Sanjeev_Kumar,
+//             quote: `I had been struggling with credit card issues for a long time, unable to even manage the minimum payments. The constant harassment through calls and messages had become overwhelming. But ever since I joined Debt Frie, everything changed. With your guidance and support, those troubling days are finally behind me.
+//                     No one harasses me anymore, and I’m incredibly grateful for your help in settling my credit card. Thank you so much to the entire Debt Frie team for standing by me—I truly appreciate your support.
+//                     `,
 
-        },
-        {
-            id: 6,
-            name: "Prem Jha",
-            image: images.Prem_Jha,
-            quote: `I had a genuinely positive experience with Debtfrie. Their approach was professional, responsive, and grounded in a clear understanding of my requirements. Every
-interaction reflected a commitment to integrity and client satisfaction. I truly appreciate the clarity and support
-throughout the process and would be glad to recommend their services to others seeking reliable and ethical guidance
-`,
+//         },
+//         {
+//             id: 6,
+//             name: "Prem Jha",
+//             image: images.Prem_Jha,
+//             quote: `I had a genuinely positive experience with Debtfrie. Their approach was professional, responsive, and grounded in a clear understanding of my requirements. Every
+// interaction reflected a commitment to integrity and client satisfaction. I truly appreciate the clarity and support
+// throughout the process and would be glad to recommend their services to others seeking reliable and ethical guidance
+// `,
 
-        }
-    ];
+//         }
+//     ];
 
 
     // For desktop view - positioned testimonials
@@ -194,8 +195,8 @@ throughout the process and would be glad to recommend their services to others s
                 letterSpacing: '0%',
             }}>
                 <h1 className="text-3xl md:text-4xl lg:text-5xl text-white font-bold mb-4">
-                    Trusted By Leaders <br />
-                    From Various Industries
+                    A name India trusts across <br />
+                    every state and sectors
                 </h1>
                 <p className="text-lg md:text-xl text-white max-w-2xl mb-8" style={{
                     fontFamily: 'gilroy',

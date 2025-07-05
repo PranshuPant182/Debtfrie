@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import DebtSavingsPopup from "./DebtSavingsPopup";
 
 const DebtCalculator = () => {
   const nagivate = useNavigate();
   const [creditCardDebt, setCreditCardDebt] = useState(1000);
   const [personalLoanDebt, setPersonalLoanDebt] = useState(2000);
+  const [showPopup, setShowPopup] = useState(false);
+
 
   const totalDebt = creditCardDebt + personalLoanDebt;
   const settlementAmount = Math.round(totalDebt * 0.3);
@@ -53,7 +56,7 @@ const DebtCalculator = () => {
             <input
               type="range"
               min="0"
-              max="1000000"
+              max="10000000"
               step="1000"
               value={creditCardDebt}
               onChange={(e) => setCreditCardDebt(Number(e.target.value))}
@@ -73,7 +76,7 @@ const DebtCalculator = () => {
             <input
               type="range"
               min="0"
-              max="2000000"
+              max="10000000"
               step="1000"
               value={personalLoanDebt}
               onChange={(e) => setPersonalLoanDebt(Number(e.target.value))}
@@ -115,20 +118,20 @@ const DebtCalculator = () => {
                 />
                 <text
                   x="50"
-                  y="48"
+                  y="52"
                   textAnchor="middle"
-                  className="fill-blue-500 text-[12px] font-bold"
+                  className="fill-blue-500 text-[10px] font-bold"
                 >
                   ₹{savings.toLocaleString()}
                 </text>
-                <text
+                {/* <text
                   x="50"
                   y="64"
                   textAnchor="middle"
                   className="fill-green-500 text-[8px] font-bold"
                 >
                   Less in Interest
-                </text>
+                </text> */}
               </svg>
             </div>
 
@@ -167,9 +170,7 @@ const DebtCalculator = () => {
           </div>
 
           <div className="flex justify-center items-center mt-10">
-            <button className="w-[50%] bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg font-semibold" onClick={() => {
-              nagivate('/contactus')
-            }}>
+            <button className="w-[50%] bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg font-semibold" onClick={() => setShowPopup(true)}>
               Check Rates
             </button>
           </div>
@@ -179,6 +180,15 @@ const DebtCalculator = () => {
           </p>
         </div>
       </div>
+      {showPopup && (
+        <DebtSavingsPopup
+          onClose={() => setShowPopup(false)}
+          onRedirect={() => {
+            setShowPopup(false);
+            nagivate("/contactus");
+          }}
+        />
+      )}
     </div>
   );
 };

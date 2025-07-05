@@ -23,7 +23,7 @@ function Navbar() {
       <div className="flex flex-row items-center justify-between w-full">
         {/* Logo */}
         <div className="flex items-center cursor-pointer" onClick={() => navigate('/')}>
-          <img src={images.Favicon} className='h-7 w-8' />
+          <img src={images.Favicon} className='h-9 w-10' />
         </div>
 
 

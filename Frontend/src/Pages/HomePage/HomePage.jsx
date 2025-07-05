@@ -131,7 +131,7 @@ function HomePage() {
                                     <img src={images.Idea} className="w-full h-full" alt="Idea Icon" />
                                 </div>
                                 <div className="ml-6">
-                                    <span className="text-3xl">Tailored Loan Solutions</span>
+                                    <span className="text-3xl">Tailored Debt Solutions</span>
                                 </div>
                             </div>
                         </div>
@@ -212,7 +212,7 @@ function HomePage() {
                                         <span className="text-base">Protection from Harassment</span>
                                     </div>
                                     <div className="w-1/3 px-2">
-                                        <span className="text-base">Tailored Loan Solutions</span>
+                                        <span className="text-base">Tailored Debt Solutions</span>
                                     </div>
                                 </div>
                             </div>
@@ -389,9 +389,6 @@ function HomePage() {
                         </div>
                     </div>
                 )}
-
-
-
             </div>
         </Layout>
     )

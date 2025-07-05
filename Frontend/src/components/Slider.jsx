@@ -67,7 +67,6 @@ const StepSlider = () => {
           <span className="text-blue-500"> A Debt-</span>
           <span className="text-yellow-500">Free Life.</span>
         </h2>
-
       </div>
 
       {/* MOBILE DESIGN - Only shown on small screens */}
@@ -76,26 +75,26 @@ const StepSlider = () => {
           {steps.map((step, index) => (
             <div
               key={step.id}
-              className="min-w-[360px] max-w-[300px] text-white rounded-2xl overflow-hidden flex flex-col justify-between px-6 py-4"
+              className="min-w-[360px] max-w-[300px] text-white rounded-2xl overflow-hidden flex flex-col px-6 py-4"
               style={{
                 backgroundColor: index % 2 === 0 ? "#0B1437" : "#3369e3",
                 height: "480px",
               }}
             >
               {/* Step Number */}
-              <div className="bg-white text-[#0B1437] w-10 h-10 flex items-center justify-center rounded-full font-medium"
+              <div className="bg-white text-[#0B1437] w-10 h-10 flex items-center justify-center rounded-full font-medium mb-6"
                 style={{
                   fontFamily: 'gilroy',
                   fontWeight: 500,
-                  alignSelf: 'flex-start', // Keep it on the top left
+                  alignSelf: 'flex-start',
                 }}
               >
                 {index + 1 < 10 ? `0${index + 1}` : index + 1}
               </div>
 
-              {/* Title + Description */}
-              <div className="flex-1 mt-6 mb-4">
-                <h3 className="text-2xl font-bold mb-2"
+              {/* Title - Fixed at top */}
+              <div className="mb-4">
+                <h3 className="text-2xl font-bold"
                   style={{
                     fontFamily: 'Youth',
                     fontWeight: 900,
@@ -103,7 +102,10 @@ const StepSlider = () => {
                 >
                   {step.title}
                 </h3>
+              </div>
 
+              {/* Description - Fixed positioning */}
+              <div className="mb-6 flex-1 flex items-start">
                 <p className="text-sm text-gray-200 leading-snug"
                   style={{
                     fontFamily: 'gilroy',
@@ -114,8 +116,8 @@ const StepSlider = () => {
                 </p>
               </div>
 
-              {/* Image */}
-              <div className="flex justify-end">
+              {/* Image - Fixed at bottom */}
+              <div className="flex justify-end mt-auto">
                 <img
                   src={step.image}
                   alt={`Step ${index + 1}`}
@@ -123,7 +125,6 @@ const StepSlider = () => {
                 />
               </div>
             </div>
-
           ))}
         </div>
       </div>
@@ -134,7 +135,7 @@ const StepSlider = () => {
           {steps.map((step, index) => (
             <div
               key={step.id}
-              className="min-w-[60vw] text-white rounded-3xl p-6 flex relative items-center"
+              className="min-w-[60vw] text-white rounded-3xl p-6 flex relative"
               style={{
                 backgroundColor: index % 2 === 0 ? "#0B1437" : "#3369e3",
                 height: "68vh"
@@ -152,32 +153,39 @@ const StepSlider = () => {
                 {`0${index + 1}`}
               </div>
 
-              {/* Left Section: Text */}
-              <div className="flex-1 pl-6 pr-4">
-                <h3 className="text-3xl font-bold mb-2"
-                  style={{
-                    fontFamily: 'Youth',
-                    fontWeight: 900,
-                    lineHeight: '100%',
-                    letterSpacing: '0%',
-                  }}
-                >
-                  {step.title}
-                </h3>
-                <p className="text-2xl text-gray-300 max-w-xs"
-                  style={{
-                    fontFamily: 'gilroy',
-                    fontWeight: 400,
-                    lineHeight: '100%',
-                    letterSpacing: '0%',
-                  }}
-                >
-                  {step.description}
-                </p>
+              {/* Left Section: Text Container */}
+              <div className="flex-1 pl-6 pr-4 pt-20 flex flex-col">
+                {/* Title - Fixed at top with margin */}
+                <div className="mb-6">
+                  <h3 className="text-3xl font-bold"
+                    style={{
+                      fontFamily: 'Youth',
+                      fontWeight: 900,
+                      lineHeight: '100%',
+                      letterSpacing: '0%',
+                    }}
+                  >
+                    {step.title}
+                  </h3>
+                </div>
+                
+                {/* Description - Fixed positioning */}
+                <div className="flex-1 flex items-start">
+                  <p className="text-2xl text-gray-300 max-w-xs leading-relaxed"
+                    style={{
+                      fontFamily: 'gilroy',
+                      fontWeight: 400,
+                      lineHeight: '130%',
+                      letterSpacing: '0%',
+                    }}
+                  >
+                    {step.description}
+                  </p>
+                </div>
               </div>
 
               {/* Right Section: Image */}
-              <div className="flex-shrink-0 h-full flex items-end">
+              <div className="flex-shrink-0 h-full flex items-end justify-end pr-4 pb-4">
                 <img
                   src={step.image}
                   alt={`Step ${index + 1}`}
