@@ -145,12 +145,16 @@ function Footer() {
                 <h3 className="text-white text-lg md:text-xl font-semibold text-center mb-6" style={{ fontFamily: 'gilroy' }}>
                     Awards & Accreditations
                 </h3>
-                <div className="flex flex-wrap justify-center items-center gap-6">
+                <div className="flex flex-wrap justify-center items-center gap-6 mb-4">
                     <img src={images.MCA_logo} alt="Award 1" className="h-12 sm:h-16 object-contain" />
                     <img src={images.barCouncil_logo} alt="Award 2" className="h-12 sm:h-16 object-contain" />
                     {/* <img src={images.Award3} alt="Award 3" className="h-12 sm:h-16 object-contain" /> */}
                 </div>
+                <p className="text-center text-white text-sm md:text-base" style={{ fontFamily: 'gilroy' }}>
+                    BCI Registered Advocates
+                </p>
             </div>
+
 
 
             {/* Bottom Bar */}

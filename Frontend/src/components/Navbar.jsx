@@ -23,8 +23,19 @@ function Navbar() {
       <div className="flex flex-row items-center justify-between w-full">
         {/* Logo */}
         <div className="flex items-center cursor-pointer" onClick={() => navigate('/')}>
-          <img src={images.Favicon} className='h-9 w-10' />
+          <img src={images.Favicon} className="h-9 w-10 mr-2" alt="Logo" />
+          <span className="text-xl font-bold" style={{
+            fontFamily: 'Youth',
+            fontWeight: 900,
+            lineHeight: '100%',
+            letterSpacing: '0%',
+          }}>
+            <span className="text-[#3369e3]">Debt</span>
+            <span className="text-[#fcd43a]">Frie</span>
+          </span>
         </div>
+
+
 
 
         {/* Navigation Links - Hidden on mobile, visible on md and larger screens */}

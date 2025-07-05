@@ -38,6 +38,8 @@ import phone from '../assets/Images/Phone.png';
 import LinesBG from '../assets/Images/Linesbg.png';
 import barCouncil_logo from '../assets/Images/barCouncil logo.png';
 import MCA_logo from '../assets/Images/MCA_logo.png';
+import meeting from '../assets/Images/meeting.jpg';
+
 
 
 import Prem_Jha from '../assets/Images/Testimonial/Prem Jha.jpg';
@@ -102,4 +104,5 @@ export default {
     Subhajit_Mandal:Subhajit_Mandal,
     barCouncil_logo:barCouncil_logo,
     MCA_logo:MCA_logo,
+    meeting:meeting,
 };

@@ -125,7 +125,7 @@ function ContactUs() {
             lineHeight: '100%',
             letterSpacing: '0%',
           }}>Our Office</h2>
-          <img src={images.ContactUs} alt="Our Office" className="w-full rounded-lg mb-6" />
+          <img src={images.meeting} alt="Our Office" className="w-full rounded-lg mb-6" />
 
           <div className="text-gray-700" style={{
             fontFamily: 'gilroy',

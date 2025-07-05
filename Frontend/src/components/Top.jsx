@@ -97,7 +97,7 @@ const HeroSection = ({scrollToMiddle}) => {
       }}>
         <button className='bg-[#3369e3] text-white px-3 font-medium  py-3 sm:py-2 md:px-4 md:py-3 rounded-2xl text-sm flex items-center gap-2'
           onClick={() => navigate("/contactus")}>
-          <span>GET DFEBT FRIE</span>
+          <span>GET DFEBT FREE</span>
           <MoveRight className="w-4 h-4 md:w-5 md:h-5" />
         </button>
         <button className='text-sm bg-gray-200 px-3 font-medium  py-3 sm:py-2 md:px-4 md:py-3 rounded-2xl' onClick={scrollToMiddle}>
