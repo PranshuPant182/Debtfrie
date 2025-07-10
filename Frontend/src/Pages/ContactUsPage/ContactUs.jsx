@@ -753,7 +753,6 @@
 // export default ContactUs
 
 
-
 import React, { useState, useRef, useEffect } from 'react'
 import Layout from '../Layout'
 import { useForm } from 'react-hook-form';
@@ -794,15 +793,10 @@ function ContactUs() {
       document.body.appendChild(script);
     });
 
-  // Check if device is mobile
-  const isMobileDevice = () => {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-  };
-
-  // Start polling for payment status (for desktop QR payments)
+  // Start polling for payment status (for non-QR payments)
   const startPaymentPolling = (orderId) => {
     pollAttemptRef.current = 0;
-    setPaymentStatus('Waiting for payment... Please scan the QR code with your UPI app');
+    setPaymentStatus('Processing payment... Please complete the payment');
 
     pollIntervalRef.current = setInterval(async () => {
       try {
@@ -814,7 +808,7 @@ function ContactUs() {
 
         if (data.success && data.payments && data.payments.length > 0) {
           const payment = data.payments[0];
-          
+
           if (payment.status === 'captured') {
             // Payment successful
             clearInterval(pollIntervalRef.current);
@@ -841,13 +835,13 @@ function ContactUs() {
         } else {
           // Update status with remaining time
           const remainingTime = Math.ceil((maxPollAttempts - pollAttemptRef.current) * 5 / 60);
-          setPaymentStatus(`Waiting for payment... (${remainingTime} minutes remaining)`);
+          setPaymentStatus(`Processing payment... (${remainingTime} minutes remaining)`);
         }
 
       } catch (error) {
         console.error('Polling error:', error);
         pollAttemptRef.current++;
-        
+
         if (pollAttemptRef.current >= maxPollAttempts) {
           clearInterval(pollIntervalRef.current);
           setPaymentStatus('');
@@ -872,7 +866,7 @@ function ContactUs() {
   const verifyAndSubmitForm = async (formData, paymentInfo) => {
     try {
       console.log('Verifying payment:', paymentInfo);
-      
+
       // For webhook-detected payments, skip verification and directly submit
       if (paymentInfo.razorpay_signature.includes('|')) {
         // This is likely a webhook-detected payment, submit form directly
@@ -969,12 +963,57 @@ function ContactUs() {
         name: "DebtFrie",
         description: "Debt Resolution Consultation Fee",
         order_id: order.id,
+
+        // Control which payment methods are available - NO QR CODE
+        method: {
+          upi: true,        // UPI (intent/collect only, no QR)
+          card: true,       // Credit/Debit cards
+          netbanking: true, // Net banking
+          wallet: true,     // Digital wallets (Paytm, etc.)
+          emi: false,       // Disable EMI options
+          paylater: false   // Disable pay later options
+        },
+
+        // Fine-tune UPI to remove QR
+        config: {
+          display: {
+            blocks: {
+              utib: {
+                name: 'Pay using UPI',
+                instruments: [
+                  {
+                    method: 'upi',
+                    flows: ['intent', 'collect'] // Only intent & collect, NO 'qr'
+                  }
+                ]
+              },
+              banks: {
+                name: 'Pay using Netbanking',
+                instruments: [
+                  { method: 'netbanking' }
+                ]
+              },
+              cards: {
+                name: 'Cards',
+                instruments: [
+                  { method: 'card' }
+                ]
+              }
+            },
+            sequence: ['block.utib', 'block.cards', 'block.banks'],
+            preferences: {
+              show_default_blocks: false // Use our custom blocks
+            }
+          }
+        },
+
         handler: async function (response) {
           // This handles successful payment (mainly for mobile)
           console.log('Payment success handler called:', response);
           stopPaymentPolling();
           await verifyAndSubmitForm(formData, response);
         },
+
         modal: {
           ondismiss: () => {
             console.log('Payment modal dismissed');
@@ -982,30 +1021,41 @@ function ContactUs() {
             setIsLoading(false);
             setPaymentStatus('');
           },
-          // When modal opens, start polling for desktop payments
+          // When modal opens, start polling for fallback
           onopen: () => {
             console.log('Payment modal opened');
-            // For desktop, start polling after a short delay to allow QR generation
+            // Start light polling for webhook detection
             setTimeout(() => {
-              if (!isMobileDevice()) {
-                startPaymentPolling(order.id);
-              }
-            }, 3000); // Wait 3 seconds for QR to be generated
+              startPaymentPolling(order.id);
+            }, 3000);
           },
         },
+
         prefill: {
           name: formData.fullName,
           email: formData.email,
           contact: formData.phone,
         },
-        theme: { color: "#3399cc" },
-        // Add retry options for better UPI experience
+
+        theme: {
+          color: "#3399cc"
+        },
+
+        // Enhanced options for better success rates
         retry: {
           enabled: true,
           max_count: 3
         },
-        // Add timeout for better mobile experience
-        timeout: 300, // 5 minutes
+
+        timeout: 300, // 5 minutes timeout
+
+        // Better mobile experience
+        remember_customer: false,
+        readonly: {
+          email: true,
+          contact: true,
+          name: true
+        }
       };
 
       const rzp1 = new window.Razorpay(options);
@@ -1093,7 +1143,7 @@ function ContactUs() {
           </p>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-            {/* Form fields remain the same... */}
+            {/* Full Name */}
             <div>
               <label className="block text-base font-medium mb-3">Full Name <span className='text-red-600'>*</span></label>
               <input {...register("fullName", { required: "Full name is required." })}
@@ -1102,6 +1152,7 @@ function ContactUs() {
               {errors.fullName && <p className="text-red-600 text-sm mt-1">{errors.fullName.message}</p>}
             </div>
 
+            {/* Mobile Number */}
             <div>
               <label className="block text-base font-medium mb-3">Mobile Number <span className='text-red-600'>*</span></label>
               <input {...register("phone", {
@@ -1116,6 +1167,7 @@ function ContactUs() {
               {errors.phone && <p className="text-red-600 text-sm mt-1">{errors.phone.message}</p>}
             </div>
 
+            {/* Email */}
             <div>
               <label className="block text-base font-medium mb-3">Email ID <span className='text-red-600'>*</span></label>
               <input type="email" {...register("email", { required: "Email is required." })}
@@ -1124,6 +1176,7 @@ function ContactUs() {
               {errors.email && <p className="text-red-600 text-sm mt-1">{errors.email.message}</p>}
             </div>
 
+            {/* City of Residence */}
             <div>
               <label className="block text-base font-medium mb-3">City of Residence</label>
               <select {...register("city")} className="w-full px-4 py-3 bg-[#f1f2f6] text-gray-600 rounded-xl">
@@ -1140,6 +1193,7 @@ function ContactUs() {
               </select>
             </div>
 
+            {/* Monthly Income */}
             <div>
               <label className="block text-base font-medium mb-3">Monthly Income</label>
               <select {...register("monthlyIncome")} className="w-full px-4 py-3 bg-[#f1f2f6] text-gray-600 rounded-xl">
@@ -1155,6 +1209,7 @@ function ContactUs() {
               </select>
             </div>
 
+            {/* Credit Card Dues */}
             <div>
               <label className="block text-base font-medium mb-3">Outstanding Credit Card Dues</label>
               <select {...register("creditCardDues")} className="w-full px-4 py-3 bg-[#f1f2f6] text-gray-600 rounded-xl">
@@ -1169,6 +1224,7 @@ function ContactUs() {
               </select>
             </div>
 
+            {/* Personal Loan Dues */}
             <div>
               <label className="block text-base font-medium mb-3">Outstanding Personal Loan Dues</label>
               <select {...register("loanDues")} className="w-full px-4 py-3 bg-[#f1f2f6] text-gray-600 rounded-xl">
@@ -1185,6 +1241,7 @@ function ContactUs() {
               </select>
             </div>
 
+            {/* EMI Bounce Status */}
             <div>
               <label className="block text-base font-medium mb-3">EMI Bounce Status</label>
               <select {...register("emiBounce")} className="w-full px-4 py-3 bg-[#f1f2f6] text-gray-600 rounded-xl">
@@ -1197,6 +1254,7 @@ function ContactUs() {
               </select>
             </div>
 
+            {/* Additional Comments */}
             <div>
               <label className="block text-base font-medium mb-3">Additional Queries or Comments</label>
               <textarea
@@ -1229,12 +1287,10 @@ function ContactUs() {
               {paymentStatus && (
                 <p className="text-blue-600 text-sm mb-2">{paymentStatus}</p>
               )}
-              {!isMobileDevice() && paymentStatus && (
-                <div className="text-gray-500 text-xs">
-                  <p>Desktop users: Please scan the QR code with your UPI app</p>
-                  <p className="mt-1">Don't close this window - we're checking for payment automatically</p>
-                </div>
-              )}
+              <div className="text-gray-500 text-xs">
+                <p>Choose your preferred payment method</p>
+                <p className="mt-1">UPI • Cards • Net Banking • Wallets</p>
+              </div>
             </div>
           </div>
         )}
