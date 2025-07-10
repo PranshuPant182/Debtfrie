@@ -6,7 +6,7 @@ const router = express.Router();
 router.post('/razorpay', async (req, res) => {
     console.log('=== WEBHOOK DEBUG START ===');
     
-    const webhookSecret = 'Testing_2025_Debtfrie';
+    const webhookSecret = 'secret_2025_debtfrie_webhook_';
     const signature = req.headers['x-razorpay-signature'];
     const isFromPostman = req.headers['user-agent']?.includes('Postman');
     
