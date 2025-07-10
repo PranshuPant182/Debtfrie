@@ -4,45 +4,20 @@ const crypto = require('crypto');
 const router = express.Router();
 
 router.post('/razorpay', async (req, res) => {
-    const webhookSecret = 'Testing_2025_Debtfrie';
+    const webhookSecret = process.env.RAZORPAY_WEBHOOK_SECRET;
     const signature = req.headers['x-razorpay-signature'];
     
-    console.log('🔥 Webhook received');
-    console.log('Signature:', signature);
-    console.log('Body type:', typeof req.body);
-    
     try {
-        // Handle the raw body correctly
-        let body;
-        if (Buffer.isBuffer(req.body)) {
-            body = req.body.toString();
-        } else if (typeof req.body === 'string') {
-            body = req.body;
-        } else {
-            // If it's already parsed as JSON, convert back to string
-            body = JSON.stringify(req.body);
-        }
-        
-        console.log('Body for verification:', body.substring(0, 100) + '...');
-        
         const expectedSignature = crypto
             .createHmac('sha256', webhookSecret)
-            .update(body)
+            .update(JSON.stringify(req.body))
             .digest('hex');
-            
-        console.log('Expected:', expectedSignature);
-        console.log('Received:', signature);
-        
+
         if (signature === expectedSignature) {
-            console.log('✅ Signature verified!');
+            const event = req.body.event;
+            const payment = req.body.payload.payment.entity;
             
-            // Parse the webhook data
-            const webhookData = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
-            const event = webhookData.event;
-            const payment = webhookData.payload.payment.entity;
-            
-            console.log('Event:', event);
-            console.log('Payment ID:', payment.id);
+            console.log('Webhook received:', event, payment.id);
             
             if (event === 'payment.captured') {
                 console.log('✅ Payment captured:', payment.id);
@@ -56,7 +31,7 @@ router.post('/razorpay', async (req, res) => {
             
             res.status(200).json({ received: true });
         } else {
-            console.log('❌ Signature mismatch');
+            console.log('❌ Invalid webhook signature');
             res.status(400).json({ error: 'Invalid signature' });
         }
     } catch (error) {
