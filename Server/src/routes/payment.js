@@ -89,7 +89,7 @@ const crypto = require('crypto');
 const router = express.Router();
 
 // Environment validation
-const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = 'production';
 const requiredEnvVars = ['RAZORPAY_KEY_ID', 'RAZORPAY_KEY_SECRET'];
 
 // Validate required environment variables
@@ -152,7 +152,7 @@ router.post('/webhook', express.raw({ type: 'application/json' }), async (req, r
         }
 
         // Verify the webhook signature for security
-        const webhookSecret = process.env.WEBHOOK_SECRET || 'debtfrie_webhook_secret_2024';
+        const webhookSecret = 'secret_2025_debtfrie_webhook_';
         const expectedSignature = crypto
             .createHmac('sha256', webhookSecret)
             .update(webhookBody)
@@ -434,7 +434,7 @@ router.post('/create-order', async (req, res) => {
         console.log('📝 Creating new order...');
 
         const options = {
-            amount: 100, // 49 INR in paisa
+            amount: 4900, // 49 INR in paisa
             currency: 'INR',
             receipt: 'receipt_order_' + new Date().getTime(),
             payment_capture: 1, // Auto capture payments
