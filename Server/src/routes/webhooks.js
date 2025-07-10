@@ -8,93 +8,82 @@ router.post('/razorpay', async (req, res) => {
     
     const webhookSecret = 'Testing_2025_Debtfrie';
     const signature = req.headers['x-razorpay-signature'];
+    const isFromPostman = req.headers['user-agent']?.includes('Postman');
     
-    // Log everything for debugging
     console.log('1. Headers:', JSON.stringify(req.headers, null, 2));
     console.log('2. Body type:', typeof req.body);
-    console.log('3. Body constructor:', req.body.constructor.name);
-    console.log('4. Body length:', req.body.length || 'no length');
-    console.log('5. Signature:', signature);
-    console.log('6. Secret:', webhookSecret);
+    console.log('3. Is from Postman:', isFromPostman);
+    console.log('4. Signature:', signature);
     
     try {
+        // Handle Postman testing (no signature verification)
+        if (isFromPostman && !signature) {
+            console.log('🧪 POSTMAN TEST MODE - Skipping signature verification');
+            
+            let bodyString = Buffer.isBuffer(req.body) ? req.body.toString('utf8') : JSON.stringify(req.body);
+            const webhookData = JSON.parse(bodyString);
+            
+            console.log('✅ Test webhook data received:', JSON.stringify(webhookData, null, 2));
+            
+            return res.status(200).json({ 
+                received: true,
+                test_mode: true,
+                message: 'Webhook endpoint working - test successful'
+            });
+        }
+        
+        // Handle real Razorpay webhooks (with signature verification)
         if (!signature) {
-            console.log('❌ No signature found');
-            return res.status(400).json({ error: 'No signature' });
+            console.log('❌ No signature found - not from Razorpay');
+            return res.status(400).json({ error: 'No signature - not a valid Razorpay webhook' });
         }
         
-        // Handle different body types
-        let bodyString;
-        if (Buffer.isBuffer(req.body)) {
-            bodyString = req.body.toString('utf8');
-            console.log('7a. Body is Buffer, converted to string');
-        } else if (typeof req.body === 'string') {
-            bodyString = req.body;
-            console.log('7b. Body is already string');
-        } else if (typeof req.body === 'object') {
-            bodyString = JSON.stringify(req.body);
-            console.log('7c. Body is object, stringified');
-        } else {
-            bodyString = String(req.body);
-            console.log('7d. Body converted with String()');
-        }
+        // Process real webhook
+        let bodyString = Buffer.isBuffer(req.body) ? req.body.toString('utf8') : JSON.stringify(req.body);
         
-        console.log('8. Final body string (first 200 chars):', bodyString.substring(0, 200));
-        console.log('9. Body string length:', bodyString.length);
-        
-        // Create signature
         const expectedSignature = crypto
             .createHmac('sha256', webhookSecret)
             .update(bodyString, 'utf8')
             .digest('hex');
             
-        console.log('10. Expected signature:', expectedSignature);
-        console.log('11. Received signature:', signature);
-        console.log('12. Signatures match:', signature === expectedSignature);
+        console.log('5. Expected signature:', expectedSignature);
+        console.log('6. Received signature:', signature);
         
         if (signature === expectedSignature) {
             console.log('✅ SIGNATURE VERIFIED!');
             
-            // Parse JSON
             const webhookData = JSON.parse(bodyString);
-            console.log('13. Parsed webhook data:', JSON.stringify(webhookData, null, 2));
-            
             const event = webhookData.event;
-            console.log('14. Event:', event);
             
             if (webhookData.payload && webhookData.payload.payment) {
                 const payment = webhookData.payload.payment.entity;
-                console.log('15. Payment:', JSON.stringify(payment, null, 2));
+                console.log('🎉 Payment event:', event);
+                console.log('💰 Payment ID:', payment.id);
+                console.log('📝 Order ID:', payment.order_id);
+                console.log('💵 Amount:', payment.amount);
                 
                 if (event === 'payment.captured') {
-                    console.log('🎉 PAYMENT CAPTURED SUCCESS!');
+                    console.log('🎉 PAYMENT SUCCESS!');
+                    // TODO: Update your database here
                 }
             }
             
             res.status(200).json({ 
                 received: true,
                 event: event,
-                debug: 'signature_verified'
+                signature_verified: true
             });
             
         } else {
             console.log('❌ SIGNATURE MISMATCH');
-            return res.status(400).json({ 
-                error: 'Invalid signature',
-                expected: expectedSignature,
-                received: signature
-            });
+            res.status(400).json({ error: 'Invalid signature' });
         }
         
     } catch (error) {
         console.error('❌ WEBHOOK ERROR:', error.message);
-        console.error('❌ ERROR STACK:', error.stack);
-        console.error('❌ ERROR DETAILS:', error);
-        
         res.status(500).json({ 
             error: 'Webhook processing failed',
-            details: error.message,
-            stack: error.stack
+            details: error.message
         });
     }
     
