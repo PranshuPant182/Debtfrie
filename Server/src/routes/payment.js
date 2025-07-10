@@ -434,7 +434,7 @@ router.post('/create-order', async (req, res) => {
         console.log('📝 Creating new order...');
 
         const options = {
-            amount: 4900, // 49 INR in paisa
+            amount: 100, // 49 INR in paisa
             currency: 'INR',
             receipt: 'receipt_order_' + new Date().getTime(),
             payment_capture: 1, // Auto capture payments
