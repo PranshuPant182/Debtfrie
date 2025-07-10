@@ -5,8 +5,14 @@ const app = express();
 // ========== MIDDLEWARE ==========
 app.use(cors());
 
-// Raw body parser for webhooks BEFORE express.json()
-app.use('/api/webhooks/razorpay', express.raw({ type: 'application/json' }));
+// CRITICAL: Raw body parser for webhooks MUST come before express.json()
+// This preserves the raw body for signature verification
+app.use('/api/webhooks', express.raw({ 
+    type: 'application/json',
+    verify: (req, res, buf) => {
+        req.rawBody = buf.toString();
+    }
+}));
 
 // Regular JSON parser for other routes
 app.use(express.json());
@@ -25,7 +31,7 @@ app.use('/api/blogs', blogRoutes);
 const paymentRoutes = require('./routes/payment');
 app.use('/api/payment', paymentRoutes);
 
-// Webhook routes - ADD THIS LINE
+// Webhook routes
 const webhookRoutes = require('./routes/webhooks');
 app.use('/api/webhooks', webhookRoutes);
 
