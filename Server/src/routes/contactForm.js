@@ -138,11 +138,6 @@ router.post("/submit-form", async (req, res) => {
 
 Thank you for getting in touch with us, and welcome to Debtfrie.
 
-✅ PAYMENT CONFIRMED
-Payment ID: ${paymentInfo.paymentId}
-Amount: ₹${paymentInfo.amount ? (paymentInfo.amount/100) : 'N/A'}
-Date: ${new Date().toLocaleDateString('en-IN')}
-
 We truly appreciate your decision to take a step toward resolving your debt concerns. At Debtfrie, we understand that financial challenges can be stressful — and we're here to support you every step of the way with compassion, expertise, and complete confidentiality.
 
 About Us
@@ -165,7 +160,6 @@ Team Debtfrie
 India's Trusted Debt Resolution Experts  
 www.debtfrie.in
 
-Reference ID: ${savedSubmission._id}`
     };
 
     // Email to self (internal notification)
