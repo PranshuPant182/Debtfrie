@@ -42,7 +42,7 @@ const FormSubmissionSchema = new mongoose.Schema({
     default: ""
   },
   paymentInfo: {
-    type: mongoose.Schema.Types.Mixed, // Stores any object structure
+    type: mongoose.Schema.Types.Mixed,
     default: null
   },
   submissionDate: {
@@ -63,17 +63,45 @@ const FormSubmissionSchema = new mongoose.Schema({
     default: ""
   }
 }, {
-  timestamps: true // Automatically adds createdAt and updatedAt
+  timestamps: true
 });
 
 const FormSubmission = mongoose.model('FormSubmission', FormSubmissionSchema);
 
-
+// MODIFIED: Only save form AFTER payment verification
 router.post("/submit-form", async (req, res) => {
   const { formData, paymentInfo } = req.body;
 
   try {
-    // Save form data to database FIRST
+    // STEP 1: Verify payment first
+    if (!paymentInfo || !paymentInfo.paymentId || !paymentInfo.status) {
+      return res.status(400).json({ 
+        success: false, 
+        error: "Payment information is required" 
+      });
+    }
+
+    // STEP 2: Check if payment is successful
+    if (paymentInfo.status !== 'captured' && paymentInfo.status !== 'success') {
+      return res.status(400).json({ 
+        success: false, 
+        error: "Payment not successful. Form cannot be submitted." 
+      });
+    }
+
+    // STEP 3: Check if this payment ID was already used
+    const existingSubmission = await FormSubmission.findOne({ 
+      'paymentInfo.paymentId': paymentInfo.paymentId 
+    });
+
+    if (existingSubmission) {
+      return res.status(400).json({ 
+        success: false, 
+        error: "This payment has already been used for a submission." 
+      });
+    }
+
+    // STEP 4: ONLY NOW save form data to database (after payment verification)
     const newSubmission = new FormSubmission({
       fullName: formData.fullName,
       email: formData.email,
@@ -88,9 +116,9 @@ router.post("/submit-form", async (req, res) => {
     });
 
     const savedSubmission = await newSubmission.save();
-    console.log("Form data saved to database with ID:", savedSubmission._id);
+    console.log("✅ PAID Form data saved to database with ID:", savedSubmission._id);
 
-    // SMTP config for GoDaddy
+    // STEP 5: Send emails (only after successful payment + form save)
     const transporter = nodemailer.createTransport({
       host: "smtpout.secureserver.net",
       port: 465,
@@ -109,6 +137,11 @@ router.post("/submit-form", async (req, res) => {
       text: `Dear ${formData.fullName},
 
 Thank you for getting in touch with us, and welcome to Debtfrie.
+
+✅ PAYMENT CONFIRMED
+Payment ID: ${paymentInfo.paymentId}
+Amount: ₹${paymentInfo.amount ? (paymentInfo.amount/100) : 'N/A'}
+Date: ${new Date().toLocaleDateString('en-IN')}
 
 We truly appreciate your decision to take a step toward resolving your debt concerns. At Debtfrie, we understand that financial challenges can be stressful — and we're here to support you every step of the way with compassion, expertise, and complete confidentiality.
 
@@ -139,12 +172,19 @@ Reference ID: ${savedSubmission._id}`
     const internalMailOptions = {
       from: "no-reply@debtfrie.in",
       to: "Official@debtfrie.in",
-      subject: `New Form Submission from ${formData.fullName} - ID: ${savedSubmission._id}`,
-      text: `You have received a new form submission:
+      subject: `💰 PAID Form Submission from ${formData.fullName} - ID: ${savedSubmission._id}`,
+      text: `You have received a new PAID form submission:
+
+✅ PAYMENT VERIFIED ✅
+Payment ID: ${paymentInfo.paymentId}
+Order ID: ${paymentInfo.orderId || 'N/A'}
+Amount: ₹${paymentInfo.amount ? (paymentInfo.amount/100) : 'N/A'}
+Status: ${paymentInfo.status}
 
 Reference ID: ${savedSubmission._id}
 Submission Date: ${savedSubmission.submissionDate}
 
+CUSTOMER DETAILS:
 Full Name: ${formData.fullName}
 Email: ${formData.email}
 Phone: ${formData.phone}
@@ -163,7 +203,10 @@ View in portal: [Your portal URL]/submissions/${savedSubmission._id}
 
     // Send emails
     await transporter.sendMail(userMailOptions);
+    console.log("✅ User email sent successfully");
+    
     await transporter.sendMail(internalMailOptions);
+    console.log("✅ Internal email sent successfully");
 
     // Update the database to mark email as sent
     await FormSubmission.findByIdAndUpdate(savedSubmission._id, { emailSent: true });
@@ -171,28 +214,18 @@ View in portal: [Your portal URL]/submissions/${savedSubmission._id}
     res.json({ 
       success: true, 
       submissionId: savedSubmission._id,
-      message: "Form submitted successfully and confirmation email sent."
+      paymentId: paymentInfo.paymentId,
+      message: "✅ Payment verified! Form submitted successfully and confirmation email sent."
     });
 
   } catch (error) {
-    console.log("Error in form submission:", error);
+    console.log("❌ Error in form submission:", error);
     
-    // If there's an error after saving to DB but before/during email sending,
-    // you might want to update the record to indicate email failed
-    if (error.message && error.message.includes("Email")) {
-      // Handle email-specific errors
-      res.status(500).json({ 
-        success: false, 
-        error: "Form saved but email sending failed", 
-        details: error.message 
-      });
-    } else {
-      // Handle database or other errors
-      res.status(500).json({ 
-        success: false, 
-        error: error.message 
-      });
-    }
+    res.status(500).json({ 
+      success: false, 
+      error: "Form submission failed. Please contact support if payment was deducted.",
+      details: error.message 
+    });
   }
 });
 
@@ -303,12 +336,25 @@ router.get("/dashboard/stats", async (req, res) => {
       }
     });
 
+    // Calculate total revenue (all submissions have successful payments)
+    const revenueStats = await FormSubmission.aggregate([
+      {
+        $group: {
+          _id: null,
+          totalRevenue: { $sum: "$paymentInfo.amount" },
+          averageAmount: { $avg: "$paymentInfo.amount" }
+        }
+      }
+    ]);
+
     res.json({
       success: true,
       data: {
         totalSubmissions,
         todaySubmissions,
-        statusBreakdown: stats
+        statusBreakdown: stats,
+        totalRevenue: revenueStats[0]?.totalRevenue ? (revenueStats[0].totalRevenue / 100) : 0,
+        averageAmount: revenueStats[0]?.averageAmount ? (revenueStats[0].averageAmount / 100) : 0
       }
     });
 
