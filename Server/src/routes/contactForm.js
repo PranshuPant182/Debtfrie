@@ -60,10 +60,6 @@ router.post("/submit-form", async (req, res) => {
       });
     }
 
-    console.log('✅ Payment validation passed');
-    console.log('💰 Payment ID:', paymentId);
-    console.log('📋 Order ID:', orderId);
-
     // Check if this payment was already used
     const existingSubmission = await FormSubmission.findOne({
       $or: [
@@ -145,18 +141,9 @@ www.debtfrie.in
     const internalMailOptions = {
       from: "no-reply@debtfrie.in",
       to: "Official@debtfrie.in",
-      subject: `💰 PAID Form Submission from ${formData.fullName} - ID: ${savedSubmission._id}`,
+      subject: `New Form Submission from ${formData.fullName} - ID: ${savedSubmission._id}`,
       text: `You have received a new PAID form submission:
 
-✅ PAYMENT DETAILS:
-Payment ID: ${paymentId}
-Order ID: ${orderId}
-Amount: ₹49
-Status: COMPLETED
-
-📋 SUBMISSION DETAILS:
-Reference ID: ${savedSubmission._id}
-Submission Date: ${savedSubmission.submissionDate}
 
 👤 CUSTOMER DETAILS:
 Full Name: ${formData.fullName}
@@ -169,7 +156,7 @@ Personal Loan Dues: ${formData.loanDues}
 EMI Bounce: ${formData.emiBounce}
 Additional Info: ${formData.additionalInfo || "N/A"}
 
-💳 FULL PAYMENT INFO:
+PAYMENT INFO:
 ${JSON.stringify(paymentInfo, null, 2)}
 
 View in portal: [Your portal URL]/submissions/${savedSubmission._id}`
