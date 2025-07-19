@@ -3,80 +3,77 @@ const nodemailer = require("nodemailer");
 const mongoose = require("mongoose");
 const router = express.Router();
 
-// Form submission schema (same as before)
+// Form submission schema
 const FormSubmissionSchema = new mongoose.Schema({
-  fullName: { type: String, required: true },
-  email: { type: String, required: true },
-  phone: { type: String, required: true },
-  city: { type: String, required: true },
-  monthlyIncome: { type: String, required: true },
-  creditCardDues: { type: String, required: true },
-  loanDues: { type: String, required: true },
-  emiBounce: { type: String, required: true },
-  additionalInfo: { type: String, default: "" },
-  paymentInfo: { type: mongoose.Schema.Types.Mixed, default: null },
-  submissionDate: { type: Date, default: Date.now },
-  status: { type: String, enum: ['new', 'contacted', 'in-progress', 'resolved', 'closed'], default: 'new' },
-  emailSent: { type: Boolean, default: false },
-  notes: { type: String, default: "" }
-}, { timestamps: true });
+  fullName: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true
+  },
+  phone: {
+    type: String,
+    required: true
+  },
+  city: {
+    type: String,
+    required: true
+  },
+  monthlyIncome: {
+    type: String,
+    required: true
+  },
+  creditCardDues: {
+    type: String,
+    required: true
+  },
+  loanDues: {
+    type: String,
+    required: true
+  },
+  emiBounce: {
+    type: String,
+    required: true
+  },
+  additionalInfo: {
+    type: String,
+    default: ""
+  },
+  paymentInfo: {
+    type: mongoose.Schema.Types.Mixed, // Stores any object structure
+    default: null
+  },
+  submissionDate: {
+    type: Date,
+    default: Date.now
+  },
+  status: {
+    type: String,
+    enum: ['new', 'contacted', 'in-progress', 'resolved', 'closed'],
+    default: 'new'
+  },
+  emailSent: {
+    type: Boolean,
+    default: false
+  },
+  notes: {
+    type: String,
+    default: ""
+  }
+}, {
+  timestamps: true // Automatically adds createdAt and updatedAt
+});
 
 const FormSubmission = mongoose.model('FormSubmission', FormSubmissionSchema);
+
 
 router.post("/submit-form", async (req, res) => {
   const { formData, paymentInfo } = req.body;
 
   try {
-    console.log('📝 Form submission request received');
-    console.log('💳 Payment info:', JSON.stringify(paymentInfo, null, 2));
-
-    // FIXED: Handle both Razorpay response formats
-    let paymentId, orderId, signature;
-    
-    if (paymentInfo.razorpay_payment_id) {
-      // Standard Razorpay response format
-      paymentId = paymentInfo.razorpay_payment_id;
-      orderId = paymentInfo.razorpay_order_id;
-      signature = paymentInfo.razorpay_signature;
-    } else if (paymentInfo.paymentId) {
-      // Custom format (if frontend transforms it)
-      paymentId = paymentInfo.paymentId;
-      orderId = paymentInfo.orderId;
-      signature = paymentInfo.signature;
-    } else {
-      console.log('❌ Invalid payment info format');
-      return res.status(400).json({ 
-        success: false, 
-        error: "Payment information is missing or invalid" 
-      });
-    }
-
-    // Verify we have essential payment data
-    if (!paymentId || !orderId) {
-      console.log('❌ Missing payment ID or order ID');
-      return res.status(400).json({ 
-        success: false, 
-        error: "Payment ID and Order ID are required" 
-      });
-    }
-
-    // Check if this payment was already used
-    const existingSubmission = await FormSubmission.findOne({
-      $or: [
-        { 'paymentInfo.razorpay_payment_id': paymentId },
-        { 'paymentInfo.paymentId': paymentId }
-      ]
-    });
-
-    if (existingSubmission) {
-      console.log('⚠️ Payment already used:', paymentId);
-      return res.status(400).json({ 
-        success: false, 
-        error: "This payment has already been used for a submission." 
-      });
-    }
-
-    // Save form data to database
+    // Save form data to database FIRST
     const newSubmission = new FormSubmission({
       fullName: formData.fullName,
       email: formData.email,
@@ -91,13 +88,9 @@ router.post("/submit-form", async (req, res) => {
     });
 
     const savedSubmission = await newSubmission.save();
-    console.log("✅ Form data saved to database with ID:", savedSubmission._id);
+    console.log("Form data saved to database with ID:", savedSubmission._id);
 
-<<<<<<< Updated upstream
-    // Send emails
-=======
     // SMTP config for GoDaddy
->>>>>>> Stashed changes
     const transporter = nodemailer.createTransport({
       host: "smtpout.secureserver.net",
       port: 465,
@@ -138,18 +131,20 @@ Warm regards,
 Team Debtfrie  
 India's Trusted Debt Resolution Experts  
 www.debtfrie.in
-`
+
+Reference ID: ${savedSubmission._id}`
     };
 
-    // Email to admin
+    // Email to self (internal notification)
     const internalMailOptions = {
       from: "no-reply@debtfrie.in",
       to: "Official@debtfrie.in",
       subject: `New Form Submission from ${formData.fullName} - ID: ${savedSubmission._id}`,
-      text: `You have received a new PAID form submission:
+      text: `You have received a new form submission:
 
+Reference ID: ${savedSubmission._id}
+Submission Date: ${savedSubmission.submissionDate}
 
-👤 CUSTOMER DETAILS:
 Full Name: ${formData.fullName}
 Email: ${formData.email}
 Phone: ${formData.phone}
@@ -160,46 +155,48 @@ Personal Loan Dues: ${formData.loanDues}
 EMI Bounce: ${formData.emiBounce}
 Additional Info: ${formData.additionalInfo || "N/A"}
 
-PAYMENT INFO:
-${JSON.stringify(paymentInfo, null, 2)}
+Payment Info: ${JSON.stringify(paymentInfo, null, 2)}
 
-View in portal: [Your portal URL]/submissions/${savedSubmission._id}`
+View in portal: [Your portal URL]/submissions/${savedSubmission._id}
+      `
     };
 
-    try {
-      await transporter.sendMail(userMailOptions);
-      console.log("✅ User email sent successfully");
-      
-      await transporter.sendMail(internalMailOptions);
-      console.log("✅ Admin email sent successfully");
+    // Send emails
+    await transporter.sendMail(userMailOptions);
+    await transporter.sendMail(internalMailOptions);
 
-      // Mark email as sent
-      await FormSubmission.findByIdAndUpdate(savedSubmission._id, { emailSent: true });
-      
-    } catch (emailError) {
-      console.log("⚠️ Email sending failed:", emailError.message);
-      // Don't fail the submission if email fails
-    }
+    // Update the database to mark email as sent
+    await FormSubmission.findByIdAndUpdate(savedSubmission._id, { emailSent: true });
 
     res.json({ 
       success: true, 
       submissionId: savedSubmission._id,
-      paymentId: paymentId,
-      message: "✅ Payment verified! Form submitted successfully and confirmation email sent."
+      message: "Form submitted successfully and confirmation email sent."
     });
 
   } catch (error) {
-    console.log("❌ Error in form submission:", error);
+    console.log("Error in form submission:", error);
     
-    res.status(500).json({ 
-      success: false, 
-      error: "Form submission failed. Please contact support if payment was deducted.",
-      details: error.message 
-    });
+    // If there's an error after saving to DB but before/during email sending,
+    // you might want to update the record to indicate email failed
+    if (error.message && error.message.includes("Email")) {
+      // Handle email-specific errors
+      res.status(500).json({ 
+        success: false, 
+        error: "Form saved but email sending failed", 
+        details: error.message 
+      });
+    } else {
+      // Handle database or other errors
+      res.status(500).json({ 
+        success: false, 
+        error: error.message 
+      });
+    }
   }
 });
 
-// Keep all your existing GET routes unchanged...
+// GET API to fetch all submissions for portal
 router.get("/submissions", async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
@@ -207,6 +204,7 @@ router.get("/submissions", async (req, res) => {
     const status = req.query.status;
     const search = req.query.search;
 
+    // Build query
     let query = {};
     if (status && status !== 'all') {
       query.status = status;
@@ -242,6 +240,7 @@ router.get("/submissions", async (req, res) => {
   }
 });
 
+// GET API to fetch single submission by ID
 router.get("/submissions/:id", async (req, res) => {
   try {
     const submission = await FormSubmission.findById(req.params.id);
@@ -258,6 +257,7 @@ router.get("/submissions/:id", async (req, res) => {
   }
 });
 
+// PUT API to update submission status or add notes
 router.put("/submissions/:id", async (req, res) => {
   try {
     const { status, notes } = req.body;
@@ -284,6 +284,7 @@ router.put("/submissions/:id", async (req, res) => {
   }
 });
 
+// GET API for dashboard statistics
 router.get("/dashboard/stats", async (req, res) => {
   try {
     const stats = await FormSubmission.aggregate([
