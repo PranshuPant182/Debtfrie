@@ -1,3 +1,4 @@
+// Updated Blog Schema with Image Support
 const mongoose = require('mongoose');
 
 const SectionSchema = new mongoose.Schema({
@@ -15,6 +16,11 @@ const BlogSchema = new mongoose.Schema({
   author: { type: String, required: true },
   disclaimer: String,
   title: { type: String, required: true },
+  image: { 
+    data: Buffer,
+    contentType: String,
+    filename: String
+  },
   sections: [SectionSchema],
   createdAt: { type: Date, default: Date.now }
 });

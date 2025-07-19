@@ -93,7 +93,11 @@ router.post("/submit-form", async (req, res) => {
     const savedSubmission = await newSubmission.save();
     console.log("✅ Form data saved to database with ID:", savedSubmission._id);
 
+<<<<<<< Updated upstream
     // Send emails
+=======
+    // SMTP config for GoDaddy
+>>>>>>> Stashed changes
     const transporter = nodemailer.createTransport({
       host: "smtpout.secureserver.net",
       port: 465,
