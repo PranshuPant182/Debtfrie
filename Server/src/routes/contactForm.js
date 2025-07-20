@@ -68,7 +68,6 @@ const FormSubmissionSchema = new mongoose.Schema({
 
 const FormSubmission = mongoose.model('FormSubmission', FormSubmissionSchema);
 
-
 router.post("/submit-form", async (req, res) => {
   const { formData, paymentInfo } = req.body;
 
@@ -91,7 +90,7 @@ router.post("/submit-form", async (req, res) => {
     console.log("Form data saved to database with ID:", savedSubmission._id);
 
     // SMTP config for GoDaddy
-    const transporter = nodemailer.createTransport({
+    const transporter = nodemailer.createTransporter({
       host: "smtpout.secureserver.net",
       port: 465,
       secure: true,
@@ -281,6 +280,52 @@ router.put("/submissions/:id", async (req, res) => {
   } catch (error) {
     console.log("Error updating submission:", error);
     res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// DELETE API to delete a submission by ID
+router.delete("/submissions/:id", async (req, res) => {
+  try {
+    const submissionId = req.params.id;
+
+    // Validate if the ID is a valid MongoDB ObjectId
+    if (!mongoose.Types.ObjectId.isValid(submissionId)) {
+      return res.status(400).json({ 
+        success: false, 
+        error: "Invalid submission ID format" 
+      });
+    }
+
+    // Find and delete the submission
+    const deletedSubmission = await FormSubmission.findByIdAndDelete(submissionId);
+
+    if (!deletedSubmission) {
+      return res.status(404).json({ 
+        success: false, 
+        error: "Submission not found" 
+      });
+    }
+
+    // Log the deletion for audit purposes
+    console.log(`Submission deleted - ID: ${submissionId}, Name: ${deletedSubmission.fullName}, Email: ${deletedSubmission.email}`);
+
+    res.json({ 
+      success: true, 
+      message: "Submission deleted successfully",
+      deletedSubmission: {
+        id: deletedSubmission._id,
+        fullName: deletedSubmission.fullName,
+        email: deletedSubmission.email
+      }
+    });
+
+  } catch (error) {
+    console.log("Error deleting submission:", error);
+    res.status(500).json({ 
+      success: false, 
+      error: "Internal server error while deleting submission",
+      details: error.message 
+    });
   }
 });
 
