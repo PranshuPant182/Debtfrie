@@ -5,11 +5,13 @@ import AboutUs from './Pages/AboutUsPage/AboutUs.jsx'
 import DebtResolution from './Pages/DebtResolutionPage/DebtResolution.jsx'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import ContactUs from './Pages/ContactUsPage/ContactUs.jsx'
-import DebtConsolidation from './Pages/DebtConsolidationPage/DebtConsolidation.jsx'
 import FAQs from './Pages/FAQsPage/FAQs.jsx'
 import BlogPage from './Pages/BlogPage/BlogPage.jsx'
 import BlogDetailPage from './Pages/BlogPage/BlogDetailPage.jsx'
 import ScrollToTop from './utils/ScrollToTop.jsx'
+import DebtRestructuring from './Pages/DebtConsolidationPage/DebtRestructuring.jsx'
+import AdminDashboard from './Pages/TestPage/TestPage.jsx'
+import BlogAdminPanel from './Pages/BlogTest/BlogTest.jsx'
 
 createRoot(document.getElementById('root')).render(
 
@@ -20,10 +22,13 @@ createRoot(document.getElementById('root')).render(
             <Route path='/contactus' element={<ContactUs />} />
             <Route path='/debtResolution' element={<DebtResolution />} />
             <Route path='/aboutUs' element={<AboutUs />} />
-            <Route path='/debtRestructuring' element={<DebtConsolidation />} />
+            <Route path='/debtRestructuring' element={<DebtRestructuring />} />
             <Route path='/faqs' element={<FAQs />} />
             <Route path='/blog' element={<BlogPage />} />
             <Route path='/blogDetail/:id' element={<BlogDetailPage />} />
+            <Route path='/Test' element={<AdminDashboard />} />
+            <Route path='/Admin' element={<BlogAdminPanel />} />
+
         </Routes>
     </BrowserRouter>
 )

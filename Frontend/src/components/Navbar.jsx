@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import '../index.css';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import images from '../utils/images';
@@ -7,10 +7,25 @@ function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
   const navigate = useNavigate();
+  const dropdownRef = useRef(null);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsResourcesOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <div className="min-h-22 w-full flex items-center px-4 md:px-12 relative" style={{
@@ -35,9 +50,6 @@ function Navbar() {
           </span>
         </div>
 
-
-
-
         {/* Navigation Links - Hidden on mobile, visible on md and larger screens */}
         <div className="hidden md:flex flex-row items-center space-x-4 lg:space-x-15" style={{
           fontFamily: 'gilroy',
@@ -50,15 +62,16 @@ function Navbar() {
           <Link to="/" className="cursor-pointer hover:text-gray-600">Home</Link>
           <Link to="/debtResolution" className="cursor-pointer hover:text-gray-600">Debt Resolution</Link>
           <Link to="/debtRestructuring" className="cursor-pointer hover:text-gray-600">Debt Restructuring</Link>
-          {/* <Link to="/" className="cursor-pointer hover:text-gray-600">Resources</Link> */}
+          
           <div
-            className="relative group"
-            onClick={() => setIsResourcesOpen(true)}
-          // onMouseEnter={() => setIsResourcesOpen(true)}
-          // onMouseLeave={() => setIsResourcesOpen(false)}
+            ref={dropdownRef}
+            className="relative"
           >
-            <div className="cursor-pointer hover:text-gray-600 flex items-center">
-              Resources
+            <div 
+              className="cursor-pointer hover:text-gray-600 flex items-center"
+              onClick={() => setIsResourcesOpen(!isResourcesOpen)}
+            >
+              Reading Room
               <svg
                 className={`w-4 h-4 ml-1 transition-transform duration-200 ${isResourcesOpen ? 'rotate-180' : ''}`}
                 fill="none"
@@ -72,9 +85,27 @@ function Navbar() {
 
             {/* Dropdown Menu */}
             {isResourcesOpen && (
-              <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-md z-50 py-2 text-sm text-black">
-                {/* <Link to="/aboutUs" className="text-center block px-4 py-2 hover:bg-gray-100">About Us</Link> */}
-                <Link to="/faqs" className="text-center block px-4 py-2 hover:bg-gray-100">FAQs</Link>
+              <div className="absolute right-0 mt-2 w-36 bg-white shadow-lg rounded-md z-50 py-2 text-sm text-black border border-gray-200">
+                <Link 
+                  to="/blog" 
+                  className="text-center block px-3 py-2 cursor-pointer hover:bg-gray-100 hover:text-gray-700 transition-colors duration-200"
+                  onClick={() => setIsResourcesOpen(false)}
+                >
+                  Blog
+                </Link>
+                <Link 
+                  to="/faqs" 
+                  className="text-center block px-3 py-2 cursor-pointer hover:bg-gray-100 hover:text-gray-700 transition-colors duration-200"
+                  onClick={() => setIsResourcesOpen(false)}
+                >
+                  FAQs
+                </Link>
+                <Link 
+                  className="text-center block px-3 py-2 cursor-pointer hover:bg-gray-100 hover:text-gray-700 transition-colors duration-200"
+                  onClick={() => setIsResourcesOpen(false)}
+                >
+                  Testimonial
+                </Link>
               </div>
             )}
           </div>
@@ -105,9 +136,18 @@ function Navbar() {
       <div className={`md:hidden fixed top-0 right-0 h-full bg-white w-64 shadow-lg z-50 transform transition-transform duration-300 ease-in-out ${isMenuOpen ? "translate-x-0" : "translate-x-full"}`}>
         <div className="p-6 flex flex-col h-full">
           {/* Logo */}
-          <Link to="/" className="text-xl font-semibold mb-6">
-            Logo
-          </Link>
+          <div className="flex items-center mb-6" onClick={() => navigate('/')}>
+            <img src={images.Favicon} className="h-9 w-10 mr-2" alt="Logo" />
+            <span className="text-xl font-bold" style={{
+              fontFamily: 'Youth',
+              fontWeight: 900,
+              lineHeight: '100%',
+              letterSpacing: '0%',
+            }}>
+              <span className="text-[#3369e3]">Debt</span>
+              <span className="text-[#fcd43a]">Frie</span>
+            </span>
+          </div>
 
           {/* Divider */}
           <div className="border-t border-gray-200 mb-6"></div>
@@ -125,7 +165,7 @@ function Navbar() {
               className={`cursor-pointer flex justify-between items-center px-2 py-1 rounded-md transition-colors duration-200 ${isResourcesOpen ? "bg-blue-100 text-blue-700" : "hover:text-gray-600"
                 }`}
             >
-              <span>Resources</span>
+              <span>Reading Room</span>
               <svg
                 className={`w-4 h-4 ml-2 transform transition-transform ${isResourcesOpen ? "rotate-180" : ""
                   }`}
@@ -142,10 +182,9 @@ function Navbar() {
               <div className="ml-4 flex flex-col space-y-4 text-[15px] text-gray-700 transition-all duration-200 ease-in-out">
                 <Link to="/blog" className="cursor-pointer hover:text-gray-500">Blog</Link>
                 <Link to="/faqs" className="cursor-pointer hover:text-gray-500">FAQs</Link>
-                {/* <Link to="/" className="cursor-pointer hover:text-gray-500">Help Center</Link> */}
+                <Link className="cursor-pointer hover:text-gray-500">Testimonial</Link>
               </div>
             )}
-            {/* <Link to="/aboutUs" className="cursor-pointer hover:text-gray-600">About Us</Link> */}
             <Link to="/contactus" className="cursor-pointer hover:text-gray-600">Contact Us</Link>
           </div>
 
@@ -161,7 +200,6 @@ function Navbar() {
           </button>
         </div>
       </div>
-
 
       {/* Overlay when mobile menu is open */}
       {isMenuOpen && (

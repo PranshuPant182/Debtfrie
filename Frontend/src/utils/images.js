@@ -35,7 +35,7 @@ import Men from '../assets/Images/men.png';
 import ContactUs from '../assets/Images/contactUs.png';
 import Favicon from '../assets/Images/favicon.png';
 import phone from '../assets/Images/Phone.png';
-import LinesBG from '../assets/Images/Linesbg.png';
+import LinesBG from '../assets/Images/Linesbg.svg';
 import barCouncil_logo from '../assets/Images/barCouncil logo.png';
 import MCA_logo from '../assets/Images/MCA_logo.png';
 import meeting from '../assets/Images/meeting.jpg';
@@ -48,10 +48,28 @@ import Omshanker_Pandey from '../assets/Images/Testimonial/Omshanker Pandey.jpg'
 import Sahil_Gautam from '../assets/Images/Testimonial/Sahil Gautam.jpg';
 import Rakesh_Rawat from '../assets/Images/Testimonial/Rakesh Rawat.jpg';
 import Subhajit_Mandal from '../assets/Images/Testimonial/Subhajit Mandal.jpg';
-
-
-
 import Checklist from '../assets/Images/CheckList.png';
+
+
+
+import debt_Settlement from '../assets/Images/New/Expert Negotiation.png';
+import debt_Settlement_2 from '../assets/Images/New/Onboarding.png';
+import debt_Settlement_2_2 from '../assets/Images/New/Onboarding2.png';
+import debt_Settlement_3 from '../assets/Images/New/Personalized Counselling.png';
+import debt_Settlement_3_2 from '../assets/Images/New/Personalized Counselling 2.png';
+import Financial_Assessment_and_Consultation from '../assets/Images/New/Financial Assessment and Consultation.png';
+import Progress_Monitoring from '../assets/Images/New/Progress Monitoring.png';
+import Debt_Free from '../assets/Images/New/Debt Free.png';
+import Debt_Free_status from '../assets/Images/New/Debt free status.png';
+import Savings_and_Negotiations from '../assets/Images/New/Savings and Negotiations.png';
+
+
+
+
+
+
+
+
 
 
 
@@ -94,15 +112,26 @@ export default {
     Men: Men,
     ContactUs: ContactUs,
     Favicon: Favicon,
-    phone:phone,
-    LinesBG:LinesBG,
-    Prem_Jha:Prem_Jha,
-    Sanjeev_Kumar:Sanjeev_Kumar,
-    Omshanker_Pandey:Omshanker_Pandey,
-    Sahil_Gautam:Sahil_Gautam,
-    Rakesh_Rawat:Rakesh_Rawat,
-    Subhajit_Mandal:Subhajit_Mandal,
-    barCouncil_logo:barCouncil_logo,
-    MCA_logo:MCA_logo,
-    meeting:meeting,
+    phone: phone,
+    LinesBG: LinesBG,
+    Prem_Jha: Prem_Jha,
+    Sanjeev_Kumar: Sanjeev_Kumar,
+    Omshanker_Pandey: Omshanker_Pandey,
+    Sahil_Gautam: Sahil_Gautam,
+    Rakesh_Rawat: Rakesh_Rawat,
+    Subhajit_Mandal: Subhajit_Mandal,
+    barCouncil_logo: barCouncil_logo,
+    MCA_logo: MCA_logo,
+    meeting: meeting,
+
+    debt_Settlement: debt_Settlement,
+    debt_Settlement_2: debt_Settlement_2,
+    debt_Settlement_2_2: debt_Settlement_2_2,
+    debt_Settlement_3:debt_Settlement_3,
+    debt_Settlement_3_2:debt_Settlement_3_2,
+    Financial_Assessment_and_Consultation:Financial_Assessment_and_Consultation,
+    Progress_Monitoring:Progress_Monitoring,
+    Debt_Free:Debt_Free,
+    Debt_Free_status:Debt_Free_status,
+    Savings_and_Negotiations:Savings_and_Negotiations,
 };

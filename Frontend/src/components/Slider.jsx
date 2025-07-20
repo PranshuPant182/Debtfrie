@@ -10,14 +10,14 @@ const steps = [
     title: "Fill Up the Form",
     description:
       "Start by providing your details through our easy-to-fill form to begin your journey.",
-    image: SliderImages.Checklist,
+    image: SliderImages.Financial_Assessment_and_Consultation,
   },
   {
     id: 2,
     title: "Financial Assessment and Consultation",
     description:
       "Next, we begin by understanding your financial situation through a comprehensive financial assessment. This involves a one-on-one discussion with our financial experts, where you can share details about your existing loans and financial obligations.",
-    image: SliderImages.Checklist,
+    image: SliderImages.Progress_Monitoring,
   },
   {
     id: 3,
@@ -31,14 +31,14 @@ const steps = [
     title: "Onboarding",
     description:
       "Sign up with us. Our onboarding process involves signing a legal agreement designed to safeguard your interest.",
-    image: SliderImages.Checklist,
+    image: SliderImages.Financial_Assessment_and_Consultation,
   },
   {
     id: 5,
     title: "Savings and Negotiations",
     description:
       "You begin setting aside a portion of your income towards loan repayment, while our team of experts negotiates with banks and financial institutions to secure favourable terms aligned with your payment capacity.",
-    image: SliderImages.Checklist,
+    image: SliderImages.Progress_Monitoring,
   },
   {
     id: 6,
@@ -135,14 +135,14 @@ const StepSlider = () => {
           {steps.map((step, index) => (
             <div
               key={step.id}
-              className="min-w-[60vw] text-white rounded-3xl p-6 flex relative"
+              className="min-w-[55vw] max-w-[60vw] text-white rounded-3xl p-6 flex relative overflow-hidden"
               style={{
                 backgroundColor: index % 2 === 0 ? "#0B1437" : "#3369e3",
                 height: "68vh"
               }}
             >
               {/* Top-left Step Number */}
-              <div className="absolute top-6 left-6 font-semibold text-2xl bg-white text-[#0B1437] w-12 h-12 flex items-center justify-center rounded-full"
+              <div className="absolute top-6 left-6 font-semibold text-2xl bg-white text-[#0B1437] w-12 h-12 flex items-center justify-center rounded-full z-10"
                 style={{
                   fontFamily: 'gilroy',
                   fontWeight: 400,
@@ -154,14 +154,14 @@ const StepSlider = () => {
               </div>
 
               {/* Left Section: Text Container */}
-              <div className="flex-1 pl-6 pr-4 pt-20 flex flex-col">
+              <div className="flex-1 pl-6 pr-8 pt-20 flex flex-col max-w-[60%]">
                 {/* Title - Fixed at top with margin */}
                 <div className="mb-6">
-                  <h3 className="text-3xl font-bold"
+                  <h3 className="text-2xl lg:text-3xl font-bold leading-tight"
                     style={{
                       fontFamily: 'Youth',
                       fontWeight: 900,
-                      lineHeight: '100%',
+                      lineHeight: '110%',
                       letterSpacing: '0%',
                     }}
                   >
@@ -169,14 +169,17 @@ const StepSlider = () => {
                   </h3>
                 </div>
                 
-                {/* Description - Fixed positioning */}
-                <div className="flex-1 flex items-start">
-                  <p className="text-2xl text-gray-300 max-w-xs leading-relaxed"
+                {/* Description - Fixed positioning with better constraints */}
+                <div className="flex-1 flex items-start overflow-hidden">
+                  <p className="text-lg lg:text-xl text-gray-300 leading-relaxed break-words"
                     style={{
                       fontFamily: 'gilroy',
                       fontWeight: 400,
                       lineHeight: '130%',
                       letterSpacing: '0%',
+                      wordWrap: 'break-word',
+                      overflowWrap: 'break-word',
+                      hyphens: 'auto',
                     }}
                   >
                     {step.description}
@@ -185,11 +188,11 @@ const StepSlider = () => {
               </div>
 
               {/* Right Section: Image */}
-              <div className="flex-shrink-0 h-full flex items-end justify-end pr-4 pb-4">
+              <div className="flex-shrink-0 h-full flex items-end justify-end pr-4 pb-4 max-w-[40%]">
                 <img
                   src={step.image}
                   alt={`Step ${index + 1}`}
-                  className="h-[80%] object-contain"
+                  className="h-[80%] w-auto object-contain"
                 />
               </div>
             </div>

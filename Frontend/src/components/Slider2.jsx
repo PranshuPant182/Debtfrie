@@ -4,54 +4,55 @@ import "slick-carousel/slick/slick-theme.css";
 import SliderImages from "../utils/images"; // Assuming this exports an object with CheckList
 import '../index.css'
 
+
 const steps = [
   {
     id: 1,
-    title: "Fill Up the Form",
+    title: "Personalized Debt Plan",
     description:
-      "Start by providing your details through our easy-to-fill form to begin your journey.",
-    image: SliderImages.Checklist,
+      "We assess your finances and design a repayment or settlement plan that fits your budget.",
+    image: SliderImages.Financial_Assessment_and_Consultation,
   },
   {
     id: 2,
-    title: "Financial Assessment and Consultation",
+    title: "Expert Allocation",
     description:
-      "Next, we begin by understanding your financial situation through a comprehensive financial assessment. This involves a one-on-one discussion with our financial experts, where you can share details about your existing loans and financial obligations.",
-    image: SliderImages.Checklist,
+      "From budgeting tools, on-call counsellors & Advocates, you get full dedicated team for your support.",
+    image: SliderImages.Progress_Monitoring,
   },
   {
     id: 3,
-    title: "Eligibility Check",
+    title: "Self-Save Model (No Loan)",
     description:
-      "Checking a client's eligibility typically involves assessing whether they meet the required criteria or not. This includes a comprehensive review of their financial history and a thorough analysis of their credit report.",
+      "You set aside a part of your earnings and save them in your own account. This is your money, used only to settle your debts. Kindly note that we don't offer any loan. You repay the settlement amount from your savings.",
     image: SliderImages.Checklist,
   },
   {
     id: 4,
-    title: "Onboarding",
+    title: "Expert Negotiation",
     description:
-      "Sign up with us. Our onboarding process involves signing a legal agreement designed to safeguard your interest.",
-    image: SliderImages.Checklist,
+      "Our specialists negotiate with your banks and lenders to reduce your debt, waive interest, and secure the best settlement terms.",
+    image: SliderImages.Financial_Assessment_and_Consultation,
   },
   {
     id: 5,
-    title: "Savings and Negotiations",
+    title: "Legal & Harassment Support",
     description:
-      "You begin setting aside a portion of your income towards loan repayment, while our team of experts negotiates with banks and financial institutions to secure favourable terms aligned with your payment capacity.",
-    image: SliderImages.Checklist,
+      "We protect you from Banks Harassment, guide you through legal notices and handle creditor communications on your behalf.",
+    image: SliderImages.Progress_Monitoring,
   },
   {
     id: 6,
-    title: "Debt free status",
+    title: "You Are Debt Free",
     description:
-      "Once all settlements or restructuring agreements are successfully executed, you achieve a debt-free status, empowering you to take full control of your financial future.",
+      "Congratulations! You are now completely debt-free and ready to embrace a more financially secure and empowered future.",
     image: SliderImages.Checklist,
-  },
+  }
 ];
 
 const StepSlider2 = () => {
   return (
-    <div className="w-full sm:h-screen flex flex-col md:pl-10 mb-10 sm:mb-0">
+    <div className="w-full h-screen flex flex-col md:pl-10">
       {/* Header - Responsive for both mobile and desktop */}
       <div className="w-full h-auto md:h-[20%] flex justify-center items-center mt-7 sm:mt-0 py-4 md:py-0"
         style={{
@@ -61,8 +62,8 @@ const StepSlider2 = () => {
           letterSpacing: '0%',
         }}
       >
-        <h2 className="text-3xl md:text-4xl font-bold text-center px-4">
-          How Its Work
+        <h2 className="text-2xl md:text-4xl font-bold text-center px-4">
+          How Does DEBT<span className='text-[#3369E3]'> Resolution</span> Works? <br className="hidden md:block" />
         </h2>
       </div>
 
@@ -72,26 +73,26 @@ const StepSlider2 = () => {
           {steps.map((step, index) => (
             <div
               key={step.id}
-              className="min-w-[360px] max-w-[300px] text-white rounded-2xl overflow-hidden flex flex-col justify-between px-6 py-4"
+              className="min-w-[380px] max-w-[320px] text-white rounded-2xl overflow-hidden flex flex-col px-6 py-4"
               style={{
                 backgroundColor: index % 2 === 0 ? "#0B1437" : "#3369e3",
                 height: "480px",
               }}
             >
               {/* Step Number */}
-              <div className="bg-white text-[#0B1437] w-10 h-10 flex items-center justify-center rounded-full font-medium"
+              <div className="bg-white text-[#0B1437] w-10 h-10 flex items-center justify-center rounded-full font-medium mb-6"
                 style={{
                   fontFamily: 'gilroy',
                   fontWeight: 500,
-                  alignSelf: 'flex-start', // Keep it on the top left
+                  alignSelf: 'flex-start',
                 }}
               >
                 {index + 1 < 10 ? `0${index + 1}` : index + 1}
               </div>
 
-              {/* Title + Description */}
-              <div className="flex-1 mt-6 mb-4">
-                <h3 className="text-2xl font-bold mb-2"
+              {/* Title - Fixed at top */}
+              <div className="mb-4">
+                <h3 className="text-2xl font-bold"
                   style={{
                     fontFamily: 'Youth',
                     fontWeight: 900,
@@ -99,8 +100,11 @@ const StepSlider2 = () => {
                 >
                   {step.title}
                 </h3>
+              </div>
 
-                <p className="text-sm text-gray-200 leading-snug"
+              {/* Description - Fixed positioning with increased width */}
+              <div className="mb-6 flex-1 flex items-start">
+                <p className="text-sm text-gray-200 leading-snug w-full"
                   style={{
                     fontFamily: 'gilroy',
                     fontWeight: 400,
@@ -110,8 +114,8 @@ const StepSlider2 = () => {
                 </p>
               </div>
 
-              {/* Image */}
-              <div className="flex justify-end">
+              {/* Image - Fixed at bottom */}
+              <div className="flex justify-end mt-auto">
                 <img
                   src={step.image}
                   alt={`Step ${index + 1}`}
@@ -119,7 +123,6 @@ const StepSlider2 = () => {
                 />
               </div>
             </div>
-
           ))}
         </div>
       </div>
@@ -130,7 +133,7 @@ const StepSlider2 = () => {
           {steps.map((step, index) => (
             <div
               key={step.id}
-              className="min-w-[60vw] text-white rounded-3xl p-6 flex relative items-center"
+              className="min-w-[65vw] text-white rounded-3xl p-6 flex relative"
               style={{
                 backgroundColor: index % 2 === 0 ? "#0B1437" : "#3369e3",
                 height: "68vh"
@@ -148,32 +151,39 @@ const StepSlider2 = () => {
                 {`0${index + 1}`}
               </div>
 
-              {/* Left Section: Text */}
-              <div className="flex-1 pl-6 pr-4">
-                <h3 className="text-3xl font-bold mb-2"
-                  style={{
-                    fontFamily: 'Youth',
-                    fontWeight: 900,
-                    lineHeight: '100%',
-                    letterSpacing: '0%',
-                  }}
-                >
-                  {step.title}
-                </h3>
-                <p className="text-2xl text-gray-300 max-w-xs"
-                  style={{
-                    fontFamily: 'gilroy',
-                    fontWeight: 400,
-                    lineHeight: '100%',
-                    letterSpacing: '0%',
-                  }}
-                >
-                  {step.description}
-                </p>
+              {/* Left Section: Text Container - Increased width */}
+              <div className="flex-1 pl-6 pr-6 pt-20 flex flex-col max-w-[65%]">
+                {/* Title - Fixed at top with margin */}
+                <div className="mb-6">
+                  <h3 className="text-3xl font-bold"
+                    style={{
+                      fontFamily: 'Youth',
+                      fontWeight: 900,
+                      lineHeight: '100%',
+                      letterSpacing: '0%',
+                    }}
+                  >
+                    {step.title}
+                  </h3>
+                </div>
+
+                {/* Description - Fixed positioning with increased max-width */}
+                <div className="flex-1 flex items-start">
+                  <p className="text-2xl text-gray-300 max-w-lg leading-relaxed"
+                    style={{
+                      fontFamily: 'gilroy',
+                      fontWeight: 400,
+                      lineHeight: '130%',
+                      letterSpacing: '0%',
+                    }}
+                  >
+                    {step.description}
+                  </p>
+                </div>
               </div>
 
-              {/* Right Section: Image */}
-              <div className="flex-shrink-0 h-full flex items-end">
+              {/* Right Section: Image - Adjusted to accommodate wider text */}
+              <div className="flex-shrink-0 h-full flex items-end justify-end pr-4 pb-4 max-w-[35%]">
                 <img
                   src={step.image}
                   alt={`Step ${index + 1}`}

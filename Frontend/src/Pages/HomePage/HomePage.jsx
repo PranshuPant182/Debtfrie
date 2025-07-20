@@ -12,10 +12,14 @@ import HeroSection from '../../components/Top'
 import { useNavigate } from 'react-router-dom'
 import EnrollBanner from '../../components/EnrollBanner'
 import VideoMarqueeSection from '../../components/VideoMarqueeSection'
+import AnimatedCardsSection from '../../components/AnimatedCardsSection'
 
 function HomePage() {
     const [showPopup, setShowPopup] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
     const targetRef = useRef(null);
+    const featuresRef = useRef(null);
+    const textRef = useRef(null);
     const navigate = useNavigate();
 
     const scrollToMiddle = () => {
@@ -25,7 +29,6 @@ function HomePage() {
         });
     };
 
-
     useEffect(() => {
         const timer = setTimeout(() => {
             setShowPopup(true);
@@ -34,9 +37,106 @@ function HomePage() {
         return () => clearTimeout(timer);
     }, []);
 
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                }
+            },
+            { threshold: 0.3 }
+        );
+
+        if (targetRef.current) {
+            observer.observe(targetRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, []);
+
     return (
         <Layout>
             <div className=''>
+                {/* Add CSS for animations */}
+                <style jsx>{`
+                    @keyframes slideInFromRight {
+                        0% {
+                            transform: translateX(100%);
+                            opacity: 0;
+                        }
+                        100% {
+                            transform: translateX(0);
+                            opacity: 1;
+                        }
+                    }
+
+                    @keyframes slideInFromLeft {
+                        0% {
+                            transform: translateX(-100%);
+                            opacity: 0;
+                        }
+                        100% {
+                            transform: translateX(0);
+                            opacity: 1;
+                        }
+                    }
+
+                    @keyframes slideInFromTop {
+                        0% {
+                            transform: translateY(-100%);
+                            opacity: 0;
+                        }
+                        100% {
+                            transform: translateY(0);
+                            opacity: 1;
+                        }
+                    }
+                    @keyframes slideInFromBottom {
+                            100% {
+                            transform: translateY(0);
+                            opacity: 1;
+                        }
+                        0% {
+                            transform: translateY(-100%);
+                            opacity: 0;
+                        }
+                    }
+                        
+
+                    .animate-slide-right {
+                        animation: slideInFromRight 0.8s ease-out forwards;
+                    }
+
+                    .animate-slide-left {
+                        animation: slideInFromLeft 0.8s ease-out forwards;
+                    }
+                    .animate-slide-top {
+                        animation: slideInFromTop 0.8s ease-out forwards;
+                    }
+
+                    .animate-slide-bottom {
+                        animation: slideInFromBottom 0.8s ease-out forwards;
+                    }
+
+                    
+
+                    .animate-delay-1 {
+                        animation-delay: 0.2s;
+                    }
+
+                    .animate-delay-2 {
+                        animation-delay: 0.4s;
+                    }
+
+                    .animate-delay-3 {
+                        animation-delay: 0.6s;
+                    }
+
+                    .opacity-0 {
+                        opacity: 0;
+                    }
+                `}</style>
+
                 {/*FRONT HEADING */}
                 <HeroSection scrollToMiddle={scrollToMiddle} />
 
@@ -47,7 +147,7 @@ function HomePage() {
                     <div className="hidden sm:grid sm:grid-cols-3 sm:h-[90%]">
                         {/* COL 1 HEADING - Desktop only */}
                         <div className="flex justify-center items-center">
-                            <div className="w-[100%] flex justify-center items-center">
+                            <div className={`w-[100%] flex justify-center items-center ${isVisible ? 'animate-slide-right' : 'opacity-0'}`}> 
                                 <span className="text-5xl text-white font-bold" style={{
                                     fontFamily: 'Youth',
                                     fontWeight: 900,
@@ -70,12 +170,16 @@ function HomePage() {
 
                             {/* Overlayed Content - full height layout inside phone */}
                             <div className="absolute top-1/2 left-1/2 w-[80%] max-w-[240px] h-[550px] transform -translate-x-1/2 -translate-y-1/2 flex flex-col justify-between items-center px-4 py-5 text-center">
-                                <div className='absolute bottom-[230px]' style={{
-                                    fontFamily: 'gilroy',
-                                    fontWeight: 400,
-                                    lineHeight: '100%',
-                                    letterSpacing: '0%',
-                                }}>
+                                <div 
+                                    ref={textRef}
+                                    className={`absolute bottom-[230px] ${isVisible ? 'animate-slide-top' : 'opacity-0'}`} 
+                                    style={{
+                                        fontFamily: 'gilroy',
+                                        fontWeight: 400,
+                                        lineHeight: '100%',
+                                        letterSpacing: '0%',
+                                    }}
+                                >
                                     <p className="text-xl text-white font-medium leading-snug">
                                         Here to heal your<br />
                                         financial worries with<br />
@@ -84,14 +188,6 @@ function HomePage() {
                                     </p>
                                 </div>
 
-                                {/* <div className="w-full flex flex-col gap-3 absolute bottom-8">
-                                    <button className="bg-white text-[#3369e3] py-2 rounded-full text-sm font-semibold w-full">
-                                        I have an account
-                                    </button>
-                                    <button className="border border-white text-white py-2 rounded-full text-sm font-semibold w-full">
-                                        I’m new here
-                                    </button>
-                                </div> */}
                                 <div className="w-full flex flex-col gap-3 absolute bottom-8">
                                     <button className="bg-white text-[#3369e3] py-2 rounded-full text-sm font-semibold w-full cursor-pointer"
                                         onClick={() => navigate('/contactus')}>
@@ -101,16 +197,18 @@ function HomePage() {
                             </div>
                         </div>
 
-
-
                         {/* COL 3 FEATURES - Desktop only */}
-                        <div className="flex flex-col justify-center space-y-16 text-white p-20" style={{
-                            fontFamily: 'gilroy',
-                            fontWeight: 400,
-                            lineHeight: '100%',
-                            letterSpacing: '0%',
-                        }}>
-                            <div className="flex items-center">
+                        <div 
+                            ref={featuresRef}
+                            className="flex flex-col justify-center space-y-16 text-white p-20" 
+                            style={{
+                                fontFamily: 'gilroy',
+                                fontWeight: 400,
+                                lineHeight: '100%',
+                                letterSpacing: '0%',
+                            }}
+                        >
+                            <div className={`flex items-center ${isVisible ? 'animate-slide-right' : 'opacity-0'}`}>
                                 <div className="w-12 flex-shrink-0">
                                     <img src={images.Auction} className="w-full h-full" alt="Auction Icon" />
                                 </div>
@@ -118,7 +216,7 @@ function HomePage() {
                                     <span className="text-3xl">Expert Legal Guidance</span>
                                 </div>
                             </div>
-                            <div className="flex items-center">
+                            <div className={`flex items-center ${isVisible ? 'animate-slide-right animate-delay-1' : 'opacity-0'}`}>
                                 <div className="w-12 flex-shrink-0">
                                     <ShieldCheck size={50} />
                                 </div>
@@ -126,7 +224,7 @@ function HomePage() {
                                     <span className="text-3xl">Protection from Harassment</span>
                                 </div>
                             </div>
-                            <div className="flex items-center">
+                            <div className={`flex items-center ${isVisible ? 'animate-slide-right animate-delay-2' : 'opacity-0'}`}>
                                 <div className="w-12 flex-shrink-0">
                                     <img src={images.Idea} className="w-full h-full" alt="Idea Icon" />
                                 </div>
@@ -148,12 +246,15 @@ function HomePage() {
                             />
                         </div>
                         <div className="b absolute top-18 left-1/2 w-[80%] max-w-[240px] h-[550px] transform -translate-x-1/2 -translate-y-1/2 flex flex-col justify-between items-center px-4 py-5 text-center z-50">
-                            <div className='absolute bottom-[230px]' style={{
-                                fontFamily: 'gilroy',
-                                fontWeight: 400,
-                                lineHeight: '100%',
-                                letterSpacing: '0%',
-                            }}>
+                            <div 
+                                className={`absolute bottom-[230px] ${isVisible ? 'animate-slide-top' : 'opacity-0'}`} 
+                                style={{
+                                    fontFamily: 'gilroy',
+                                    fontWeight: 400,
+                                    lineHeight: '100%',
+                                    letterSpacing: '0%',
+                                }}
+                            >
                                 <p className="text-sm text-white font-medium leading-snug">
                                     Here to heal your<br />
                                     financial worries with<br />
@@ -171,7 +272,7 @@ function HomePage() {
                         </div>
 
                         {/* Main Heading - Below image */}
-                        <div className="-mt-36 text-center">
+                        <div className={`-mt-36 text-center ${isVisible ? 'animate-slide-top' : 'opacity-0'}`}>
                             <span className="text-2xl text-white font-bold" style={{
                                 fontFamily: 'Youth',
                                 fontWeight: 900,
@@ -186,7 +287,7 @@ function HomePage() {
                         <div className="w-full mt-10 flex flex-col space-y-8 text-white">
                             <div className="w-full text-white">
                                 {/* First row - All icons */}
-                                <div className="flex flex-row justify-around items-center">
+                                <div className={`flex flex-row justify-around items-center ${isVisible ? 'animate-slide-bottom' : 'opacity-0'}`}>
                                     <div className="w-10 flex-shrink-0">
                                         <img src={images.Auction} className="w-full h-full" alt="Auction Icon" />
                                     </div>
@@ -199,7 +300,7 @@ function HomePage() {
                                 </div>
 
                                 {/* Second row - All headings */}
-                                <div className="flex flex-row justify-around items-start text-center mt-4" style={{
+                                <div className={`flex flex-row justify-around items-start text-center mt-4  ${isVisible ? 'animate-slide-bottom' : 'opacity-0'}`} style={{
                                     fontFamily: 'gilroy',
                                     fontWeight: 400,
                                     lineHeight: '100%',
@@ -222,130 +323,14 @@ function HomePage() {
 
                 <EnrollBanner />
 
-
                 {/* CALCULATOR */}
                 <DebtCalculator />
-
-                {/* VIDEO */}
-                {/* <div className="w-full sm:min-h-screen bg-white relative overflow-hidden">
-                    <div className="max-w-5xl mx-auto px-4 py-16 z-10 relative" style={{
-                        fontFamily: 'Youth',
-                        fontWeight: 900,
-                        lineHeight: '100%',
-                        letterSpacing: '0%',
-                    }}>
-                        <div className="text-center mb-10">
-                            <h1 className="text-3xl sm:text-3xl md:text-5xl font-bold text-navy-900 mb-2">
-                                Debt-Free Living Starts
-                            </h1>
-                            <h1 className="text-3xl sm:text-3xl md:text-5xl font-bold mb-4 sm:mb-8">
-                                With <span className="text-blue-500">Debt</span><span className="text-yellow-500">Frie</span>
-                            </h1>
-                            <p className="text-lg sm:text-xl text-gray-800" style={{
-                                fontFamily: 'gilroy',
-                                fontWeight: 400,
-                                lineHeight: '100%',
-                                letterSpacing: '0%',
-                            }}>
-                                Join The DebtFrie Success Stories Today!
-                            </p>
-                        </div>
-
-                        <div className="flex justify-center items-center">
-                            <div className="w-[800px] h-[450px] rounded-2xl overflow-hidden relative bg-black">
-                                <video
-                                    src="/Debtfrie.MP4"
-                                    className="w-full h-full object-contain rounded-2xl"
-                                    controls
-                                    autoPlay={false}
-                                    muted
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </div> */}
 
                 <div className="w-full sm:min-h-screen bg-white relative overflow-hidden">
                     <VideoMarqueeSection />
                 </div>
 
-                <div className="w-full min-h-screen flex flex-col items-center justify-center bg-[#3369e3] relative overflow-hidden bg-hero-image">
-                    {/* Header section */}
-                    <div className="flex justify-center text-center py-10 md:py-16 px-4 z-10 sm:mb-16">
-                        <h1 className="text-3xl sm:text-4xl md:text-5xl text-white font-medium leading-tight" style={{
-                            fontFamily: 'Youth',
-                            fontWeight: 900,
-                            lineHeight: '100%',
-                            letterSpacing: '0%',
-                        }}>
-                            Your Path To <span className="text-yellow-400">Financial Freedom</span> With <br className="hidden sm:block" />Tailored Solutions
-                        </h1>
-                    </div>
-
-                    {/* Cards section */}
-                    <div className="flex flex-col md:flex-row flex-wrap justify-center gap-6 md:gap-8 lg:gap-10 px-4 sm:px-8 pb-10 md:pb-20 z-10 w-full max-w-7xl" style={{
-                        fontFamily: 'Youth',
-                        fontWeight: 900,
-                        lineHeight: '100%',
-                        letterSpacing: '0%',
-                    }}>
-                        {/* Card 1 */}
-                        <div className="flex flex-col justify-center items-center bg-white rounded-2xl shadow-lg p-6 w-full sm:w-64 text-center mb-6 md:mb-0">
-                            <div className="mb-4 flex items-center justify-center h-24">
-                                <img src={images.PigiBank} alt="Savings" className="h-20 w-auto" />
-                            </div>
-                            <span className="text-xl sm:text-2xl font-bold mb-3">Self-Savings<br />Model</span>
-                            <span className="text-sm" style={{
-                                fontFamily: 'gilroy',
-                                fontWeight: 400,
-                                lineHeight: '100%',
-                                letterSpacing: '0%',
-                            }}>Save while settling your debts.<br />For a secure financial future.</span>
-                        </div>
-
-                        {/* Card 2 */}
-                        <div className="flex flex-col justify-center items-center bg-white rounded-2xl shadow-lg p-6 w-full sm:w-64 text-center mb-6 md:mb-0">
-                            <div className="mb-4 flex items-center justify-center h-24">
-                                <img src={images.Calendar} alt="Calendar" className="h-20 w-auto" />
-                            </div>
-                            <span className="text-xl sm:text-2xl font-bold mb-3">Consumer-<br />Feasible Plan</span>
-                            <span className="text-sm" style={{
-                                fontFamily: 'gilroy',
-                                fontWeight: 400,
-                                lineHeight: '100%',
-                                letterSpacing: '0%',
-                            }}>Personalized And Practical Plans Designed For Your Financial Ease.</span>
-                        </div>
-
-                        {/* Card 3 */}
-                        <div className="flex flex-col justify-center items-center bg-white rounded-2xl shadow-lg p-6 w-full sm:w-64 text-center mb-6 md:mb-0">
-                            <div className="mb-4 flex items-center justify-center h-24">
-                                <img src={images.Note} alt="Document" className="h-20 w-auto" />
-                            </div>
-                            <span className="text-xl sm:text-2xl font-bold mb-3">Settle Now, Pay<br />Later</span>
-                            <span className="text-sm" style={{
-                                fontFamily: 'gilroy',
-                                fontWeight: 400,
-                                lineHeight: '100%',
-                                letterSpacing: '0%',
-                            }}>We Settle Your Debts First, And Pay After - No Upfront Costs.</span>
-                        </div>
-
-                        {/* Card 4 */}
-                        <div className="flex flex-col justify-center items-center bg-white rounded-2xl shadow-lg p-6 w-full sm:w-64 text-center mb-6 md:mb-0">
-                            <div className="mb-4 flex items-center justify-center h-24">
-                                <img src={images.Arrow} alt="Target" className="h-20 w-auto" />
-                            </div>
-                            <span className="text-xl sm:text-2xl font-bold mb-3">Result-Oriented<br />Services</span>
-                            <span className="text-sm" style={{
-                                fontFamily: 'gilroy',
-                                fontWeight: 400,
-                                lineHeight: '100%',
-                                letterSpacing: '0%',
-                            }}>Focused On Reducing Your Debt And Improving Your Financial Stability.</span>
-                        </div>
-                    </div>
-                </div>
+                <AnimatedCardsSection />
 
                 {/* TESTIMONIAL */}
                 <TestimonialsSection />

@@ -31,7 +31,7 @@ function Footer() {
             {/* Footer Grid */}
             <div className="container mx-auto px-6 md:px-12 py-12">
                 <div className="grid grid-cols-1 md:grid-cols-6 gap-10">
-                    {/* Company Info, Contact & Certificates */}
+                    {/* Company Info & Contact */}
                     <div className="md:col-span-2">
                         {/* Brand Name */}
                         <h2 className="text-4xl md:text-5xl font-bold" style={{ fontFamily: 'Youth', fontWeight: 900 }}>
@@ -40,7 +40,7 @@ function Footer() {
 
                         {/* Description */}
                         <p className="text-gray-400 text-sm mt-4 mb-6" style={{ fontFamily: 'gilroy' }}>
-                            Debtfrie is India’s first legal-based fintech, empowering individuals to take control of their
+                            Debtfrie is India's first legal-based fintech, empowering individuals to take control of their
                             debt with expert guidance and trusted solutions.
                         </p>
 
@@ -69,16 +69,6 @@ function Footer() {
                             <div className="flex items-start gap-2">
                                 <span className="text-lg">🏢</span>
                                 <span>D-34 Sector 2 Noida,<br />Red FM Lane, 201301</span>
-                            </div>
-                        </div>
-
-                        {/* Certificates */}
-                        <div className="mt-6">
-                            <p className="text-gray-400 text-sm mb-2">Certified for Best Consumer Debt practices:</p>
-                            <div className="flex items-center space-x-3">
-                                <img src={images.Certificate2} alt="ISO" className="h-10 sm:h-16 object-contain" />
-                                <img src={images.Certificate3} alt="PCI DSS" className="h-16 object-contain" />
-                                <img src={images.Certificate1} alt="SISA" className="h-10 object-contain" />
                             </div>
                         </div>
                     </div>
@@ -147,24 +137,26 @@ function Footer() {
                 </h3>
                 <div className="flex flex-wrap justify-center items-center gap-6 mb-4">
                     <img src={images.MCA_logo} alt="Award 1" className="h-12 sm:h-16 object-contain" />
-                    <img src={images.barCouncil_logo} alt="Award 2" className="h-12 sm:h-16 object-contain" />
-                    {/* <img src={images.Award3} alt="Award 3" className="h-12 sm:h-16 object-contain" /> */}
+                    {/* Certificates moved here */}
+                    <img src={images.Certificate2} alt="ISO" className="h-10 sm:h-16 object-contain" />
+                    <img src={images.Certificate3} alt="PCI DSS" className="h-16 object-contain" />
+                    <img src={images.Certificate1} alt="SISA" className="h-10 object-contain" />
+                    <div className="text-center">
+                        <img src={images.barCouncil_logo} alt="Award 2" className="h-12 sm:h-16 object-contain mx-auto" />
+                        <p className="text-white text-xs mt-2" style={{ fontFamily: 'gilroy' }}>
+                            BCI Registered Advocates
+                        </p>
+                    </div>
                 </div>
-                <p className="text-center text-white text-sm md:text-base" style={{ fontFamily: 'gilroy' }}>
-                    BCI Registered Advocates
-                </p>
             </div>
-
-
 
             {/* Bottom Bar */}
             <div className="border-t border-gray-800 bg-[#02102f] text-center py-6 text-gray-400 text-sm" style={{ fontFamily: 'gilroy' }}>
-                GSTIN: 09ABBCA5615N1ZF &nbsp;|&nbsp; Powered by Advocentia Financial Resolutions Pvt. Ltd. &nbsp;|&nbsp; © 2024 Design Mnks. All rights reserved.
+                GSTIN: 09ABBCA5615N1ZF &nbsp;|&nbsp; Powered by Advocentia Financial Resolutions Pvt. Ltd. &nbsp;|&nbsp; © 2025 Design Mnks. All rights reserved.
             </div>
-
 
         </footer>
     );
 }
 
-export default Footer;
+export default Footer;  

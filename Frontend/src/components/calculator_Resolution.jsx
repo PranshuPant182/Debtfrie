@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import DebtSavingsPopup from "./DebtSavingsPopup";
 
 const DebtCalculator_Resolution = () => {
     const nagivate = useNavigate();
     const [creditCardDebt, setCreditCardDebt] = useState(1000);
     const [personalLoanDebt, setPersonalLoanDebt] = useState(2000);
+    const [showPopup, setShowPopup] = useState(false);
 
     const totalDebt = creditCardDebt + personalLoanDebt;
     const settlementAmount = Math.round(totalDebt * 0.3);
     const savings = totalDebt - settlementAmount;
     const percentage = totalDebt > 0 ? (settlementAmount / totalDebt) * 100 : 0;
-
 
     const circleRadius = 36;
     const circleCircumference = 2 * Math.PI * circleRadius;
@@ -93,7 +94,6 @@ const DebtCalculator_Resolution = () => {
                         <span className="font-bold">₹{savings.toLocaleString()}</span> monthly!
                     </p>
 
-
                     <div className="flex flex-col sm:flex-row sm:items-center gap-4 mt-10">
                         {/* Circular Progress */}
                         <div className="w-30 h-30 flex-shrink-0 flex items-center justify-center">
@@ -125,14 +125,6 @@ const DebtCalculator_Resolution = () => {
                                 >
                                     ₹{savings.toLocaleString()}
                                 </text>
-                                {/* <text
-                                    x="50"
-                                    y="64"
-                                    textAnchor="middle"
-                                    className="fill-green-500 text-[8px] font-bold"
-                                >
-                                    Less in Interest
-                                </text> */}
                             </svg>
                         </div>
 
@@ -171,9 +163,7 @@ const DebtCalculator_Resolution = () => {
                     </div>
 
                     <div className="flex justify-center items-center mt-10">
-                        <button className="w-[50%] bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg font-semibold" onClick={() => {
-                            nagivate('/contactus')
-                        }}>
+                        <button className="w-[50%] bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg font-semibold" onClick={() => setShowPopup(true)}>
                             Check Rates
                         </button>
                     </div>
@@ -183,6 +173,15 @@ const DebtCalculator_Resolution = () => {
                     </p>
                 </div>
             </div>
+            {showPopup && (
+                <DebtSavingsPopup
+                    onClose={() => setShowPopup(false)}
+                    onRedirect={() => {
+                        setShowPopup(false);
+                        nagivate("/contactus");
+                    }}
+                />
+            )}
         </div>
     );
 };
