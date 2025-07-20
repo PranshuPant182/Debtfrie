@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import SliderImages from "../utils/images"; // Assuming this exports an object with CheckList
@@ -51,6 +51,18 @@ const steps = [
 ];
 
 const StepSlider2 = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => {
+        return (prevIndex + 1) % steps.length;
+      });
+    }, 2000); // Auto-slide every 2 seconds
+
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, []);
+
   return (
     <div className="w-full h-screen flex flex-col md:pl-10">
       {/* Header - Responsive for both mobile and desktop */}
@@ -63,64 +75,76 @@ const StepSlider2 = () => {
         }}
       >
         <h2 className="text-2xl md:text-4xl font-bold text-center px-4">
-          How Does DEBT<span className='text-[#3369E3]'> Resolution</span> Works? <br className="hidden md:block" />
+          Just 6 Easy Steps To Start<br className="hidden md:block" />
+          Your Journey Towards
+          <span className="text-blue-500"> A Debt-</span>
+          <span className="text-yellow-500">Free Life.</span>
         </h2>
       </div>
 
       {/* MOBILE DESIGN - Only shown on small screens */}
-      <div className="md:hidden w-full flex-1 overflow-x-auto scrollbar-hide mt-7 sm:mt-0">
-        <div className="flex space-x-4 pb-8 w-max px-4">
+      <div className="md:hidden w-full flex-1 overflow-hidden mt-7 sm:mt-0">
+        <div
+          className="flex transition-transform duration-500 ease-in-out"
+          style={{
+            transform: `translateX(-${currentIndex * 100}%)`,
+          }}
+        >
           {steps.map((step, index) => (
             <div
               key={step.id}
-              className="min-w-[380px] max-w-[320px] text-white rounded-2xl overflow-hidden flex flex-col px-6 py-4"
-              style={{
-                backgroundColor: index % 2 === 0 ? "#0B1437" : "#3369e3",
-                height: "480px",
-              }}
+              className="w-full flex justify-center items-center px-4 flex-shrink-0"
             >
-              {/* Step Number */}
-              <div className="bg-white text-[#0B1437] w-10 h-10 flex items-center justify-center rounded-full font-medium mb-6"
+              <div
+                className="w-[360px] text-white rounded-2xl overflow-hidden flex flex-col px-6 py-4"
                 style={{
-                  fontFamily: 'gilroy',
-                  fontWeight: 500,
-                  alignSelf: 'flex-start',
+                  backgroundColor: index % 2 === 0 ? "#0B1437" : "#3369e3",
+                  height: "480px",
                 }}
               >
-                {index + 1 < 10 ? `0${index + 1}` : index + 1}
-              </div>
-
-              {/* Title - Fixed at top */}
-              <div className="mb-4">
-                <h3 className="text-2xl font-bold"
-                  style={{
-                    fontFamily: 'Youth',
-                    fontWeight: 900,
-                  }}
-                >
-                  {step.title}
-                </h3>
-              </div>
-
-              {/* Description - Fixed positioning with increased width */}
-              <div className="mb-6 flex-1 flex items-start">
-                <p className="text-sm text-gray-200 leading-snug w-full"
+                {/* Step Number */}
+                <div className="bg-white text-[#0B1437] w-10 h-10 flex items-center justify-center rounded-full font-medium mb-6"
                   style={{
                     fontFamily: 'gilroy',
-                    fontWeight: 400,
+                    fontWeight: 500,
+                    alignSelf: 'flex-start',
                   }}
                 >
-                  {step.description}
-                </p>
-              </div>
+                  {index + 1 < 10 ? `0${index + 1}` : index + 1}
+                </div>
 
-              {/* Image - Fixed at bottom */}
-              <div className="flex justify-end mt-auto">
-                <img
-                  src={step.image}
-                  alt={`Step ${index + 1}`}
-                  className="max-h-[160px] object-contain"
-                />
+                {/* Title - Fixed at top */}
+                <div className="mb-4">
+                  <h3 className="text-2xl font-bold"
+                    style={{
+                      fontFamily: 'Youth',
+                      fontWeight: 900,
+                    }}
+                  >
+                    {step.title}
+                  </h3>
+                </div>
+
+                {/* Description - Fixed positioning */}
+                <div className="mb-6 flex-1 flex items-start">
+                  <p className="text-sm text-gray-200 leading-snug"
+                    style={{
+                      fontFamily: 'gilroy',
+                      fontWeight: 400,
+                    }}
+                  >
+                    {step.description}
+                  </p>
+                </div>
+
+                {/* Image - Fixed at bottom */}
+                <div className="flex justify-end mt-auto">
+                  <img
+                    src={step.image}
+                    alt={`Step ${index + 1}`}
+                    className="max-h-[160px] object-contain"
+                  />
+                </div>
               </div>
             </div>
           ))}
@@ -129,18 +153,23 @@ const StepSlider2 = () => {
 
       {/* DESKTOP DESIGN - Only shown on medium screens and above */}
       <div className="hidden md:block w-full flex-1 overflow-x-auto flex-col scrollbar-hide">
-        <div className="flex space-x-4 px-4 py-4 w-max">
+        <div
+          className="flex space-x-4 px-4 py-4 w-max transition-transform duration-500 ease-in-out"
+          style={{
+            transform: `translateX(-${currentIndex * (55)}vw)`
+          }}
+        >
           {steps.map((step, index) => (
             <div
               key={step.id}
-              className="min-w-[65vw] text-white rounded-3xl p-6 flex relative"
+              className="min-w-[55vw] max-w-[60vw] text-white rounded-3xl p-6 flex relative overflow-hidden"
               style={{
                 backgroundColor: index % 2 === 0 ? "#0B1437" : "#3369e3",
                 height: "68vh"
               }}
             >
               {/* Top-left Step Number */}
-              <div className="absolute top-6 left-6 font-semibold text-2xl bg-white text-[#0B1437] w-12 h-12 flex items-center justify-center rounded-full"
+              <div className="absolute top-6 left-6 font-semibold text-2xl bg-white text-[#0B1437] w-12 h-12 flex items-center justify-center rounded-full z-10"
                 style={{
                   fontFamily: 'gilroy',
                   fontWeight: 400,
@@ -151,15 +180,15 @@ const StepSlider2 = () => {
                 {`0${index + 1}`}
               </div>
 
-              {/* Left Section: Text Container - Increased width */}
-              <div className="flex-1 pl-6 pr-6 pt-20 flex flex-col max-w-[65%]">
+              {/* Left Section: Text Container */}
+              <div className="flex-1 pl-6 pr-8 pt-20 flex flex-col max-w-[60%]">
                 {/* Title - Fixed at top with margin */}
                 <div className="mb-6">
-                  <h3 className="text-3xl font-bold"
+                  <h3 className="text-2xl lg:text-3xl font-bold leading-tight"
                     style={{
                       fontFamily: 'Youth',
                       fontWeight: 900,
-                      lineHeight: '100%',
+                      lineHeight: '110%',
                       letterSpacing: '0%',
                     }}
                   >
@@ -167,14 +196,17 @@ const StepSlider2 = () => {
                   </h3>
                 </div>
 
-                {/* Description - Fixed positioning with increased max-width */}
-                <div className="flex-1 flex items-start">
-                  <p className="text-2xl text-gray-300 max-w-lg leading-relaxed"
+                {/* Description - Fixed positioning with better constraints */}
+                <div className="flex-1 flex items-start overflow-hidden">
+                  <p className="text-lg lg:text-xl text-gray-300 leading-relaxed break-words"
                     style={{
                       fontFamily: 'gilroy',
                       fontWeight: 400,
                       lineHeight: '130%',
                       letterSpacing: '0%',
+                      wordWrap: 'break-word',
+                      overflowWrap: 'break-word',
+                      hyphens: 'auto',
                     }}
                   >
                     {step.description}
@@ -182,17 +214,29 @@ const StepSlider2 = () => {
                 </div>
               </div>
 
-              {/* Right Section: Image - Adjusted to accommodate wider text */}
-              <div className="flex-shrink-0 h-full flex items-end justify-end pr-4 pb-4 max-w-[35%]">
+              {/* Right Section: Image */}
+              <div className="flex-shrink-0 h-full flex items-end justify-end pr-4 pb-4 max-w-[40%]">
                 <img
                   src={step.image}
                   alt={`Step ${index + 1}`}
-                  className="h-[80%] object-contain"
+                  className="h-[80%] w-auto object-contain"
                 />
               </div>
             </div>
           ))}
         </div>
+      </div>
+
+      {/* Slide Indicators */}
+      <div className="flex justify-center space-x-2 py-4">
+        {steps.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentIndex(index)}
+            className={`w-3 h-3 rounded-full transition-colors duration-300 ${index === currentIndex ? 'bg-blue-500' : 'bg-gray-300'
+              }`}
+          />
+        ))}
       </div>
     </div>
   );
