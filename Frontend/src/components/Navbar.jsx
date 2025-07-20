@@ -13,20 +13,6 @@ function Navbar() {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsResourcesOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
-
   return (
     <div className="min-h-22 w-full flex items-center px-4 md:px-12 relative" style={{
       fontFamily: 'gilroy',
@@ -101,6 +87,7 @@ function Navbar() {
                   FAQs
                 </Link>
                 <Link
+                  to="/testimonial"
                   className="text-center block px-3 py-2 cursor-pointer hover:bg-gray-100 hover:text-gray-700 transition-colors duration-200"
                   onClick={() => setIsResourcesOpen(false)}
                 >
@@ -182,7 +169,7 @@ function Navbar() {
               Debt Restructuring
             </Link>
             <div
-              onClick={() => setIsResourcesOpen(!isResourcesOpen)}
+              onClick={() => setIsResourcesOpen(true)}
               className={`cursor-pointer flex justify-between items-center px-2 py-1 rounded-md transition-colors duration-200 ${isResourcesOpen ? "bg-blue-100 text-blue-700" : "hover:text-gray-600"
                 }`}
             >
@@ -200,7 +187,7 @@ function Navbar() {
             </div>
 
             {isResourcesOpen && (
-              <div className="ml-4 flex flex-col space-y-4 text-[15px] text-gray-700 transition-all duration-200 ease-in-out">
+              <div className="ml-4 flex flex-col space-y-4 text-[15px] text-gray-700 transition-all duration-200 ease-in-out z-50">
                 <Link
                   to="/blog"
                   className="cursor-pointer hover:text-gray-500"
@@ -222,6 +209,7 @@ function Navbar() {
                   FAQs
                 </Link>
                 <Link
+                  // to="/testimonial"
                   className="cursor-pointer hover:text-gray-500"
                   onClick={() => {
                     setIsResourcesOpen(false);

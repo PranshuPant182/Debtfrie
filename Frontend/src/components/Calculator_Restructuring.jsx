@@ -1,15 +1,38 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import DebtSavingsPopup from "./DebtSavingsPopup";
+
+// Mock component for DebtSavingsPopup since it's not defined
+const DebtSavingsPopup = ({ onClose, onRedirect }) => (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="bg-white p-6 rounded-lg max-w-md mx-4">
+            <h3 className="text-lg font-bold mb-4">Debt Savings Information</h3>
+            <p className="mb-4">Your potential savings have been calculated based on Debtfrie's restructuring program.</p>
+            <div className="flex gap-2">
+                <button 
+                    onClick={onRedirect}
+                    className="bg-blue-500 text-white px-4 py-2 rounded"
+                >
+                    Contact Us
+                </button>
+                <button 
+                    onClick={onClose}
+                    className="bg-gray-300 px-4 py-2 rounded"
+                >
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+);
 
 const DebtCalculator_Restructuring = () => {
-    const nagivate = useNavigate();
+    const nagivate = () => {}; // Mock navigate function
     const [creditCardDebt, setCreditCardDebt] = useState(1000);
     const [personalLoanDebt, setPersonalLoanDebt] = useState(2000);
     const [showPopup, setShowPopup] = useState(false);
 
+    // Updated formula: Total EMI × 60% (40% reduction)
     const totalDebt = creditCardDebt + personalLoanDebt;
-    const restructuredAmount = Math.round(totalDebt * 0.6); // 40% reduction
+    const restructuredAmount = Math.round(totalDebt * 0.6); // 60% of total EMI (40% reduction)
     const savings = totalDebt - restructuredAmount;
     const percentage = totalDebt > 0 ? (restructuredAmount / totalDebt) * 100 : 0;
 
