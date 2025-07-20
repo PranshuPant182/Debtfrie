@@ -78,7 +78,7 @@ const DebtCalculator_Restructuring = () => {
                         <input
                             type="range"
                             min="0"
-                            max="10000000"
+                            max="1000000"
                             step="1000"
                             value={creditCardDebt}
                             onChange={(e) => setCreditCardDebt(Number(e.target.value))}
@@ -98,7 +98,7 @@ const DebtCalculator_Restructuring = () => {
                         <input
                             type="range"
                             min="0"
-                            max="10000000"
+                            max="1000000"
                             step="1000"
                             value={personalLoanDebt}
                             onChange={(e) => setPersonalLoanDebt(Number(e.target.value))}

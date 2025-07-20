@@ -120,7 +120,7 @@ const DebtResolutionHero = ({ onGetStarted }) => {
                 <div className={`transform transition-all duration-800 ease-out ${isVisible ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'
                     }`}>
                     <p
-                        className="text-sm text-[#3369E3] font-medium mb-2"
+                        className="text-lg text-[#3369E3] font-medium mb-2"
                         style={{ fontFamily: 'gilroy' }}
                     >
                         DEBT RESOLUTION
