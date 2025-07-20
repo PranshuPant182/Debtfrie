@@ -13,6 +13,10 @@ app.use(express.json());
 
 // ========== ROUTES ==========
 
+// Auth routes - ADD THIS NEW ROUTE
+const authRoutes = require('./routes/authRoutes');
+app.use('/api/auth', authRoutes);
+
 // User routes (Auth, Profile, etc.)
 const userRoutes = require('./routes/userRoutes');
 app.use('/api/users', userRoutes);
@@ -25,13 +29,13 @@ app.use('/api/blogs', blogRoutes);
 const paymentRoutes = require('./routes/payment');
 app.use('/api/payment', paymentRoutes);
 
-// Webhook routes - ADD THIS LINE
+// Webhook routes
 const webhookRoutes = require('./routes/webhooks');
 app.use('/api/webhooks', webhookRoutes);
 
 // Form submission after payment
 const contactFormRoutes = require('./routes/contactForm');
-app.use('/api', contactFormRoutes); // handles /submit-form
+app.use('/api', contactFormRoutes);
 
 // Root route for basic API check
 app.get('/', (req, res) => {
