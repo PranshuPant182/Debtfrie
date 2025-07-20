@@ -62,12 +62,12 @@ function Navbar() {
           <Link to="/" className="cursor-pointer hover:text-gray-600">Home</Link>
           <Link to="/debtResolution" className="cursor-pointer hover:text-gray-600">Debt Resolution</Link>
           <Link to="/debtRestructuring" className="cursor-pointer hover:text-gray-600">Debt Restructuring</Link>
-          
+
           <div
             ref={dropdownRef}
             className="relative"
           >
-            <div 
+            <div
               className="cursor-pointer hover:text-gray-600 flex items-center"
               onClick={() => setIsResourcesOpen(!isResourcesOpen)}
             >
@@ -86,21 +86,21 @@ function Navbar() {
             {/* Dropdown Menu */}
             {isResourcesOpen && (
               <div className="absolute right-0 mt-2 w-36 bg-white shadow-lg rounded-md z-50 py-2 text-sm text-black border border-gray-200">
-                <Link 
-                  to="/blog" 
+                <Link
+                  to="/blog"
                   className="text-center block px-3 py-2 cursor-pointer hover:bg-gray-100 hover:text-gray-700 transition-colors duration-200"
                   onClick={() => setIsResourcesOpen(false)}
                 >
                   Blog
                 </Link>
-                <Link 
-                  to="/faqs" 
+                <Link
+                  to="/faqs"
                   className="text-center block px-3 py-2 cursor-pointer hover:bg-gray-100 hover:text-gray-700 transition-colors duration-200"
                   onClick={() => setIsResourcesOpen(false)}
                 >
                   FAQs
                 </Link>
-                <Link 
+                <Link
                   className="text-center block px-3 py-2 cursor-pointer hover:bg-gray-100 hover:text-gray-700 transition-colors duration-200"
                   onClick={() => setIsResourcesOpen(false)}
                 >
@@ -136,7 +136,10 @@ function Navbar() {
       <div className={`md:hidden fixed top-0 right-0 h-full bg-white w-64 shadow-lg z-50 transform transition-transform duration-300 ease-in-out ${isMenuOpen ? "translate-x-0" : "translate-x-full"}`}>
         <div className="p-6 flex flex-col h-full">
           {/* Logo */}
-          <div className="flex items-center mb-6" onClick={() => navigate('/')}>
+          <div className="flex items-center mb-6" onClick={() => {
+            navigate('/');
+            setIsMenuOpen(false);
+          }}>
             <img src={images.Favicon} className="h-9 w-10 mr-2" alt="Logo" />
             <span className="text-xl font-bold" style={{
               fontFamily: 'Youth',
@@ -157,9 +160,27 @@ function Navbar() {
             className="flex flex-col space-y-12 text-[16px] text-black"
             style={{ fontFamily: 'MyCustomFont', fontWeight: 400 }}
           >
-            <Link to="/" className="cursor-pointer hover:text-gray-600">Home</Link>
-            <Link to="/debtResolution" className="cursor-pointer hover:text-gray-600">Debt Resolution</Link>
-            <Link to="/debtRestructuring" className="cursor-pointer hover:text-gray-600">Debt Restructuring</Link>
+            <Link
+              to="/"
+              className="cursor-pointer hover:text-gray-600"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Home
+            </Link>
+            <Link
+              to="/debtResolution"
+              className="cursor-pointer hover:text-gray-600"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Debt Resolution
+            </Link>
+            <Link
+              to="/debtRestructuring"
+              className="cursor-pointer hover:text-gray-600"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Debt Restructuring
+            </Link>
             <div
               onClick={() => setIsResourcesOpen(!isResourcesOpen)}
               className={`cursor-pointer flex justify-between items-center px-2 py-1 rounded-md transition-colors duration-200 ${isResourcesOpen ? "bg-blue-100 text-blue-700" : "hover:text-gray-600"
@@ -180,12 +201,44 @@ function Navbar() {
 
             {isResourcesOpen && (
               <div className="ml-4 flex flex-col space-y-4 text-[15px] text-gray-700 transition-all duration-200 ease-in-out">
-                <Link to="/blog" className="cursor-pointer hover:text-gray-500">Blog</Link>
-                <Link to="/faqs" className="cursor-pointer hover:text-gray-500">FAQs</Link>
-                <Link className="cursor-pointer hover:text-gray-500">Testimonial</Link>
+                <Link
+                  to="/blog"
+                  className="cursor-pointer hover:text-gray-500"
+                  onClick={() => {
+                    setIsResourcesOpen(false);
+                    setIsMenuOpen(false);
+                  }}
+                >
+                  Blog
+                </Link>
+                <Link
+                  to="/faqs"
+                  className="cursor-pointer hover:text-gray-500"
+                  onClick={() => {
+                    setIsResourcesOpen(false);
+                    setIsMenuOpen(false);
+                  }}
+                >
+                  FAQs
+                </Link>
+                <Link
+                  className="cursor-pointer hover:text-gray-500"
+                  onClick={() => {
+                    setIsResourcesOpen(false);
+                    setIsMenuOpen(false);
+                  }}
+                >
+                  Testimonial
+                </Link>
               </div>
             )}
-            <Link to="/contactus" className="cursor-pointer hover:text-gray-600">Contact Us</Link>
+            <Link
+              to="/contactus"
+              className="cursor-pointer hover:text-gray-600"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Contact Us
+            </Link>
           </div>
 
           {/* Close button */}
