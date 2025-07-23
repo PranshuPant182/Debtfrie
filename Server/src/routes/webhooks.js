@@ -4,7 +4,7 @@ const crypto = require('crypto');
 const router = express.Router();
 
 router.post('/razorpay', async (req, res) => {
-    const webhookSecret = process.env.RAZORPAY_WEBHOOK_SECRET;
+    const webhookSecret = "secret_2025_debtfrie_webhook_";
     const signature = req.headers['x-razorpay-signature'];
     
     try {
