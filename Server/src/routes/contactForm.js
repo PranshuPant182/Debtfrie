@@ -90,7 +90,7 @@ router.post("/submit-form", async (req, res) => {
     console.log("Form data saved to database with ID:", savedSubmission._id);
 
     // SMTP config for GoDaddy
-    const transporter = nodemailer.createTransporter({
+    const transporter = nodemailer.createTransport({
       host: "smtpout.secureserver.net",
       port: 465,
       secure: true,
