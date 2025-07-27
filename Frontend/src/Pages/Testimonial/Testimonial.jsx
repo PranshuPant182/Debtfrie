@@ -10,7 +10,7 @@ function DynamicTestimonials() {
     const [stats, setStats] = useState({ total: 0, avgRating: 0 });
 
     // Configure your API base URL here
-    const API_BASE_URL = 'http://localhost:3000/api';
+    const API_BASE_URL = `${import.meta.env.VITE_API_BASE_URL}`;
 
     // Fetch testimonials from API
     const fetchTestimonials = async (page = 1, limit = 9) => {
