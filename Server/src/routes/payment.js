@@ -5,8 +5,8 @@ const crypto = require('crypto');
 const router = express.Router();
 
 const razorpay = new Razorpay({
-    key_id: "rzp_live_Ck2ZwPRt71n7c5",
-    key_secret: "XKj0FnmoZhpi55BOW9D6Iwjq",
+    key_id: process.env.RAZORPAY_KEY_ID,
+    key_secret: process.env.RAZORPAY_KEY_SECRET,
 });
 
 // Create order endpoint

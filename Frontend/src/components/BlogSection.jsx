@@ -64,7 +64,7 @@ const BlogSection = ({ title }) => {
             .then(data => {
                 const fallbackImages = [blog1, blog2, blog3];
 
-                const formattedBlogs = data.slice(0, 4).map((post, index) => ({
+                const formattedBlogs = data?.data.slice(0, 4).map((post, index) => ({
                     ...post,
                     image: post.image || fallbackImages[index % fallbackImages.length],
                     date: new Date(post.createdAt).toLocaleDateString('en-IN', {

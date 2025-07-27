@@ -12,11 +12,14 @@ import ScrollToTop from './utils/ScrollToTop.jsx'
 import DebtRestructuring from './Pages/DebtConsolidationPage/DebtRestructuring.jsx'
 import AdminDashboard from './Pages/TestPage/TestPage.jsx'
 import BlogAdminPanel from './Pages/BlogTest/BlogTest.jsx'
+import FacebookPixelTracker from './utils/FacebookPixelTracker.jsx'
+import Testimonial from './Pages/Testimonial/Testimonial.jsx'
 
 createRoot(document.getElementById('root')).render(
 
     <BrowserRouter>
         <ScrollToTop />
+        <FacebookPixelTracker />
         <Routes>
             <Route path='/' element={<HomePage />} />
             <Route path='/contactus' element={<ContactUs />} />
@@ -24,6 +27,7 @@ createRoot(document.getElementById('root')).render(
             <Route path='/aboutUs' element={<AboutUs />} />
             <Route path='/debtRestructuring' element={<DebtRestructuring />} />
             <Route path='/faqs' element={<FAQs />} />
+            <Route path='/testimonial' element={<Testimonial />} />
             <Route path='/blog' element={<BlogPage />} />
             <Route path='/blogDetail/:id' element={<BlogDetailPage />} />
             <Route path='/Test' element={<AdminDashboard />} />

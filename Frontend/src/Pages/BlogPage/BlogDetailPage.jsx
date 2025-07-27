@@ -14,7 +14,7 @@ function BlogDetailPage() {
     useEffect(() => {
         axios.get(`${import.meta.env.VITE_API_BASE_URL}/blogs/${id}`)
             .then((res) => {
-                setBlog(res.data);
+                setBlog(res.data?.data);
                 setLoading(false);
             })
             .catch((err) => {

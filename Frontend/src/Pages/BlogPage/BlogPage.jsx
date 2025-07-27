@@ -38,6 +38,7 @@ const BlogCard = ({ post }) => {
 
 const BlogHomePage = () => {
     const [blogs, setBlogs] = useState([]);
+    console.log("blogs",blogs)
     const [visibleCount, setVisibleCount] = useState(9);
     const [searchQuery, setSearchQuery] = useState("");
     const [loading, setLoading] = useState(true);
@@ -46,7 +47,7 @@ const BlogHomePage = () => {
         // Fetch blogs from backend
         axios.get(`${import.meta.env.VITE_API_BASE_URL}/blogs`)
             .then(res => {
-                setBlogs(res.data);
+                setBlogs(res.data?.data);
                 setLoading(false);
             })
             .catch(err => {
@@ -59,7 +60,7 @@ const BlogHomePage = () => {
         setVisibleCount((prev) => prev + 3);
     };
 
-    const filteredPosts = blogs.filter(post =>
+    const filteredPosts = blogs?.filter(post =>
         post.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
 

@@ -13,6 +13,8 @@ import { useNavigate } from 'react-router-dom'
 import EnrollBanner from '../../components/EnrollBanner'
 import VideoMarqueeSection from '../../components/VideoMarqueeSection'
 import AnimatedCardsSection from '../../components/AnimatedCardsSection'
+import Banner from '../../components/Banner'
+
 
 function HomePage() {
     const [showPopup, setShowPopup] = useState(false);
@@ -322,6 +324,8 @@ function HomePage() {
                 </div>
 
                 <EnrollBanner />
+
+                <Banner />
 
                 {/* CALCULATOR */}
                 <DebtCalculator />

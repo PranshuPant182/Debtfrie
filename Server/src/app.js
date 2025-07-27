@@ -25,6 +25,10 @@ app.use('/api/users', userRoutes);
 const blogRoutes = require('./routes/blogRoutes');
 app.use('/api/blogs', blogRoutes);
 
+// Testimonials routes - NEW ROUTE ADDED
+const testimonialRoutes = require('./routes/testimonial');
+app.use('/api/testimonials', testimonialRoutes);
+
 // Razorpay payment routes
 const paymentRoutes = require('./routes/payment');
 app.use('/api/payment', paymentRoutes);

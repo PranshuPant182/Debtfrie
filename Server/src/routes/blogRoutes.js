@@ -1,47 +1,80 @@
-// Updated Routes with Image Upload Support
+// Updated Routes with Base64 Image Support
 const express = require('express');
 const router = express.Router();
-const multer = require('multer');
 const Blog = require('../models/Blog');
 
-// Configure multer for image uploads
-const storage = multer.memoryStorage();
-const upload = multer({
-  storage: storage,
-limits: {
-    fileSize: 50 * 1024 * 1024, // 50MB instead of 5MB
-  },
-  fileFilter: (req, file, cb) => {
-    if (file.mimetype.startsWith('image/')) {
-      cb(null, true);
-    } else {
-      cb(new Error('Only image files are allowed'), false);
-    }
-  }
-});
-
-// Create a new blog with image upload
-router.post('/', upload.single('image'), async (req, res) => {
+// Helper function to validate and process base64 image
+const processBase64Image = (base64Data) => {
   try {
+    if (!base64Data) return null;
+    
+    // Check if it's a valid base64 image
+    const isValidFormat = /^data:image\/(jpeg|jpg|png|gif|webp);base64,/.test(base64Data);
+    if (!isValidFormat) {
+      throw new Error('Invalid image format. Only JPEG, PNG, GIF, and WebP are allowed.');
+    }
+
+    // Extract content type and filename
+    const mimeMatch = base64Data.match(/^data:image\/([a-z]+);base64,/);
+    const contentType = `image/${mimeMatch[1]}`;
+    const extension = mimeMatch[1] === 'jpeg' ? 'jpg' : mimeMatch[1];
+    const filename = `blog_image_${Date.now()}.${extension}`;
+
+    // Get the base64 string without prefix
+    const base64Image = base64Data.replace(/^data:image\/[a-z]+;base64,/, '');
+    
+    // Convert to buffer
+    const buffer = Buffer.from(base64Image, 'base64');
+    
+    // Check file size (50MB limit)
+    const sizeInMB = buffer.length / (1024 * 1024);
+    if (sizeInMB > 50) {
+      throw new Error('Image size must be less than 50MB.');
+    }
+
+    return {
+      data: buffer,
+      contentType: contentType,
+      filename: filename
+    };
+  } catch (error) {
+    throw new Error(`Image processing error: ${error.message}`);
+  }
+};
+
+// Create a new blog with base64 image
+router.post('/', async (req, res) => {
+  try {
+    const { author, disclaimer, title, sections, image } = req.body;
+
+    // Validate required fields
+    if (!author || !title) {
+      return res.status(400).json({ error: 'Author and title are required fields' });
+    }
+
     const blogData = {
-      author: req.body.author,
-      disclaimer: req.body.disclaimer,
-      title: req.body.title,
-      sections: JSON.parse(req.body.sections || '[]')
+      author: author.trim(),
+      disclaimer: disclaimer?.trim() || '',
+      title: title.trim(),
+      sections: sections || []
     };
 
-    // Handle image upload
-    if (req.file) {
-      blogData.image = {
-        data: req.file.buffer,
-        contentType: req.file.mimetype,
-        filename: req.file.originalname
-      };
+    // Process image if provided
+    if (image) {
+      try {
+        const processedImage = processBase64Image(image);
+        if (processedImage) {
+          blogData.image = processedImage;
+        }
+      } catch (imageError) {
+        return res.status(400).json({ error: imageError.message });
+      }
     }
 
     const blog = new Blog(blogData);
     await blog.save();
     
+    // Return blog data without image buffer for performance
     res.status(201).json({
       _id: blog._id,
       author: blog.author,
@@ -49,9 +82,11 @@ router.post('/', upload.single('image'), async (req, res) => {
       title: blog.title,
       sections: blog.sections,
       createdAt: blog.createdAt,
-      hasImage: !!blog.image
+      hasImage: !!blog.image,
+      imageUrl: blog.image ? `/api/blogs/${blog._id}/image` : null
     });
   } catch (err) {
+    console.error('Error creating blog:', err);
     res.status(400).json({ error: err.message });
   }
 });
@@ -59,18 +94,49 @@ router.post('/', upload.single('image'), async (req, res) => {
 // Get all blogs (without image data for performance)
 router.get('/', async (req, res) => {
   try {
-    const blogs = await Blog.find()
+    const { page = 1, limit = 10, author, title } = req.query;
+    
+    // Build query filter
+    const filter = {};
+    if (author) {
+      filter.author = { $regex: author, $options: 'i' };
+    }
+    if (title) {
+      filter.title = { $regex: title, $options: 'i' };
+    }
+
+    const blogs = await Blog.find(filter)
       .select('-image.data') // Exclude image data for list view
-      .sort({ createdAt: -1 });
+      .sort({ createdAt: -1 })
+      .limit(limit * 1)
+      .skip((page - 1) * limit);
+    
+    const total = await Blog.countDocuments(filter);
     
     const blogsWithImageInfo = blogs.map(blog => ({
       ...blog.toObject(),
       hasImage: !!blog.image,
-      imageUrl: blog.image ? `/api/blogs/${blog._id}/image` : null
+      imageUrl: blog.image ? `/api/blogs/${blog._id}/image` : null,
+      // Add image metadata without the actual data
+      imageInfo: blog.image ? {
+        contentType: blog.image.contentType,
+        filename: blog.image.filename,
+        size: blog.image.data ? blog.image.data.length : 0
+      } : null
     }));
     
-    res.json(blogsWithImageInfo);
+    res.json({
+      success: true,
+      data: blogsWithImageInfo,
+      pagination: {
+        current: parseInt(page),
+        pages: Math.ceil(total / limit),
+        total,
+        limit: parseInt(limit)
+      }
+    });
   } catch (err) {
+    console.error('Error fetching blogs:', err);
     res.status(500).json({ error: err.message });
   }
 });
@@ -79,16 +145,27 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const blog = await Blog.findById(req.params.id).select('-image.data');
-    if (!blog) return res.status(404).json({ error: 'Blog not found' });
+    
+    if (!blog) {
+      return res.status(404).json({ error: 'Blog not found' });
+    }
     
     const blogResponse = {
       ...blog.toObject(),
       hasImage: !!blog.image,
-      imageUrl: blog.image ? `/api/blogs/${blog._id}/image` : null
+      imageUrl: blog.image ? `/api/blogs/${blog._id}/image` : null,
+      imageInfo: blog.image ? {
+        contentType: blog.image.contentType,
+        filename: blog.image.filename
+      } : null
     };
     
-    res.json(blogResponse);
+    res.json({
+      success: true,
+      data: blogResponse
+    });
   } catch (err) {
+    console.error('Error fetching blog:', err);
     res.status(500).json({ error: err.message });
   }
 });
@@ -97,53 +174,82 @@ router.get('/:id', async (req, res) => {
 router.get('/:id/image', async (req, res) => {
   try {
     const blog = await Blog.findById(req.params.id);
-    if (!blog || !blog.image) {
+    
+    if (!blog || !blog.image || !blog.image.data) {
       return res.status(404).json({ error: 'Image not found' });
     }
 
+    // Set appropriate headers
     res.set('Content-Type', blog.image.contentType);
     res.set('Content-Disposition', `inline; filename="${blog.image.filename}"`);
+    res.set('Cache-Control', 'public, max-age=31536000'); // Cache for 1 year
+    res.set('ETag', `"${blog._id}-${blog.createdAt.getTime()}"`);
+    
     res.send(blog.image.data);
   } catch (err) {
+    console.error('Error fetching blog image:', err);
     res.status(500).json({ error: err.message });
   }
 });
 
-// Update blog with image
-router.put('/:id', upload.single('image'), async (req, res) => {
+// Update blog with base64 image
+router.put('/:id', async (req, res) => {
   try {
-    const updateData = {
-      author: req.body.author,
-      disclaimer: req.body.disclaimer,
-      title: req.body.title,
-      sections: JSON.parse(req.body.sections || '[]')
-    };
+    const { author, disclaimer, title, sections, image } = req.body;
 
-    // Handle image update
-    if (req.file) {
-      updateData.image = {
-        data: req.file.buffer,
-        contentType: req.file.mimetype,
-        filename: req.file.originalname
-      };
+    const blog = await Blog.findById(req.params.id);
+    if (!blog) {
+      return res.status(404).json({ error: 'Blog not found' });
     }
 
-    const blog = await Blog.findByIdAndUpdate(
+    // Prepare update data
+    const updateData = {};
+    
+    if (author !== undefined) updateData.author = author.trim();
+    if (disclaimer !== undefined) updateData.disclaimer = disclaimer.trim();
+    if (title !== undefined) updateData.title = title.trim();
+    if (sections !== undefined) updateData.sections = sections;
+
+    // Handle image update
+    if (image !== undefined) {
+      if (image === null || image === '') {
+        // Remove image if explicitly set to null or empty
+        updateData.image = undefined;
+        updateData.$unset = { image: 1 };
+      } else {
+        // Process new image
+        try {
+          const processedImage = processBase64Image(image);
+          if (processedImage) {
+            updateData.image = processedImage;
+          }
+        } catch (imageError) {
+          return res.status(400).json({ error: imageError.message });
+        }
+      }
+    }
+
+    const updatedBlog = await Blog.findByIdAndUpdate(
       req.params.id,
-      updateData,
-      { new: true }
+      updateData.image === undefined && updateData.$unset ? 
+        { ...updateData, $unset: updateData.$unset } : 
+        updateData,
+      { new: true, runValidators: true }
     ).select('-image.data');
 
-    if (!blog) return res.status(404).json({ error: 'Blog not found' });
-
     const blogResponse = {
-      ...blog.toObject(),
-      hasImage: !!blog.image,
-      imageUrl: blog.image ? `/api/blogs/${blog._id}/image` : null
+      ...updatedBlog.toObject(),
+      hasImage: !!updatedBlog.image,
+      imageUrl: updatedBlog.image ? `/api/blogs/${updatedBlog._id}/image` : null
     };
 
-    res.json(blogResponse);
+    res.json({
+      success: true,
+      data: blogResponse,
+      message: 'Blog updated successfully'
+    });
   } catch (err) {
+    console.error('Error updating blog:', err);
     res.status(400).json({ error: err.message });
   }
 });
@@ -152,12 +258,79 @@ router.put('/:id', upload.single('image'), async (req, res) => {
 router.delete('/:id', async (req, res) => {
   try {
     const deletedBlog = await Blog.findByIdAndDelete(req.params.id);
+    
     if (!deletedBlog) {
-      return res.status(404).json({ error: 'Blog not found' });
+      return res.status(404).json({ 
+        success: false,
+        error: 'Blog not found' 
+      });
     }
-    res.json({ message: 'Blog deleted successfully' });
+    
+    res.json({ 
+      success: true,
+      message: 'Blog deleted successfully',
+      data: {
+        deletedId: req.params.id,
+        title: deletedBlog.title
+      }
+    });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.error('Error deleting blog:', err);
+    res.status(500).json({ 
+      success: false,
+      error: err.message 
+    });
+  }
+});
+
+// Get blog statistics
+router.get('/admin/stats', async (req, res) => {
+  try {
+    const stats = await Blog.aggregate([
+      {
+        $group: {
+          _id: null,
+          total: { $sum: 1 },
+          totalWithImages: {
+            $sum: {
+              $cond: [{ $ifNull: ["$image", false] }, 1, 0]
+            }
+          }
+        }
+      }
+    ]);
+
+    const authorStats = await Blog.aggregate([
+      {
+        $group: {
+          _id: '$author',
+          count: { $sum: 1 }
+        }
+      },
+      {
+        $sort: { count: -1 }
+      },
+      {
+        $limit: 10
+      }
+    ]);
+
+    res.json({
+      success: true,
+      data: {
+        overview: stats[0] || {
+          total: 0,
+          totalWithImages: 0
+        },
+        topAuthors: authorStats
+      }
+    });
+  } catch (err) {
+    console.error('Error fetching blog stats:', err);
+    res.status(500).json({ 
+      success: false,
+      error: err.message 
+    });
   }
 });
 
