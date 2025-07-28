@@ -221,7 +221,7 @@ throughout the process and would be glad to recommend their services to others s
                     lineHeight: '100%',
                     letterSpacing: '0%',
                 }}>
-                    Empowering Businesses Across Diverse Sectors <br />
+                    Empowering Individuals Across Diverse Sectors <br />
                     With Proven Expertise And Results
                 </p>
                 <button className={`flex items-center bg-white text-black px-6 py-3 rounded-xl font-medium transition-all hover:bg-opacity-90 hover:transform hover:scale-105 z-50 ${isVisible ? 'animate-fade-in-up animation-delay-400' : 'opacity-0'}`}
