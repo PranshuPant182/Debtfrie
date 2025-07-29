@@ -96,7 +96,7 @@ router.post("/submit-form", async (req, res) => {
       secure: true,
       auth: {
         user: "Official@debtfrie.in",
-        pass: "Debtfrie#9266",
+        pass: "Debtfrie@9266",
       },
     });
 
