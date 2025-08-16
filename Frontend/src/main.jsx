@@ -14,6 +14,7 @@ import AdminDashboard from './Pages/TestPage/TestPage.jsx'
 import BlogAdminPanel from './Pages/BlogTest/BlogTest.jsx'
 import FacebookPixelTracker from './utils/FacebookPixelTracker.jsx'
 import Testimonial from './Pages/Testimonial/Testimonial.jsx'
+import ThankYouPage from './Pages/ThankYouPage/ThankYou.jsx'
 
 createRoot(document.getElementById('root')).render(
 
@@ -32,6 +33,7 @@ createRoot(document.getElementById('root')).render(
             <Route path='/blogDetail/:id' element={<BlogDetailPage />} />
             <Route path='/Test' element={<AdminDashboard />} />
             <Route path='/Admin' element={<BlogAdminPanel />} />
+            <Route path='/ThankYou' element={<ThankYouPage />} />
 
         </Routes>
     </BrowserRouter>

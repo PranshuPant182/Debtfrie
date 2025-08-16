@@ -149,7 +149,7 @@ function HomePage() {
                     <div className="hidden sm:grid sm:grid-cols-3 sm:h-[90%]">
                         {/* COL 1 HEADING - Desktop only */}
                         <div className="flex justify-center items-center">
-                            <div className={`w-[100%] flex justify-center items-center ${isVisible ? 'animate-slide-right' : 'opacity-0'}`}> 
+                            <div className={`w-[100%] flex justify-center items-center ${isVisible ? 'animate-slide-right' : 'opacity-0'}`}>
                                 <span className="text-5xl text-white font-bold" style={{
                                     fontFamily: 'Youth',
                                     fontWeight: 900,
@@ -172,9 +172,9 @@ function HomePage() {
 
                             {/* Overlayed Content - full height layout inside phone */}
                             <div className="absolute top-1/2 left-1/2 w-[80%] max-w-[240px] h-[550px] transform -translate-x-1/2 -translate-y-1/2 flex flex-col justify-between items-center px-4 py-5 text-center">
-                                <div 
+                                <div
                                     ref={textRef}
-                                    className={`absolute bottom-[230px] ${isVisible ? 'animate-slide-top' : 'opacity-0'}`} 
+                                    className={`absolute bottom-[230px] ${isVisible ? 'animate-slide-top' : 'opacity-0'}`}
                                     style={{
                                         fontFamily: 'gilroy',
                                         fontWeight: 400,
@@ -200,9 +200,9 @@ function HomePage() {
                         </div>
 
                         {/* COL 3 FEATURES - Desktop only */}
-                        <div 
+                        <div
                             ref={featuresRef}
-                            className="flex flex-col justify-center space-y-16 text-white p-20" 
+                            className="flex flex-col justify-center space-y-16 text-white p-20"
                             style={{
                                 fontFamily: 'gilroy',
                                 fontWeight: 400,
@@ -248,8 +248,8 @@ function HomePage() {
                             />
                         </div>
                         <div className="b absolute top-18 left-1/2 w-[80%] max-w-[240px] h-[550px] transform -translate-x-1/2 -translate-y-1/2 flex flex-col justify-between items-center px-4 py-5 text-center z-50">
-                            <div 
-                                className={`absolute bottom-[230px] ${isVisible ? 'animate-slide-top' : 'opacity-0'}`} 
+                            <div
+                                className={`absolute bottom-[230px] ${isVisible ? 'animate-slide-top' : 'opacity-0'}`}
                                 style={{
                                     fontFamily: 'gilroy',
                                     fontWeight: 400,
