@@ -2,6 +2,14 @@ const express = require("express");
 const nodemailer = require("nodemailer");
 const mongoose = require("mongoose");
 const router = express.Router();
+const axios = require("axios");
+
+const ODOO_CONFIG = {
+  url: "https://debtfrie1.odoo.com/jsonrpc",
+  db: "debtfrie1",
+  uid: 2,
+  password: "97fa39c7320d0fe2251bc1c80539d8e45a8e9a1a"
+};
 
 // Form submission schema
 const FormSubmissionSchema = new mongoose.Schema({
@@ -61,10 +69,58 @@ const FormSubmissionSchema = new mongoose.Schema({
   notes: {
     type: String,
     default: ""
+  },
+  odooLeadCreated: {
+    type: Boolean,
+    default: false
+  },
+  odooLeadId: {
+    type: String,
+    default: null
   }
 }, {
   timestamps: true // Automatically adds createdAt and updatedAt
 });
+
+async function createOdooLead(formData, submissionId) {
+  const leadData = {
+    name: `Website Lead - ${formData.fullName}`,
+    contact_name: formData.fullName,
+    email_from: formData.email,
+    phone: formData.phone,
+    city: formData.city,
+    x_Monthly_Income: formData.monthlyIncome,
+    x_outstanding_creditCards_due: formData.creditCardDues,
+    x_outstanding_personal_loan_dues: formData.loanDues,
+    x_emi_bounce_status: formData.emiBounce,
+    description: `${formData.additionalInfo ? formData.additionalInfo + '\n\n' : ''}Database Reference: ${submissionId}\nPayment Status: Confirmed (₹49)`,
+    type: "lead"
+  };
+
+  const response = await axios.post(ODOO_CONFIG.url, {
+    jsonrpc: "2.0",
+    method: "call",
+    id: Date.now(),
+    params: {
+      service: "object",
+      method: "execute_kw",
+      args: [
+        ODOO_CONFIG.db,
+        ODOO_CONFIG.uid,
+        ODOO_CONFIG.password,
+        "crm.lead",
+        "create",
+        [[leadData]]
+      ]
+    }
+  });
+
+  if (response.data.error) {
+    throw new Error(`Odoo API Error: ${response.data.error.message}`);
+  }
+
+  return response.data.result;
+}
 
 const FormSubmission = mongoose.model('FormSubmission', FormSubmissionSchema);
 
@@ -87,7 +143,6 @@ router.post("/submit-form", async (req, res) => {
     });
 
     const savedSubmission = await newSubmission.save();
-    console.log("Form data saved to database with ID:", savedSubmission._id);
 
     // SMTP config for GoDaddy
     const transporter = nodemailer.createTransport({
@@ -167,29 +222,43 @@ View in portal: [Your portal URL]/submissions/${savedSubmission._id}
     // Update the database to mark email as sent
     await FormSubmission.findByIdAndUpdate(savedSubmission._id, { emailSent: true });
 
-    res.json({ 
-      success: true, 
+    if (paymentInfo && paymentInfo.status === 'success') {
+      try {
+        const odooLeadId = await createOdooLead(formData, savedSubmission._id);
+        await FormSubmission.findByIdAndUpdate(savedSubmission._id, {
+          odooLeadCreated: true,
+          odooLeadId: odooLeadId
+        });
+        console.log("Lead created in Odoo with ID:", odooLeadId);
+      } catch (odooError) {
+        console.log("Error creating Odoo lead:", odooError);
+        // Don't fail the entire request if Odoo fails - just log the error
+      }
+    }
+
+    res.json({
+      success: true,
       submissionId: savedSubmission._id,
       message: "Form submitted successfully and confirmation email sent."
     });
 
   } catch (error) {
     console.log("Error in form submission:", error);
-    
+
     // If there's an error after saving to DB but before/during email sending,
     // you might want to update the record to indicate email failed
     if (error.message && error.message.includes("Email")) {
       // Handle email-specific errors
-      res.status(500).json({ 
-        success: false, 
-        error: "Form saved but email sending failed", 
-        details: error.message 
+      res.status(500).json({
+        success: false,
+        error: "Form saved but email sending failed",
+        details: error.message
       });
     } else {
       // Handle database or other errors
-      res.status(500).json({ 
-        success: false, 
-        error: error.message 
+      res.status(500).json({
+        success: false,
+        error: error.message
       });
     }
   }
@@ -234,7 +303,6 @@ router.get("/submissions", async (req, res) => {
     });
 
   } catch (error) {
-    console.log("Error fetching submissions:", error);
     res.status(500).json({ success: false, error: error.message });
   }
 });
@@ -243,7 +311,7 @@ router.get("/submissions", async (req, res) => {
 router.get("/submissions/:id", async (req, res) => {
   try {
     const submission = await FormSubmission.findById(req.params.id);
-    
+
     if (!submission) {
       return res.status(404).json({ success: false, error: "Submission not found" });
     }
@@ -260,7 +328,7 @@ router.get("/submissions/:id", async (req, res) => {
 router.put("/submissions/:id", async (req, res) => {
   try {
     const { status, notes } = req.body;
-    
+
     const updateData = {};
     if (status) updateData.status = status;
     if (notes) updateData.notes = notes;
@@ -290,9 +358,9 @@ router.delete("/submissions/:id", async (req, res) => {
 
     // Validate if the ID is a valid MongoDB ObjectId
     if (!mongoose.Types.ObjectId.isValid(submissionId)) {
-      return res.status(400).json({ 
-        success: false, 
-        error: "Invalid submission ID format" 
+      return res.status(400).json({
+        success: false,
+        error: "Invalid submission ID format"
       });
     }
 
@@ -300,17 +368,13 @@ router.delete("/submissions/:id", async (req, res) => {
     const deletedSubmission = await FormSubmission.findByIdAndDelete(submissionId);
 
     if (!deletedSubmission) {
-      return res.status(404).json({ 
-        success: false, 
-        error: "Submission not found" 
+      return res.status(404).json({
+        success: false,
+        error: "Submission not found"
       });
     }
-
-    // Log the deletion for audit purposes
-    console.log(`Submission deleted - ID: ${submissionId}, Name: ${deletedSubmission.fullName}, Email: ${deletedSubmission.email}`);
-
-    res.json({ 
-      success: true, 
+    res.json({
+      success: true,
       message: "Submission deleted successfully",
       deletedSubmission: {
         id: deletedSubmission._id,
@@ -321,10 +385,10 @@ router.delete("/submissions/:id", async (req, res) => {
 
   } catch (error) {
     console.log("Error deleting submission:", error);
-    res.status(500).json({ 
-      success: false, 
+    res.status(500).json({
+      success: false,
       error: "Internal server error while deleting submission",
-      details: error.message 
+      details: error.message
     });
   }
 });
