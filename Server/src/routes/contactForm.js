@@ -119,7 +119,7 @@ async function createOdooLead(formData, submissionId) {
     throw new Error(`Odoo API Error: ${response.data.error.message}`);
   }
 
-  return response.data.result;
+return Array.isArray(response.data.result) ? response.data.result[0] : response.data.result;
 }
 
 const FormSubmission = mongoose.model('FormSubmission', FormSubmissionSchema);
