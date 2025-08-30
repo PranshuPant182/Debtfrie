@@ -493,10 +493,10 @@ function ContactUs() {
               <select {...register("emiBounce")} className="w-full px-4 py-3 bg-[#f1f2f6] text-gray-600 rounded-xl">
                 <option value="">Select option</option>
                 <option value="None">No EMI Bounce</option>
-                <option value="1">1 EMI Bounce</option>
-                <option value="2">2 EMI Bounces</option>
-                <option value="3">3 EMI Bounces</option>
-                <option value=">3">More than 3 EMI Bounces</option>
+                <option value="1 EMI Bounce">1 EMI Bounce</option>
+                <option value="2 EMI Bounces">2 EMI Bounces</option>
+                <option value="3 EMI Bounces">3 EMI Bounces</option>
+                <option value="More than 3 EMI Bounces">More than 3 EMI Bounces</option>
               </select>
             </div>
 

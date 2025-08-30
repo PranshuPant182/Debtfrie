@@ -82,9 +82,11 @@ const FormSubmissionSchema = new mongoose.Schema({
   timestamps: true // Automatically adds createdAt and updatedAt
 });
 
+
 async function createOdooLead(formData, submissionId) {
+
   const leadData = {
-    name: `Website Lead - ${formData.fullName}`,
+    name: formData.fullName,
     contact_name: formData.fullName,
     email_from: formData.email,
     phone: formData.phone,
@@ -93,11 +95,11 @@ async function createOdooLead(formData, submissionId) {
     x_outstanding_creditCards_due: formData.creditCardDues,
     x_outstanding_personal_loan_dues: formData.loanDues,
     x_emi_bounce_status: formData.emiBounce,
-    description: `${formData.additionalInfo ? formData.additionalInfo + '\n\n' : ''}Database Reference: ${submissionId}\nPayment Status: Confirmed (₹49)`,
+    description: formData.additionalInfo,
     type: "lead"
   };
 
-  const response = await axios.post(ODOO_CONFIG.url, {
+  const requestPayload = {
     jsonrpc: "2.0",
     method: "call",
     id: Date.now(),
@@ -113,14 +115,34 @@ async function createOdooLead(formData, submissionId) {
         [[leadData]]
       ]
     }
-  });
+  };
 
-  if (response.data.error) {
-    throw new Error(`Odoo API Error: ${response.data.error.message}`);
+  try {
+      const response = await axios.post(ODOO_CONFIG.url, requestPayload, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      timeout: 30000 // 30 second timeout
+    });
+
+    if (response.data.error) {
+      console.error('Odoo API returned an error:', response.data.error);
+      throw new Error(`Odoo API Error: ${JSON.stringify(response.data.error)}`);
+    }
+
+    if (!response.data.result) {
+      console.error('No result in Odoo response');
+      throw new Error('Odoo API returned no result');
+    }
+
+    const leadId = Array.isArray(response.data.result) ? response.data.result[0] : response.data.result;
+    return leadId;
+
+  } catch (axiosError) {
+    throw axiosError; // Re-throw to be handled by calling function
   }
-
-return Array.isArray(response.data.result) ? response.data.result[0] : response.data.result;
 }
+
 
 const FormSubmission = mongoose.model('FormSubmission', FormSubmissionSchema);
 
@@ -222,17 +244,36 @@ View in portal: [Your portal URL]/submissions/${savedSubmission._id}
     // Update the database to mark email as sent
     await FormSubmission.findByIdAndUpdate(savedSubmission._id, { emailSent: true });
 
-    if (paymentInfo && paymentInfo.status === 'success') {
+    // Check for successful Razorpay payment
+    const isPaymentSuccessful = paymentInfo &&
+      paymentInfo.razorpay_payment_id &&
+      paymentInfo.razorpay_order_id &&
+      paymentInfo.razorpay_signature;
+
+    if (isPaymentSuccessful) {
       try {
         const odooLeadId = await createOdooLead(formData, savedSubmission._id);
-        await FormSubmission.findByIdAndUpdate(savedSubmission._id, {
-          odooLeadCreated: true,
-          odooLeadId: odooLeadId
-        });
-        console.log("Lead created in Odoo with ID:", odooLeadId);
+
       } catch (odooError) {
-        console.log("Error creating Odoo lead:", odooError);
-        // Don't fail the entire request if Odoo fails - just log the error
+        console.log("err", odooError)
+
+        // Update database to record the error
+        try {
+          await FormSubmission.findByIdAndUpdate(savedSubmission._id, {
+            notes: `Odoo lead creation failed at ${new Date().toISOString()}: ${odooError.message}`,
+            odooLeadCreated: false
+          });
+        } catch (dbError) {
+          console.error('❌ Failed to update database with error info:', dbError.message);
+        }
+      }
+    } else {
+      console.log('⏭️ SKIPPING ODOO LEAD CREATION');
+
+      if (!paymentInfo) {
+        console.log('⚠️ No payment info provided');
+      } else if (paymentInfo.status !== 'success') {
+        console.log('💳 Actual payment status:', paymentInfo.status);
       }
     }
 
