@@ -38,7 +38,6 @@ const BlogCard = ({ post }) => {
 
 const BlogHomePage = () => {
     const [blogs, setBlogs] = useState([]);
-    console.log("blogs",blogs)
     const [visibleCount, setVisibleCount] = useState(9);
     const [searchQuery, setSearchQuery] = useState("");
     const [loading, setLoading] = useState(true);
@@ -111,9 +110,17 @@ const BlogHomePage = () => {
                                     year: 'numeric',
                                 });
 
+                                // const postWithExtras = {
+                                //     ...post,
+                                //     image: post.image || fallbackImage,
+                                //     date: formattedDate,
+                                // };
+
                                 const postWithExtras = {
                                     ...post,
-                                    image: post.image || fallbackImage,
+                                    image: post.imageUrl
+                                        ? `${import.meta.env.VITE_API_BASE_URL.replace(/\/api$/, "")}${post.imageUrl}`
+                                        : fallbackImage,
                                     date: formattedDate,
                                 };
 

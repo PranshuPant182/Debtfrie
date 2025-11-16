@@ -8,7 +8,6 @@ import { useParams } from 'react-router-dom';
 function BlogDetailPage() {
     const { id } = useParams(); // blog ID from URL
     const [blog, setBlog] = useState(null);
-    console.log("blog", blog)
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -91,7 +90,7 @@ function BlogDetailPage() {
                         {/* Image */}
                         <div className="w-full flex justify-center mb-8">
                             <img
-                                src={image || images.BlogImage}
+                                src={images.BlogImage}
                                 alt="Blog Cover"
                                 className="rounded-md max-w-full h-auto"
                             />

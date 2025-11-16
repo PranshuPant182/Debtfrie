@@ -4,12 +4,13 @@ const app = express();
 
 // ========== MIDDLEWARE ==========
 app.use(cors());
+// Regular JSON parser for other routes
+// app.use(express.json());
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 
 // Raw body parser for webhooks BEFORE express.json()
 app.use('/api/webhooks/razorpay', express.raw({ type: 'application/json' }));
-
-// Regular JSON parser for other routes
-app.use(express.json());
 
 // ========== ROUTES ==========
 

@@ -67,8 +67,20 @@ const AdminPanel = () => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const blogs = await response.json();
-      setBlogs(blogs);
+      const responseJson = await response.json();
+
+      let safeBlogs = [];
+
+      if (Array.isArray(responseJson)) {
+        safeBlogs = responseJson;
+      } else if (Array.isArray(responseJson.data)) {
+        safeBlogs = responseJson.data;
+      } else if (Array.isArray(responseJson.items)) {
+        safeBlogs = responseJson.items;
+      }
+
+      setBlogs(safeBlogs);
+
     } catch (error) {
       console.error('Error fetching blogs:', error);
       showMessage('Error fetching blogs: ' + error.message, 'error');
@@ -93,9 +105,12 @@ const AdminPanel = () => {
       }
 
       const data = await response.json();
-      
+
+      console.log("TESTIMONIALS API DATA:", data);
+      console.log("TYPE OF data.data:", typeof data.data);
+
       if (data.success) {
-        setTestimonials(data.data);
+        setTestimonials(Array.isArray(data.data) ? data.data : data.data.items || []);
         setPagination(data.pagination);
       } else {
         throw new Error(data.message || 'Failed to fetch testimonials');
@@ -142,7 +157,7 @@ const AdminPanel = () => {
         setSelectedImage(file);
         const base64 = await fileToBase64(file);
         setImagePreview(base64);
-        
+
         // Update form data for testimonials
         if (activeModule === 'testimonials') {
           setTestimonialFormData(prev => ({
@@ -177,8 +192,8 @@ const AdminPanel = () => {
   const handleSectionChange = useCallback((sectionId, field, value) => {
     setBlogFormData(prev => ({
       ...prev,
-      sections: prev.sections.map(section => 
-        section.id === sectionId 
+      sections: prev.sections.map(section =>
+        section.id === sectionId
           ? { ...section, [field]: value }
           : section
       )
@@ -206,31 +221,36 @@ const AdminPanel = () => {
     }));
   }, []);
 
-  const handleBlogSubmit = useCallback(async (e) => {
+  const handleBlogSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    
+
     try {
-      const formDataToSend = new FormData();
-      
-      formDataToSend.append('author', blogFormData.author);
-      formDataToSend.append('title', blogFormData.title);
-      formDataToSend.append('disclaimer', blogFormData.disclaimer);
-      
-      // Remove ID from sections before sending
-      const sectionsToSend = blogFormData.sections.map(({ id, ...section }) => section);
-      formDataToSend.append('sections', JSON.stringify(sectionsToSend));
-      
+      let base64Image = null;
+
       if (selectedImage) {
-        formDataToSend.append('image', selectedImage);
+        base64Image = await fileToBase64(selectedImage);
       }
-      
+
+      const sectionsToSend = blogFormData.sections.map(({ id, ...rest }) => rest);
+
+      const body = {
+        author: blogFormData.author,
+        title: blogFormData.title,
+        disclaimer: blogFormData.disclaimer,
+        sections: sectionsToSend,
+        image: base64Image
+      };
+
       const url = editingItem ? `${API_BASE}/${editingItem._id}` : API_BASE;
       const method = editingItem ? 'PUT' : 'POST';
-      
+
       const response = await fetch(url, {
-        method: method,
-        body: formDataToSend,
+        method,
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body)
       });
 
       if (!response.ok) {
@@ -243,18 +263,19 @@ const AdminPanel = () => {
       setShowCreateModal(false);
       setEditingItem(null);
       showMessage(`Blog ${editingItem ? 'updated' : 'created'} successfully!`);
-    } catch (error) {
-      console.error('Error saving blog:', error);
-      showMessage('Error saving blog: ' + error.message, 'error');
+    } catch (err) {
+      console.error("Error saving blog:", err);
+      showMessage("Error saving blog: " + err.message, "error");
     } finally {
       setLoading(false);
     }
-  }, [blogFormData, selectedImage, editingItem, API_BASE, fetchBlogs, showMessage]);
+  };
+
 
   const handleTestimonialSubmit = useCallback(async (e) => {
     e.preventDefault();
     setLoading(true);
-    
+
     try {
       // Validate required fields
       if (!testimonialFormData.name || !testimonialFormData.rating || !testimonialFormData.text) {
@@ -274,7 +295,7 @@ const AdminPanel = () => {
 
       const url = editingItem ? `${TESTIMONIAL_API_BASE}/${editingItem._id}` : TESTIMONIAL_API_BASE;
       const method = editingItem ? 'PUT' : 'POST';
-      
+
       const response = await fetch(url, {
         method: method,
         headers: {
@@ -289,7 +310,7 @@ const AdminPanel = () => {
       }
 
       const result = await response.json();
-      
+
       if (result.success) {
         await fetchTestimonials();
         resetTestimonialForm();
@@ -347,7 +368,7 @@ const AdminPanel = () => {
         }
 
         const result = await response.json();
-        
+
         if (result.success) {
           setTestimonials(prev => prev.filter(testimonial => testimonial._id !== id));
           showMessage(result.message || 'Testimonial deleted successfully!');
@@ -363,7 +384,7 @@ const AdminPanel = () => {
 
   const editItem = useCallback((item) => {
     setEditingItem(item);
-    
+
     if (activeModule === 'blogs') {
       setBlogFormData({
         author: item.author || '',
@@ -388,7 +409,7 @@ const AdminPanel = () => {
         setImagePreview(item.image);
       }
     }
-    
+
     setShowCreateModal(true);
   }, [activeModule]);
 
@@ -443,37 +464,35 @@ const AdminPanel = () => {
           <span className="text-xl font-semibold">Debt Frrie</span>
         </div>
       </div>
-      
+
       <nav className="px-4 space-y-2">
         <div className="text-xs uppercase text-slate-400 px-3 py-2 font-semibold tracking-wider">
           General
         </div>
-        
+
         <button
           onClick={() => {
             setActiveModule('blogs');
             setActiveTab('view');
           }}
-          className={`w-full flex items-center px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-            activeModule === 'blogs'
-              ? 'bg-slate-700 text-white border-r-2 border-emerald-500'
-              : 'text-slate-300 hover:text-white hover:bg-slate-700'
-          }`}
+          className={`w-full flex items-center px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${activeModule === 'blogs'
+            ? 'bg-slate-700 text-white border-r-2 border-emerald-500'
+            : 'text-slate-300 hover:text-white hover:bg-slate-700'
+            }`}
         >
           <FileText className="w-4 h-4 mr-3" />
           Blogs
         </button>
-        
+
         <button
           onClick={() => {
             setActiveModule('testimonials');
             setActiveTab('view');
           }}
-          className={`w-full flex items-center px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-            activeModule === 'testimonials'
-              ? 'bg-slate-700 text-white border-r-2 border-emerald-500'
-              : 'text-slate-300 hover:text-white hover:bg-slate-700'
-          }`}
+          className={`w-full flex items-center px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${activeModule === 'testimonials'
+            ? 'bg-slate-700 text-white border-r-2 border-emerald-500'
+            : 'text-slate-300 hover:text-white hover:bg-slate-700'
+            }`}
         >
           <MessageSquare className="w-4 h-4 mr-3" />
           Testimonials
@@ -493,7 +512,7 @@ const AdminPanel = () => {
             Manage your {activeModule} content
           </p>
         </div>
-        
+
         <div className="flex items-center space-x-4">
           <div className="relative">
             <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
@@ -505,7 +524,7 @@ const AdminPanel = () => {
               className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent w-64"
             />
           </div>
-          
+
           <button
             onClick={() => {
               resetForm();
@@ -516,7 +535,7 @@ const AdminPanel = () => {
             <Plus className="w-4 h-4 mr-2" />
             Add New {activeModule.slice(0, -1)}
           </button>
-          
+
           <div className="w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center">
             <User className="w-4 h-4 text-emerald-600" />
           </div>
@@ -530,11 +549,11 @@ const AdminPanel = () => {
     const filteredData = currentData?.filter(item => {
       const searchValue = searchTerm?.toLowerCase();
       if (activeModule === 'blogs') {
-        return item.title?.toLowerCase().includes(searchValue) || 
-               item.author?.toLowerCase().includes(searchValue);
+        return item.title?.toLowerCase().includes(searchValue) ||
+          item.author?.toLowerCase().includes(searchValue);
       } else {
-        return item.name?.toLowerCase().includes(searchValue) || 
-               item.text?.toLowerCase().includes(searchValue);
+        return item.name?.toLowerCase().includes(searchValue) ||
+          item.text?.toLowerCase().includes(searchValue);
       }
     });
 
@@ -619,9 +638,8 @@ const AdminPanel = () => {
                           <img
                             src={item.imageUrl || item.image}
                             alt=""
-                            className={`w-8 h-8 mr-3 object-cover ${
-                              activeModule === 'testimonials' ? 'rounded-full' : 'rounded'
-                            }`}
+                            className={`w-8 h-8 mr-3 object-cover ${activeModule === 'testimonials' ? 'rounded-full' : 'rounded'
+                              }`}
                           />
                         )}
                         <div>
@@ -648,9 +666,8 @@ const AdminPanel = () => {
                           {[...Array(5)].map((_, i) => (
                             <Star
                               key={i}
-                              className={`w-4 h-4 ${
-                                i < item.rating ? 'text-yellow-400 fill-current' : 'text-gray-300'
-                              }`}
+                              className={`w-4 h-4 ${i < item.rating ? 'text-yellow-400 fill-current' : 'text-gray-300'
+                                }`}
                             />
                           ))}
                           <span className="ml-1 text-xs text-gray-500">({item.rating})</span>
@@ -1061,16 +1078,15 @@ const AdminPanel = () => {
   return (
     <div className="flex min-h-screen bg-gray-50">
       {Sidebar}
-      
+
       <div className="flex-1">
         {Header}
-        
+
         {message && (
-          <div className={`mx-6 mt-4 px-4 py-3 rounded-lg border-l-4 ${
-            message.type === 'error' 
-              ? 'bg-red-50 border-red-400 text-red-700' 
-              : 'bg-green-50 border-green-400 text-green-700'
-          }`}>
+          <div className={`mx-6 mt-4 px-4 py-3 rounded-lg border-l-4 ${message.type === 'error'
+            ? 'bg-red-50 border-red-400 text-red-700'
+            : 'bg-green-50 border-green-400 text-green-700'
+            }`}>
             <div className="flex items-center">
               <div className="flex-shrink-0">
                 {message.type === 'error' ? (
@@ -1087,12 +1103,12 @@ const AdminPanel = () => {
             </div>
           </div>
         )}
-        
+
         <div className="p-6">
           {DataTable}
         </div>
       </div>
-      
+
       {CreateModal}
     </div>
   );
