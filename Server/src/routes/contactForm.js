@@ -118,7 +118,7 @@ async function createOdooLead(formData, submissionId) {
   };
 
   try {
-      const response = await axios.post(ODOO_CONFIG.url, requestPayload, {
+    const response = await axios.post(ODOO_CONFIG.url, requestPayload, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -173,7 +173,7 @@ router.post("/submit-form", async (req, res) => {
       secure: true,
       auth: {
         user: "Official@debtfrie.in",
-        pass: "Debtfrie@9266",
+        pass: "Debtfrie@9971",
       },
     });
 
@@ -237,15 +237,65 @@ View in portal: [Your portal URL]/submissions/${savedSubmission._id}
       `
     };
 
-    // Send emails
-    await transporter.sendMail(userMailOptions);
-    await transporter.sendMail(internalMailOptions);
+    // // Send emails
+    // await transporter.sendMail(userMailOptions);
+    // await transporter.sendMail(internalMailOptions);
 
-    // Update the database to mark email as sent
-    await FormSubmission.findByIdAndUpdate(savedSubmission._id, { emailSent: true });
+    // // Update the database to mark email as sent
+    // await FormSubmission.findByIdAndUpdate(savedSubmission._id, { emailSent: true });
 
-    // Check for successful Razorpay payment
-    const isPaymentSuccessful = paymentInfo &&
+    // // Check for successful Razorpay payment
+    // const isPaymentSuccessful = paymentInfo &&
+    //   paymentInfo.razorpay_payment_id &&
+    //   paymentInfo.razorpay_order_id &&
+    //   paymentInfo.razorpay_signature;
+
+    // if (isPaymentSuccessful) {
+    //   try {
+    //     const odooLeadId = await createOdooLead(formData, savedSubmission._id);
+
+    //   } catch (odooError) {
+    //     console.log("err", odooError)
+
+    //     // Update database to record the error
+    //     try {
+    //       await FormSubmission.findByIdAndUpdate(savedSubmission._id, {
+    //         notes: `Odoo lead creation failed at ${new Date().toISOString()}: ${odooError.message}`,
+    //         odooLeadCreated: false
+    //       });
+    //     } catch (dbError) {
+    //       console.error('❌ Failed to update database with error info:', dbError.message);
+    //     }
+    //   }
+    // } else {
+    //   console.log('⏭️ SKIPPING ODOO LEAD CREATION');
+
+    //   if (!paymentInfo) {
+    //     console.log('⚠️ No payment info provided');
+    //   } else if (paymentInfo.status !== 'success') {
+    //     console.log('💳 Actual payment status:', paymentInfo.status);
+    //   }
+    // }
+    // ------------------- SEND EMAILS (but don't stop execution if failed) -------------------
+    try {
+      await transporter.sendMail(userMailOptions);
+      await transporter.sendMail(internalMailOptions);
+
+      // Email sent successfully
+      await FormSubmission.findByIdAndUpdate(savedSubmission._id, { emailSent: true });
+    } catch (emailError) {
+      console.error("⚠ Email sending failed but continuing...", emailError.message);
+
+      // Log failure but do NOT stop the process
+      await FormSubmission.findByIdAndUpdate(savedSubmission._id, {
+        emailSent: false,
+        notes: `Email failed at ${new Date().toISOString()}: ${emailError.message}`
+      });
+    }
+
+    // ------------------- ODOO LEAD CREATION (runs even if email failed) -------------------
+    const isPaymentSuccessful =
+      paymentInfo &&
       paymentInfo.razorpay_payment_id &&
       paymentInfo.razorpay_order_id &&
       paymentInfo.razorpay_signature;
@@ -254,28 +304,30 @@ View in portal: [Your portal URL]/submissions/${savedSubmission._id}
       try {
         const odooLeadId = await createOdooLead(formData, savedSubmission._id);
 
+        // Update record with successful Odoo lead ID
+        await FormSubmission.findByIdAndUpdate(savedSubmission._id, {
+          odooLeadCreated: true,
+          odooLeadId
+        });
       } catch (odooError) {
-        console.log("err", odooError)
+        console.log("err", odooError);
 
-        // Update database to record the error
-        try {
-          await FormSubmission.findByIdAndUpdate(savedSubmission._id, {
-            notes: `Odoo lead creation failed at ${new Date().toISOString()}: ${odooError.message}`,
-            odooLeadCreated: false
-          });
-        } catch (dbError) {
-          console.error('❌ Failed to update database with error info:', dbError.message);
-        }
+        // Even if Odoo fails — save error safely
+        await FormSubmission.findByIdAndUpdate(savedSubmission._id, {
+          notes: `Odoo lead creation failed at ${new Date().toISOString()}: ${odooError.message}`,
+          odooLeadCreated: false
+        });
       }
     } else {
-      console.log('⏭️ SKIPPING ODOO LEAD CREATION');
+      console.log('SKIPPING ODOO LEAD CREATION');
 
       if (!paymentInfo) {
-        console.log('⚠️ No payment info provided');
+        console.log('No payment info provided');
       } else if (paymentInfo.status !== 'success') {
-        console.log('💳 Actual payment status:', paymentInfo.status);
+        console.log('Actual payment status:', paymentInfo.status);
       }
     }
+
 
     res.json({
       success: true,
@@ -286,23 +338,24 @@ View in portal: [Your portal URL]/submissions/${savedSubmission._id}
   } catch (error) {
     console.log("Error in form submission:", error);
 
-    // If there's an error after saving to DB but before/during email sending,
-    // you might want to update the record to indicate email failed
-    if (error.message && error.message.includes("Email")) {
-      // Handle email-specific errors
-      res.status(500).json({
-        success: false,
-        error: "Form saved but email sending failed",
-        details: error.message
-      });
-    } else {
-      // Handle database or other errors
-      res.status(500).json({
-        success: false,
-        error: error.message
+    // Check if DB saved the submission
+    if (savedSubmission && savedSubmission._id) {
+      // FORM SUCCESS — RETURN SUCCESS RESPONSE
+      return res.json({
+        success: true,
+        submissionId: savedSubmission._id,
+        message: "Form submitted successfully. Email sending may have failed."
       });
     }
+
+    // If form was NOT saved — return real error
+    return res.status(500).json({
+      success: false,
+      error: "Form submission failed",
+      details: error.message
+    });
   }
+
 });
 
 // GET API to fetch all submissions for portal
