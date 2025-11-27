@@ -480,7 +480,7 @@ const AdminDashboard = () => {
                 <div className="flex space-x-3">
                   <button
                     onClick={() => deleteSubmission(deleteConfirm)}
-                    className="flex-1 bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500"
+                    className="flex-1 bg-red-600 text-black px-4 py-2 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500"
                   >
                     Delete
                   </button>
