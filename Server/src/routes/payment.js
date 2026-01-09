@@ -12,7 +12,8 @@ const razorpay = new Razorpay({
 // Create order endpoint
 router.post('/create-order', async (req, res) => {
     const options = {
-        amount: 4900, // 49 INR in paisa
+        // amount: 4900, // 50 INR in rupees
+                amount: 100, // 1 INR in rupee
         currency: 'INR',
         receipt: 'receipt_order_' + new Date().getTime(),
     };
