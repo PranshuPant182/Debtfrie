@@ -18,6 +18,7 @@ import ThankYouPage from './Pages/ThankYouPage/ThankYou.jsx'
 import LandingPage from './Pages/LandingPage/LandingPage.jsx'
 import ContactFormNew from './Pages/ContactUsPage/ContactFormNew.jsx'
 import InquiryForm from './Pages/InquiryPage/InquiryForm.jsx'
+import NotFound from './Pages/NotFoundPage/NotFound.jsx'
 
 
 createRoot(document.getElementById('root')).render(
@@ -41,6 +42,7 @@ createRoot(document.getElementById('root')).render(
             <Route path='/welcome' element={<LandingPage />} />
             <Route path='/contact-new' element={<ContactFormNew />} />
             <Route path='/enquiry' element={<InquiryForm />} />
+            <Route path='*' element={<NotFound />} />
         </Routes>
     </BrowserRouter>
 )
