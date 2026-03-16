@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DebtSavingsPopup from "./DebtSavingsPopup";
 
-const DebtCalculator = () => {
+const DebtCalculator = ({ type, scrollToMiddle }) => {
   const nagivate = useNavigate();
   const [creditCardDebt, setCreditCardDebt] = useState(1000);
   const [personalLoanDebt, setPersonalLoanDebt] = useState(2000);
@@ -17,7 +17,14 @@ const DebtCalculator = () => {
   const circleRadius = 36;
   const circleCircumference = 2 * Math.PI * circleRadius;
   const progressStroke = circleCircumference * (percentage / 100);
-  const remainingStroke = circleCircumference - progressStroke;
+
+  const handleButtonClick = () => {
+    if (type == "home") {
+      setShowPopup(true);
+    } else {
+      scrollToMiddle()
+    }
+  }
 
   return (
     <div className="w-full h-auto px-4 py-10 flex flex-col items-center justify-center bg-gradient-to-r from-white to-blue-50">
@@ -170,7 +177,7 @@ const DebtCalculator = () => {
           </div>
 
           <div className="flex justify-center items-center mt-10">
-            <button className="w-[50%] bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg font-semibold" onClick={() => setShowPopup(true)}>
+            <button className="w-[50%] bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg font-semibold" onClick={handleButtonClick}>
               Check Rates
             </button>
           </div>

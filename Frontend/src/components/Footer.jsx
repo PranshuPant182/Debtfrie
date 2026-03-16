@@ -6,7 +6,7 @@ import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
 
-function Footer() {
+function Footer({ showButton }) {
     const navigate = useNavigate();
     return (
         <footer className="bg-[#02102f] text-white">
@@ -18,12 +18,13 @@ function Footer() {
                         <h2 className="text-xl sm:text-3xl font-bold mb-6 max-w-4xl mx-auto tracking-widest">
                             Transform Your Debt Struggles Into Financial <br className="hidden sm:inline" /> Freedom And Lasting Peace Of Mind
                         </h2>
-                        <button onClick={() => navigate('/contactus')} className="bg-[#3369e3] hover:bg-blue-600 text-white px-6 py-3 rounded-xl font-medium flex items-center shadow-lg transform transition hover:scale-105" style={{ fontFamily: 'gilroy' }}>
-                            GET STARTED
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
-                                <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                            </svg>
-                        </button>
+                        {showButton &&
+                            (<button onClick={() => navigate('/contactus')} className="bg-[#3369e3] hover:bg-blue-600 text-white px-6 py-3 rounded-xl font-medium flex items-center shadow-lg transform transition hover:scale-105" style={{ fontFamily: 'gilroy' }}>
+                                GET STARTED
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                                </svg>
+                            </button>)}
                     </div>
                 </div>
             </div>

@@ -57,7 +57,7 @@ function HomePage() {
     }, []);
 
     return (
-        <Layout>
+        <Layout showButton={true} showContactUsButton={true}>
             <div className=''>
                 {/* Add CSS for animations */}
                 <style jsx>{`
@@ -140,7 +140,7 @@ function HomePage() {
                 `}</style>
 
                 {/*FRONT HEADING */}
-                <HeroSection scrollToMiddle={scrollToMiddle} />
+                <HeroSection scrollToMiddle={scrollToMiddle} Achievements={false} type={"home"} />
 
                 {/* MOBILE IMAGE */}
                 {/* HOW WE CAN HELP YOU */}
@@ -328,7 +328,7 @@ function HomePage() {
                 <Banner />
 
                 {/* CALCULATOR */}
-                <DebtCalculator />
+                <DebtCalculator type={"home"} scrollToMiddle={scrollToMiddle} />
 
                 <div className="w-full sm:min-h-screen bg-white relative overflow-hidden">
                     <VideoMarqueeSection />

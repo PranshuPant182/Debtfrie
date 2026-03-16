@@ -106,9 +106,6 @@ const AdminPanel = () => {
 
       const data = await response.json();
 
-      console.log("TESTIMONIALS API DATA:", data);
-      console.log("TYPE OF data.data:", typeof data.data);
-
       if (data.success) {
         setTestimonials(Array.isArray(data.data) ? data.data : data.data.items || []);
         setPagination(data.pagination);

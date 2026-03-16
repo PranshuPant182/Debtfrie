@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import '../index.css';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import images from '../utils/images';
 
-function Navbar() {
+function Navbar({ showContactUsButton }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
   const navigate = useNavigate();
@@ -48,6 +48,8 @@ function Navbar() {
           <Link to="/" className="cursor-pointer hover:text-gray-600">Home</Link>
           <Link to="/debtResolution" className="cursor-pointer hover:text-gray-600">Debt Resolution</Link>
           <Link to="/debtRestructuring" className="cursor-pointer hover:text-gray-600">Debt Restructuring</Link>
+          <Link to="/enquiry" className="cursor-pointer hover:text-gray-600">Enquiry</Link>
+
 
           <div
             ref={dropdownRef}
@@ -102,9 +104,9 @@ function Navbar() {
 
         {/* Contact Button - Hidden on mobile, visible on md and larger screens */}
         <div className="hidden md:block">
-          <button className="bg-blue-600 text-white text-[12px] px-3 py-2 rounded-2xl cursor-pointer" onClick={() => navigate("/contactus")}>
+          {showContactUsButton && (<button className="bg-blue-600 text-white text-[12px] px-3 py-2 rounded-2xl cursor-pointer" onClick={() => navigate("/contactus")}>
             CONTACT US
-          </button>
+          </button>)}
         </div>
 
         {/* Hamburger Menu Icon - Visible only on mobile */}
@@ -168,6 +170,14 @@ function Navbar() {
             >
               Debt Restructuring
             </Link>
+            <Link
+              to="/enquiry"
+              className="cursor-pointer hover:text-gray-600"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Enquiry
+            </Link>
+
             <div
               onClick={() => setIsResourcesOpen(true)}
               className={`cursor-pointer flex justify-between items-center px-2 py-1 rounded-md transition-colors duration-200 ${isResourcesOpen ? "bg-blue-100 text-blue-700" : "hover:text-gray-600"
@@ -220,13 +230,13 @@ function Navbar() {
                 </Link>
               </div>
             )}
-            <Link
+            {showContactUsButton && (<Link
               to="/contactus"
               className="cursor-pointer hover:text-gray-600"
               onClick={() => setIsMenuOpen(false)}
             >
               Contact Us
-            </Link>
+            </Link>)}
           </div>
 
           {/* Close button */}

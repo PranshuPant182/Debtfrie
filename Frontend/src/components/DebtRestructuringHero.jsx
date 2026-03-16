@@ -172,7 +172,7 @@ const DebtRestructuringHero = ({ onGetStarted }) => {
                     <button
                         className="bg-[#3369e3] hover:bg-[#2558d6] text-white text-sm px-4 py-3 rounded-xl flex items-center gap-2 cursor-pointer transition-all duration-300 hover:scale-110 hover:shadow-xl transform hover:rotate-1 active:scale-95 group"
                         style={{ fontFamily: 'gilroy' }}
-                        onClick={onGetStarted || (() => console.log('Navigate to contact us'))}
+                        onClick={onGetStarted}
                     >
                         <span className="transition-all duration-300 group-hover:tracking-wider">GET STARTED</span>
                         <span className="text-white text-lg transition-all duration-300 group-hover:translate-x-2 group-hover:scale-125">

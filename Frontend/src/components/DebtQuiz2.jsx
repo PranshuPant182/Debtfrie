@@ -152,7 +152,6 @@ const DebtQuiz2 = () => {
     };
 
     const handleContactUs = () => {
-        console.log("Navigating to contact page");
         setShowPopup(false);
         setShowConfetti(false);
     };

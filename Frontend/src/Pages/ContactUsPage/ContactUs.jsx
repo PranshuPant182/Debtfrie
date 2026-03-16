@@ -50,8 +50,6 @@ function ContactUs() {
         const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/payment/order-status/${orderId}`);
         const data = await response.json();
 
-        console.log('Polling response:', data);
-
         if (data.success && data.payments && data.payments.length > 0) {
           const payment = data.payments[0];
 
@@ -111,7 +109,6 @@ function ContactUs() {
   // Verify payment and submit form
   const verifyAndSubmitForm = async (formData, paymentInfo) => {
     try {
-      console.log('Verifying payment:', paymentInfo);
 
       // For webhook-detected payments, skip verification and directly submit
       if (paymentInfo.razorpay_signature.includes('|')) {
@@ -200,8 +197,6 @@ function ContactUs() {
       const { order } = orderData;
       currentOrderRef.current = order;
 
-      console.log('Order created:', order.id);
-
       const options = {
         key: import.meta.env.VITE_RAZORPAY_KEY,
         amount: order.amount,
@@ -255,21 +250,18 @@ function ContactUs() {
 
         handler: async function (response) {
           // This handles successful payment (mainly for mobile)
-          console.log('Payment success handler called:', response);
           stopPaymentPolling();
           await verifyAndSubmitForm(formData, response);
         },
 
         modal: {
           ondismiss: () => {
-            console.log('Payment modal dismissed');
             stopPaymentPolling();
             setIsLoading(false);
             setPaymentStatus('');
           },
           // When modal opens, start polling for fallback
           onopen: () => {
-            console.log('Payment modal opened');
             // Start light polling for webhook detection
             setTimeout(() => {
               startPaymentPolling(order.id);
@@ -308,7 +300,6 @@ function ContactUs() {
 
       // Handle payment failure
       rzp1.on('payment.failed', function (response) {
-        console.log('Payment failed:', response.error);
         stopPaymentPolling();
         setIsLoading(false);
         setPaymentStatus('');

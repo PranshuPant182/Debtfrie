@@ -15,6 +15,10 @@ import BlogAdminPanel from './Pages/BlogTest/BlogTest.jsx'
 import FacebookPixelTracker from './utils/FacebookPixelTracker.jsx'
 import Testimonial from './Pages/Testimonial/Testimonial.jsx'
 import ThankYouPage from './Pages/ThankYouPage/ThankYou.jsx'
+import LandingPage from './Pages/LandingPage/LandingPage.jsx'
+import ContactFormNew from './Pages/ContactUsPage/ContactFormNew.jsx'
+import InquiryForm from './Pages/InquiryPage/InquiryForm.jsx'
+
 
 createRoot(document.getElementById('root')).render(
 
@@ -34,7 +38,9 @@ createRoot(document.getElementById('root')).render(
             <Route path='/Test' element={<AdminDashboard />} />
             <Route path='/Admin' element={<BlogAdminPanel />} />
             <Route path='/ThankYou' element={<ThankYouPage />} />
-
+            <Route path='/welcome' element={<LandingPage />} />
+            <Route path='/contact-new' element={<ContactFormNew />} />
+            <Route path='/enquiry' element={<InquiryForm />} />
         </Routes>
     </BrowserRouter>
 )

@@ -48,7 +48,7 @@ const HeaderData = [
   },
 ];
 
-const HeroSection = ({scrollToMiddle}) => {
+const HeroSection = ({ scrollToMiddle, Achievements, type }) => {
   const [index, setIndex] = useState(0);
   const [isFading, setIsFading] = useState(false);
   const [isAnimating, setIsAnimating] = useState(true);
@@ -59,11 +59,11 @@ const HeroSection = ({scrollToMiddle}) => {
     const interval = setInterval(() => {
       setIsFading(true);
       setIsAnimating(false);
-      
+
       setTimeout(() => {
         setIndex((prevIndex) => (prevIndex + 1) % HeaderData.length);
         setIsFading(false);
-        
+
         // Trigger new animations after content change
         setTimeout(() => {
           setIsAnimating(true);
@@ -75,6 +75,14 @@ const HeroSection = ({scrollToMiddle}) => {
   }, []);
 
   const current = HeaderData[index];
+
+  const handleGetDebtFree = () => {
+    if (type == "home") {
+      navigate("/contactus");
+    } else {
+      scrollToMiddle();
+    }
+  }
 
   return (
     <>
@@ -232,11 +240,10 @@ const HeroSection = ({scrollToMiddle}) => {
         {/* FRONT HEADING */}
         <div className={`transition-opacity duration-500 ease-in-out ${isFading ? "opacity-0" : "opacity-100"
           }  w-full py-6 md:py-8 flex flex-col justify-center items-center sm:mt-15 px-2`}>
-          
-          <h1 
-            className={`text-4xl sm:text-5xl text-center ${
-              isAnimating && !isFading ? 'animate-slide-top' : 'opacity-0'
-            }`}
+
+          <h1
+            className={`text-4xl sm:text-5xl text-center ${isAnimating && !isFading ? 'animate-slide-top' : 'opacity-0'
+              }`}
             style={{
               fontFamily: 'Youth',
               fontWeight: 900,
@@ -246,13 +253,12 @@ const HeroSection = ({scrollToMiddle}) => {
           >
             {current.HeadingTop}
           </h1>
-          
+
           <br />
-          
-          <p 
-            className={`text-[16px] sm:text-2xl text-center ${
-              isAnimating && !isFading ? 'animate-slide-bottom animate-delay-1' : 'opacity-0'
-            }`}
+
+          <p
+            className={`text-[16px] sm:text-2xl text-center ${isAnimating && !isFading ? 'animate-slide-bottom animate-delay-1' : 'opacity-0'
+              }`}
             style={{
               fontFamily: 'gilroy',
               lineHeight: '100%',
@@ -262,9 +268,30 @@ const HeroSection = ({scrollToMiddle}) => {
             {current.HeadingBottom}
           </p>
         </div>
+        {Achievements && (
+          <div className="w-full max-w-6xl px-4 py-8 mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4">
+              {[
+                "1L+ Customers Assisted",
+                "₹50+ Cr Debt Settled",
+                "10+ Years of Financial Expertise",
+                "100% Secure & Confidential",
+                "PAN India Support",
+                "Trusted by Salaried Professionals & Business Owners"
+              ].map((text, idx) => (
+                <div key={idx} className="flex items-start gap-2">
+                  <span className="text-xl font-bold leading-none mt-1">•</span>
+                  <p className="text-sm sm:text-base font-bold text-gray-900 leading-tight">
+                    {text}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* FRONT BUTTONS */}
-        <div 
+        <div
           className='w-full flex flex-row justify-center items-center space-x-4'
           style={{
             fontFamily: 'gilroy',
@@ -273,16 +300,16 @@ const HeroSection = ({scrollToMiddle}) => {
             letterSpacing: '0%',
           }}
         >
-          <button 
+          <button
             className='animate-button-shimmer text-white px-3 font-medium py-3 sm:py-2 md:px-4 md:py-3 rounded-2xl text-sm flex items-center gap-2 hover:scale-105 transition-transform duration-300'
-            onClick={() => navigate("/contactus")}
+            onClick={handleGetDebtFree}
           >
             <span>GET DEBT FREE</span>
             <MoveRight className="w-4 h-4 md:w-5 md:h-5" />
           </button>
-          
-          <button 
-            className='text-sm bg-gray-200 px-3 font-medium py-3 sm:py-2 md:px-4 md:py-3 rounded-2xl hover:bg-gray-300 hover:scale-105 transition-all duration-300' 
+
+          <button
+            className='text-sm bg-gray-200 px-3 font-medium py-3 sm:py-2 md:px-4 md:py-3 rounded-2xl hover:bg-gray-300 hover:scale-105 transition-all duration-300'
             onClick={scrollToMiddle}
           >
             LEARN HOW IT WORKS
@@ -294,9 +321,8 @@ const HeroSection = ({scrollToMiddle}) => {
           <img
             src={current.Image}
             alt="Header"
-            className={`absolute inset-0 h-full w-full object-cover rounded-lg transition-opacity duration-500 ease-in-out ${
-              isFading ? 'opacity-0' : 'opacity-100'
-            }`}
+            className={`absolute inset-0 h-full w-full object-cover rounded-lg transition-opacity duration-500 ease-in-out ${isFading ? 'opacity-0' : 'opacity-100'
+              }`}
           />
         </div>
       </div>

@@ -3,57 +3,57 @@ import images from '../utils/images'; // adjust path as needed
 import Waves from './Waves';
 
 const AnimatedCardsSection = () => {
-    const [isVisible, setIsVisible] = useState(false);
-    const [hoveredCard, setHoveredCard] = useState(null);
-    const sectionRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const [hoveredCard, setHoveredCard] = useState(null);
+  const sectionRef = useRef(null);
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    setIsVisible(true);
-                }
-            },
-            { threshold: 0.2 }
-        );
-
-        if (sectionRef.current) {
-            observer.observe(sectionRef.current);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
         }
+      },
+      { threshold: 0.2 }
+    );
 
-        return () => observer.disconnect();
-    }, []);
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
 
-    const cardData = [
-        {
-            image: images.PigiBank,
-            title: "Self-Savings\nModel",
-            description: "Save while settling your debts.\nFor a secure financial future.",
-            alt: "Savings"
-        },
-        {
-            image: images.Calendar,
-            title: "Consumer-\nFeasible Plan",
-            description: "Personalized And Practical Plans Designed For Your Financial Ease.",
-            alt: "Calendar"
-        },
-        {
-            image: images.Note,
-            title: "Settle Now, Pay\nLater",
-            description: "We Settle Your Debts First, And Pay After - No Upfront Costs.",
-            alt: "Document"
-        },
-        {
-            image: images.Arrow,
-            title: "Result-Oriented\nServices",
-            description: "Focused On Reducing Your Debt And Improving Your Financial Stability.",
-            alt: "Target"
-        }
-    ];
+    return () => observer.disconnect();
+  }, []);
 
-    return (
-        <>
-            <style jsx>{`
+  const cardData = [
+    {
+      image: images.PigiBank,
+      title: "Self-Savings\nModel",
+      description: "Save while settling your debts.\nFor a secure financial future.",
+      alt: "Savings"
+    },
+    {
+      image: images.Calendar,
+      title: "Consumer-\nFeasible Plan",
+      description: "Personalized And Practical Plans Designed For Your Financial Ease.",
+      alt: "Calendar"
+    },
+    {
+      image: images.Note,
+      title: "Settle Now, Pay\nLater",
+      description: "We Settle Your Debts First, And Pay After - No Upfront Costs.",
+      alt: "Document"
+    },
+    {
+      image: images.Arrow,
+      title: "Result-Oriented\nServices",
+      description: "Focused On Reducing Your Debt And Improving Your Financial Stability.",
+      alt: "Target"
+    }
+  ];
+
+  return (
+    <>
+      <style jsx>{`
         @keyframes fadeInUp {
           0% {
             opacity: 0;
@@ -199,11 +199,11 @@ const AnimatedCardsSection = () => {
         }
       `}</style>
 
-            <div
-                ref={sectionRef}
-                className="w-full min-h-screen flex flex-col items-center justify-center bg-[#3369e3] relative overflow-hidden bg-hero-image"
-            >
-                {/* <Waves
+      <div
+        ref={sectionRef}
+        className="w-full min-h-screen flex flex-col items-center justify-center bg-[#3369e3] relative overflow-hidden bg-hero-image"
+      >
+        {/* <Waves
                     lineColor="#c9c9c9"
                     waveSpeedX={0.02}
                     waveSpeedY={0.01}
@@ -215,106 +215,106 @@ const AnimatedCardsSection = () => {
                     xGap={12}
                     yGap={36}
                 /> */}
-                {/* Header section */}
-                <div className="flex justify-center text-center py-10 md:py-16 px-4 z-10 sm:mb-16">
-                    <h1
-                        className={`text-3xl sm:text-4xl md:text-5xl text-white font-medium leading-tight ${isVisible ? 'animate-fade-up' : 'opacity-0'
-                            }`}
-                        style={{
-                            fontFamily: 'Youth',
-                            fontWeight: 900,
-                            lineHeight: '100%',
-                            letterSpacing: '0%',
-                        }}
-                    >
-                        Your Path To <span className="text-yellow-400">Financial Freedom</span> With <br className="hidden sm:block" />Tailored Solutions
-                    </h1>
-                </div>
+        {/* Header section */}
+        <div className="flex justify-center text-center py-10 md:py-16 px-4 z-10 sm:mb-16">
+          <h1
+            className={`text-3xl sm:text-4xl md:text-5xl text-white font-medium leading-tight ${isVisible ? 'animate-fade-up' : 'opacity-0'
+              }`}
+            style={{
+              fontFamily: 'Youth',
+              fontWeight: 900,
+              lineHeight: '100%',
+              letterSpacing: '0%',
+            }}
+          >
+            Your Path To <span className="text-yellow-400">Financial Freedom</span> With <br className="hidden sm:block" />Tailored Solutions
+          </h1>
+        </div>
 
-                {/* Cards section */}
-                <div
-                    className="flex flex-col md:flex-row flex-wrap justify-center gap-6 md:gap-8 lg:gap-10 px-4 sm:px-8 pb-10 md:pb-20 z-10 w-full max-w-7xl"
-                    style={{
-                        fontFamily: 'Youth',
-                        fontWeight: 900,
-                        lineHeight: '100%',
-                        letterSpacing: '0%',
-                    }}
-                >
-                    {cardData.map((card, index) => (
-                        <div
-                            key={index}
-                            className={`
+        {/* Cards section */}
+        <div
+          className="flex flex-col md:flex-row flex-wrap justify-center gap-6 md:gap-8 lg:gap-10 px-4 sm:px-8 pb-10 md:pb-20 z-10 w-full max-w-7xl"
+          style={{
+            fontFamily: 'Youth',
+            fontWeight: 900,
+            lineHeight: '100%',
+            letterSpacing: '0%',
+          }}
+        >
+          {cardData.map((card, index) => (
+            <div
+              key={index}
+              className={`
                 flex flex-col justify-center items-center bg-white rounded-2xl shadow-lg p-6 w-full sm:w-64 text-center mb-6 md:mb-0
                 card-hover-effect animate-float
                 ${isVisible ?
-                                    (index % 2 === 0 ? `animate-slide-left animate-delay-${index + 1}` : `animate-slide-right animate-delay-${index + 1}`)
-                                    : 'opacity-0'
-                                }
+                  (index % 2 === 0 ? `animate-slide-left animate-delay-${index + 1}` : `animate-slide-right animate-delay-${index + 1}`)
+                  : 'opacity-0'
+                }
                 ${hoveredCard === index ? 'animate-card-glow' : ''}
               `}
-                            onMouseEnter={() => setHoveredCard(index)}
-                            onMouseLeave={() => setHoveredCard(null)}
-                            style={{
-                                animationDelay: `${index * 0.2}s`,
-                                animationFillMode: 'both'
-                            }}
-                        >
-                            <div className="mb-4 flex items-center justify-center h-24">
-                                <img
-                                    src={card.image}
-                                    alt={card.alt}
-                                    className={`
+              onMouseEnter={() => setHoveredCard(index)}
+              onMouseLeave={() => setHoveredCard(null)}
+              style={{
+                animationDelay: `${index * 0.2}s`,
+                animationFillMode: 'both'
+              }}
+            >
+              <div className="mb-4 flex items-center justify-center h-24">
+                <img
+                  src={card.image}
+                  alt={card.alt}
+                  className={`
                     h-20 w-auto card-image-hover
                     ${hoveredCard === index ? 'animate-image-rotate' : ''}
                   `}
-                                />
-                            </div>
+                />
+              </div>
 
-                            <span
-                                className={`
+              <span
+                className={`
                   text-xl sm:text-2xl font-bold mb-3
                   ${hoveredCard === index ? 'animate-title-glow' : ''}
                 `}
-                                style={{
-                                    background: hoveredCard === index ?
-                                        'linear-gradient(45deg, #3369e3, #4575FE)' : 'inherit',
-                                    WebkitBackgroundClip: hoveredCard === index ? 'text' : 'unset',
-                                    WebkitTextFillColor: hoveredCard === index ? 'transparent' : 'inherit',
-                                    backgroundClip: hoveredCard === index ? 'text' : 'unset'
-                                }}
-                            >
-                                {card.title.split('\n').map((line, lineIndex) => (
-                                    <React.Fragment key={lineIndex}>
-                                        {line}
-                                        {lineIndex < card.title.split('\n').length - 1 && <br />}
-                                    </React.Fragment>
-                                ))}
-                            </span>
+                style={{
+                  background: hoveredCard === index ?
+                    'linear-gradient(45deg, #3369e3, #4575FE)' : 'inherit',
+                  WebkitBackgroundClip: hoveredCard === index ? 'text' : 'unset',
+                  WebkitTextFillColor: hoveredCard === index ? 'transparent' : 'inherit',
+                  backgroundClip: hoveredCard === index ? 'text' : 'unset'
+                }}
+              >
+                {card.title.split('\n').map((line, lineIndex) => (
+                  <React.Fragment key={lineIndex}>
+                    {line}
+                    {lineIndex < card.title.split('\n').length - 1 && <br />}
+                  </React.Fragment>
+                ))}
+              </span>
 
-                            <span
-                                className="text-sm transition-colors duration-300"
-                                style={{
-                                    fontFamily: 'gilroy',
-                                    fontWeight: 400,
-                                    lineHeight: '100%',
-                                    letterSpacing: '0%',
-                                    color: hoveredCard === index ? '#3369e3' : 'inherit'
-                                }}
-                            >
-                                {card.description.split('\n').map((line, lineIndex) => (
-                                    <React.Fragment key={lineIndex}>
-                                        {line}
-                                        {lineIndex < card.description.split('\n').length - 1 && <br />}
-                                    </React.Fragment>
-                                ))}
-                            </span>
-                        </div>
-                    ))}
-                </div>
+              <span
+                className="text-sm transition-colors duration-300"
+                style={{
+                  fontFamily: 'gilroy',
+                  fontWeight: 400,
+                  lineHeight: '100%',
+                  letterSpacing: '0%',
+                  color: hoveredCard === index ? '#3369e3' : 'inherit'
+                }}
+              >
+                {card.description.split('\n').map((line, lineIndex) => (
+                  <React.Fragment key={lineIndex}>
+                    {line}
+                    {lineIndex < card.description.split('\n').length - 1 && <br />}
+                  </React.Fragment>
+                ))}
+              </span>
             </div>
-        </>
-    );
+          ))}
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default AnimatedCardsSection;
