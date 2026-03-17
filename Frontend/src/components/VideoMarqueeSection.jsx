@@ -10,26 +10,36 @@ export default function VideoSection() {
             (entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
-                        videoRef.current?.play().catch((err) => {
-                            console.log('Autoplay failed:', err);
-                        });
+                        if (videoRef.current) {
+                            videoRef.current.muted = false;
+                            videoRef.current.play().catch((err) => {
+                                console.log('Unmuted autoplay failed, trying muted:', err);
+                                if (videoRef.current) {
+                                    videoRef.current.muted = true;
+                                    videoRef.current.play().catch((mutedErr) => {
+                                        console.log('Muted autoplay also failed:', mutedErr);
+                                    });
+                                }
+                            });
+                        }
                     } else {
                         videoRef.current?.pause();
                     }
                 });
             },
             {
-                threshold: 0.5, // Adjust this if needed
+                threshold: 0.2, // Play as soon as 20% is visible
             }
         );
 
-        if (videoRef.current) {
-            observer.observe(videoRef.current);
+        const currentVideoRef = videoRef.current;
+        if (currentVideoRef) {
+            observer.observe(currentVideoRef);
         }
 
         return () => {
-            if (videoRef.current) {
-                observer.unobserve(videoRef.current);
+            if (currentVideoRef) {
+                observer.unobserve(currentVideoRef);
             }
         };
     }, []);
@@ -57,7 +67,9 @@ export default function VideoSection() {
                         className="w-full h-auto"
                         controls
                         preload="metadata"
-                        muted // Autoplay requires this in many browsers
+                        loop
+                        playsInline
+                        autoPlay
                         style={{ maxHeight: '600px' }}
                     >
                         <source src={video} type="video/mp4" />

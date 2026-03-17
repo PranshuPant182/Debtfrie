@@ -33,7 +33,7 @@ function ContactFormNew() {
             fontWeight: 900,
             lineHeight: '100%',
             letterSpacing: '0%',
-          }}>Contact Form</h2>
+          }}>Best Way to Settle Your Loans.</h2>
 
           <p className="text-lg text-black mb-6 text-center" style={{
             fontFamily: 'gilroy',
@@ -42,10 +42,11 @@ function ContactFormNew() {
             letterSpacing: '0%',
           }}
           >
-            Fill out the form below, and our team will get back to you promptly. Let's<br /> connect and create solutions together.
+            Speak with a Debtfrie financial expert and discover how you can legally reduce your loan burden and regain financial control. <br />Fill the form to start your confidential consultation.
+
           </p>
 
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 mt-10">
             {/* Full Name */}
             <div>
               <label className="block text-base font-medium mb-3">Full Name <span className='text-red-600'>*</span></label>

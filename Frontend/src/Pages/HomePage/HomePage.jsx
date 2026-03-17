@@ -140,7 +140,7 @@ function HomePage() {
                 `}</style>
 
                 {/*FRONT HEADING */}
-                <HeroSection scrollToMiddle={scrollToMiddle} Achievements={false} type={"home"} />
+                <HeroSection scrollToMiddle={scrollToMiddle} Achievements={false} type={"home"} ShowImage={true} />
 
                 {/* MOBILE IMAGE */}
                 {/* HOW WE CAN HELP YOU */}

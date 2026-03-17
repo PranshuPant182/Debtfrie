@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import images from '../utils/images';
 
@@ -112,24 +112,23 @@ throughout the process and would be glad to recommend their services to others s
         }
     ];
 
-    const nextTestimonial = () => {
+    const nextTestimonial = useCallback(() => {
         setSlideDirection('left');
         setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
-    };
+    }, [testimonials.length]);
 
-    const prevTestimonial = () => {
+    const prevTestimonial = useCallback(() => {
         setSlideDirection('right');
         setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-    };
+    }, [testimonials.length]);
 
-    // Handle testimonial navigation
     useEffect(() => {
         const interval = setInterval(() => {
             nextTestimonial();
         }, 5000);
 
         return () => clearInterval(interval);
-    }, [testimonials.length]);
+    }, [nextTestimonial]);
 
     // Intersection Observer for scroll-triggered animations
     useEffect(() => {
@@ -184,16 +183,16 @@ throughout the process and would be glad to recommend their services to others s
                 <div className={`floating-orb orb-3 ${isVisible ? 'animate-pulse-custom' : 'opacity-0'}`}></div>
                 <div className={`floating-orb orb-4 ${isVisible ? 'animate-float' : 'opacity-0'}`}></div>
                 <div className={`floating-orb orb-5 ${isVisible ? 'animate-float-reverse' : 'opacity-0'}`}></div>
-                
+
                 {/* Animated Lines */}
                 <div className={`animated-line line-1 ${isVisible ? 'animate-line-move' : 'opacity-0'}`}></div>
                 <div className={`animated-line line-2 ${isVisible ? 'animate-line-move' : 'opacity-0'}`}></div>
                 <div className={`animated-line line-3 ${isVisible ? 'animate-line-move' : 'opacity-0'}`}></div>
-                
+
                 {/* Particles */}
                 {isVisible && Array.from({ length: 20 }).map((_, i) => (
-                    <div 
-                        key={i} 
+                    <div
+                        key={i}
                         className="particle animate-particle-float"
                         style={{
                             left: `${Math.random() * 100}%`,
@@ -303,7 +302,7 @@ throughout the process and would be glad to recommend their services to others s
             </div>
 
             {/* Mobile testimonial card - positioned at bottom */}
-            <div className="md:hidden absolute bottom-16 left-4 right-4">
+            <div className="md:hidden absolute bottom-16 left-4 right-4 z-[60]">
                 {/* Navigation buttons */}
                 <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between pointer-events-none z-10">
                     {/* Left arrow button */}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { MoveRight } from "lucide-react";
+import { MoveRight, Users, HandCoins, Award, ShieldCheck, MapPin, Sparkles } from "lucide-react";
 import images from "../utils/images"; // adjust this path as necessary
 import { useNavigate } from "react-router-dom";
 
@@ -48,7 +48,7 @@ const HeaderData = [
   },
 ];
 
-const HeroSection = ({ scrollToMiddle, Achievements, type }) => {
+const HeroSection = ({ scrollToMiddle, Achievements, type, ShowImage }) => {
   const [index, setIndex] = useState(0);
   const [isFading, setIsFading] = useState(false);
   const [isAnimating, setIsAnimating] = useState(true);
@@ -236,7 +236,7 @@ const HeroSection = ({ scrollToMiddle, Achievements, type }) => {
         }
       `}</style>
 
-      <div className="w-full flex flex-col items-center min-h-[600px] sm:min-h-[650px] lg:min-h-[700px]" >
+      <div className={`w-full flex flex-col items-center min-h-[600px] sm:min-h-[650px] ${ShowImage ? "lg:min-h-[700px]" : "lg:min-h-[450px]"} `} >
         {/* FRONT HEADING */}
         <div className={`transition-opacity duration-500 ease-in-out ${isFading ? "opacity-0" : "opacity-100"
           }  w-full py-6 md:py-8 flex flex-col justify-center items-center sm:mt-15 px-2`}>
@@ -269,20 +269,22 @@ const HeroSection = ({ scrollToMiddle, Achievements, type }) => {
           </p>
         </div>
         {Achievements && (
-          <div className="w-full max-w-6xl px-4 py-8 mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4">
+          <div className="w-full max-w-6xl px-4 py-12 mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
-                "1L+ Customers Assisted",
-                "₹50+ Cr Debt Settled",
-                "10+ Years of Financial Expertise",
-                "100% Secure & Confidential",
-                "PAN India Support",
-                "Trusted by Salaried Professionals & Business Owners"
-              ].map((text, idx) => (
-                <div key={idx} className="flex items-start gap-2">
-                  <span className="text-xl font-bold leading-none mt-1">•</span>
-                  <p className="text-sm sm:text-base font-bold text-gray-900 leading-tight">
-                    {text}
+                { icon: Users, text: "1L+ Customers Assisted", color: "text-yellow-600" },
+                { icon: HandCoins, text: "₹50+ Cr Debt Settled", color: "text-yellow-600" },
+                { icon: Award, text: "10+ Years of Financial Expertise", color: "text-yellow-600" },
+                { icon: ShieldCheck, text: "100% Secure & Confidential", color: "text-yellow-600" },
+                { icon: MapPin, text: "PAN India Support", color: "text-yellow-600" },
+                { icon: Sparkles, text: "Trusted by Professionals", color: "text-yellow-600" }
+              ].map((item, idx) => (
+                <div key={idx} className="flex items-center gap-4 bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300">
+                  <div className={`p-3 rounded-xl bg-opacity-10 ${item.color.replace('text', 'bg')}`}>
+                    <item.icon className={`w-6 h-6 ${item.color}`} />
+                  </div>
+                  <p className="text-sm sm:text-base font-bold text-gray-800 leading-tight">
+                    {item.text}
                   </p>
                 </div>
               ))}
@@ -291,7 +293,7 @@ const HeroSection = ({ scrollToMiddle, Achievements, type }) => {
         )}
 
         {/* FRONT BUTTONS */}
-        <div
+        {ShowImage && <div
           className='w-full flex flex-row justify-center items-center space-x-4'
           style={{
             fontFamily: 'gilroy',
@@ -314,10 +316,10 @@ const HeroSection = ({ scrollToMiddle, Achievements, type }) => {
           >
             LEARN HOW IT WORKS
           </button>
-        </div>
+        </div>}
 
         {/* FRONT IMAGE */}
-        <div className="w-full max-w-[400px] sm:max-w-[600px] h-[350px] sm:h-[350px] md:h-[400px] lg:h-[450px] xl:h-[500px] relative overflow-hidden">
+        <div className={`${ShowImage ? "w-full max-w-[400px] sm:max-w-[600px] h-[350px] sm:h-[350px] md:h-[400px] lg:h-[450px] xl:h-[500px] relative overflow-hidden" : "hidden"} `}>
           <img
             src={current.Image}
             alt="Header"

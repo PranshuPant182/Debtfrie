@@ -47,9 +47,12 @@ function LandingPage() {
 
     return (
         <Layout showButton={false} showContactUsButton={false}>
-            <HeroSection scrollToMiddle={scrollToMiddle} Achievements={true} type={"Welcome"} />
+            <HeroSection scrollToMiddle={scrollToMiddle} Achievements={true} type={"Welcome"} ShowImage={false} />
             <div ref={formRef}>
                 <ContactFormNew />
+            </div>
+            <div className="w-full sm:min-h-screen bg-white relative overflow-hidden">
+                <VideoMarqueeSection />
             </div>
             <div ref={targetRef} className="w-full  bg-[#3369e3] mt-[150px]">
                 {/* Desktop Layout - 3 columns */}
@@ -231,9 +234,6 @@ function LandingPage() {
             </div>
             <DebtCalculator type={"Welcome"} scrollToMiddle={scrollToMiddle} />
             <StepSlider />
-            <div className="w-full sm:min-h-screen bg-white relative overflow-hidden">
-                <VideoMarqueeSection />
-            </div>
             <TestimonialsSection />
             <Banner />
             <AnimatedCardsSection />
