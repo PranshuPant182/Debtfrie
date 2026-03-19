@@ -272,12 +272,9 @@ const HeroSection = ({ scrollToMiddle, Achievements, type, ShowImage }) => {
           <div className="w-full max-w-6xl px-4 py-12 mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
-                { icon: Users, text: "1L+ Customers Assisted", color: "text-yellow-600" },
-                { icon: HandCoins, text: "₹50+ Cr Debt Settled", color: "text-yellow-600" },
-                { icon: Award, text: "10+ Years of Financial Expertise", color: "text-yellow-600" },
-                { icon: ShieldCheck, text: "100% Secure & Confidential", color: "text-yellow-600" },
-                { icon: MapPin, text: "PAN India Support", color: "text-yellow-600" },
-                { icon: Sparkles, text: "Trusted by Professionals", color: "text-yellow-600" }
+                { icon: Users, text: " 35,000 + Customers Assisted ", color: "text-yellow-600" },
+                { icon: HandCoins, text: "120 Cr + Debt Settled", color: "text-yellow-600" },
+                { icon: Award, text: "10 + Years of Financial & Legal Expertise", color: "text-yellow-600" },
               ].map((item, idx) => (
                 <div key={idx} className="flex items-center gap-4 bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300">
                   <div className={`p-3 rounded-xl bg-opacity-10 ${item.color.replace('text', 'bg')}`}>

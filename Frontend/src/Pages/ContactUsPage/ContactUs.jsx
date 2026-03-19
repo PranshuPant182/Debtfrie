@@ -14,7 +14,7 @@ function ContactUs() {
   const maxPollAttempts = 60; // 5 minutes of polling
   const pollAttemptRef = useRef(0);
 
-  
+
   const {
     register,
     handleSubmit,
@@ -463,18 +463,21 @@ function ContactUs() {
 
             {/* Personal Loan Dues */}
             <div>
-              <label className="block text-base font-medium mb-3">Outstanding Personal Loan Dues</label>
+              <label className="block text-base font-medium mb-3">Outstanding Personal Loan Dues (Personal Loan, Business Loan, Pay Day Loan, Consumer Loan, Education Loan, Overdraft etc.) ?</label>
               <select {...register("loanDues")} className="w-full px-4 py-3 bg-[#f1f2f6] text-gray-600 rounded-xl">
                 <option value="">Select option</option>
                 <option value="None">No Personal Loan Dues</option>
-                <option value="<1L">Less than ₹1 Lakh</option>
-                <option value="1-2L">₹1 – ₹2 Lakhs</option>
-                <option value="2-5L">₹2 – ₹5 Lakhs</option>
-                <option value="5-10L">₹5 – ₹10 Lakhs</option>
-                <option value="10-15L">₹10 – ₹15 Lakhs</option>
-                <option value="15-20L">₹15 – ₹20 Lakhs</option>
-                <option value="20-30L">₹20 – ₹30 Lakhs</option>
-                <option value=">30L">Above ₹30 Lakhs</option>
+                <option value="<1L">Less than Rs. 1 Lacs</option>
+                <option value="1-2L">Rs. 1-2 Lacs</option>
+                <option value="2-3L">Rs. 2-3 Lacs</option>
+                <option value="3-4L">Rs. 3-4 Lacs</option>
+                <option value="4-5L">Rs. 4-5 Lacs</option>
+                <option value="5-10L">Rs. 5-10 Lacs</option>
+                <option value="10-15L">Rs. 10-15 Lacs</option>
+                <option value="15-30L">Rs. 15-30 Lacs</option>
+                <option value="30-50L">Rs. 30-50 Lacs</option>
+                <option value="50-1Cr">Rs. 50- 1 Crore</option>
+                <option value=">1Cr">More than 1 Crore</option>
               </select>
             </div>
 
@@ -510,6 +513,10 @@ function ContactUs() {
             >
               {isLoading ? 'Processing...' : 'Pay ₹49 and Submit Request'}
             </button>
+            <div className="mt-6 text-center">
+              <p className="text-[#1447e6] font-bold text-lg"><span className="text-red-600">*</span>WE DO NOT PROVIDE LOAN</p>
+              <p className="text-gray-600 text-sm mt-1">We provide legal advice related to debts.</p>
+            </div>
           </form>
         </div>
 

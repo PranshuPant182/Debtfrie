@@ -89,7 +89,7 @@ function EnrollBanner() {
         }
       `}</style>
 
-      <div 
+      <div
         ref={bannerRef}
         className="w-full flex justify-center items-center py-6 bg-gradient-to-r from-white to-blue-50"
       >
