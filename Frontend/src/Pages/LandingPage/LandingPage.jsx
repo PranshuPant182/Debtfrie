@@ -17,7 +17,6 @@ function LandingPage() {
     const targetRef = useRef(null);
     const formRef = useRef(null);
     const [isVisible, setIsVisible] = useState(false);
-    const [showPopup, setShowPopup] = useState(false);
     const featuresRef = useRef(null);
     const textRef = useRef(null);
     const navigate = useNavigate();
@@ -44,14 +43,6 @@ function LandingPage() {
         }
 
         return () => observer.disconnect();
-    }, []);
-
-    useEffect(() => {
-        // Show popup after a short delay
-        const timer = setTimeout(() => {
-            setShowPopup(true);
-        }, 1000);
-        return () => clearTimeout(timer);
     }, []);
 
     return (
@@ -247,28 +238,6 @@ function LandingPage() {
             <Banner />
             <AnimatedCardsSection />
             <FAQAccordion limit={3} showButton={true} />
-
-            {showPopup && (
-                <div className="fixed inset-0 bg-transparent backdrop-blur-md backdrop-saturate-150 flex justify-center items-center z-[9999] animate-fade-in">
-                    <div className="bg-white p-8 rounded-2xl max-w-md w-[90%] text-center shadow-2xl relative">
-                        <h2 className="text-2xl font-bold text-gray-800 mb-4" style={{ fontFamily: 'Youth' }}>
-                            Notice
-                        </h2>
-                        <div className="text-md text-gray-600 mb-6 space-y-2" style={{ fontFamily: 'gilroy' }}>
-                            <p>We do not provide loans.</p>
-                            <p>We offer legal advice and solutions for debt resolution.</p>
-                        </div>
-                        <div className="flex justify-center">
-                            <button
-                                onClick={() => setShowPopup(false)}
-                                className="bg-blue-600 hover:bg-blue-700 transition text-white px-8 py-2 rounded-full font-semibold shadow"
-                            >
-                                Okay
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
         </Layout>
 
     )
