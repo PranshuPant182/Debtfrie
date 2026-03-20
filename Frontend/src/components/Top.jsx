@@ -236,7 +236,7 @@ const HeroSection = ({ scrollToMiddle, Achievements, type, ShowImage }) => {
         }
       `}</style>
 
-      <div className={`w-full flex flex-col items-center min-h-[600px] sm:min-h-[650px] ${ShowImage ? "lg:min-h-[700px]" : "lg:min-h-[450px]"} `} >
+      <div className={`w-full flex flex-col items-center min-h-[300px] sm:min-h-[650px] ${ShowImage ? "lg:min-h-[700px]" : "lg:min-h-[450px]"} `} >
         {/* FRONT HEADING */}
         <div className={`transition-opacity duration-500 ease-in-out ${isFading ? "opacity-0" : "opacity-100"
           }  w-full py-6 md:py-8 flex flex-col justify-center items-center sm:mt-15 px-2`}>
