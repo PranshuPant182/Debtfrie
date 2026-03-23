@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Layout from '../Layout'
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { getUTMParams } from '../../utils/utmUtils';
 
 function ContactFormNew() {
   const navigate = useNavigate();
@@ -15,7 +16,12 @@ function ContactFormNew() {
 
   const onSubmit = async (formData) => {
     setIsLoading(true);
-    console.log("Form Submitted Successfully:", formData);
+    const utmParams = getUTMParams();
+    const submissionData = {
+      ...formData,
+      ...utmParams
+    };
+    console.log("Form Submitted Successfully:", submissionData);
 
     // Simulate a brief delay to show processing state
     setTimeout(() => {

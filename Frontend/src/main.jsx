@@ -13,6 +13,7 @@ import DebtRestructuring from './Pages/DebtConsolidationPage/DebtRestructuring.j
 import AdminDashboard from './Pages/TestPage/TestPage.jsx'
 import BlogAdminPanel from './Pages/BlogTest/BlogTest.jsx'
 import FacebookPixelTracker from './utils/FacebookPixelTracker.jsx'
+import UTMTracker from './utils/UTMTracker.jsx'
 import Testimonial from './Pages/Testimonial/Testimonial.jsx'
 import ThankYouPage from './Pages/ThankYouPage/ThankYou.jsx'
 import LandingPage from './Pages/LandingPage/LandingPage.jsx'
@@ -26,6 +27,7 @@ createRoot(document.getElementById('root')).render(
     <BrowserRouter>
         <ScrollToTop />
         <FacebookPixelTracker />
+        <UTMTracker />
         <Routes>
             <Route path='/' element={<HomePage />} />
             <Route path='/contactus' element={<ContactUs />} />
