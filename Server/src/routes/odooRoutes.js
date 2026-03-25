@@ -34,7 +34,7 @@ router.post('/create-lead', async (req, res) => {
         x_emi_bounce_status: formData.emiBounce || '',
         description: formData.additionalInfo || '',
         type: 'lead',
-        x_landing_page_url: req.headers.referer || '', // Using referer since window.location is not available here
+        x_landing_page_url: utmParams.landing_page || req.headers.referer || '', // Prioritize landing_page from frontend
         x_utm_source: utmParams.utm_source || '',
         x_utm_medium: utmParams.utm_medium || '',
         x_utm_campaign: utmParams.utm_campaign || '',

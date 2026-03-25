@@ -18,5 +18,12 @@ export const getUTMParams = () => {
     const value = sessionStorage.getItem(key) || localStorage.getItem(key);
     if (value) params[key] = value;
   });
+
+  // Get the landing page URL stored on first arrival
+  const landingPage = sessionStorage.getItem('landing_page');
+  if (landingPage) {
+    params.landing_page = landingPage;
+  }
+
   return params;
 };

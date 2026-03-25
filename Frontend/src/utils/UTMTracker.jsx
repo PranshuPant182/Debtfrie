@@ -15,6 +15,11 @@ const UTMTracker = () => {
         localStorage.setItem(key, value);
       }
     });
+
+    // Store the initial landing page URL (with all query parameters) if not already stored
+    if (!sessionStorage.getItem('landing_page')) {
+      sessionStorage.setItem('landing_page', window.location.href);
+    }
   }, [location.search]);
 
   return null;
