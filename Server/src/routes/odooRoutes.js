@@ -63,27 +63,45 @@ router.post('/create-lead', async (req, res) => {
     };
 
     try {
+        console.log("--- ODOO API CALL START ---");
+        console.log("ODOO URL:", ODOO_CONFIG.url);
+        console.log("ODOO DB:", ODOO_CONFIG.db);
+        console.log("ODOO UID:", ODOO_CONFIG.uid);
+        // Do not log password for security, but maybe confirm it's present
+        console.log("ODOO Password Present:", !!ODOO_CONFIG.password);
+
+        console.log("Request Payload:", JSON.stringify(payload, null, 2));
+
         const response = await axios.post(ODOO_CONFIG.url, payload, {
             headers: {
                 'Content-Type': 'application/json',
             },
         });
-        console.log("ODOO URL:", ODOO_CONFIG.url);
+
+        console.log("Odoo Response Status:", response.status);
 
         if (response.data.error) {
-            console.error('Odoo API Error:', response.data.error);
+            console.error('Odoo API Internal Error:', JSON.stringify(response.data.error, null, 2));
             return res.status(500).json({
                 success: false,
                 error: response.data.error.data?.message || response.data.error.message || 'Odoo API Error',
             });
         }
 
+        console.log("Odoo Result:", response.data.result);
+        console.log("--- ODOO API CALL END ---");
+
         res.json({
             success: true,
             result: response.data.result,
         });
     } catch (error) {
-        console.error('Backend error calling Odoo API:', error.message);
+        console.error('--- ODOO API CALL FAILED ---');
+        console.error('Error Message:', error.message);
+        if (error.response) {
+            console.error('Error Response Data:', JSON.stringify(error.response.data, null, 2));
+            console.error('Error Response Status:', error.response.status);
+        }
         res.status(500).json({
             success: false,
             error: 'Internal Server Error while communicating with Odoo',
