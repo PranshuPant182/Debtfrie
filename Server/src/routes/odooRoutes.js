@@ -2,17 +2,21 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 
-const ODOO_CONFIG = {
-    url: process.env.ODOO_URL,
-    db: process.env.ODOO_DB,
-    uid: parseInt(process.env.ODOO_UID),
-    password: process.env.ODOO_PASSWORD,
-};
+console.log("--- odooRoutes.js Module Loaded ---");
+console.log("Initial process.env.ODOO_URL check:", process.env.ODOO_URL ? "Defined" : "UNDEFINED");
 
 /**
  * Creates a lead in Odoo CRM
  */
 router.post('/create-lead', async (req, res) => {
+    // Read config inside the handler to ensure environment variables are loaded
+    const ODOO_CONFIG = {
+        url: process.env.ODOO_URL,
+        db: process.env.ODOO_DB,
+        uid: parseInt(process.env.ODOO_UID),
+        password: process.env.ODOO_PASSWORD,
+    };
+
     const { formData, utmParams = {} } = req.body;
 
     if (!formData) {
