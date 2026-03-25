@@ -22,7 +22,6 @@ function ContactFormNew() {
     try {
       const utmParams = getUTMParams();
       await createOdooLead(formData, utmParams);
-      toast.success("Form submitted successfully!");
       navigate('/ThankYou');
     } catch (error) {
       console.error("Submission error:", error);
