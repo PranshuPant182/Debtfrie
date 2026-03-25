@@ -42,6 +42,10 @@ app.use('/api/webhooks', webhookRoutes);
 const contactFormRoutes = require('./routes/contactForm');
 app.use('/api', contactFormRoutes);
 
+// Odoo routes
+const odooRoutes = require('./routes/odooRoutes');
+app.use('/api/odoo', odooRoutes);
+
 // Root route for basic API check
 app.get('/', (req, res) => {
     res.send('API WORKING');

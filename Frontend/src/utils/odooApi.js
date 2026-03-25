@@ -1,84 +1,39 @@
 /**
- * Utility to create a lead in Odoo CRM using JSON-RPC
+ * Utility to create a lead in Odoo CRM by calling our own backend
  */
 
-const ODOO_CONFIG = {
-  url: import.meta.env.VITE_ODOO_URL,
-  db: import.meta.env.VITE_ODOO_DB,
-  uid: import.meta.env.VITE_ODOO_UID,
-  password: import.meta.env.VITE_ODOO_PASSWORD,
+const API_CONFIG = {
+  baseUrl: import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api',
 };
 
 /**
- * Creates a lead in Odoo CRM
+ * Creates a lead in Odoo CRM via Backend
  * @param {Object} formData Form data from the UI
  * @param {Object} utmParams UTM parameters from storage
  * @returns {Promise<Object>} API response
  */
 export const createOdooLead = async (formData, utmParams = {}) => {
-  const leadData = {
-    name: formData.fullName || 'New Lead',
-    email_from: formData.email,
-    phone: formData.phone,
-    city: formData.city || '',
-    x_Monthly_Income: formData.monthlyIncome || '',
-    x_outstanding_creditCards_due: formData.creditCardDues || '',
-    x_outstanding_personal_loan_dues: formData.loanDues || '',
-    x_emi_bounce_status: formData.emiBounce || '',
-    description: formData.additionalInfo || '',
-    type: 'lead',
-    x_landing_page_url: window.location.href,
-    x_utm_source: utmParams.utm_source || '',
-    x_utm_medium: utmParams.utm_medium || '',
-    x_utm_campaign: utmParams.utm_campaign || '',
-    x_utm_term: utmParams.utm_term || '',
-    x_utm_content: utmParams.utm_content || '',
-    x_utm_keyword: utmParams.utm_keyword || '',
-    x_utm_adgroup: utmParams.utm_adgroup || '',
-    x_utm_adset: utmParams.utm_adset || '',
-    x_utm_campaign_id: utmParams.utm_campaign_id || '',
-    x_utm_ad_id: utmParams.utm_ad_id || '',
-    x_utm_device: utmParams.utm_device || '',
-  };
-
-  const payload = {
-    jsonrpc: '2.0',
-    method: 'call',
-    id: Math.floor(Math.random() * 1000),
-    params: {
-      service: 'object',
-      method: 'execute_kw',
-      args: [
-        ODOO_CONFIG.db,
-        ODOO_CONFIG.uid,
-        ODOO_CONFIG.password,
-        'crm.lead',
-        'create',
-        [[leadData]],
-      ],
-    },
-  };
-
   try {
-    const response = await fetch(ODOO_CONFIG.url, {
+    const response = await fetch(`${API_CONFIG.baseUrl}/odoo/create-lead`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(payload),
+      body: JSON.stringify({
+        formData,
+        utmParams,
+      }),
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
     }
 
     const result = await response.json();
-    if (result.error) {
-      throw new Error(result.error.data?.message || result.error.message || 'Odoo API Error');
-    }
     return result;
   } catch (error) {
-    console.error('Error calling Odoo API:', error);
-    throw error; // Re-throw to be caught by the form
+    console.error('Error calling Backend Odoo API:', error);
+    throw error;
   }
 };

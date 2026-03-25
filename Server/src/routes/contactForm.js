@@ -5,10 +5,10 @@ const router = express.Router();
 const axios = require("axios");
 
 const ODOO_CONFIG = {
-  url: "https://debtfrie1.odoo.com/jsonrpc",
-  db: "debtfrie1",
-  uid: 2,
-  password: "97fa39c7320d0fe2251bc1c80539d8e45a8e9a1a"
+  url: process.env.ODOO_URL,
+  db: process.env.ODOO_DB,
+  uid: parseInt(process.env.ODOO_UID),
+  password: process.env.ODOO_PASSWORD,
 };
 
 // Form submission schema
