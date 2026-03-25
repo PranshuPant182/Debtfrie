@@ -3,10 +3,10 @@
  */
 
 const ODOO_CONFIG = {
-  url: 'https://debtfrie1.odoo.com/jsonrpc',
-  db: 'debtfrie1',
-  uid: 2,
-  password: '97fa39c7320d0fe2251bc1c80539d8e45a8e9a1a',
+  url: import.meta.env.VITE_ODOO_URL,
+  db: import.meta.env.VITE_ODOO_DB,
+  uid: import.meta.env.VITE_ODOO_UID,
+  password: import.meta.env.VITE_ODOO_PASSWORD,
 };
 
 /**
@@ -28,7 +28,6 @@ export const createOdooLead = async (formData, utmParams = {}) => {
     description: formData.additionalInfo || '',
     type: 'lead',
     x_landing_page_url: window.location.href,
-    // UTM Parameters mapping
     x_utm_source: utmParams.utm_source || '',
     x_utm_medium: utmParams.utm_medium || '',
     x_utm_campaign: utmParams.utm_campaign || '',
