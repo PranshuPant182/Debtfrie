@@ -3,6 +3,8 @@ import Layout from '../Layout'
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { getUTMParams } from '../../utils/utmUtils';
+import { createOdooLead } from '../../utils/odooApi';
+
 
 function ContactFormNew() {
   const navigate = useNavigate();
@@ -16,18 +18,16 @@ function ContactFormNew() {
 
   const onSubmit = async (formData) => {
     setIsLoading(true);
-    const utmParams = getUTMParams();
-    const submissionData = {
-      ...formData,
-      ...utmParams
-    };
-    console.log("Form Submitted Successfully:", submissionData);
-
-    // Simulate a brief delay to show processing state
-    setTimeout(() => {
-      setIsLoading(false);
+    try {
+      const utmParams = getUTMParams();
+      await createOdooLead(formData, utmParams);
+      console.log("Form Submitted Successfully");
       navigate('/ThankYou');
-    }, 1000);
+    } catch (error) {
+      console.error("Submission error:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
