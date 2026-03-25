@@ -20,7 +20,7 @@ export const getUTMParams = () => {
   });
 
   // Get the landing page URL stored on first arrival
-  const landingPage = sessionStorage.getItem('landing_page');
+  const landingPage = sessionStorage.getItem('landing_page') || localStorage.getItem('landing_page');
   if (landingPage) {
     params.landing_page = landingPage;
   }
