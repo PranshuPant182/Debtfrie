@@ -68,6 +68,7 @@ router.post('/create-lead', async (req, res) => {
                 'Content-Type': 'application/json',
             },
         });
+        console.log("ODOO URL:", ODOO_CONFIG.url);
 
         if (response.data.error) {
             console.error('Odoo API Error:', response.data.error);
