@@ -73,12 +73,12 @@ export const createOdooLead = async (formData, utmParams = {}) => {
     }
 
     const result = await response.json();
-    console.log('Odoo API Result:', result);
+    if (result.error) {
+      throw new Error(result.error.data?.message || result.error.message || 'Odoo API Error');
+    }
     return result;
   } catch (error) {
     console.error('Error calling Odoo API:', error);
-    // We don't want to block the user experience if Odoo fails
-    // (e.g. CORS or network issues)
-    return { error: error.message };
+    throw error; // Re-throw to be caught by the form
   }
 };

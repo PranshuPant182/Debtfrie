@@ -21,10 +21,10 @@ function ContactFormNew() {
     try {
       const utmParams = getUTMParams();
       await createOdooLead(formData, utmParams);
-      console.log("Form Submitted Successfully");
       navigate('/ThankYou');
     } catch (error) {
       console.error("Submission error:", error);
+      alert("Server is not responding. Please try again later.");
     } finally {
       setIsLoading(false);
     }

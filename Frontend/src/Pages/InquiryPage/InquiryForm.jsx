@@ -25,6 +25,7 @@ function InquiryForm() {
       navigate('/ThankYou');
     } catch (error) {
       console.error("Submission error:", error);
+      alert("Server is not responding. Please try again later.");
     } finally {
       setIsLoading(false);
     }
