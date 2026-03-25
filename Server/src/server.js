@@ -1,4 +1,6 @@
-require('dotenv').config(); // Load environment variables
+require('dotenv').config({
+  path: require('path').resolve(__dirname, '../.env')
+});
 
 const connectDB = require('./config/db'); // MongoDB connection
 const app = require('./app'); // Express app
