@@ -11,7 +11,7 @@ console.log("Trying to start server on port:", PORT);
 // Connect to MongoDB and start the server
 connectDB().then(() => {
   app.listen(PORT, () => {
-    console.log(`✅ Server running at http://localhost:${PORT}`);
+    console.log(`Server running at http://localhost:${PORT}`);
   });
 }).catch((err) => {
   console.error('Failed to start server:', err.message);
