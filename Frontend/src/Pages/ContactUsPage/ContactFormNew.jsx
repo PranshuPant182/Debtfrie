@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { getUTMParams } from '../../utils/utmUtils';
 import { createOdooLead } from '../../utils/odooApi';
+import { toast } from 'react-hot-toast';
 
 
 function ContactFormNew() {
@@ -21,10 +22,11 @@ function ContactFormNew() {
     try {
       const utmParams = getUTMParams();
       await createOdooLead(formData, utmParams);
+      toast.success("Form submitted successfully!");
       navigate('/ThankYou');
     } catch (error) {
       console.error("Submission error:", error);
-      alert("Server is not responding. Please try again later.");
+      toast.error("Server is not responding. Please try again later.");
     } finally {
       setIsLoading(false);
     }

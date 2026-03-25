@@ -20,11 +20,13 @@ import LandingPage from './Pages/LandingPage/LandingPage.jsx'
 import ContactFormNew from './Pages/ContactUsPage/ContactFormNew.jsx'
 import InquiryForm from './Pages/InquiryPage/InquiryForm.jsx'
 import NotFound from './Pages/NotFoundPage/NotFound.jsx'
+import { Toaster } from 'react-hot-toast'
 
 
 createRoot(document.getElementById('root')).render(
 
     <BrowserRouter>
+        <Toaster position="top-center" reverseOrder={false} />
         <ScrollToTop />
         <FacebookPixelTracker />
         <UTMTracker />
