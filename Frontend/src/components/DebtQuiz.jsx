@@ -298,7 +298,7 @@ const DebtQuiz = () => {
                                         
                                         <div className="flex flex-col sm:flex-row gap-2">
                                             <button
-                                                onClick={()=> navigate('/contactus')}
+                                                onClick={()=> navigate('/contact-us')}
                                                 className="bg-gradient-to-r cursor-pointer from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-4 py-2 rounded-lg font-semibold text-sm shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2"
                                             >
                                                 <Phone className="w-3 h-3" />

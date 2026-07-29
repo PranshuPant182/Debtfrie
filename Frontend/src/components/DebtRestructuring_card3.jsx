@@ -134,7 +134,7 @@ const DebtRestructuring_card3 = () => {
                         Your financial past doesn't define you—your decision to restructure and recover does. With Debtfrie, you don't just manage debt—you regain peace of mind & protect your credit score.<br/> Book consultation <span className="text-blue-600 font-bold">@Rs.49/-</span> today.
                     </p>
                     
-                    <button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-4 py-2 rounded-full font-semibold text-sm shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200" onClick={() => navigate('/contactus')}>
+                    <button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-4 py-2 rounded-full font-semibold text-sm shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200" onClick={() => navigate('/contact-us')}>
                         Book Consultation Today
                     </button>
                 </div>

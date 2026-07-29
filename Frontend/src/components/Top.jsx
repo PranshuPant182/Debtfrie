@@ -7,12 +7,11 @@ const HeaderData = [
   {
     HeadingTop: (
       <>
-        Achieve Financial Freedom With <span className="text-[#3369e3]">Debt</span>
-        <span className="text-[#fcd43a]">Frie</span>
+        Debt settlement company helping you become debt free
       </>
     ),
     HeadingBottom: (
-      <>India's trusted solution for debt relief, loan settlement and financial freedom.</>),
+      <>Struggling with credit card or loan debt? Debtfrie offers expert debt settlement, restructuring & relief solutions across India.</>),
     Image: images.HomePageBottom,
   },
   {
@@ -78,7 +77,7 @@ const HeroSection = ({ scrollToMiddle, Achievements, type, ShowImage }) => {
 
   const handleGetDebtFree = () => {
     if (type == "home") {
-      navigate("/contactus");
+      navigate("/contact-us");
     } else {
       scrollToMiddle();
     }

@@ -3,6 +3,7 @@ import Layout from '../Layout'
 import { useForm } from 'react-hook-form';
 import images from '../../utils/images'
 import { useNavigate } from 'react-router-dom';
+import { getCanonicalUrl } from '../../utils/seoUtils';
 
 function ContactUs() {
   const navigate = useNavigate();
@@ -124,7 +125,7 @@ function ContactUs() {
         stopPaymentPolling();
 
         if (result.success) {
-          navigate('/ThankYou');
+          navigate('/thank-you');
         } else {
           alert("Payment successful, but failed to submit form. Please contact support.");
         }
@@ -156,7 +157,7 @@ function ContactUs() {
       stopPaymentPolling();
 
       if (result.success) {
-        navigate('/ThankYou');
+        navigate('/thank-you');
       } else {
         alert("Payment verified, but failed to submit form. Please contact support.");
       }
@@ -317,6 +318,13 @@ function ContactUs() {
 
   return (
     <Layout>
+      <title>Contact Us | Settle Loans & Stop Harassment - Debtfrie</title>
+      <meta name="description" content="Contact Debtfrie for queries regarding loan settlements, anti-harassment protection, and credit restructuring services. Book your consultation today." />
+      <link rel="canonical" href={getCanonicalUrl('/contact-us')} />
+      <meta property="og:title" content="Contact Us | Settle Loans & Stop Harassment - Debtfrie" />
+      <meta property="og:description" content="Contact Debtfrie for queries regarding loan settlements, anti-harassment protection, and credit restructuring services. Book your consultation today." />
+      <meta property="og:url" content={getCanonicalUrl('/contact-us')} />
+      <meta property="og:type" content="website" />
       <div className="flex flex-col lg:flex-row w-full min-h-screen bg-white px-4 py-8 lg:px-20 gap-8">
         {/* Left Side - Office Info */}
         <div className="lg:w-1/2 w-full sm:mt-16">

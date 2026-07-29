@@ -4,6 +4,7 @@ import BlogSection from '../../components/BlogSection';
 import images from '../../utils/images';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { getCanonicalUrl } from '../../utils/seoUtils';
 
 function BlogDetailPage() {
     const { id } = useParams(); // blog ID from URL
@@ -57,6 +58,36 @@ function BlogDetailPage() {
 
     return(
             <Layout>
+                <title>{`${title} | Debtfrie Blog`}</title>
+                <meta name="description" content={sections?.[0]?.content?.substring(0, 155) || `Read the latest article on ${category} from Debtfrie.`} />
+                <link rel="canonical" href={getCanonicalUrl(`/blogDetail/${id}`)} />
+                <meta property="og:title" content={`${title} | Debtfrie Blog`} />
+                <meta property="og:description" content={sections?.[0]?.content?.substring(0, 155) || `Read the latest article on ${category} from Debtfrie.`} />
+                <meta property="og:image" content={image} />
+                <meta property="og:url" content={getCanonicalUrl(`/blogDetail/${id}`)} />
+                <meta property="og:type" content="article" />
+                <script type="application/ld+json">
+                    {JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "BlogPosting",
+                        "headline": title,
+                        "image": image,
+                        "datePublished": createdAt,
+                        "author": {
+                            "@type": "Person",
+                            "name": author || "Debtfrie Expert"
+                        },
+                        "publisher": {
+                            "@type": "Organization",
+                            "name": "Debtfrie",
+                            "logo": {
+                                "@type": "ImageObject",
+                                "url": getCanonicalUrl('/favicon.png')
+                            }
+                        },
+                        "description": sections?.[0]?.content?.substring(0, 155) || "Read the latest article on debt settlement from Debtfrie."
+                    })}
+                </script>
                 <div className="mx-auto">
                     <div className="max-w-3xl mx-auto px-4 py-10 text-gray-800">
 

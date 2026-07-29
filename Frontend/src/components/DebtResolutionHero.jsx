@@ -134,14 +134,14 @@ const DebtResolutionHero = ({ onGetStarted }) => {
                 >
                     <div className="mb-2">
                         <AnimatedText
-                            text="Your Path to Debt"
+                            text="Debt Resolution Services"
                             className="text-4xl sm:text-6xl block"
                             delay={0}
                         />
                     </div>
                     <div>
                         <AnimatedText
-                            text="Freedom Starts Here"
+                            text="Across India"
                             className="text-4xl sm:text-6xl text-[#3369E3] block"
                             delay={400}
                         />

@@ -192,7 +192,7 @@ const DebtCalculator = ({ type, scrollToMiddle }) => {
           onClose={() => setShowPopup(false)}
           onRedirect={() => {
             setShowPopup(false);
-            nagivate("/contactus");
+            nagivate("/contact-us");
           }}
         />
       )}

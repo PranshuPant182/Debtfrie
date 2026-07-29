@@ -206,14 +206,14 @@ throughout the process and would be glad to recommend their services to others s
 
             {/* Central content */}
             <div className="flex flex-col items-center justify-start md:justify-center h-screen text-center px-4 pt-16 md:pt-0 z-50 relative">
-                <h1 className={`text-3xl md:text-4xl lg:text-md xl:text-2xl 2xl:text-3xl text-white font-bold mb-4 z-50 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{
+                <h2 className={`text-3xl md:text-4xl lg:text-md xl:text-2xl 2xl:text-3xl text-white font-bold mb-4 z-50 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{
                     fontFamily: 'Youth',
                     lineHeight: '100%',
                     letterSpacing: '0%',
                 }}>
                     A name India trusts across <br />
                     every state and sectors
-                </h1>
+                </h2>
                 <p className={`text-lg md:text-xl text-white max-w-2xl mb-8 z-50 ${isVisible ? 'animate-fade-in-up animation-delay-200' : 'opacity-0'}`} style={{
                     fontFamily: 'gilroy',
                     fontWeight: 400,
@@ -225,7 +225,7 @@ throughout the process and would be glad to recommend their services to others s
                 </p>
                 <button className={`flex items-center bg-white text-black px-6 py-3 rounded-xl font-medium transition-all hover:bg-opacity-90 hover:transform hover:scale-105 z-50 ${isVisible ? 'animate-fade-in-up animation-delay-400' : 'opacity-0'}`}
                     onClick={() => {
-                        navigate('/testimonial')
+                        navigate('/testimonials')
                     }}>
                     Read Success Stories
                     <svg

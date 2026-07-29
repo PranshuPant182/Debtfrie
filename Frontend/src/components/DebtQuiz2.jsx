@@ -2,6 +2,69 @@ import React, { useState, useEffect } from "react";
 import { CheckCircle, AlertCircle, Phone, Mail, Shield } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
+// Confetti Component
+const Confetti = ({ showConfetti, setShowConfetti }) => {
+    const [confettiPieces, setConfettiPieces] = useState([]);
+
+    useEffect(() => {
+        if (showConfetti) {
+            const pieces = [];
+            const colors = ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6', '#EC4899'];
+
+            for (let i = 0; i < 100; i++) {
+                pieces.push({
+                    id: i,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    left: Math.random() * 100,
+                    animationDelay: Math.random() * 1,
+                    animationDuration: 2 + Math.random() * 1,
+                });
+            }
+            setConfettiPieces(pieces);
+
+            const timer = setTimeout(() => {
+                setShowConfetti(false);
+                setConfettiPieces([]);
+            }, 5000);
+
+            return () => clearTimeout(timer);
+        }
+    }, [showConfetti, setShowConfetti]);
+
+    if (!showConfetti) return null;
+
+    return (
+        <div className="fixed inset-0 pointer-events-none z-[10000] overflow-hidden">
+            {confettiPieces.map((piece) => (
+                <div
+                    key={piece.id}
+                    className="absolute w-2 h-2 opacity-80"
+                    style={{
+                        left: `${piece.left}%`,
+                        backgroundColor: piece.color,
+                        animationDelay: `${piece.animationDelay}s`,
+                        animationDuration: `${piece.animationDuration}s`,
+                        animation: `confetti-fall ${piece.animationDuration}s ${piece.animationDelay}s ease-out forwards`,
+                        borderRadius: Math.random() > 0.5 ? '50%' : '0',
+                    }}
+                />
+            ))}
+            <style jsx>{`
+                @keyframes confetti-fall {
+                    0% {
+                        transform: translateY(-100vh) rotate(0deg);
+                        opacity: 1;
+                    }
+                    100% {
+                        transform: translateY(100vh) rotate(360deg);
+                        opacity: 0;
+                    }
+                }
+            `}</style>
+        </div>
+    );
+};
+
 const DebtQuiz2 = () => {
     const questions = [
         {
@@ -43,69 +106,6 @@ const DebtQuiz2 = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [showConfetti, setShowConfetti] = useState(false);
     const navigate = useNavigate();
-
-    // Confetti Component
-    const Confetti = () => {
-        const [confettiPieces, setConfettiPieces] = useState([]);
-
-        useEffect(() => {
-            if (showConfetti) {
-                const pieces = [];
-                const colors = ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6', '#EC4899'];
-                
-                for (let i = 0; i < 100; i++) {
-                    pieces.push({
-                        id: i,
-                        color: colors[Math.floor(Math.random() * colors.length)],
-                        left: Math.random() * 100,
-                        animationDelay: Math.random() * 1,
-                        animationDuration: 2 + Math.random() * 1,
-                    });
-                }
-                setConfettiPieces(pieces);
-
-                const timer = setTimeout(() => {
-                    setShowConfetti(false);
-                    setConfettiPieces([]);
-                }, 5000);
-
-                return () => clearTimeout(timer);
-            }
-        }, [showConfetti]);
-
-        if (!showConfetti) return null;
-
-        return (
-            <div className="fixed inset-0 pointer-events-none z-[10000] overflow-hidden">
-                {confettiPieces.map((piece) => (
-                    <div
-                        key={piece.id}
-                        className="absolute w-2 h-2 opacity-80"
-                        style={{
-                            left: `${piece.left}%`,
-                            backgroundColor: piece.color,
-                            animationDelay: `${piece.animationDelay}s`,
-                            animationDuration: `${piece.animationDuration}s`,
-                            animation: `confetti-fall ${piece.animationDuration}s ${piece.animationDelay}s ease-out forwards`,
-                            borderRadius: Math.random() > 0.5 ? '50%' : '0',
-                        }}
-                    />
-                ))}
-                <style jsx>{`
-                    @keyframes confetti-fall {
-                        0% {
-                            transform: translateY(-100vh) rotate(0deg);
-                            opacity: 1;
-                        }
-                        100% {
-                            transform: translateY(100vh) rotate(360deg);
-                            opacity: 0;
-                        }
-                    }
-                `}</style>
-            </div>
-        );
-    };
 
     const handleOptionSelect = (questionIndex, optionIndex) => {
         setAnswers({ ...answers, [questionIndex]: optionIndex });
@@ -151,11 +151,6 @@ const DebtQuiz2 = () => {
         setTimeout(() => setShowPopup(true), 100);
     };
 
-    const handleContactUs = () => {
-        setShowPopup(false);
-        setShowConfetti(false);
-    };
-
     const handleClosePopup = () => {
         setShowPopup(false);
         setShowConfetti(false);
@@ -165,7 +160,7 @@ const DebtQuiz2 = () => {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8">
-            <Confetti />
+            <Confetti showConfetti={showConfetti} setShowConfetti={setShowConfetti} />
 
             {/* Compact Header Section */}
             <div className="max-w-4xl mx-auto px-4 py-4">
@@ -196,7 +191,7 @@ const DebtQuiz2 = () => {
                                 </span>
                             </div>
                             <div className="w-full bg-gray-200 rounded-full h-1.5">
-                                <div 
+                                <div
                                     className="bg-gradient-to-r from-blue-500 to-blue-600 h-1.5 rounded-full transition-all duration-300"
                                     style={{ width: `${(Object.keys(answers).length / questions.length) * 100}%` }}
                                 ></div>
@@ -212,13 +207,12 @@ const DebtQuiz2 = () => {
                                     </h3>
                                     <div className="space-y-2">
                                         {q.options.map((option, oIndex) => (
-                                            <label 
-                                                key={oIndex} 
-                                                className={`flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-all duration-150 hover:shadow-sm ${
-                                                    answers[qIndex] === oIndex 
-                                                        ? 'border-blue-500 bg-blue-50' 
+                                            <label
+                                                key={oIndex}
+                                                className={`flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-all duration-150 hover:shadow-sm ${answers[qIndex] === oIndex
+                                                        ? 'border-blue-500 bg-blue-50'
                                                         : 'border-gray-200 hover:border-gray-300'
-                                                }`}
+                                                    }`}
                                             >
                                                 <input
                                                     type="radio"
@@ -243,11 +237,10 @@ const DebtQuiz2 = () => {
                             <button
                                 onClick={handleSubmit}
                                 disabled={!isFormComplete || isSubmitting}
-                                className={`inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-200 ${
-                                    isFormComplete && !isSubmitting
+                                className={`inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-200 ${isFormComplete && !isSubmitting
                                         ? 'bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-md hover:shadow-lg transform hover:-translate-y-0.5'
                                         : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                                }`}
+                                    }`}
                             >
                                 {isSubmitting ? (
                                     <>
@@ -272,7 +265,7 @@ const DebtQuiz2 = () => {
                     <div className="bg-white p-6 rounded-xl max-w-md w-full text-center shadow-xl transform animate-bounce-in">
                         {(() => {
                             const result = calculateResults();
-                            
+
                             return (
                                 <>
                                     <div className="mb-4">
@@ -289,7 +282,7 @@ const DebtQuiz2 = () => {
                                             {result.message}
                                         </p>
                                     </div>
-                                    
+
                                     <div className="border-t border-gray-100 pt-4">
                                         <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-4 mb-4">
                                             <h4 className="text-sm font-bold text-gray-800 mb-1">
@@ -299,10 +292,10 @@ const DebtQuiz2 = () => {
                                                 Book your <strong className="text-blue-600">₹49 consultation</strong> and discover how restructuring can change your financial future.
                                             </p>
                                         </div>
-                                        
+
                                         <div className="flex flex-col sm:flex-row gap-2 justify-center items-center">
                                             <button
-                                                onClick={() => navigate('/contactus')}
+                                                onClick={() => navigate('/contact-us')}
                                                 className="bg-gradient-to-r cursor-pointer from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-4 py-2 rounded-lg font-semibold text-sm shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2"
                                             >
                                                 <Phone className="w-3 h-3" />

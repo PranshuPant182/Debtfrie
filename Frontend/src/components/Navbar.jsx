@@ -46,8 +46,8 @@ function Navbar({ showContactUsButton }) {
           textAlign: 'right'
         }}>
           <Link to="/" className="cursor-pointer hover:text-gray-600">Home</Link>
-          <Link to="/debtResolution" className="cursor-pointer hover:text-gray-600">Debt Resolution</Link>
-          <Link to="/debtRestructuring" className="cursor-pointer hover:text-gray-600">Debt Restructuring</Link>
+          <Link to="/debt-resolution" className="cursor-pointer hover:text-gray-600">Debt Resolution</Link>
+          <Link to="/debt-restructuring" className="cursor-pointer hover:text-gray-600">Debt Restructuring</Link>
           <Link to="/enquiry" className="cursor-pointer hover:text-gray-600">Enquiry</Link>
 
 
@@ -89,7 +89,7 @@ function Navbar({ showContactUsButton }) {
                   FAQs
                 </Link>
                 <Link
-                  to="/testimonial"
+                  to="/testimonials"
                   className="text-center block px-3 py-2 cursor-pointer hover:bg-gray-100 hover:text-gray-700 transition-colors duration-200"
                   onClick={() => setIsResourcesOpen(false)}
                 >
@@ -99,12 +99,12 @@ function Navbar({ showContactUsButton }) {
             )}
           </div>
 
-          <Link to="/aboutUs" className="cursor-pointer hover:text-gray-600">About Us</Link>
+          <Link to="/about-us" className="cursor-pointer hover:text-gray-600">About Us</Link>
         </div>
 
         {/* Contact Button - Hidden on mobile, visible on md and larger screens */}
         <div className="hidden md:block">
-          {showContactUsButton && (<button className="bg-blue-600 text-white text-[12px] px-3 py-2 rounded-2xl cursor-pointer" onClick={() => navigate("/contactus")}>
+          {showContactUsButton && (<button className="bg-blue-600 text-white text-[12px] px-3 py-2 rounded-2xl cursor-pointer" onClick={() => navigate("/contact-us")}>
             CONTACT US
           </button>)}
         </div>
@@ -157,14 +157,14 @@ function Navbar({ showContactUsButton }) {
               Home
             </Link>
             <Link
-              to="/debtResolution"
+              to="/debt-resolution"
               className="cursor-pointer hover:text-gray-600"
               onClick={() => setIsMenuOpen(false)}
             >
               Debt Resolution
             </Link>
             <Link
-              to="/debtRestructuring"
+              to="/debt-restructuring"
               className="cursor-pointer hover:text-gray-600"
               onClick={() => setIsMenuOpen(false)}
             >
@@ -219,7 +219,7 @@ function Navbar({ showContactUsButton }) {
                   FAQs
                 </Link>
                 <Link
-                  // to="/testimonial"
+                  to="/testimonials"
                   className="cursor-pointer hover:text-gray-500"
                   onClick={() => {
                     setIsResourcesOpen(false);
@@ -231,7 +231,7 @@ function Navbar({ showContactUsButton }) {
               </div>
             )}
             {showContactUsButton && (<Link
-              to="/contactus"
+              to="/contact-us"
               className="cursor-pointer hover:text-gray-600"
               onClick={() => setIsMenuOpen(false)}
             >

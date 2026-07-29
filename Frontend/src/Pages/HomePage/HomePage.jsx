@@ -14,6 +14,7 @@ import EnrollBanner from '../../components/EnrollBanner'
 import VideoMarqueeSection from '../../components/VideoMarqueeSection'
 import AnimatedCardsSection from '../../components/AnimatedCardsSection'
 import Banner from '../../components/Banner'
+import { getCanonicalUrl } from '../../utils/seoUtils'
 
 
 function HomePage() {
@@ -58,6 +59,44 @@ function HomePage() {
 
     return (
         <Layout showButton={true} showContactUsButton={true}>
+            <title>Debt Settlement Company in India | Debtfrie</title>
+            <meta name="description" content="Struggling with credit card or loan debt? Debtfrie offers expert debt settlement, restructuring & relief solutions across India. Free consultation." />
+            <link rel="canonical" href={getCanonicalUrl('/')} />
+            <meta property="og:title" content="Debt Settlement Company in India | Debtfrie" />
+            <meta property="og:description" content="Struggling with credit card or loan debt? Debtfrie offers expert debt settlement, restructuring & relief solutions across India. Free consultation." />
+            <meta property="og:url" content={getCanonicalUrl('/')} />
+            <meta property="og:type" content="website" />
+            <script type="application/ld+json">
+                {JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@graph": [
+                        {
+                            "@type": "Organization",
+                            "@id": `${getCanonicalUrl('/')}#organization`,
+                            "name": "Debtfrie",
+                            "url": getCanonicalUrl('/'),
+                            "logo": getCanonicalUrl('/favicon.png'),
+                            "contactPoint": {
+                                "@type": "ContactPoint",
+                                "telephone": "+91-9266990923",
+                                "contactType": "customer service",
+                                "areaServed": "IN",
+                                "availableLanguage": ["en", "hi"]
+                            },
+                            "sameAs": [
+                                "https://wa.me/919266990923"
+                            ]
+                        },
+                        {
+                            "@type": "WebSite",
+                            "@id": `${getCanonicalUrl('/')}#website`,
+                            "url": getCanonicalUrl('/'),
+                            "name": "Debtfrie",
+                            "description": "India's first legal-based fintech, empowering individuals to settle loans, get protection from creditor harassment, and gain financial freedom."
+                        }
+                    ]
+                })}
+            </script>
             <div className=''>
                 {/* Add CSS for animations */}
                 <style jsx>{`
@@ -166,7 +205,7 @@ function HomePage() {
                             {/* Phone Image */}
                             <img
                                 src={images.phone}
-                                alt="Header"
+                                alt="Debtfrie mobile application dashboard interface"
                                 className="h-auto max-w-xs object-contain rounded-lg"
                             />
 
@@ -192,7 +231,7 @@ function HomePage() {
 
                                 <div className="w-full flex flex-col gap-3 absolute bottom-8">
                                     <button className="bg-white text-[#3369e3] py-2 rounded-full text-sm font-semibold w-full cursor-pointer"
-                                        onClick={() => navigate('/contactus')}>
+                                        onClick={() => navigate('/contact-us')}>
                                         Enroll Now
                                     </button>
                                 </div>
@@ -243,7 +282,7 @@ function HomePage() {
                         <div className="bg-[#3369e3] py-4 flex justify-center">
                             <img
                                 src={images.phone}
-                                alt="Header"
+                                alt="Debtfrie mobile application dashboard interface"
                                 className="h-auto max-w-44 object-contain rounded-lg relative bottom-36"
                             />
                         </div>
@@ -267,7 +306,7 @@ function HomePage() {
 
                             <div className="w-full flex justify-center items-center gap-2 absolute bottom-30">
                                 <button className="bg-white w-1/2 text-[#3369e3] py-1 rounded-full text-sm font-semibold cursor-pointer"
-                                    onClick={() => navigate('/contactus')}>
+                                    onClick={() => navigate('/contact-us')}>
                                     Enroll Now
                                 </button>
                             </div>
@@ -348,7 +387,7 @@ function HomePage() {
                 <BlogSection title={true} />
 
                 {/* FAQ */}
-                <FAQAccordion limit={3} showButton={true} />
+                <FAQAccordion page="home" limit={3} showButton={true} />
                 {showPopup && (
                     <div className="fixed inset-0 bg-transparent backdrop-blur-md backdrop-saturate-150 flex justify-center items-center z-[9999] animate-fade-in">
                         <div className="bg-white p-8 rounded-2xl max-w-md w-[90%] text-center shadow-2xl relative">
@@ -363,7 +402,7 @@ function HomePage() {
                             </p>
                             <div className="flex justify-center gap-4">
                                 <button
-                                    onClick={() => navigate('/contactus')}
+                                    onClick={() => navigate('/contact-us')}
                                     className="bg-blue-600 hover:bg-blue-700 transition text-white px-5 py-2 rounded-full font-semibold shadow"
                                 >
                                     Yes, I need help

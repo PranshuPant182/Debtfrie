@@ -19,7 +19,7 @@ function Footer({ showButton }) {
                             Transform Your Debt Struggles Into Financial <br className="hidden sm:inline" /> Freedom And Lasting Peace Of Mind
                         </h2>
                         {showButton &&
-                            (<button onClick={() => navigate('/contactus')} className="bg-[#3369e3] hover:bg-blue-600 text-white px-6 py-3 rounded-xl font-medium flex items-center shadow-lg transform transition hover:scale-105" style={{ fontFamily: 'gilroy' }}>
+                            (<button onClick={() => navigate('/contact-us')} className="bg-[#3369e3] hover:bg-blue-600 text-white px-6 py-3 rounded-xl font-medium flex items-center shadow-lg transform transition hover:scale-105" style={{ fontFamily: 'gilroy' }}>
                                 GET STARTED
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
                                     <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -79,11 +79,11 @@ function Footer({ showButton }) {
                         <h3 className="text-lg font-medium mb-4">Quick Links</h3>
                         <ul className="space-y-3 text-gray-400 text-sm" style={{ fontFamily: 'gilroy' }}>
                             <li onClick={() => navigate('/')} className="hover:text-white cursor-pointer">Home</li>
-                            <li onClick={() => navigate('/aboutUs')} className="hover:text-white cursor-pointer">About Us</li>
-                            <li onClick={() => navigate('/debtResolution')} className="hover:text-white cursor-pointer">Debt Resolution</li>
-                            <li onClick={() => navigate('/debtRestructuring')} className="hover:text-white cursor-pointer">Debt Restructuring</li>
+                            <li onClick={() => navigate('/about-us')} className="hover:text-white cursor-pointer">About Us</li>
+                            <li onClick={() => navigate('/debt-resolution')} className="hover:text-white cursor-pointer">Debt Resolution</li>
+                            <li onClick={() => navigate('/debt-restructuring')} className="hover:text-white cursor-pointer">Debt Restructuring</li>
                             <li onClick={() => navigate('/blog')} className="hover:text-white cursor-pointer">Reading Room</li>
-                            <li onClick={() => navigate('/contactus')} className="hover:text-white cursor-pointer">Contact Us</li>
+                            <li onClick={() => navigate('/contact-us')} className="hover:text-white cursor-pointer">Contact Us</li>
                             {/* <li className="hover:text-white cursor-pointer">Client Testimonials</li> */}
                         </ul>
                     </div>
@@ -92,8 +92,8 @@ function Footer({ showButton }) {
                     <div>
                         <h3 className="text-lg font-medium mb-4">Our Services</h3>
                         <ul className="space-y-3 text-gray-400 text-sm" style={{ fontFamily: 'gilroy' }}>
-                            <li onClick={() => navigate('/debtResolution')}>Debt Resolution</li>
-                            <li onClick={() => navigate('/debtRestructuring')}>Debt Restructuring</li>
+                            <li onClick={() => navigate('/debt-resolution')}>Debt Resolution</li>
+                            <li onClick={() => navigate('/debt-restructuring')}>Debt Restructuring</li>
                             <li>Debt Settlements</li>
                             <li>Legal Support</li>
                             <li>Anti-Harassment</li>

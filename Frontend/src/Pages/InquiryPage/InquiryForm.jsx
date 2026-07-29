@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import Layout from '../Layout'
+import FAQAccordion from '../../components/Faq'
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { getUTMParams } from '../../utils/utmUtils';
 import { createOdooLead } from '../../utils/odooApi';
 import { toast } from 'react-hot-toast';
+import { getCanonicalUrl } from '../../utils/seoUtils';
 
 
 function InquiryForm() {
@@ -22,7 +24,7 @@ function InquiryForm() {
     try {
       const utmParams = getUTMParams();
       await createOdooLead(formData, utmParams);
-      navigate('/ThankYou');
+      navigate('/thank-you');
     } catch (error) {
       console.error("Submission error:", error);
       toast.error("Server is not responding. Please try again later.");
@@ -33,14 +35,21 @@ function InquiryForm() {
 
   return (
     <>
+      <title>Book a Free Debt Consultation | Debtfrie</title>
+      <meta name="description" content="Get a free, confidential debt consultation from Debtfrie's experts. Share your details and we'll help you find the right settlement plan." />
+      <link rel="canonical" href={getCanonicalUrl('/enquiry')} />
+      <meta property="og:title" content="Book a Free Debt Consultation | Debtfrie" />
+      <meta property="og:description" content="Get a free, confidential debt consultation from Debtfrie's experts. Share your details and we'll help you find the right settlement plan." />
+      <meta property="og:url" content={getCanonicalUrl('/enquiry')} />
+      <meta property="og:type" content="website" />
       <div className="w-full min-h-screen bg-white px-4 py-8 lg:px-20 flex justify-center items-start">
         <div className="w-full max-w-4xl">
-          <h2 className="text-3xl font-semibold text-gray-900 mb-6 text-center" style={{
+          <h1 className="text-3xl font-semibold text-gray-900 mb-6 text-center" style={{
             fontFamily: 'Youth',
             fontWeight: 900,
             lineHeight: '100%',
             letterSpacing: '0%',
-          }}>Enquiry Form</h2>
+          }}>Get a free, confidential debt consultation</h1>
 
           <p className="text-lg text-black mb-6 text-center" style={{
             fontFamily: 'gilroy',
@@ -216,6 +225,9 @@ function InquiryForm() {
               <p className="text-gray-600 text-sm mt-1">We provide legal advice related to debts.</p>
             </div>
           </form>
+          <div className="mt-12 border-t border-gray-200 pt-8">
+            <FAQAccordion page="enquiry" showButton={false} />
+          </div>
         </div>
       </div>
     </>

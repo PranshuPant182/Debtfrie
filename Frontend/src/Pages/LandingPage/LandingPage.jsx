@@ -76,7 +76,7 @@ function LandingPage() {
                         {/* Phone Image */}
                         <img
                             src={images.phone}
-                            alt="Header"
+                            alt="Debtfrie mobile application dashboard interface"
                             className="h-auto max-w-xs object-contain rounded-lg"
                         />
 
@@ -153,7 +153,7 @@ function LandingPage() {
                     <div className="bg-[#3369e3] py-4 flex justify-center">
                         <img
                             src={images.phone}
-                            alt="Header"
+                            alt="Debtfrie mobile application dashboard interface"
                             className="h-auto max-w-44 object-contain rounded-lg relative bottom-36"
                         />
                     </div>
@@ -177,7 +177,7 @@ function LandingPage() {
 
                         <div className="w-full flex justify-center items-center gap-2 absolute bottom-30">
                             <button className="bg-white w-1/2 text-[#3369e3] py-1 rounded-full text-sm font-semibold cursor-pointer"
-                                onClick={() => navigate('/contactus')}>
+                                onClick={() => navigate('/contact-us')}>
                                 Enroll Now
                             </button>
                         </div>

@@ -22,7 +22,7 @@ function EnquiryForm1() {
     try {
       const utmParams = getUTMParams();
       await createOdooLead(formData, utmParams);
-      navigate('/ThankYou');
+      navigate('/thank-you');
     } catch (error) {
       console.error("Submission error:", error);
       toast.error("Server is not responding. Please try again later.");

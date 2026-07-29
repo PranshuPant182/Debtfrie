@@ -202,7 +202,7 @@ const DebtCalculator_Restructuring = () => {
                     onClose={() => setShowPopup(false)}
                     onRedirect={() => {
                         setShowPopup(false);
-                        nagivate("/contactus");
+                        nagivate("/contact-us");
                     }}
                 />
             )}

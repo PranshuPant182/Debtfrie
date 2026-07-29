@@ -184,7 +184,7 @@ const Calculator_Resolution = () => {
           onClose={() => setShowPopup(false)}
           onRedirect={() => {
             setShowPopup(false);
-            nagivate("/contactus");
+            nagivate("/contact-us");
           }}
         />
       )}

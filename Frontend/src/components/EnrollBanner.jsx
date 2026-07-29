@@ -94,7 +94,7 @@ function EnrollBanner() {
         className="w-full flex justify-center items-center py-6 bg-gradient-to-r from-white to-blue-50"
       >
         <div
-          onClick={() => navigate('/contactus')}
+          onClick={() => navigate('/contact-us')}
           className={`
             cursor-pointer text-white text-center px-8 py-4 rounded-xl shadow-lg 
             hover:scale-105 transition-all duration-300 

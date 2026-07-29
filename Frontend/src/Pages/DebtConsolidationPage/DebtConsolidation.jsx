@@ -37,7 +37,7 @@ function DebtConsolidation() {
             fontFamily: 'gilroy'
           }}
             onClick={() => {
-              navigate('/contactus')
+              navigate('/contact-us')
             }}
           >
             GET STARTED

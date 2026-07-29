@@ -2,148 +2,212 @@ import React, { useState } from 'react';
 import { CirclePlus, CircleMinus } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
-const FAQAccordion = ({ limit = null, showButton = true }) => {
+const pageFaqs = {
+    home: [
+        {
+            question: "What is debt settlement and how does it work?",
+            answer: "Debt settlement is a process where we negotiate with your creditors to allow you to pay a lump sum that is less than the total amount you owe. This legally resolves the account as 'settled' and gets you out of the debt trap."
+        },
+        {
+            question: "Is Debtfrie a legitimate debt relief company in India?",
+            answer: "Yes, Debtfrie is a legitimate debt relief platform registered under the Ministry of Corporate Affairs, ISO-certified, and backed by a network of Bar Council-registered advocates who guide you legally."
+        },
+        {
+            question: "How long does the debt settlement process take?",
+            answer: "The process typically takes 3 to 12 months, depending on the number of accounts you have, your total debt volume, and your monthly savings capacity."
+        },
+        {
+            question: "Will debt settlement affect my CIBIL score?",
+            answer: "Yes, settling a debt temporarily lowers your CIBIL score. However, once you are debt-free, our credit rebuilding program guides you on restoring your creditworthiness in a short period."
+        },
+        {
+            question: "What debt solutions does Debtfrie offer besides settlement?",
+            answer: "Apart from debt settlement, we offer debt restructuring, EMI reduction programs, creditor harassment protection, and expert financial counseling."
+        }
+    ],
+    'debt-resolution': [
+        {
+            question: "How is debt resolution different from bankruptcy?",
+            answer: "Bankruptcy is a court-ordered legal declaration that severely damages your credit for years. Debt resolution is a negotiated settlement with lenders to resolve your dues without going through bankruptcy courts."
+        },
+        {
+            question: "What makes Debtfrie one of the best debt settlement companies in India?",
+            answer: "We are India’s first legal-based fintech, employing experienced advocates who handle creditor harassment and legal notices, providing you with a safe, compliant route to financial freedom."
+        },
+        {
+            question: "What documents do I need to start debt resolution?",
+            answer: "You need basic KYC documents (PAN, Aadhaar), your recent bank statements, loan agreement letters, and a record of creditor harassment or legal notices if any."
+        },
+        {
+            question: "Can debt resolution help with multiple loans at once?",
+            answer: "Yes, we can enroll multiple unsecured debts, including personal loans, credit card balances, and payday loans, consolidating them into one structured resolution plan."
+        },
+        {
+            question: "How much can my outstanding debt be reduced by?",
+            answer: "On average, negotiators at Debtfrie help settle outstanding unsecured balances for 50% or less of the total outstanding dues, depending on the creditor and your financial situation."
+        }
+    ],
+    'debt-restructuring': [
+        {
+            question: "What is debt restructuring and how is it different from settlement?",
+            answer: "Restructuring renegotiates your loan terms (lower interest rates, longer tenure, lower EMIs) without reducing the principal. Settlement resolves the debt completely for a lesser amount."
+        },
+        {
+            question: "Will restructuring my loan affect my credit score?",
+            answer: "Restructuring has a much lower negative impact on your credit score compared to settlement or default, as it represents an active agreement to continue paying on revised terms."
+        },
+        {
+            question: "Who qualifies for debt restructuring?",
+            answer: "Individuals with a steady income who are struggling to pay high-interest EMIs but want to pay their principal over an extended period qualify for restructuring."
+        },
+        {
+            question: "Can I restructure multiple loans together?",
+            answer: "Yes, we can work with multiple creditors to restructure your overall repayment load, aligning your monthly EMIs with your current disposable income."
+        },
+        {
+            question: "How long does the debt management and restructuring process take?",
+            answer: "Restructuring agreements can usually be negotiated within 30 to 90 days, depending on the response times of the participating financial institutions."
+        }
+    ],
+    enquiry: [
+        {
+            question: "Is the consultation really free?",
+            answer: "Yes, your initial consultation with Debtfrie’s debt experts is 100% free and confidential. We evaluate your debts and lay out your settlement options without any obligation."
+        },
+        {
+            question: "What information do I need to provide?",
+            answer: "You only need to share basic details: your total outstanding debt amount, type of loans (credit cards, personal loans, etc.), and monthly income so we can assess your eligibility."
+        },
+        {
+            question: "Will my employer or family be contacted during this process?",
+            answer: "Absolutely not. Debtfrie respects your privacy. All consultations are highly confidential, and we never contact your employer, family, or references."
+        },
+        {
+            question: "How soon will I hear back after submitting the form?",
+            answer: "Once you submit your enquiry, one of our financial consultants or legal experts will call you back within 24 hours to guide you."
+        },
+        {
+            question: "Am I obligated to proceed with debt settlement after the consultation?",
+            answer: "No, the consultation is completely free of obligation. You are free to decide whether our resolution program is the right fit for your situation."
+        }
+    ],
+    blog: [
+        {
+            question: "How often is the blog updated with new debt relief guides?",
+            answer: "Our blog is updated weekly with new articles covering credit scores, debt settlement legalities, borrower rights, and financial advice."
+        },
+        {
+            question: "Can I request a topic on loan settlement or debt consolidation?",
+            answer: "Yes! If you want us to cover a specific topic, you can write to us via our contact form and our editorial team will address it."
+        },
+        {
+            question: "Are these articles reviewed by legal or financial experts?",
+            answer: "Yes, all articles on the Debtfrie blog are written and reviewed by our legal team of advocates and senior financial advisors."
+        },
+        {
+            question: "Do you cover Debt Recovery Tribunal (DRT) cases and bank harassment topics?",
+            answer: "Yes, we frequently publish guides on dealing with DRT notices, SARFAESI acts, recovery agent regulations, and legal steps to stop bank harassment."
+        },
+        {
+            question: "Where can I read real client debt-free success stories?",
+            answer: "You can find client case studies and success stories in our dedicated testimonials section and featured blog posts."
+        }
+    ],
+    faqs: [
+        {
+            question: "What is debt settlement and how does it work?",
+            answer: "Debt settlement is a negotiated agreement where a lender accepts a reduced lump sum payment to close your unsecured loan or credit card debt permanently."
+        },
+        {
+            question: "How does a one-time settlement (OTS) affect my CIBIL score?",
+            answer: "An OTS is marked as 'Settled' on your credit report, which temporarily lowers your CIBIL score. However, once you are debt-free, you can start rebuild programs to raise your score."
+        },
+        {
+            question: "What's the difference between debt settlement and debt consolidation?",
+            answer: "Consolidation combines multiple loans into a single new loan with one EMI. Settlement negotiates to reduce the total amount you owe to close the accounts."
+        },
+        {
+            question: "Can Debtfrie help if I'm facing a Debt Recovery Tribunal (DRT) case?",
+            answer: "Yes, our network of Bar Council-registered advocates can draft legal replies, guide you through DRT hearings, and negotiate a settlement out of court."
+        },
+        {
+            question: "Is debt settlement legal in India, and is Debtfrie a registered debt settlement agency?",
+            answer: "Yes, settling debt through mutual out-of-court agreements is fully legal. Debtfrie is registered under the Ministry of Corporate Affairs and operates legally."
+        }
+    ],
+    testimonials: [
+        {
+            question: "Are these client testimonials verified?",
+            answer: "Yes, all testimonials on our website are verified success stories from real clients who completed our debt settlement or restructuring programs."
+        },
+        {
+            question: "Can I speak with a past client before signing up for debt settlement?",
+            answer: "To protect the privacy and confidentiality of our clients, we do not share their contact details. However, you can read their detailed case studies and video reviews."
+        },
+        {
+            question: "How long did it take these clients to become debt free?",
+            answer: "Most clients featured in our testimonials achieved complete debt freedom within 6 to 18 months, depending on their total outstanding amount."
+        },
+        {
+            question: "What types of debt did these clients settle, credit cards, personal loans, or business loans?",
+            answer: "Our clients have successfully settled credit card dues, personal loans, business loans, and instant loan app debts."
+        },
+        {
+            question: "How can I share my own experience with Debtfrie after settlement?",
+            answer: "Once your program is complete and you receive your NOCs, you can submit your review via our feedback form or video testimonial request."
+        }
+    ],
+    'about-us': [
+        {
+            question: "Who founded Debtfrie, and what are their legal credentials?",
+            answer: "Debtfrie was founded by financial and legal industry veterans with over 15 years of experience in debt resolution, banking litigation, and consumer rights."
+        },
+        {
+            question: "Is Debtfrie a registered debt settlement agency in India?",
+            answer: "Yes, Debtfrie is incorporated under the Ministry of Corporate Affairs, ISO certified, and backed by legal advocates specialized in debt resolution."
+        },
+        {
+            question: "Which cities does Debtfrie operate in?",
+            answer: "We offer PAN-India services. While our corporate office is in Noida, we serve clients from all major cities, including Delhi, Mumbai, Bengaluru, and Chennai."
+        },
+        {
+            question: "How is Debtfrie different from other debt settlement companies?",
+            answer: "Unlike generic agencies, we have an internal legal team of advocates to protect you from harassment, legal notices, and court summons."
+        },
+        {
+            question: "Does Debtfrie charge any upfront fees before settlement is finalized?",
+            answer: "We charge nominal subscription and service fees that are fully disclosed upfront, with no hidden costs or surprise settlement charges."
+        }
+    ]
+};
+
+const FAQAccordion = ({ page = 'faqs', limit = null, showButton = true }) => {
     const [openIndex, setOpenIndex] = useState(0);
     const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState("");
 
-    const faqItems = [
-        {
-            question: "What is Debtfrie, and what does the company aim to achieve?",
-            answer: "Debtfrie is a debt resolution platform that helps individuals manage, settle, or restructure their debts. Its goal is to help clients achieve a debt-free future through legal, ethical, and structured financial solutions."
-        },
-        {
-            question: "How does the Debtfrie debt resolution process function?",
-            answer: "Debtfrie negotiates with creditors on behalf of clients to reduce outstanding amounts, reschedule payments, or restructure debt, aiming for a mutually agreeable solution."
-        },
-        {
-            question: "Who can avail Debtfrie services?",
-            answer: "Any individual facing financial hardship, struggling with unsecured and secured debt, application loans, credit card loans, personal loans, payday loans or unable to manage EMIs can avail of Debtfrie’s services."
-        },
-        {
-            question: "What are the Debt Management Programs of Debtfrie?",
-            answer: "These include debt settlement, debt restructuring, EMI reduction programs, credit score rebuilding, and financial counseling."
-        },
-        {
-            question: "Is the practice of debt settlement legally recognized in India?",
-            answer: "Yes, debt settlement is legally permitted when done through mutual agreement between borrower and creditor, though it may affect credit scores which is rebuildable."
-        },
-        {
-            question: "Does participating in a debt settlement program affect my credit score?",
-            answer: "Your credit score will get affected temporarily, however it will be rebuildable with the expert financial advisory at Debtfrie."
-        },
-        {
-            question: "Is it necessary to stop paying my EMIs while enrolled with Debtfrie?",
-            answer: "Not necessarily. However, in some cases, clients may be advised to pause payments during negotiations, which should be done cautiously."
-        },
-        {
-            question: "What are the charges or fees associated with Debtfrie’s services?",
-            answer: "Fees are typically discussed upfront and vary from case to case."
-        },
-        {
-            question: "What is the typical duration of the debt settlement process with Debtfrie?",
-            answer: "The process usually takes minimum 2-3 months depending on debt size, number of creditors, and negotiation outcomes. However the duration may vary case to case."
-        },
-        {
-            question: "How does Debtfrie assist in managing creditor harassment?",
-            answer: "Our strong team of Advocates directly deal with lenders and harassment practices associated with them."
-        },
-        {
-            question: "Can Debtfrie provide assistance with secured loans such as home or auto loans?",
-            answer: "Yes Debtfrie deals with both secured and unsecured loans."
-        },
-        {
-            question: "Are there any fees involved in the loan settlement process?",
-            answer: "Yes, clients may be charged a processing fee or success-based fee, which should be transparently disclosed. However the same will vary from case to case."
-        },
-        {
-            question: "What happens if a lender initiates legal proceedings during the settlement process?",
-            answer: "Debtfrie offers legal support through its experienced team of advocates or mediation services and negotiates a settlement to potentially avoid prolonged legal issues."
-        },
-        {
-            question: "Can I continue using my credit cards while enrolled in the Debtfrie program?",
-            answer: "Typically, clients are advised to avoid using credit cards during the program to prevent additional debt."
-        },
-        {
-            question: "Will I receive NOC once my debt has been successfully settled?",
-            answer: "Yes, a No Objection Certificate (NOC) from the lender is issued upon successful settlement."
-        },
-        {
-            question: "Can Debtfrie help me achieve complete debt freedom?",
-            answer: "Yes, by settling or restructuring debts and offering financial as well as legal guidance from our expert team of Advocates and Financial Advisors, Debtfrie helps clients work toward financial stability."
-        },
-        {
-            question: "Will I be eligible to take loan again?",
-            answer: "Yes. With the help of Debtfrie’s Credit Score Rebuilding program one can be eligible for taking loans again within a short period of time."
-        },
-        {
-            question: "Are Debtfrie’s services available PAN India?",
-            answer: "Yes, the services are available across India via online and offline channels as well as internationally. Our head office is situated in Noida, Uttar Pradesh and we have clients from different cities."
-        },
-        {
-            question: "Is there a minimum or maximum debt amount required to enrol with Debtfrie?",
-            answer: "There is a minimum threshold of ₹2,00,000/-. There’s typically no strict upper limit."
-        },
-        {
-            question: "Does enrollment with Debtfrie guarantee settlement of all my unsecured debts?",
-            answer: "Debtfrie aims to settle all debts through negotiation, conciliation and arbitration."
-        },
-        {
-            question: "Are there any hidden costs or upfront charges involved, or is the pricing completely transparent?",
-            answer: "Debtfrie has a transparent fee structure according to the pay capacity of the client and there are no hidden charges."
-        },
-        {
-            question: "What is debt restructuring options in addition to debt settlement?",
-            answer: "Debt restructuring involves altering loan terms (e.g., reduced EMIs, extended tenure) without necessarily reducing the principal amount."
-        },
-        {
-            question: "Can Loan Settlement process affect my CIBIL or Credit Score?",
-            answer: "Yes, it usually lowers your credit score/CIBIL temporarily but can be improved over time with disciplined financial behaviour."
-        },
-        {
-            question: "Can Debtfrie help reduce my EMI burden and secure lower interest rates?",
-            answer: "Yes, through our debt restructuring programme that guarantees reduction of EMI and interest rates. This programme functions under the guidance of our experienced team of Advocates and Financial experts."
-        },
-        {
-            question: "How does Debtfrie work on my CIBIL?",
-            answer: "Debtfrie guarantees financial freedom by breaking the debt trap and subsequently guides in rebuilding the CIBIL score."
-        },
-        {
-            question: "Is my CIBIL rebuildable?",
-            answer: "Yes, with responsible credit use, timely payments, and financial discipline, your CIBIL score can improve."
-        },
-        {
-            question: "Is a person eligible to take loan again post settlement process?",
-            answer: "Yes, but it may take time to rebuild creditworthiness. Eligibility improves as your credit profile stabilizes."
-        },
-        {
-            question: "Is Debtfrie registered?",
-            answer: "Yes, Debtfrie is incorporated under Ministry of Corporate Affairs, ISO certified and operates under appropriate regulatory and business frameworks in India. Debtfrie is approved by Government of India."
-        }
-    ];
-
+    const faqItems = pageFaqs[page] || pageFaqs['faqs'];
 
     const toggleAccordion = (index) => {
         setOpenIndex(openIndex === index ? null : index);
     };
 
-    // If limit is passed (like 3), slice the list
     const filteredPosts = faqItems.filter(post =>
         post.question.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
     const displayedItems = limit ? filteredPosts.slice(0, limit) : filteredPosts;
 
+    const HeadingTag = limit ? 'h2' : 'h1';
 
     return (
         <div className="w-full max-w-7xl mx-auto px-4 py-8">
             <div className="text-center mb-8">
-                <h1 className="text-4xl sm:text-6xl font-bold text-navy-900 mb-2" style={{ fontFamily: 'Youth', fontWeight: 900 }}>Frequently Asked Questions</h1>
+                <HeadingTag className="text-4xl sm:text-6xl font-bold text-navy-900 mb-2" style={{ fontFamily: 'Youth', fontWeight: 900 }}>Frequently Asked Questions</HeadingTag>
                 <p className="text-base sm:text-lg text-gray-700">
                     <span className='text-[#4575FE]'>Got Questions?</span> We've Got Answers!
                 </p>
             </div>
-
 
             <div className="mb-8 max-w-xl mx-auto">
                 <div className="relative">
@@ -192,7 +256,6 @@ const FAQAccordion = ({ limit = null, showButton = true }) => {
                     </p>
                 )}
             </div>
-
 
             {showButton && (
                 <div className="flex justify-center mt-8">

@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    { "source": "/contactus", "destination": "/contact-us", "permanent": true },
+    { "source": "/debtResolution", "destination": "/debt-resolution", "permanent": true },
+    { "source": "/aboutUs", "destination": "/about-us", "permanent": true },
+    { "source": "/debtRestructuring", "destination": "/debt-restructuring", "permanent": true },
+    { "source": "/testimonial", "destination": "/testimonials", "permanent": true },
+    { "source": "/Test", "destination": "/test", "permanent": true },
+    { "source": "/Admin", "destination": "/admin", "permanent": true },
+    { "source": "/ThankYou", "destination": "/thank-you", "permanent": true }
+  ],
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

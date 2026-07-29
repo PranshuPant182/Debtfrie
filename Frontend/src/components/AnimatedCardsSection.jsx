@@ -215,9 +215,8 @@ const AnimatedCardsSection = () => {
                     xGap={12}
                     yGap={36}
                 /> */}
-        {/* Header section */}
         <div className="flex justify-center text-center py-10 md:py-16 px-4 z-10 sm:mb-16">
-          <h1
+          <h2
             className={`text-3xl sm:text-4xl md:text-5xl text-white font-medium leading-tight ${isVisible ? 'animate-fade-up' : 'opacity-0'
               }`}
             style={{
@@ -228,7 +227,7 @@ const AnimatedCardsSection = () => {
             }}
           >
             Your Path To <span className="text-yellow-400">Financial Freedom</span> With <br className="hidden sm:block" />Tailored Solutions
-          </h1>
+          </h2>
         </div>
 
         {/* Cards section */}

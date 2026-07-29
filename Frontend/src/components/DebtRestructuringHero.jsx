@@ -132,14 +132,14 @@ const DebtRestructuringHero = ({ onGetStarted }) => {
                 >
                     <div className="mb-2">
                         <AnimatedText
-                            text="DEBT RESTRUCTURING"
+                            text="Debt Restructuring Solutions"
                             className="text-4xl sm:text-5xl block"
                             delay={0}
                         />
                     </div>
                     <div>
                         <AnimatedText
-                            text="Break Free from Debt with Debtfrie"
+                            text="Regain Financial Control"
                             className="text-4xl sm:text-4xl text-[#3369E3] block"
                             delay={400}
                         />

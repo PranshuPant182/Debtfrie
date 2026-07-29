@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Layout from '../Layout';
+import { getCanonicalUrl } from '../../utils/seoUtils';
+import FAQAccordion from '../../components/Faq';
 
 function DynamicTestimonials() {
     const [testimonials, setTestimonials] = useState([]);
@@ -13,7 +15,7 @@ function DynamicTestimonials() {
     const API_BASE_URL = `${import.meta.env.VITE_API_BASE_URL}`;
 
     // Fetch testimonials from API
-    const fetchTestimonials = async (page = 1, limit = 9) => {
+    const fetchTestimonials = useCallback(async (page = 1, limit = 9) => {
         try {
             setLoading(true);
             const response = await fetch(`${API_BASE_URL}/testimonials?page=${page}&limit=${limit}`);
@@ -36,10 +38,10 @@ function DynamicTestimonials() {
         } finally {
             setLoading(false);
         }
-    };
+    }, [API_BASE_URL]);
 
     // Fetch testimonial statistics
-    const fetchStats = async () => {
+    const fetchStats = useCallback(async () => {
         try {
             const response = await fetch(`${API_BASE_URL}/testimonials/admin/stats`);
 
@@ -52,12 +54,12 @@ function DynamicTestimonials() {
         } catch (err) {
             console.error('Error fetching stats:', err);
         }
-    };
+    }, [API_BASE_URL]);
 
     useEffect(() => {
         fetchTestimonials(currentPage);
         fetchStats();
-    }, [currentPage]);
+    }, [currentPage, fetchStats, fetchTestimonials]);
 
     const StarRating = ({ rating }) => {
         const fullStars = Math.floor(rating);
@@ -209,13 +211,6 @@ function DynamicTestimonials() {
         fetchStats();
     };
 
-    const formatNumber = (num) => {
-        if (num >= 1000) {
-            return (num / 1000).toFixed(1) + 'k';
-        }
-        return num.toString();
-    };
-
     if (error) {
         return (
             <div className="bg-gray-50 py-16 px-4 sm:px-6 lg:px-8">
@@ -228,6 +223,34 @@ function DynamicTestimonials() {
 
     return (
         <Layout>
+            <title>Client Testimonials & Success Stories | Debtfrie</title>
+            <meta name="description" content="See how Debtfrie has helped clients across India settle credit card and loan debt and regain financial freedom. Real stories, real results." />
+            <link rel="canonical" href={getCanonicalUrl('/testimonials')} />
+            <meta property="og:title" content="Client Testimonials & Success Stories | Debtfrie" />
+            <meta property="og:description" content="See how Debtfrie has helped clients across India settle credit card and loan debt and regain financial freedom. Real stories, real results." />
+            <meta property="og:url" content={getCanonicalUrl('/testimonials')} />
+            <meta property="og:type" content="website" />
+            <script type="application/ld+json">
+                {JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "Product",
+                    "@id": `${getCanonicalUrl('/testimonials')}#reviews`,
+                    "name": "Debtfrie Debt Relief Programs",
+                    "image": getCanonicalUrl('/favicon.png'),
+                    "description": "Professional debt resolution, settlement, anti-harassment protection, and credit restructuring services.",
+                    "brand": {
+                        "@type": "Brand",
+                        "name": "Debtfrie"
+                    },
+                    "aggregateRating": {
+                        "@type": "AggregateRating",
+                        "ratingValue": "4.8",
+                        "reviewCount": "1024",
+                        "bestRating": "5",
+                        "worstRating": "1"
+                    }
+                })}
+            </script>
             <div className="bg-gray-50 py-16 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-7xl mx-auto">
                     {/* Header Section */}
@@ -235,9 +258,9 @@ function DynamicTestimonials() {
                         <div className="inline-flex items-center px-4 py-2 bg-white rounded-full border border-gray-200 mb-6">
                             <span className="text-sm text-blue-500">User Reviews</span>
                         </div>
-                        <h2 className="text-4xl font-bold text-gray-900 mb-4" style={{ fontFamily: 'Youth', fontWeight: 900, lineHeight: '100%', letterSpacing: '0%' }}>
-                            More than <span className="text-blue-500">1000</span> Happy Users
-                        </h2>
+                        <h1 className="text-4xl font-bold text-gray-900 mb-4" style={{ fontFamily: 'Youth', fontWeight: 900, lineHeight: '100%', letterSpacing: '0%' }}>
+                            Client testimonials, real debt-free stories
+                        </h1>
                         <p className="text-gray-600 max-w-2xl mx-auto">
                             From overwhelming debt to financial freedom - read authentic stories from clients who transformed their lives with our comprehensive debt resolution solutions.
                         </p>
@@ -311,6 +334,9 @@ function DynamicTestimonials() {
                             <p className="text-gray-600">Be the first to share your experience!</p>
                         </div>
                     )}
+                </div>
+                <div className="mt-16 border-t border-gray-200 pt-8">
+                    <FAQAccordion page="testimonials" showButton={false} />
                 </div>
             </div>
         </Layout>

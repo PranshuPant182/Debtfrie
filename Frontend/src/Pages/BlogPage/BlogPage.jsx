@@ -3,6 +3,8 @@ import Layout from "../Layout";
 import images from "../../utils/images";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { getCanonicalUrl } from "../../utils/seoUtils";
+import FAQAccordion from "../../components/Faq";
 
 const BlogCard = ({ post }) => {
     const navigate = useNavigate();
@@ -67,10 +69,17 @@ const BlogHomePage = () => {
 
     return (
         <Layout>
+             <title>Debt Relief Blog | Tips & Guides – Debtfrie</title>
+            <meta name="description" content="Expert articles on debt settlement, CIBIL score impact, loan restructuring & DRT cases. Practical guidance to become debt free in India." />
+            <link rel="canonical" href={getCanonicalUrl('/blog')} />
+            <meta property="og:title" content="Debt Relief Blog | Tips & Guides – Debtfrie" />
+            <meta property="og:description" content="Expert articles on debt settlement, CIBIL score impact, loan restructuring & DRT cases. Practical guidance to become debt free in India." />
+            <meta property="og:url" content={getCanonicalUrl('/blog')} />
+            <meta property="og:type" content="website" />
             <div className="p-4 md:p-10 max-w-screen-xl mx-auto">
                 <div className="text-center mb-10">
                     <h1 className="text-3xl md:text-5xl font-bold" style={{ fontFamily: 'Youth', fontWeight: 900, lineHeight: '100%', letterSpacing: '0%' }}>
-                        Welcome To The <span className="text-blue-600">Debtfrie</span> Blog
+                        Debt relief blog, tips and guides
                     </h1>
                     <p className="text-gray-600 mt-3 max-w-xl mx-auto" style={{ fontFamily: 'gilroy', fontWeight: 400, lineHeight: '100%', letterSpacing: '0%' }}>
                         Your Trusted Guide To Financial Freedom—Practical Tips, Expert Insights,
@@ -146,6 +155,9 @@ const BlogHomePage = () => {
                         </button>
                     </div>
                 )}
+                <div className="mt-16 border-t border-gray-200 pt-8">
+                    <FAQAccordion page="blog" showButton={false} />
+                </div>
             </div>
         </Layout>
     );

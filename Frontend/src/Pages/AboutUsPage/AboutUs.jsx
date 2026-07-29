@@ -1,7 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import Layout from '../Layout'
 import { BookOpen, ShieldCheck, Target } from 'lucide-react'
 import images from '../../utils/images'
+import { getCanonicalUrl } from '../../utils/seoUtils'
+import { Link } from 'react-router-dom'
+import FAQAccordion from '../../components/Faq'
+
+const finalValues = {
+    clients: 2000,
+    success: 98,
+    experts: 50,
+    years: 5
+};
 
 function AboutUs() {
     const [isStatsVisible, setIsStatsVisible] = useState(false);
@@ -13,14 +23,7 @@ function AboutUs() {
     });
     const statsRef = useRef(null);
 
-    const finalValues = {
-        clients: 2000,
-        success: 98,
-        experts: 50,
-        years: 5
-    };
-
-    const animateCounters = () => {
+    const animateCounters = useCallback(() => {
         const duration = 2000; // 2 seconds
         const steps = 60; // 60 steps for smooth animation
         const stepDuration = duration / steps;
@@ -37,19 +40,19 @@ function AboutUs() {
         const interval = setInterval(() => {
             currentStep++;
             
-            setCounters(prev => ({
+            setCounters({
                 clients: Math.min(Math.floor(increments.clients * currentStep), finalValues.clients),
                 success: Math.min(Math.floor(increments.success * currentStep), finalValues.success),
                 experts: Math.min(Math.floor(increments.experts * currentStep), finalValues.experts),
                 years: Math.min(Math.floor(increments.years * currentStep), finalValues.years)
-            }));
+            });
 
             if (currentStep >= steps) {
                 setCounters(finalValues);
                 clearInterval(interval);
             }
         }, stepDuration);
-    };
+    }, []);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -67,7 +70,7 @@ function AboutUs() {
         }
 
         return () => observer.disconnect();
-    }, [isStatsVisible]);
+    }, [isStatsVisible, animateCounters]);
 
     return (
         <>
@@ -183,20 +186,27 @@ function AboutUs() {
             `}</style>
 
             <Layout>
+                <title>About Debtfrie | Debt Relief Experts India</title>
+                <meta name="description" content="Debtfrie is a Noida-based fintech led by Bar Council-registered advocates, helping Indians settle debt and rebuild their finances." />
+                <link rel="canonical" href={getCanonicalUrl('/about-us')} />
+                <meta property="og:title" content="About Debtfrie | Debt Relief Experts India" />
+                <meta property="og:description" content="Debtfrie is a Noida-based fintech led by Bar Council-registered advocates, helping Indians settle debt and rebuild their finances." />
+                <meta property="og:url" content={getCanonicalUrl('/about-us')} />
+                <meta property="og:type" content="website" />
                 <div>
                     <section className="w-full px-6 md:px-12 py-12 bg-white">
                         {/* Header Section */}
                         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
                             <div className="md:w-1/2">
-                                <h2 className="text-[26px] sm:text-3xl sm:text-5xl font-bold leading-snug animate-slide-left" style={{
+                                <h1 className="text-[26px] sm:text-3xl sm:text-5xl font-bold leading-snug animate-slide-left" style={{
                                     fontFamily: 'Youth',
                                     fontWeight: 900,
                                     lineHeight: '100%',
                                     letterSpacing: '0%',
                                 }}>
-                                    Your Trusted Partner for <br />
-                                    a <span className="text-blue-600">Debt-Free</span> Future
-                                </h2>
+                                    About Debtfrie, <br />
+                                    debt relief experts <span className="text-blue-600">you can trust</span>
+                                </h1>
                             </div>
                             <div className="md:w-1/3 text-gray-600 text-base" style={{
                                 fontFamily: 'gilroy',
@@ -207,8 +217,9 @@ function AboutUs() {
                             >
                                 <p>
                                     At DebtFrie, we believe financial stress shouldn't define your future. If you're struggling with overdue loans or mounting debt, our expert team of advocates and financial professionals is here to guide you with dignity and clarity.
-
-                                    We specialize in loan settlement, debt restructuring, and advisory services—offering ethical, compliant, and empathetic solutions that ease legal and emotional strain. DebtFrie bridges the gap between borrowers and lenders, helping you restore financial stability and confidence.
+                                </p>
+                                <p className="mt-4">
+                                    We specialize in <Link to="/debt-resolution" className="text-blue-600 hover:underline">loan settlement</Link>, <Link to="/debt-restructuring" className="text-blue-600 hover:underline">debt restructuring</Link>, and advisory services—offering ethical, compliant, and empathetic solutions that ease legal and emotional strain. DebtFrie bridges the gap between borrowers and lenders, helping you restore financial stability and confidence.
                                 </p>
                             </div>
                         </div>
@@ -233,7 +244,7 @@ function AboutUs() {
                                     letterSpacing: '0%',
                                 }}>
                                     Founded in 2021 by Arushi Khanna and Vanshit Kaushik during the financial turmoil of COVID-19, Debtfrie was created to help individuals overwhelmed by unsecured debt.
-                                    We specialize in Loan Settlement, Debt Restructuring, and Credit Score Rebuilding, offering compassionate, personalized support tailored to each client's needs.
+                                    We specialize in <Link to="/debt-resolution" className="text-blue-600 hover:underline">Loan Settlement</Link>, <Link to="/debt-restructuring" className="text-blue-600 hover:underline">Debt Restructuring</Link>, and Credit Score Rebuilding, offering compassionate, personalized support tailored to each client's needs.
                                     More than a debt resolution company, Debtfrie is a financial lifeline — empowering people to overcome debt and rebuild their financial future with dignity and confidence.
                                 </p>
                             </div>
@@ -374,6 +385,9 @@ function AboutUs() {
                             </div>
                         </div>
                     </section>
+                    <div className="w-full max-w-7xl mx-auto px-6 md:px-12 py-12 bg-white border-t border-gray-100">
+                        <FAQAccordion page="about-us" showButton={false} />
+                    </div>
                 </div>
             </Layout>
         </>
