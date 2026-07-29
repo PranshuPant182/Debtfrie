@@ -35,13 +35,17 @@ const getContentType = (filePath) => {
 };
 
 const startServer = (port) => {
+  const cleanIndexHtml = fs.readFileSync(path.join(DIST_DIR, 'index.html'));
+
   return new Promise((resolve) => {
     const server = http.createServer((req, res) => {
       let safePath = req.url.split('?')[0].split('#')[0];
       let filePath = path.join(DIST_DIR, safePath);
       
       if (!fs.existsSync(filePath) || fs.statSync(filePath).isDirectory()) {
-        filePath = path.join(DIST_DIR, 'index.html');
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.end(cleanIndexHtml, 'utf-8');
+        return;
       }
 
       fs.readFile(filePath, (err, content) => {
