@@ -1,0 +1,1419 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <style type="text/css">:root, :host {
+  --fa-font-solid: normal 900 1em/1 "Font Awesome 6 Free";
+  --fa-font-regular: normal 400 1em/1 "Font Awesome 6 Free";
+  --fa-font-light: normal 300 1em/1 "Font Awesome 6 Pro";
+  --fa-font-thin: normal 100 1em/1 "Font Awesome 6 Pro";
+  --fa-font-duotone: normal 900 1em/1 "Font Awesome 6 Duotone";
+  --fa-font-duotone-regular: normal 400 1em/1 "Font Awesome 6 Duotone";
+  --fa-font-duotone-light: normal 300 1em/1 "Font Awesome 6 Duotone";
+  --fa-font-duotone-thin: normal 100 1em/1 "Font Awesome 6 Duotone";
+  --fa-font-brands: normal 400 1em/1 "Font Awesome 6 Brands";
+  --fa-font-sharp-solid: normal 900 1em/1 "Font Awesome 6 Sharp";
+  --fa-font-sharp-regular: normal 400 1em/1 "Font Awesome 6 Sharp";
+  --fa-font-sharp-light: normal 300 1em/1 "Font Awesome 6 Sharp";
+  --fa-font-sharp-thin: normal 100 1em/1 "Font Awesome 6 Sharp";
+  --fa-font-sharp-duotone-solid: normal 900 1em/1 "Font Awesome 6 Sharp Duotone";
+  --fa-font-sharp-duotone-regular: normal 400 1em/1 "Font Awesome 6 Sharp Duotone";
+  --fa-font-sharp-duotone-light: normal 300 1em/1 "Font Awesome 6 Sharp Duotone";
+  --fa-font-sharp-duotone-thin: normal 100 1em/1 "Font Awesome 6 Sharp Duotone";
+}
+
+svg:not(:root).svg-inline--fa, svg:not(:host).svg-inline--fa {
+  overflow: visible;
+  box-sizing: content-box;
+}
+
+.svg-inline--fa {
+  display: var(--fa-display, inline-block);
+  height: 1em;
+  overflow: visible;
+  vertical-align: -0.125em;
+}
+.svg-inline--fa.fa-2xs {
+  vertical-align: 0.1em;
+}
+.svg-inline--fa.fa-xs {
+  vertical-align: 0em;
+}
+.svg-inline--fa.fa-sm {
+  vertical-align: -0.0714285705em;
+}
+.svg-inline--fa.fa-lg {
+  vertical-align: -0.2em;
+}
+.svg-inline--fa.fa-xl {
+  vertical-align: -0.25em;
+}
+.svg-inline--fa.fa-2xl {
+  vertical-align: -0.3125em;
+}
+.svg-inline--fa.fa-pull-left {
+  margin-right: var(--fa-pull-margin, 0.3em);
+  width: auto;
+}
+.svg-inline--fa.fa-pull-right {
+  margin-left: var(--fa-pull-margin, 0.3em);
+  width: auto;
+}
+.svg-inline--fa.fa-li {
+  width: var(--fa-li-width, 2em);
+  top: 0.25em;
+}
+.svg-inline--fa.fa-fw {
+  width: var(--fa-fw-width, 1.25em);
+}
+
+.fa-layers svg.svg-inline--fa {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.fa-layers-counter, .fa-layers-text {
+  display: inline-block;
+  position: absolute;
+  text-align: center;
+}
+
+.fa-layers {
+  display: inline-block;
+  height: 1em;
+  position: relative;
+  text-align: center;
+  vertical-align: -0.125em;
+  width: 1em;
+}
+.fa-layers svg.svg-inline--fa {
+  transform-origin: center center;
+}
+
+.fa-layers-text {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transform-origin: center center;
+}
+
+.fa-layers-counter {
+  background-color: var(--fa-counter-background-color, #ff253a);
+  border-radius: var(--fa-counter-border-radius, 1em);
+  box-sizing: border-box;
+  color: var(--fa-inverse, #fff);
+  line-height: var(--fa-counter-line-height, 1);
+  max-width: var(--fa-counter-max-width, 5em);
+  min-width: var(--fa-counter-min-width, 1.5em);
+  overflow: hidden;
+  padding: var(--fa-counter-padding, 0.25em 0.5em);
+  right: var(--fa-right, 0);
+  text-overflow: ellipsis;
+  top: var(--fa-top, 0);
+  transform: scale(var(--fa-counter-scale, 0.25));
+  transform-origin: top right;
+}
+
+.fa-layers-bottom-right {
+  bottom: var(--fa-bottom, 0);
+  right: var(--fa-right, 0);
+  top: auto;
+  transform: scale(var(--fa-layers-scale, 0.25));
+  transform-origin: bottom right;
+}
+
+.fa-layers-bottom-left {
+  bottom: var(--fa-bottom, 0);
+  left: var(--fa-left, 0);
+  right: auto;
+  top: auto;
+  transform: scale(var(--fa-layers-scale, 0.25));
+  transform-origin: bottom left;
+}
+
+.fa-layers-top-right {
+  top: var(--fa-top, 0);
+  right: var(--fa-right, 0);
+  transform: scale(var(--fa-layers-scale, 0.25));
+  transform-origin: top right;
+}
+
+.fa-layers-top-left {
+  left: var(--fa-left, 0);
+  right: auto;
+  top: var(--fa-top, 0);
+  transform: scale(var(--fa-layers-scale, 0.25));
+  transform-origin: top left;
+}
+
+.fa-1x {
+  font-size: 1em;
+}
+
+.fa-2x {
+  font-size: 2em;
+}
+
+.fa-3x {
+  font-size: 3em;
+}
+
+.fa-4x {
+  font-size: 4em;
+}
+
+.fa-5x {
+  font-size: 5em;
+}
+
+.fa-6x {
+  font-size: 6em;
+}
+
+.fa-7x {
+  font-size: 7em;
+}
+
+.fa-8x {
+  font-size: 8em;
+}
+
+.fa-9x {
+  font-size: 9em;
+}
+
+.fa-10x {
+  font-size: 10em;
+}
+
+.fa-2xs {
+  font-size: 0.625em;
+  line-height: 0.1em;
+  vertical-align: 0.225em;
+}
+
+.fa-xs {
+  font-size: 0.75em;
+  line-height: 0.0833333337em;
+  vertical-align: 0.125em;
+}
+
+.fa-sm {
+  font-size: 0.875em;
+  line-height: 0.0714285718em;
+  vertical-align: 0.0535714295em;
+}
+
+.fa-lg {
+  font-size: 1.25em;
+  line-height: 0.05em;
+  vertical-align: -0.075em;
+}
+
+.fa-xl {
+  font-size: 1.5em;
+  line-height: 0.0416666682em;
+  vertical-align: -0.125em;
+}
+
+.fa-2xl {
+  font-size: 2em;
+  line-height: 0.03125em;
+  vertical-align: -0.1875em;
+}
+
+.fa-fw {
+  text-align: center;
+  width: 1.25em;
+}
+
+.fa-ul {
+  list-style-type: none;
+  margin-left: var(--fa-li-margin, 2.5em);
+  padding-left: 0;
+}
+.fa-ul > li {
+  position: relative;
+}
+
+.fa-li {
+  left: calc(-1 * var(--fa-li-width, 2em));
+  position: absolute;
+  text-align: center;
+  width: var(--fa-li-width, 2em);
+  line-height: inherit;
+}
+
+.fa-border {
+  border-color: var(--fa-border-color, #eee);
+  border-radius: var(--fa-border-radius, 0.1em);
+  border-style: var(--fa-border-style, solid);
+  border-width: var(--fa-border-width, 0.08em);
+  padding: var(--fa-border-padding, 0.2em 0.25em 0.15em);
+}
+
+.fa-pull-left {
+  float: left;
+  margin-right: var(--fa-pull-margin, 0.3em);
+}
+
+.fa-pull-right {
+  float: right;
+  margin-left: var(--fa-pull-margin, 0.3em);
+}
+
+.fa-beat {
+  animation-name: fa-beat;
+  animation-delay: var(--fa-animation-delay, 0s);
+  animation-direction: var(--fa-animation-direction, normal);
+  animation-duration: var(--fa-animation-duration, 1s);
+  animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+  animation-timing-function: var(--fa-animation-timing, ease-in-out);
+}
+
+.fa-bounce {
+  animation-name: fa-bounce;
+  animation-delay: var(--fa-animation-delay, 0s);
+  animation-direction: var(--fa-animation-direction, normal);
+  animation-duration: var(--fa-animation-duration, 1s);
+  animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+  animation-timing-function: var(--fa-animation-timing, cubic-bezier(0.28, 0.84, 0.42, 1));
+}
+
+.fa-fade {
+  animation-name: fa-fade;
+  animation-delay: var(--fa-animation-delay, 0s);
+  animation-direction: var(--fa-animation-direction, normal);
+  animation-duration: var(--fa-animation-duration, 1s);
+  animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+  animation-timing-function: var(--fa-animation-timing, cubic-bezier(0.4, 0, 0.6, 1));
+}
+
+.fa-beat-fade {
+  animation-name: fa-beat-fade;
+  animation-delay: var(--fa-animation-delay, 0s);
+  animation-direction: var(--fa-animation-direction, normal);
+  animation-duration: var(--fa-animation-duration, 1s);
+  animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+  animation-timing-function: var(--fa-animation-timing, cubic-bezier(0.4, 0, 0.6, 1));
+}
+
+.fa-flip {
+  animation-name: fa-flip;
+  animation-delay: var(--fa-animation-delay, 0s);
+  animation-direction: var(--fa-animation-direction, normal);
+  animation-duration: var(--fa-animation-duration, 1s);
+  animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+  animation-timing-function: var(--fa-animation-timing, ease-in-out);
+}
+
+.fa-shake {
+  animation-name: fa-shake;
+  animation-delay: var(--fa-animation-delay, 0s);
+  animation-direction: var(--fa-animation-direction, normal);
+  animation-duration: var(--fa-animation-duration, 1s);
+  animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+  animation-timing-function: var(--fa-animation-timing, linear);
+}
+
+.fa-spin {
+  animation-name: fa-spin;
+  animation-delay: var(--fa-animation-delay, 0s);
+  animation-direction: var(--fa-animation-direction, normal);
+  animation-duration: var(--fa-animation-duration, 2s);
+  animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+  animation-timing-function: var(--fa-animation-timing, linear);
+}
+
+.fa-spin-reverse {
+  --fa-animation-direction: reverse;
+}
+
+.fa-pulse,
+.fa-spin-pulse {
+  animation-name: fa-spin;
+  animation-direction: var(--fa-animation-direction, normal);
+  animation-duration: var(--fa-animation-duration, 1s);
+  animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+  animation-timing-function: var(--fa-animation-timing, steps(8));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fa-beat,
+.fa-bounce,
+.fa-fade,
+.fa-beat-fade,
+.fa-flip,
+.fa-pulse,
+.fa-shake,
+.fa-spin,
+.fa-spin-pulse {
+    animation-delay: -1ms;
+    animation-duration: 1ms;
+    animation-iteration-count: 1;
+    transition-delay: 0s;
+    transition-duration: 0s;
+  }
+}
+@keyframes fa-beat {
+  0%, 90% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(var(--fa-beat-scale, 1.25));
+  }
+}
+@keyframes fa-bounce {
+  0% {
+    transform: scale(1, 1) translateY(0);
+  }
+  10% {
+    transform: scale(var(--fa-bounce-start-scale-x, 1.1), var(--fa-bounce-start-scale-y, 0.9)) translateY(0);
+  }
+  30% {
+    transform: scale(var(--fa-bounce-jump-scale-x, 0.9), var(--fa-bounce-jump-scale-y, 1.1)) translateY(var(--fa-bounce-height, -0.5em));
+  }
+  50% {
+    transform: scale(var(--fa-bounce-land-scale-x, 1.05), var(--fa-bounce-land-scale-y, 0.95)) translateY(0);
+  }
+  57% {
+    transform: scale(1, 1) translateY(var(--fa-bounce-rebound, -0.125em));
+  }
+  64% {
+    transform: scale(1, 1) translateY(0);
+  }
+  100% {
+    transform: scale(1, 1) translateY(0);
+  }
+}
+@keyframes fa-fade {
+  50% {
+    opacity: var(--fa-fade-opacity, 0.4);
+  }
+}
+@keyframes fa-beat-fade {
+  0%, 100% {
+    opacity: var(--fa-beat-fade-opacity, 0.4);
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(var(--fa-beat-fade-scale, 1.125));
+  }
+}
+@keyframes fa-flip {
+  50% {
+    transform: rotate3d(var(--fa-flip-x, 0), var(--fa-flip-y, 1), var(--fa-flip-z, 0), var(--fa-flip-angle, -180deg));
+  }
+}
+@keyframes fa-shake {
+  0% {
+    transform: rotate(-15deg);
+  }
+  4% {
+    transform: rotate(15deg);
+  }
+  8%, 24% {
+    transform: rotate(-18deg);
+  }
+  12%, 28% {
+    transform: rotate(18deg);
+  }
+  16% {
+    transform: rotate(-22deg);
+  }
+  20% {
+    transform: rotate(22deg);
+  }
+  32% {
+    transform: rotate(-12deg);
+  }
+  36% {
+    transform: rotate(12deg);
+  }
+  40%, 100% {
+    transform: rotate(0deg);
+  }
+}
+@keyframes fa-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.fa-rotate-90 {
+  transform: rotate(90deg);
+}
+
+.fa-rotate-180 {
+  transform: rotate(180deg);
+}
+
+.fa-rotate-270 {
+  transform: rotate(270deg);
+}
+
+.fa-flip-horizontal {
+  transform: scale(-1, 1);
+}
+
+.fa-flip-vertical {
+  transform: scale(1, -1);
+}
+
+.fa-flip-both,
+.fa-flip-horizontal.fa-flip-vertical {
+  transform: scale(-1, -1);
+}
+
+.fa-rotate-by {
+  transform: rotate(var(--fa-rotate-angle, 0));
+}
+
+.fa-stack {
+  display: inline-block;
+  vertical-align: middle;
+  height: 2em;
+  position: relative;
+  width: 2.5em;
+}
+
+.fa-stack-1x,
+.fa-stack-2x {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: var(--fa-stack-z-index, auto);
+}
+
+.svg-inline--fa.fa-stack-1x {
+  height: 1em;
+  width: 1.25em;
+}
+.svg-inline--fa.fa-stack-2x {
+  height: 2em;
+  width: 2.5em;
+}
+
+.fa-inverse {
+  color: var(--fa-inverse, #fff);
+}
+
+.sr-only,
+.fa-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.sr-only-focusable:not(:focus),
+.fa-sr-only-focusable:not(:focus) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.svg-inline--fa .fa-primary {
+  fill: var(--fa-primary-color, currentColor);
+  opacity: var(--fa-primary-opacity, 1);
+}
+
+.svg-inline--fa .fa-secondary {
+  fill: var(--fa-secondary-color, currentColor);
+  opacity: var(--fa-secondary-opacity, 0.4);
+}
+
+.svg-inline--fa.fa-swap-opacity .fa-primary {
+  opacity: var(--fa-secondary-opacity, 0.4);
+}
+
+.svg-inline--fa.fa-swap-opacity .fa-secondary {
+  opacity: var(--fa-primary-opacity, 1);
+}
+
+.svg-inline--fa mask .fa-primary,
+.svg-inline--fa mask .fa-secondary {
+  fill: black;
+}</style><link rel="icon" type="image/png" href="/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google tag (gtag.js) -->
+  <script src="https://connect.facebook.net/signals/config/1088760975743829?v=2.9.363&amp;r=stable&amp;domain=localhost&amp;hme=de91ab0f62915af60750e9ff269a9938d70054f827732c0fc5f10a02500a436d&amp;ex_m=108%2C210%2C160%2C22%2C73%2C74%2C151%2C69%2C68%2C11%2C169%2C93%2C16%2C143%2C131%2C39%2C76%2C81%2C139%2C165%2C171%2C26%2C27%2C28%2C30%2C48%2C152%2C78%2C116%2C18%2C20%2C44%2C40%2C42%2C41%2C86%2C95%2C99%2C114%2C150%2C153%2C46%2C115%2C24%2C21%2C123%2C70%2C36%2C155%2C154%2C156%2C147%2C145%2C25%2C35%2C59%2C113%2C167%2C71%2C17%2C158%2C118%2C84%2C67%2C19%2C88%2C89%2C120%2C87%2C141%2C140%2C144%2C100%2C166%2C34%2C49%2C117%2C47%2C8%2C4%2C5%2C7%2C6%2C3%2C94%2C105%2C172%2C177%2C224%2C75%2C237%2C236%2C235%2C23%2C33%2C55%2C107%2C61%2C10%2C64%2C101%2C102%2C103%2C109%2C134%2C31%2C29%2C136%2C137%2C138%2C133%2C132%2C161%2C77%2C164%2C162%2C163%2C50%2C60%2C127%2C15%2C168%2C45%2C282%2C283%2C281%2C296%2C312%2C217%2C206%2C62%2C207%2C205%2C315%2C306%2C52%2C218%2C111%2C135%2C83%2C125%2C54%2C124%2C130%2C129%2C58%2C65%2C63%2C157%2C79%2C80%2C119%2C37%2C32%2C53%2C56%2C104%2C170%2C1%2C128%2C14%2C126%2C12%2C2%2C57%2C96%2C66%2C122%2C92%2C91%2C173%2C174%2C97%2C98%2C9%2C106%2C51%2C148%2C90%2C82%2C72%2C121%2C110%2C43%2C149%2C0%2C85%2C142%2C146%2C159%2C38%2C112%2C13%2C175" async=""></script><script async="" src="https://connect.facebook.net/en_US/fbevents.js"></script><script async="" src="https://www.googletagmanager.com/gtag/js?id=AW-17414673421"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-17414673421');
+  </script>
+  
+  <!-- Meta Pixel Code -->
+  <script>
+    !function (f, b, e, v, n, t, s) {
+      if (f.fbq) return; n = f.fbq = function () {
+        n.callMethod ?
+        n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+      };
+      if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+      n.queue = []; t = b.createElement(e); t.async = !0;
+      t.src = v; s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s)
+    }(window, document, 'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1088760975743829');
+    fbq('track', 'PageView');
+  </script>
+  <!-- End Meta Pixel Code -->
+  <title>Debt Settlement Company in India | Debtfrie</title><title>Debt Frie</title>
+  <script type="module" crossorigin="" src="/assets/index-CyGyjiIH.js"></script>
+  <link rel="stylesheet" crossorigin="" href="/assets/index-DX4xqS2f.css">
+<style id="_goober"> @keyframes go2264125279{from{transform:scale(0) rotate(45deg);opacity:0;}to{transform:scale(1) rotate(45deg);opacity:1;}}@keyframes go3020080000{from{transform:scale(0);opacity:0;}to{transform:scale(1);opacity:1;}}@keyframes go463499852{from{transform:scale(0) rotate(90deg);opacity:0;}to{transform:scale(1) rotate(90deg);opacity:1;}}@keyframes go1268368563{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}@keyframes go1310225428{from{transform:scale(0) rotate(45deg);opacity:0;}to{transform:scale(1) rotate(45deg);opacity:1;}}@keyframes go651618207{0%{height:0;width:0;opacity:0;}40%{height:0;width:6px;opacity:1;}100%{opacity:1;height:10px;}}@keyframes go901347462{from{transform:scale(0.6);opacity:0.4;}to{transform:scale(1);opacity:1;}}.go4109123758{z-index:9999;}.go4109123758 > *{pointer-events:auto;}</style><meta name="description" content="Struggling with credit card or loan debt? Debtfrie offers expert debt settlement, restructuring &amp; relief solutions across India. Free consultation."><link rel="canonical" href="https://debtfrie.in"><meta property="og:title" content="Debt Settlement Company in India | Debtfrie"><meta property="og:description" content="Struggling with credit card or loan debt? Debtfrie offers expert debt settlement, restructuring &amp; relief solutions across India. Free consultation."><meta property="og:url" content="https://debtfrie.in"><meta property="og:type" content="website"><script type="text/javascript" async="" src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/17414673421/?random=1785335185974&amp;cv=11&amp;fst=1785335185974&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;en=gtag.config&amp;gtm=45be67r2za200xec&amp;gcd=13l3l3l3l1l1&amp;dma=0&amp;tag_exp=115938466~115938468~118897920~118897930~119724321~119896802&amp;u_w=800&amp;u_h=600&amp;url=http%3A%2F%2Flocalhost%3A45883%2F&amp;rcb=8&amp;frm=0&amp;tiba=Debt%20Settlement%20Company%20in%20India%20%7C%20Debtfrie&amp;hn=www.googleadservices.com&amp;npa=0&amp;pscdl=noapi&amp;auid=1407492644.1785335186&amp;uaa=&amp;uab=&amp;uafvl=&amp;uamb=0&amp;uam=&amp;uap=&amp;uapv=&amp;uaw=0&amp;data=event%3Dgtag.config&amp;ept=9&amp;rfmt=3&amp;fmt=4"></script></head>
+
+<body>
+  <!-- Meta Pixel noscript tag moved here -->
+  <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=1088760975743829&ev=PageView&noscript=1" /></noscript>
+  
+  <div id="root"><div data-rht-toaster="" style="position: fixed; z-index: 9999; inset: 16px; pointer-events: none;"></div><div class="min-h-screen w-full relative main-dots overflow-x-hidden"><main class="relative z-40"><div class="min-h-22 w-full flex items-center px-4 md:px-12 relative" style="font-family: gilroy; font-weight: 400; font-size: 18px; line-height: 100%; letter-spacing: 0%;"><div class="flex flex-row items-center justify-between w-full"><div class="flex items-center cursor-pointer"><img class="h-9 w-10 mr-2" alt="Logo" src="/assets/favicon-Bvy9wFD_.png"><span class="text-xl font-bold" style="font-family: Youth; font-weight: 900; line-height: 100%; letter-spacing: 0%;"><span class="text-[#3369e3]">Debt</span><span class="text-[#fcd43a]">Frie</span></span></div><div class="hidden md:flex flex-row items-center space-x-4 lg:space-x-15" style="font-family: gilroy; font-weight: 400; font-size: 18px; line-height: 100%; letter-spacing: 0%; text-align: right;"><a class="cursor-pointer hover:text-gray-600" href="/" data-discover="true">Home</a><a class="cursor-pointer hover:text-gray-600" href="/debt-resolution" data-discover="true">Debt Resolution</a><a class="cursor-pointer hover:text-gray-600" href="/debt-restructuring" data-discover="true">Debt Restructuring</a><a class="cursor-pointer hover:text-gray-600" href="/enquiry" data-discover="true">Enquiry</a><div class="relative"><div class="cursor-pointer hover:text-gray-600 flex items-center">Reading Room<svg class="w-4 h-4 ml-1 transition-transform duration-200 " fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></div></div><a class="cursor-pointer hover:text-gray-600" href="/about-us" data-discover="true">About Us</a></div><div class="hidden md:block"><button class="bg-blue-600 text-white text-[12px] px-3 py-2 rounded-2xl cursor-pointer">CONTACT US</button></div><button class="md:hidden flex flex-col space-y-1 p-2" aria-label="Toggle menu"><span class="block w-6 h-0.5 bg-black"></span><span class="block w-6 h-0.5 bg-black"></span><span class="block w-6 h-0.5 bg-black"></span></button></div><div class="md:hidden fixed top-0 right-0 h-full bg-white w-64 shadow-lg z-50 transform transition-transform duration-300 ease-in-out translate-x-full"><div class="p-6 flex flex-col h-full"><div class="flex items-center mb-6"><img class="h-9 w-10 mr-2" alt="Logo" src="/assets/favicon-Bvy9wFD_.png"><span class="text-xl font-bold" style="font-family: Youth; font-weight: 900; line-height: 100%; letter-spacing: 0%;"><span class="text-[#3369e3]">Debt</span><span class="text-[#fcd43a]">Frie</span></span></div><div class="border-t border-gray-200 mb-6"></div><div class="flex flex-col space-y-12 text-[16px] text-black" style="font-family: MyCustomFont; font-weight: 400;"><a class="cursor-pointer hover:text-gray-600" href="/" data-discover="true">Home</a><a class="cursor-pointer hover:text-gray-600" href="/debt-resolution" data-discover="true">Debt Resolution</a><a class="cursor-pointer hover:text-gray-600" href="/debt-restructuring" data-discover="true">Debt Restructuring</a><a class="cursor-pointer hover:text-gray-600" href="/enquiry" data-discover="true">Enquiry</a><div class="cursor-pointer flex justify-between items-center px-2 py-1 rounded-md transition-colors duration-200 hover:text-gray-600"><span>Reading Room</span><svg class="w-4 h-4 ml-2 transform transition-transform " fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></div><a class="cursor-pointer hover:text-gray-600" href="/contact-us" data-discover="true">Contact Us</a></div><button class="absolute top-4 right-4" aria-label="Close menu"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button></div></div></div><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://debtfrie.in#organization","name":"Debtfrie","url":"https://debtfrie.in","logo":"https://debtfrie.in/favicon.png","contactPoint":{"@type":"ContactPoint","telephone":"+91-9266990923","contactType":"customer service","areaServed":"IN","availableLanguage":["en","hi"]},"sameAs":["https://wa.me/919266990923"]},{"@type":"WebSite","@id":"https://debtfrie.in#website","url":"https://debtfrie.in","name":"Debtfrie","description":"India's first legal-based fintech, empowering individuals to settle loans, get protection from creditor harassment, and gain financial freedom."}]}</script><div class=""><style>
+                    @keyframes slideInFromRight {
+                        0% {
+                            transform: translateX(100%);
+                            opacity: 0;
+                        }
+                        100% {
+                            transform: translateX(0);
+                            opacity: 1;
+                        }
+                    }
+
+                    @keyframes slideInFromLeft {
+                        0% {
+                            transform: translateX(-100%);
+                            opacity: 0;
+                        }
+                        100% {
+                            transform: translateX(0);
+                            opacity: 1;
+                        }
+                    }
+
+                    @keyframes slideInFromTop {
+                        0% {
+                            transform: translateY(-100%);
+                            opacity: 0;
+                        }
+                        100% {
+                            transform: translateY(0);
+                            opacity: 1;
+                        }
+                    }
+                    @keyframes slideInFromBottom {
+                            100% {
+                            transform: translateY(0);
+                            opacity: 1;
+                        }
+                        0% {
+                            transform: translateY(-100%);
+                            opacity: 0;
+                        }
+                    }
+                        
+
+                    .animate-slide-right {
+                        animation: slideInFromRight 0.8s ease-out forwards;
+                    }
+
+                    .animate-slide-left {
+                        animation: slideInFromLeft 0.8s ease-out forwards;
+                    }
+                    .animate-slide-top {
+                        animation: slideInFromTop 0.8s ease-out forwards;
+                    }
+
+                    .animate-slide-bottom {
+                        animation: slideInFromBottom 0.8s ease-out forwards;
+                    }
+
+                    
+
+                    .animate-delay-1 {
+                        animation-delay: 0.2s;
+                    }
+
+                    .animate-delay-2 {
+                        animation-delay: 0.4s;
+                    }
+
+                    .animate-delay-3 {
+                        animation-delay: 0.6s;
+                    }
+
+                    .opacity-0 {
+                        opacity: 0;
+                    }
+                </style><style>
+        @keyframes slideInFromTop {
+          0% {
+            transform: translateY(-50px);
+            opacity: 0;
+          }
+          100% {
+            transform: translateY(0);
+            opacity: 1;
+          }
+        }
+
+        @keyframes slideInFromBottom {
+          0% {
+            transform: translateY(30px);
+            opacity: 0;
+          }
+          100% {
+            transform: translateY(0);
+            opacity: 1;
+          }
+        }
+
+        @keyframes slideInFromLeft {
+          0% {
+            transform: translateX(-50px);
+            opacity: 0;
+          }
+          100% {
+            transform: translateX(0);
+            opacity: 1;
+          }
+        }
+
+        @keyframes slideInFromRight {
+          0% {
+            transform: translateX(50px);
+            opacity: 0;
+          }
+          100% {
+            transform: translateX(0);
+            opacity: 1;
+          }
+        }
+
+        @keyframes fadeInScale {
+          0% {
+            transform: scale(0.9);
+            opacity: 0;
+          }
+          100% {
+            transform: scale(1);
+            opacity: 1;
+          }
+        }
+
+        @keyframes buttonGradient {
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
+        }
+
+        @keyframes buttonShimmer {
+          0% {
+            background-position: -200% center;
+          }
+          100% {
+            background-position: 200% center;
+          }
+        }
+
+        .animate-slide-top {
+          animation: slideInFromTop 0.8s ease-out forwards;
+        }
+
+        .animate-slide-bottom {
+          animation: slideInFromBottom 0.6s ease-out forwards;
+        }
+
+        .animate-slide-left {
+          animation: slideInFromLeft 0.7s ease-out forwards;
+        }
+
+        .animate-slide-right {
+          animation: slideInFromRight 0.7s ease-out forwards;
+        }
+
+        .animate-fade-scale {
+          animation: fadeInScale 0.8s ease-out forwards;
+        }
+
+        .animate-button-gradient {
+          background: linear-gradient(45deg, #3369e3, #4575FE, #2563eb, #3369e3);
+          background-size: 300% 300%;
+          animation: buttonGradient 3s ease-in-out infinite;
+        }
+
+        .animate-button-shimmer {
+          background: linear-gradient(
+            90deg,
+            #3369e3,
+            #4575FE,
+            #60a5fa,
+            #3369e3
+          );
+          background-size: 200% 100%;
+          animation: buttonShimmer 2s ease-in-out infinite;
+        }
+
+        .animate-delay-1 {
+          animation-delay: 0.2s;
+        }
+
+        .animate-delay-2 {
+          animation-delay: 0.4s;
+        }
+
+        .animate-delay-3 {
+          animation-delay: 0.6s;
+        }
+
+        .opacity-0 {
+          opacity: 0;
+        }
+
+        .text-gradient {
+          background: linear-gradient(45deg, #3369e3, #4575FE, #fcd43a);
+          background-size: 200% 200%;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          animation: gradientShift 3s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+          0%, 100% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+        }
+      </style><div class="w-full flex flex-col items-center min-h-[300px] sm:min-h-[650px] lg:min-h-[700px] "><div class="transition-opacity duration-500 ease-in-out opacity-100  w-full py-6 md:py-8 flex flex-col justify-center items-center sm:mt-15 px-2"><h1 class="text-4xl sm:text-5xl text-center animate-slide-top" style="font-family: Youth; font-weight: 900; line-height: 100%; letter-spacing: 0%;">Debt settlement company helping you become debt free</h1><br><p class="text-[16px] sm:text-2xl text-center animate-slide-bottom animate-delay-1" style="font-family: gilroy; line-height: 100%; letter-spacing: 0%;">Struggling with credit card or loan debt? Debtfrie offers expert debt settlement, restructuring &amp; relief solutions across India.</p></div><div class="w-full flex flex-row justify-center items-center space-x-4" style="font-family: gilroy; line-height: 100%; font-weight: 400; letter-spacing: 0%;"><button class="animate-button-shimmer text-white px-3 font-medium py-3 sm:py-2 md:px-4 md:py-3 rounded-2xl text-sm flex items-center gap-2 hover:scale-105 transition-transform duration-300"><span>GET DEBT FREE</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-move-right w-4 h-4 md:w-5 md:h-5"><path d="M18 8L22 12L18 16"></path><path d="M2 12H22"></path></svg></button><button class="text-sm bg-gray-200 px-3 font-medium py-3 sm:py-2 md:px-4 md:py-3 rounded-2xl hover:bg-gray-300 hover:scale-105 transition-all duration-300">LEARN HOW IT WORKS</button></div><div class="w-full max-w-[400px] sm:max-w-[600px] h-[350px] sm:h-[350px] md:h-[400px] lg:h-[450px] xl:h-[500px] relative overflow-hidden "><img alt="Header" class="absolute inset-0 h-full w-full object-cover rounded-lg transition-opacity duration-500 ease-in-out opacity-100" src="/assets/Image1-DnnGSZKP.png"></div></div><div class="w-full  bg-[#3369e3]"><div class="hidden sm:grid sm:grid-cols-3 sm:h-[90%]"><div class="flex justify-center items-center"><div class="w-[100%] flex justify-center items-center opacity-0"><span class="text-5xl text-white font-bold" style="font-family: Youth; font-weight: 900; line-height: 100%; letter-spacing: 0%;">How Debtfrie Can <br> Help You?</span></div></div><div class="relative py-12 flex justify-center items-center -mt-[228px]"><img alt="Debtfrie mobile application dashboard interface" class="h-auto max-w-xs object-contain rounded-lg" src="/assets/Phone-CFQZW50d.png"><div class="absolute top-1/2 left-1/2 w-[80%] max-w-[240px] h-[550px] transform -translate-x-1/2 -translate-y-1/2 flex flex-col justify-between items-center px-4 py-5 text-center"><div class="absolute bottom-[230px] opacity-0" style="font-family: gilroy; font-weight: 400; line-height: 100%; letter-spacing: 0%;"><p class="text-xl text-white font-medium leading-snug">Here to heal your<br>financial worries with<br>care and a smile, one<br>solution at a time.</p></div><div class="w-full flex flex-col gap-3 absolute bottom-8"><button class="bg-white text-[#3369e3] py-2 rounded-full text-sm font-semibold w-full cursor-pointer">Enroll Now</button></div></div></div><div class="flex flex-col justify-center space-y-16 text-white p-20" style="font-family: gilroy; font-weight: 400; line-height: 100%; letter-spacing: 0%;"><div class="flex items-center opacity-0"><div class="w-12 flex-shrink-0"><img class="w-full h-full" alt="Auction Icon" src="/assets/auction-DOEiYNin.png"></div><div class="ml-6"><span class="text-3xl">Expert Legal Guidance</span></div></div><div class="flex items-center opacity-0"><div class="w-12 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg></div><div class="ml-6"><span class="text-3xl">Protection from Harassment</span></div></div><div class="flex items-center opacity-0"><div class="w-12 flex-shrink-0"><img class="w-full h-full" alt="Idea Icon" src="/assets/idea-D4bapkJ4.png"></div><div class="ml-6"><span class="text-3xl">Tailored Debt Solutions</span></div></div></div></div><div class="sm:hidden relative flex flex-col items-center px-4 py-8"><div class="bg-[#3369e3] py-4 flex justify-center"><img alt="Debtfrie mobile application dashboard interface" class="h-auto max-w-44 object-contain rounded-lg relative bottom-36" src="/assets/Phone-CFQZW50d.png"></div><div class="b absolute top-18 left-1/2 w-[80%] max-w-[240px] h-[550px] transform -translate-x-1/2 -translate-y-1/2 flex flex-col justify-between items-center px-4 py-5 text-center z-50"><div class="absolute bottom-[230px] opacity-0" style="font-family: gilroy; font-weight: 400; line-height: 100%; letter-spacing: 0%;"><p class="text-sm text-white font-medium leading-snug">Here to heal your<br>financial worries with<br>care and a smile, one<br>solution at a time.</p></div><div class="w-full flex justify-center items-center gap-2 absolute bottom-30"><button class="bg-white w-1/2 text-[#3369e3] py-1 rounded-full text-sm font-semibold cursor-pointer">Enroll Now</button></div></div><div class="-mt-36 text-center opacity-0"><span class="text-2xl text-white font-bold" style="font-family: Youth; font-weight: 900; line-height: 100%; letter-spacing: 0%;">How Debtfrie Can Help You?</span></div><div class="w-full mt-10 flex flex-col space-y-8 text-white"><div class="w-full text-white"><div class="flex flex-row justify-around items-center opacity-0"><div class="w-10 flex-shrink-0"><img class="w-full h-full" alt="Auction Icon" src="/assets/auction-DOEiYNin.png"></div><div class="w-10 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg></div><div class="w-10 flex-shrink-0"><img class="w-full h-full" alt="Idea Icon" src="/assets/idea-D4bapkJ4.png"></div></div><div class="flex flex-row justify-around items-start text-center mt-4  opacity-0" style="font-family: gilroy; font-weight: 400; line-height: 100%; letter-spacing: 0%;"><div class="w-1/3 px-2"><span class="text-base">Expert Legal Guidance</span></div><div class="w-1/3 px-2"><span class="text-base">Protection from Harassment</span></div><div class="w-1/3 px-2"><span class="text-base">Tailored Debt Solutions</span></div></div></div></div></div></div><style>
+        @keyframes slideInBounce {
+          0% {
+            transform: translateY(50px) scale(0.8);
+            opacity: 0;
+          }
+          60% {
+            transform: translateY(-10px) scale(1.05);
+            opacity: 1;
+          }
+          100% {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+          }
+        }
+
+        @keyframes pulse {
+          0%, 100% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.02);
+          }
+        }
+
+        @keyframes shimmer {
+          0% {
+            background-position: -200% center;
+          }
+          100% {
+            background-position: 200% center;
+          }
+        }
+
+        .animate-slide-bounce {
+          animation: slideInBounce 0.8s ease-out forwards;
+        }
+
+        .animate-pulse-slow {
+          animation: pulse 2s ease-in-out infinite;
+        }
+
+        .shimmer-effect {
+          background: linear-gradient(
+            90deg,
+            #3b82f6,
+            #60a5fa,
+            #3730a3,
+            #4338ca,
+            #3b82f6
+          );
+          background-size: 200% 100%;
+          animation: shimmer 3s ease-in-out infinite;
+        }
+
+        .glow-effect {
+          box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .opacity-0 {
+          opacity: 0;
+        }
+      </style><div class="w-full flex justify-center items-center py-6 bg-gradient-to-r from-white to-blue-50"><div class="
+            cursor-pointer text-white text-center px-8 py-4 rounded-xl shadow-lg 
+            hover:scale-105 transition-all duration-300 
+            shimmer-effect glow-effect
+            opacity-0
+          " style="font-family: gilroy; font-weight: 500;"><span class="relative z-10 text-lg font-semibold">Enroll today for just ₹49</span></div></div><div class="w-full sm:min-h-screen bg-[#F1F7FF] relative overflow-hidden"><div class="relative w-full h-full p-4 sm:p-8 md:p-12 lg:p-16 flex items-center justify-center"><div class="w-full max-w-6xl rounded-2xl overflow-hidden shadow-2xl"><video autoplay="" loop="" playsinline="" class="w-full h-auto object-cover"><source src="/assets/DF_MotionBanner-CZjLuBJe.mp4" type="video/mp4">Your browser does not support the video tag.</video></div></div></div><div class="w-full h-auto px-4 py-10 flex flex-col items-center justify-center bg-gradient-to-r from-white to-blue-50"><div class="text-center mb-6 max-w-2xl mx-auto" style="font-family: Youth; font-weight: 900; line-height: 100%; letter-spacing: 0%;"><h2 class="text-3xl sm:text-5xl font-bold">Your Path To A <span class="text-[#4575FE]">Debt-Free</span></h2><h2 class="text-3xl sm:text-5xl font-bold">Life Starts Here</h2><p class="text-lf mt-2 text-gray-600" style="font-family: gilroy; font-weight: 400; line-height: 100%; letter-spacing: 0%;">Track, Manage, And Clear Your Debts With Ease.</p></div><div class="w-full max-w-2xl bg-white shadow-lg rounded-2xl p-6 space-y-10" style="font-family: gilroy; font-weight: 400; line-height: 100%; letter-spacing: 0%;"><div><p class="font-semibold mb-1">1. Your Credit Card Debt</p><div class="relative mt-12 flex justify-center"><input min="0" max="10000000" step="1000" class="w-[75%] accent-blue-500" type="range" value="1000"><div class="absolute right-6 sm:right-20 -top-6 font-semibold text-black">₹1000</div></div></div><div class="mt-8"><p class="font-semibold mb-1">2. Your Personal Loan Debt</p><p class="text-xs text-gray-500 mb-1">Our lender rates vary from <span class="font-bold">5.20%</span> to <span class="font-bold">35.99%</span> APR</p><div class="relative mt-12 flex justify-center"><input min="0" max="10000000" step="1000" class="w-[75%] accent-blue-500" type="range" value="2000"><div class="absolute right-6 sm:right-20 -top-6 font-semibold text-black">₹2000</div></div></div><div class="mt-8"><p class="font-semibold mb-1">3. Check the results</p><p class="text-sm text-gray-700 mb-4">Your total debt is <span class="font-bold">₹3,000</span>. With Debtfrie, you may settle this for just <span class="font-bold">₹900</span>, saving you <span class="font-bold">₹2,100</span>!</p><div class="flex flex-col sm:flex-row sm:items-center gap-4 mt-10"><div class="w-30 h-30 flex-shrink-0 flex items-center justify-center"><svg class="w-30 h-30" viewBox="0 0 100 100"><circle cx="50" cy="50" r="36" fill="none" stroke="#E5E7EB" stroke-width="8"></circle><circle cx="50" cy="50" r="36" fill="none" stroke="#3B82F6" stroke-width="8" stroke-dasharray="67.85840131753953,226.1946710584651" stroke-linecap="round" transform="rotate(-90 50 50)"></circle><text x="50" y="52" text-anchor="middle" class="fill-blue-500 text-[10px] font-bold">₹2,100</text></svg></div><div class="flex-1 flex flex-col justify-center space-y-4"><div class="flex items-center justify-center text-sm mb-6 space-x-6"><div class="flex items-center"><div class="sm:w-4 w-6 h-4 bg-black rounded-sm mr-2"></div><span class="text-gray-500">Without Debtfrie</span></div><div class="flex items-center"><div class="sm:w-4 w-6 h-4 bg-blue-500 rounded-sm mr-2"></div><span class="text-gray-500">With Debtfrie</span></div></div><div class="flex items-center justify-end space-x-2"><span class="text-sm font-semibold text-black">₹3,000</span><div class="w-[85%] h-2 bg-gray-200 rounded-full"><div class="h-full bg-black w-full rounded-full"></div></div></div><div class="flex items-center justify-end space-x-2"><span class="text-sm font-semibold text-black">₹900</span><div class="w-[85%] h-2 bg-blue-100 rounded-full"><div class="h-full bg-blue-500 rounded-full" style="width: 30%;"></div></div></div></div></div><div class="flex justify-center items-center mt-10"><button class="w-[50%] bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg font-semibold">Check Rates</button></div><p class="text-xs text-center text-gray-600 mt-4">Checking rate won't affect your credit score. Calculator results are for illustrative purposes only.</p></div></div></div><div class="w-full sm:min-h-screen bg-white relative overflow-hidden"><div class="max-w-[1400px] mx-auto px-4 py-16 z-10 relative"><div class="text-center mb-10" style="font-family: Youth; font-weight: 900;"><h2 class="text-3xl md:text-5xl font-bold text-navy-900 mb-2">Debt-Free Living Starts</h2><h2 class="text-3xl md:text-5xl font-bold mb-4 sm:mb-8">With <span class="text-blue-500">Debt</span><span class="text-yellow-500">Frie</span></h2><p class="text-lg sm:text-xl text-gray-800 mb-8" style="font-family: gilroy; font-weight: 400;">Join The DebtFrie Success Stories Today!</p></div><div class="flex justify-center"><div class="w-full max-w-5xl bg-white rounded-2xl shadow-2xl overflow-hidden"><video class="w-full h-auto" controls="" preload="metadata" loop="" playsinline="" autoplay="" style="max-height: 600px;"><source src="/assets/Official-BWoMdAhJ.mp4" type="video/mp4">Your browser does not support the video tag.</video></div></div></div></div><style>
+        @keyframes fadeInUp {
+          0% {
+            opacity: 0;
+            transform: translateY(60px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes slideInFromLeft {
+          0% {
+            opacity: 0;
+            transform: translateX(-100px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+
+        @keyframes slideInFromRight {
+          0% {
+            opacity: 0;
+            transform: translateX(100px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+
+        @keyframes floatAnimation {
+          0%, 100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-10px);
+          }
+        }
+
+        @keyframes cardGlow {
+          0%, 100% {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+          }
+          50% {
+            box-shadow: 0 20px 40px rgba(51, 105, 227, 0.2);
+          }
+        }
+
+        @keyframes imageRotate {
+          0% {
+            transform: scale(1) rotate(0deg);
+          }
+          50% {
+            transform: scale(1.1) rotate(5deg);
+          }
+          100% {
+            transform: scale(1) rotate(0deg);
+          }
+        }
+
+        @keyframes titleGlow {
+          0%, 100% {
+            text-shadow: none;
+          }
+          50% {
+            text-shadow: 0 0 20px rgba(51, 105, 227, 0.5);
+          }
+        }
+
+        .animate-fade-up {
+          animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .animate-slide-left {
+          animation: slideInFromLeft 0.8s ease-out forwards;
+        }
+
+        .animate-slide-right {
+          animation: slideInFromRight 0.8s ease-out forwards;
+        }
+
+        .animate-float {
+          animation: floatAnimation 3s ease-in-out infinite;
+        }
+
+        .animate-card-glow {
+          animation: cardGlow 2s ease-in-out infinite;
+        }
+
+        .animate-image-rotate {
+          animation: imageRotate 0.6s ease-in-out;
+        }
+
+        .animate-title-glow {
+          animation: titleGlow 1.5s ease-in-out;
+        }
+
+        .animate-delay-1 {
+          animation-delay: 0.2s;
+        }
+
+        .animate-delay-2 {
+          animation-delay: 0.4s;
+        }
+
+        .animate-delay-3 {
+          animation-delay: 0.6s;
+        }
+
+        .animate-delay-4 {
+          animation-delay: 0.8s;
+        }
+
+        .opacity-0 {
+          opacity: 0;
+        }
+
+        .card-hover-effect {
+          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .card-hover-effect:hover {
+          transform: translateY(-15px) scale(1.05);
+          box-shadow: 0 25px 50px rgba(51, 105, 227, 0.25);
+        }
+
+        .card-image-hover {
+          transition: all 0.3s ease-in-out;
+        }
+
+        .card-image-hover:hover {
+          transform: scale(1.15) rotate(5deg);
+        }
+
+        .background-pattern {
+          background-image: 
+            radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, rgba(252, 212, 58, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 40% 60%, rgba(69, 117, 254, 0.1) 0%, transparent 50%);
+        }
+      </style><div class="w-full min-h-screen flex flex-col items-center justify-center bg-[#3369e3] relative overflow-hidden bg-hero-image"><div class="flex justify-center text-center py-10 md:py-16 px-4 z-10 sm:mb-16"><h2 class="text-3xl sm:text-4xl md:text-5xl text-white font-medium leading-tight opacity-0" style="font-family: Youth; font-weight: 900; line-height: 100%; letter-spacing: 0%;">Your Path To <span class="text-yellow-400">Financial Freedom</span> With <br class="hidden sm:block">Tailored Solutions</h2></div><div class="flex flex-col md:flex-row flex-wrap justify-center gap-6 md:gap-8 lg:gap-10 px-4 sm:px-8 pb-10 md:pb-20 z-10 w-full max-w-7xl" style="font-family: Youth; font-weight: 900; line-height: 100%; letter-spacing: 0%;"><div class="
+                flex flex-col justify-center items-center bg-white rounded-2xl shadow-lg p-6 w-full sm:w-64 text-center mb-6 md:mb-0
+                card-hover-effect animate-float
+                opacity-0
+                
+              " style="animation-delay: 0s; animation-fill-mode: both;"><div class="mb-4 flex items-center justify-center h-24"><img alt="Savings" class="
+                    h-20 w-auto card-image-hover
+                    
+                  " src="/assets/pigibank-DMtSYcqd.png"></div><span class="
+                  text-xl sm:text-2xl font-bold mb-3
+                  
+                " style="background-image: inherit; background-position: inherit; background-size: inherit; background-repeat: inherit; background-attachment: inherit; background-origin: inherit; background-clip: unset; background-color: inherit; -webkit-text-fill-color: inherit;">Self-Savings<br>Model</span><span class="text-sm transition-colors duration-300" style="font-family: gilroy; font-weight: 400; line-height: 100%; letter-spacing: 0%; color: inherit;">Save while settling your debts.<br>For a secure financial future.</span></div><div class="
+                flex flex-col justify-center items-center bg-white rounded-2xl shadow-lg p-6 w-full sm:w-64 text-center mb-6 md:mb-0
+                card-hover-effect animate-float
+                opacity-0
+                
+              " style="animation-delay: 0.2s; animation-fill-mode: both;"><div class="mb-4 flex items-center justify-center h-24"><img alt="Calendar" class="
+                    h-20 w-auto card-image-hover
+                    
+                  " src="/assets/calendar-C14o007C.png"></div><span class="
+                  text-xl sm:text-2xl font-bold mb-3
+                  
+                " style="background-image: inherit; background-position: inherit; background-size: inherit; background-repeat: inherit; background-attachment: inherit; background-origin: inherit; background-clip: unset; background-color: inherit; -webkit-text-fill-color: inherit;">Consumer-<br>Feasible Plan</span><span class="text-sm transition-colors duration-300" style="font-family: gilroy; font-weight: 400; line-height: 100%; letter-spacing: 0%; color: inherit;">Personalized And Practical Plans Designed For Your Financial Ease.</span></div><div class="
+                flex flex-col justify-center items-center bg-white rounded-2xl shadow-lg p-6 w-full sm:w-64 text-center mb-6 md:mb-0
+                card-hover-effect animate-float
+                opacity-0
+                
+              " style="animation-delay: 0.4s; animation-fill-mode: both;"><div class="mb-4 flex items-center justify-center h-24"><img alt="Document" class="
+                    h-20 w-auto card-image-hover
+                    
+                  " src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHYAAAB1CAYAAACbMxW/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAypSURBVHgB7Z1bbBTXGce/md317toGGyjYEC5rqIgKlWwgIm2phK1IRGpfSBSpfagKSI2U0IeERu0r+KlPCPoCqEgN0KhS1RTcB1pRpcVRcUqV4BqpdlspvmAotiHBiy/rvc1Mz3+WWcbj2d2Z2dnZ8fr8os3C7o4t9jffOd/5zpkzArnE0Z9PdH6/M3SkdZ0Ym5qWY1QGswmZZhYUqgSptNCczirN5IBEMhu//1jpOndi8wD5HIHK5My1idiebaH329sCnVTj/Gc8RaKSil++GfC9XJHKAFJffzl8cyVIBfNJopZmpflIl3Tz+JkHHeRjyhKLSF0dFWK0QphP5rqH5SDXsdgzv5voXCmRqjGn6/f9Ltex2Je+GjpMKxw/y3Usdst6sZ04vpVbVh+70ng0Yz6I8KNcx2LjbKzJeY7f5PKIdRE/yeViXcYvcrnYCuAHuVysDeaS1uvX1ZbLxdoAJUU7VFMuF1thqiWXi/WAasjlYj3Ca7mOxc4lBEeT1SsZL+U6FjufUrhYB3gllzfFVcALuVxslai0XC62ilRSLhdrA7sFCitUSm6QPGBqWqHJ6dw0H8pycxa/oMYIHs/nQHdsEhf93Wta14qUSBHVh8lVNLl05oFrqx89EdsQZV8Kaxy0NUMQZofWNf5oWA58LUi/vSXSsVfcn4t2W67j0//GP74Y3b8zEKMVxpW/pCmZStL3DlRmQftUXHBl3TIX64A/92fpT5+maN1qmTasdi64gbVcDc+adXQxaNnAzLwSP/1hoOvTi87letIU1xqH9gbVB/KF+YXSn4cwO7nB3RGpWQokkExxsdUAsuzmC17hOCuZXeCL2fyMY7EzicokDxx34AWKGoWLrVG42BqFi61RPB3uYNyHuvGcyTYEk/Hlk4y1NpuPSVH6bFlTvVq2Hk/FquO+jbl/uHFw37rG/BicBHbW87qF1fq03eKDV1StQGF1cO+XCFhu8D62RuFiaxReK64gyA2GH8r0+YRMIxMSfT4ps5wBCw9y5dgGdEdRgfXnAu3YKLJHgNq3B8gNuNgKwGZn2NRehm4NSfmdZszAe/PqSCF3DFFGfb2FJW6CKB7seGu0d+BC2xg5wHFm8qs/To2+9s26GHHy3GDztFc+SrPJchcnSAThkiRnuu0K5hHrAoi2K39NP4s6c+RskrKpJ6RIWVLkbP51MRQhMRClYKTAeE9RjgaE4NG9x++f6j+3pZsswsWWybnrKbralzF9L5ucpszcBGUWHqkyBZF93ewhBqP5z8izs3nRkBtq2ESh+vW5z+oQFDq17+0HRyUl02UlerlYhyAxOvlB0jRK00xm6umwGqUBJivctJ3J2sCEmg/cIVZKz1Im8Vg9Do+6xk2q5MXHKDEWvaN73753ov/8trNUBE/FopwIsBTVrIQ4r6syWV12Umn0laXcuiRBzWp/z6LUmBhB5MKXg6qkulVbKbx665LIMwOfQbTmmuOd7MR4yOSOqM/hph1M8sbFnyfxDGuam4o1zZ6K1apILWtYWk/Lk0l2cr7HEiSjVDS5C9P/pVB0A9W/0G5JaCEQrXjkBA+zfnlBjXo9aJqZXCoklxcobHLyg4UlWW8qPqJKjax5kaJf2VWWVD2Q29DyktpEL3w5tOR9td/98YMjZsdysTZAojQ8sVRqev6hKsDYZLoB+tjGjS+Twv4zk0uycpaNd2NLjiOOJTBGNWa/iCRNaqCukSpJ/brdqtwkaxkMNAfE4DXji1ysBZDIofCgB4kSvuQo+8ILZbuFSM2M0+z/bqkPJFpWgdxsMq4OoxahUAfLlN/Vv8TFWgCRauxXkyypCbE+sGBhoQgY3uDEwENfrLBC/fp29YQyHscy5ZMd747mdxngYkuALPjGncVfIoRILGoihkzVC9A6YHybmh03vtUsJsV81HKxJbg7KplGa2Tti2QHRBia4IUvhijD+uX8z2LRl3h8V33ParOM8XE28WjJ64IgvqNFLa88lcDYtwJICkXXk1VQbIA4s2ZXSs+pDyRiAElY3aptJTPsIBsvo681dAXNgQR1sueeqlSe1Iufi9xXxy8L21AJM0YrBNiROjdxWxVnFVU0kqMSYhG1OFmW9PGB4Dvktdj8+qXpwgvAILzVJxsN9U0srQMjSiLN1vpWjHHNpKKAoUWv/s8adau3UCnU4yTTrQHULQ+q0hQXW6Dmp8VrVz9ZOmuDL9RqZSmt60sBEh8MjzBJoPWzDS372M8LsRPmidpkC2zmJ1C3ysqPZ1N+pmPn5o43Rzt4H1sEbd8MPValasMZPZgYQNMJsc9/XkgVrtWHjccUAycAPm8cR4tBsZNnxUUwlg+Bk3GrhqKUHrPaKXZgXtf0RFMoxiO2AGbRChBhVtCabH3/iT4XHY0iJcgNCnULghho4hFbAC2DN2I1otQ5VjYkMZJkclEW1EAGbKf5Nf4OUxSFR2wlia7dSVLqSVFxCTYxD7RlMW7NEPGILQBWSpQLIqpx4zdUYaXAMAqrL+an7jiOYD1cbAHc2jQEcuvZ5PuqF77Nhjq71DVQxTJrTXB5v1QY42IL4PZucNqQppGNWwO6zNpMMuQumZqzgSJLTz0vKWrlROOeivMml0tWe0EbqmMVuYRTlymjqdYWr+kxqQPbQBjwvKTYQv6pLJXkQ6ycyJBTtL6yVCaNEmV6dtz23GzB3ytJzsXOJihGNQ4ulCoHTO9hOGO+RjgHmmLUk41S7a7K0BEfuNg2wIc7RfjWrgCdu06O0Cbj1SU0bOyKB5pWkU3L6SVCfkZXYtQIRtaSIwShB088eSoCEqj2NmeXNWJ6zzhsQb+Znrm/aEIdfzdGa5g1zY4jNpv5A5642BIc2OWsUcP1N1bGr0Yg1emSG4WEsTu/bOMRa4VD+4LP9suwl/Qh4rTxK2Z1xCJTcehn8RlM4ZW3jkr6hfYn3seWAEJfPxBS1xUDu8MfdQ6WlRY1kChp1/cAiC8jUcqDaJUVuSf/e4lTkh++UodvznF/qwdrmvRFCTekqijyooujuViL/OyNME3GZVfkVoDe/gtbL+lf8HxnNn0lqdCcp9lxcxW4NUohCu28hmZZLbJMi2VtR4CLtxTZeeFDT64Jzhwzvu75zmzzutWJWj221O5rftnJG00ybvZwYHeA+gbJsVw3r/MRFeVYv8kV7p4nT2aL1ZbT7mvdmyL03sUFepVly7hCwNWNRGwikHDiswube83e432sTdB6nH4zSn1DWTVyW5qr8xWqUs9vLrhdARfrAE0ugFwMh7yCdVhxQaGuYlIBF+sQyD3+3bD63Dckqf2vB9HbKyvZPZ9d2NJb6oO8QFEmEHpob4jOX09R+3aRGqNIrCRX+15EqUhCd6ko1cMj1gWwF2L3DyL0KhOMtciN9bliRrn7GD9rdrvlcLbNjlTAI9ZFsMHl6e1RdWNMXB4y+WzFSG4DTJHujsiWIhlN+tRT5ZJclznRf7YtTg7gYisAbof60zdyN62D5OFJ9piQqHUtdjsVFxVbEO0oiGBjTMjHyYFjfnIx8fGAQ6mAi60wkIyH11+15yVFnI16cMW4k5+jLYxzA0SK3f5QKy/qj1vRN3swbrTs1sbLnMXwrLhG4WJrFC62RuFiaxQutkbhYmsULrZG4WJrFC62RrFceTLuYo3SYKENOCqF1VWNhXD7Ymbg1/VawXv37r0/PKEcXkgLRTe6e/TU+Eqa/j6YJq+YT+GWYVQWG5rIVQbHBfrRdxrZNJsP7x8ry7KwvRVSi0ffbuIsJ9A2OZ7zW+k0RKjoLq7VBGIHiOOI2AZFvYWoH4HYHuI4An325BP788mlmEspJMhSWS2p2NamLr/oJY4jIiH3xU49UXBFXnli8T9FUS4TxxHhQNb1LYOwqsTK2uFiqGJZ1F5iT2PEsc3+nbjLhztXzgGcJH2DuX0kyiE/YmdRe4w4tmkIE6VSKdeiFlcVKC7kPXmxLGp7eZPsjM6vy/S3f5UftViH/Jve9JjxImYnGGtsuCEPH/7YBFHbFE6a7khuh6ufpGn8cbqLXGCRWGTILGpfI97f2mb3VoUGRxOOby2DC6qv3cp0W7lNtxWWVMWZ3DEmdw/x8a1tDu6WaIjJtdvfQuqvP0p3s0z4FLlE0er16OjoKUEQcIMen9wJZ3nw8WCA9u9qKLiXhYZ6l0tEal/2hN2LrkpRclqCyY2xJwg+yJ5jxLHEvx8EKBwJ054dSy+KhlDc4bLndqZ3dk7pLnfMaoat+SYm+TB7OswktydSQkd92J8FcL+Aqc66ujpKSyEamSL1wqzRSTn+zxG5R5CVy5UQquF4InHvW+NHiWMZQaB4SJEGbruUHJXi/3mf1MufpxjWAAAAAElFTkSuQmCC"></div><span class="
+                  text-xl sm:text-2xl font-bold mb-3
+                  
+                " style="background-image: inherit; background-position: inherit; background-size: inherit; background-repeat: inherit; background-attachment: inherit; background-origin: inherit; background-clip: unset; background-color: inherit; -webkit-text-fill-color: inherit;">Settle Now, Pay<br>Later</span><span class="text-sm transition-colors duration-300" style="font-family: gilroy; font-weight: 400; line-height: 100%; letter-spacing: 0%; color: inherit;">We Settle Your Debts First, And Pay After - No Upfront Costs.</span></div><div class="
+                flex flex-col justify-center items-center bg-white rounded-2xl shadow-lg p-6 w-full sm:w-64 text-center mb-6 md:mb-0
+                card-hover-effect animate-float
+                opacity-0
+                
+              " style="animation-delay: 0.6s; animation-fill-mode: both;"><div class="mb-4 flex items-center justify-center h-24"><img alt="Target" class="
+                    h-20 w-auto card-image-hover
+                    
+                  " src="/assets/arrow-D-cDqxKI.png"></div><span class="
+                  text-xl sm:text-2xl font-bold mb-3
+                  
+                " style="background-image: inherit; background-position: inherit; background-size: inherit; background-repeat: inherit; background-attachment: inherit; background-origin: inherit; background-clip: unset; background-color: inherit; -webkit-text-fill-color: inherit;">Result-Oriented<br>Services</span><span class="text-sm transition-colors duration-300" style="font-family: gilroy; font-weight: 400; line-height: 100%; letter-spacing: 0%; color: inherit;">Focused On Reducing Your Debt And Improving Your Financial Stability.</span></div></div></div><div class="relative w-[100%] min-h-screen bg-[#3369e3] overflow-hidden"><div class="absolute inset-0 overflow-hidden"><div class="floating-orb orb-1 opacity-0"></div><div class="floating-orb orb-2 opacity-0"></div><div class="floating-orb orb-3 opacity-0"></div><div class="floating-orb orb-4 opacity-0"></div><div class="floating-orb orb-5 opacity-0"></div><div class="animated-line line-1 opacity-0"></div><div class="animated-line line-2 opacity-0"></div><div class="animated-line line-3 opacity-0"></div></div><div class="flex flex-col items-center justify-start md:justify-center h-screen text-center px-4 pt-16 md:pt-0 z-50 relative"><h2 class="text-3xl md:text-4xl lg:text-md xl:text-2xl 2xl:text-3xl text-white font-bold mb-4 z-50 opacity-0" style="font-family: Youth; line-height: 100%; letter-spacing: 0%;">A name India trusts across <br>every state and sectors</h2><p class="text-lg md:text-xl text-white max-w-2xl mb-8 z-50 opacity-0" style="font-family: gilroy; font-weight: 400; line-height: 100%; letter-spacing: 0%;">Empowering Individuals Across Diverse Sectors <br>With Proven Expertise And Results</p><button class="flex items-center bg-white text-black px-6 py-3 rounded-xl font-medium transition-all hover:bg-opacity-90 hover:transform hover:scale-105 z-50 opacity-0">Read Success Stories<svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg></button></div><div class="hidden md:block"><div class="
+                            lg:top-[44%] lg:left-[1%] xl:top-[44%] xl:left-[8%] 2xl:top-[44%] 2xl:left-[8%]
+                            
+                            
+                            
+                            
+                            
+                            absolute sm:mt-20 cursor-pointer opacity-0
+                        " style="animation-delay: 0.8s;"><div class="flex max-w-xs bg-white rounded-lg p-4 mb-2 shadow-lg hover:shadow-2xl transition-all duration-300 hover:transform hover:scale-105 hover:rotate-1 testimonial-hover"><div class="mr-4"><img alt="Subhajit Mandal" class="w-16 h-16 rounded-lg object-cover transition-transform duration-300 hover:scale-110" src="/assets/Subhajit%20Mandal-0DyjRhk9.jpg"></div><div class="flex-1"><p class="text-xs text-gray-600 mb-2">I don't usually write reviews, but I felt compelled to share my experience with Debt Frie because they've genuinely changed my life. When I first approached them, I was overwhelmed by debt — credit cards,...<span class="text-blue-500 ml-1 underline cursor-pointer">Read more</span></p><p class="text-xs font-semibold">- Subhajit Mandal</p></div></div></div><div class="
+                            
+                            lg:hidden xl:block xl:bottom-[22%] xl:right-[5%] 2xl:bottom-[22%] 2xl:right-[8%]
+                            
+                            
+                            
+                            
+                            absolute sm:mt-20 cursor-pointer opacity-0
+                        " style="animation-delay: 1.1s;"><div class="flex max-w-xs bg-white rounded-lg p-4 mb-2 shadow-lg hover:shadow-2xl transition-all duration-300 hover:transform hover:scale-105 hover:rotate-1 testimonial-hover"><div class="mr-4"><img alt="Rakesh Rawat" class="w-16 h-16 rounded-lg object-cover transition-transform duration-300 hover:scale-110" src="/assets/Rakesh%20Rawat-CU7lwLrj.jpg"></div><div class="flex-1"><p class="text-xs text-gray-600 mb-2">सर मैडम बहुत अच्छा लगा। आप लोगों से मुझे बहुत मदद मिल रही है। Very good! बहुत-बहुत धन्यवाद आप लोगों का।</p><p class="text-xs font-semibold">- Rakesh Rawat</p></div></div></div><div class="
+                            
+                            
+                            lg:top-[-10%] lg:left-[5%] xl:top-[0%] xl:left-[5%] 2l:top-[0%] 2xl:left-[5%]
+                            
+                            
+                            
+                            absolute sm:mt-20 cursor-pointer opacity-0
+                        " style="animation-delay: 1.4s;"><div class="flex max-w-xs bg-white rounded-lg p-4 mb-2 shadow-lg hover:shadow-2xl transition-all duration-300 hover:transform hover:scale-105 hover:rotate-1 testimonial-hover"><div class="mr-4"><img alt="Sahil Gautam" class="w-16 h-16 rounded-lg object-cover transition-transform duration-300 hover:scale-110" src="/assets/Sahil%20Gautam-D57FSyex.jpg"></div><div class="flex-1"><p class="text-xs text-gray-600 mb-2">I recently had the pleasure of working with Aditi Ma'am and Yash Sir from Debt Frie for a loan against my credit card and personal loan. Their professionalism and expertise were truly impressive. They guided...<span class="text-blue-500 ml-1 underline cursor-pointer">Read more</span></p><p class="text-xs font-semibold">- Sahil Gautam</p></div></div></div><div class="
+                            
+                            
+                            
+                            lg:bottom-[18%] lg:right-[2%] xl:top-[7%] xl:right-[2%] 2xl:top-[10%] 2xl:right-[5%]
+                            
+                            
+                            absolute sm:mt-20 cursor-pointer opacity-0
+                        " style="animation-delay: 1.7s;"><div class="flex max-w-xs bg-white rounded-lg p-4 mb-2 shadow-lg hover:shadow-2xl transition-all duration-300 hover:transform hover:scale-105 hover:rotate-1 testimonial-hover"><div class="mr-4"><img alt="Omshanker Pandey" class="w-16 h-16 rounded-lg object-cover transition-transform duration-300 hover:scale-110" src="/assets/Omshanker%20Pandey-BJTr4_WM.jpg"></div><div class="flex-1"><p class="text-xs text-gray-600 mb-2">My name is Om Shanker Pandey, and I am currently working with Debt Frie for my loan solution. I was deeply trapped in multiple loans and felt overwhelmed by the burden of financial obligations. From...<span class="text-blue-500 ml-1 underline cursor-pointer">Read more</span></p><p class="text-xs font-semibold">- Omshanker Pandey</p></div></div></div><div class="
+                            
+                            
+                            
+                            
+                            lg:bottom-[2%] lg:left-[35%] xl:bottom-[0%] xl:left-[40%] 2xl:bottom-[2%] 2xl:left-[40%]
+                            
+                            absolute sm:mt-20 cursor-pointer opacity-0
+                        " style="animation-delay: 2s;"><div class="flex max-w-xs bg-white rounded-lg p-4 mb-2 shadow-lg hover:shadow-2xl transition-all duration-300 hover:transform hover:scale-105 hover:rotate-1 testimonial-hover"><div class="mr-4"><img alt="Sanjeev Kumar" class="w-16 h-16 rounded-lg object-cover transition-transform duration-300 hover:scale-110" src="/assets/Sanjeev%20Kumar-DxnjoT4B.jpg"></div><div class="flex-1"><p class="text-xs text-gray-600 mb-2">I had been struggling with credit card issues for a long time, unable to even manage the minimum payments. The constant harassment through calls and messages had become overwhelming. But ever since I joined Debt...<span class="text-blue-500 ml-1 underline cursor-pointer">Read more</span></p><p class="text-xs font-semibold">- Sanjeev Kumar</p></div></div></div><div class="
+                            
+                            
+                            
+                            
+                            
+                            lg:top-[-10%] lg:right-[1%] xl:top-[-13%] xl:right-[35%] 2xl:top-[-8%] 2xl:right-[35%]
+                            absolute sm:mt-20 cursor-pointer opacity-0
+                        " style="animation-delay: 2.3s;"><div class="flex max-w-xs bg-white rounded-lg p-4 mb-2 shadow-lg hover:shadow-2xl transition-all duration-300 hover:transform hover:scale-105 hover:rotate-1 testimonial-hover"><div class="mr-4"><img alt="Prem Jha" class="w-16 h-16 rounded-lg object-cover transition-transform duration-300 hover:scale-110" src="/assets/Prem%20Jha-B2_DHmgV.jpg"></div><div class="flex-1"><p class="text-xs text-gray-600 mb-2">I had a genuinely positive experience with Debtfrie. Their approach was professional, responsive, and grounded in a clear understanding of my requirements. Every interaction reflected a commitment to integrity and client satisfaction. I truly appreciate...<span class="text-blue-500 ml-1 underline cursor-pointer">Read more</span></p><p class="text-xs font-semibold">- Prem Jha</p></div></div></div></div><div class="md:hidden absolute bottom-16 left-4 right-4 z-[60]"><div class="absolute inset-y-0 left-0 right-0 flex items-center justify-between pointer-events-none z-10"><button class="bg-white bg-opacity-90 hover:bg-opacity-100 text-gray-800 p-2 rounded-full shadow-lg transition-all duration-200 transform hover:scale-110 pointer-events-auto ml-2" aria-label="Previous testimonial"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg></button><button class="bg-white bg-opacity-90 hover:bg-opacity-100 text-gray-800 p-2 rounded-full shadow-lg transition-all duration-200 transform hover:scale-110 pointer-events-auto mr-2" aria-label="Next testimonial"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></button></div><div class="relative bg-white rounded-xl shadow-lg overflow-hidden"><div class="relative h-full w-full transition-all duration-500 ease-in-out" style="transform: translateX(0px); opacity: 1;"><div class="transition-all duration-500 ease-in-out transform animate-slide-left"><div class="flex p-4"><div class="mr-4"><img alt="Subhajit Mandal" class="w-16 h-16 rounded-lg object-cover" src="/assets/Subhajit%20Mandal-0DyjRhk9.jpg"></div><div><h3 class="font-bold text-gray-800 text-lg">Subhajit Mandal</h3></div></div><div class="px-4 pb-4"><p class="text-gray-600 mb-2 cursor-pointer">I don't usually write reviews, but I felt compelled to share my experience with Debt Frie because they've genuinely changed my life. When I first approached them, I was overwhelmed by debt — credit cards, personal loans, and the constant stress that comes with financial uncertainty. I'll admit, I was skeptical. I'd seen too many companies promise relief only to charge hidden fees or make matters worse. But Debt Frie proved to be different. Every...</p></div></div></div></div><div class="flex justify-center space-x-2 mt-4"><button class="h-2 rounded-full transition-all w-6 bg-white" aria-label="Go to testimonial 1"></button><button class="h-2 rounded-full transition-all w-2 bg-white bg-opacity-50" aria-label="Go to testimonial 2"></button><button class="h-2 rounded-full transition-all w-2 bg-white bg-opacity-50" aria-label="Go to testimonial 3"></button><button class="h-2 rounded-full transition-all w-2 bg-white bg-opacity-50" aria-label="Go to testimonial 4"></button><button class="h-2 rounded-full transition-all w-2 bg-white bg-opacity-50" aria-label="Go to testimonial 5"></button><button class="h-2 rounded-full transition-all w-2 bg-white bg-opacity-50" aria-label="Go to testimonial 6"></button></div></div><style>
+                /* Existing slide animations */
+                @keyframes slideRight {
+                    0% { transform: translateX(-100%); opacity: 0; }
+                    100% { transform: translateX(0); opacity: 1; }
+                }
+                
+                @keyframes slideLeft {
+                    0% { transform: translateX(100%); opacity: 0; }
+                    100% { transform: translateX(0); opacity: 1; }
+                }
+                
+                .animate-slide-right {
+                    animation: slideRight 0.5s forwards;
+                }
+                
+                .animate-slide-left {
+                    animation: slideLeft 0.5s forwards;
+                }
+
+                /* Background Animations with class-based triggers */
+                .animate-float {
+                    animation: float 8s ease-in-out infinite;
+                }
+
+                .animate-float-reverse {
+                    animation: floatReverse 6s ease-in-out infinite;
+                }
+
+                .animate-pulse-custom {
+                    animation: pulse 4s ease-in-out infinite;
+                }
+
+                .animate-line-move {
+                    animation: lineMove 15s linear infinite;
+                }
+
+                .animate-particle-float {
+                    animation: particleFloat linear infinite;
+                }
+                @keyframes float {
+                    0%, 100% { transform: translateY(0px); }
+                    50% { transform: translateY(-20px); }
+                }
+
+                @keyframes floatReverse {
+                    0%, 100% { transform: translateY(-10px); }
+                    50% { transform: translateY(10px); }
+                }
+
+                @keyframes pulse {
+                    0%, 100% { opacity: 0.3; transform: scale(1); }
+                    50% { opacity: 0.8; transform: scale(1.1); }
+                }
+
+                @keyframes lineMove {
+                    0% { transform: translateX(-100%) rotate(45deg); }
+                    100% { transform: translateX(100vw) rotate(45deg); }
+                }
+
+                @keyframes slideRight {
+                    0% { transform: translateX(-100%); opacity: 0; }
+                    100% { transform: translateX(0); opacity: 1; }
+                }
+                
+                @keyframes slideLeft {
+                    0% { transform: translateX(100%); opacity: 0; }
+                    100% { transform: translateX(0); opacity: 1; }
+                }
+                
+                .animate-slide-right {
+                    animation: slideRight 0.5s forwards;
+                }
+                
+                .animate-slide-left {
+                    animation: slideLeft 0.5s forwards;
+                }
+
+                @keyframes particleFloat {
+                    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+                    10% { opacity: 1; }
+                    90% { opacity: 1; }
+                    100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+                }
+
+                @keyframes fadeInUp {
+                    0% { opacity: 0; transform: translateY(30px); }
+                    100% { opacity: 1; transform: translateY(0); }
+                }
+
+                @keyframes cardEntry {
+                    0% { opacity: 0; transform: translateY(50px) scale(0.8); }
+                    100% { opacity: 1; transform: translateY(0) scale(1); }
+                }
+
+                /* Floating Orbs */
+                .floating-orb {
+                    position: absolute;
+                    border-radius: 50%;
+                    background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.3));
+                    backdrop-filter: blur(10px);
+                    border: 1px solid rgba(255,255,255,0.2);
+                }
+
+                .orb-1 {
+                    width: 120px;
+                    height: 120px;
+                    top: 10%;
+                    left: 10%;
+                    animation: float 8s ease-in-out infinite;
+                }
+
+                .orb-2 {
+                    width: 80px;
+                    height: 80px;
+                    top: 20%;
+                    right: 15%;
+                    animation: floatReverse 6s ease-in-out infinite;
+                    animation-delay: -2s;
+                }
+
+                .orb-3 {
+                    width: 60px;
+                    height: 60px;
+                    bottom: 30%;
+                    left: 20%;
+                    animation: pulse 4s ease-in-out infinite;
+                    animation-delay: -1s;
+                }
+
+                .orb-4 {
+                    width: 100px;
+                    height: 100px;
+                    bottom: 10%;
+                    right: 10%;
+                    animation: float 10s ease-in-out infinite;
+                    animation-delay: -3s;
+                }
+
+                .orb-5 {
+                    width: 40px;
+                    height: 40px;
+                    top: 50%;
+                    left: 50%;
+                    animation: floatReverse 5s ease-in-out infinite;
+                    animation-delay: -4s;
+                }
+
+                /* Animated Lines */
+                .animated-line {
+                    position: absolute;
+                    height: 2px;
+                    width: 200px;
+                    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+                }
+
+                .line-1 {
+                    top: 25%;
+                    animation: lineMove 15s linear infinite;
+                    animation-delay: 0s;
+                }
+
+                .line-2 {
+                    top: 65%;
+                    animation: lineMove 12s linear infinite;
+                    animation-delay: -5s;
+                }
+
+                .line-3 {
+                    top: 85%;
+                    animation: lineMove 18s linear infinite;
+                    animation-delay: -10s;
+                }
+
+                /* Particles */
+                .particle {
+                    position: absolute;
+                    width: 4px;
+                    height: 4px;
+                    background: rgba(255,255,255,0.6);
+                    border-radius: 50%;
+                    animation: particleFloat linear infinite;
+                }
+
+                /* Content Animations */
+                .animate-fade-in-up {
+                    animation: fadeInUp 0.8s ease-out forwards;
+                }
+
+                .animation-delay-200 {
+                    animation-delay: 0.2s;
+                    opacity: 0;
+                }
+
+                .animation-delay-400 {
+                    animation-delay: 0.4s;
+                    opacity: 0;
+                }
+
+                /* Testimonial Card Animations */
+                .testimonial-card {
+                    animation: cardEntry 0.8s ease-out forwards;
+                    opacity: 0;
+                }
+
+                .testimonial-hover:hover {
+                    transform: translateY(-5px) scale(1.05) rotate(1deg);
+                    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+                }
+
+                .testimonial-hover:hover img {
+                    transform: scale(1.1) rotate(-1deg);
+                }
+
+                /* Responsive adjustments */
+                @media (max-width: 768px) {
+                    .floating-orb {
+                        display: none;
+                    }
+                    
+                    .animated-line {
+                        display: none;
+                    }
+                }
+            </style></div><style>
+        @keyframes slideInBounce {
+          0% {
+            transform: translateY(50px) scale(0.8);
+            opacity: 0;
+          }
+          60% {
+            transform: translateY(-10px) scale(1.05);
+            opacity: 1;
+          }
+          100% {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+          }
+        }
+
+        @keyframes pulse {
+          0%, 100% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.02);
+          }
+        }
+
+        @keyframes shimmer {
+          0% {
+            background-position: -200% center;
+          }
+          100% {
+            background-position: 200% center;
+          }
+        }
+
+        .animate-slide-bounce {
+          animation: slideInBounce 0.8s ease-out forwards;
+        }
+
+        .animate-pulse-slow {
+          animation: pulse 2s ease-in-out infinite;
+        }
+
+        .shimmer-effect {
+          background: linear-gradient(
+            90deg,
+            #3b82f6,
+            #60a5fa,
+            #3730a3,
+            #4338ca,
+            #3b82f6
+          );
+          background-size: 200% 100%;
+          animation: shimmer 3s ease-in-out infinite;
+        }
+
+        .glow-effect {
+          box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .opacity-0 {
+          opacity: 0;
+        }
+      </style><div class="w-full flex justify-center items-center py-6 bg-gradient-to-r from-white to-blue-50"><div class="
+            cursor-pointer text-white text-center px-8 py-4 rounded-xl shadow-lg 
+            hover:scale-105 transition-all duration-300 
+            shimmer-effect glow-effect
+            opacity-0
+          " style="font-family: gilroy; font-weight: 500;"><span class="relative z-10 text-lg font-semibold">Enroll today for just ₹49</span></div></div><div class="w-full h-screen flex flex-col md:pl-10"><div class="w-full h-auto md:h-[20%] flex justify-center items-center mt-7 sm:mt-0 py-4 md:py-0" style="font-family: Youth; font-weight: 900; line-height: 100%; letter-spacing: 0%;"><h2 class="text-2xl md:text-4xl font-bold text-center px-4">Just 6 Easy Steps To Start<br class="hidden md:block">Your Journey Towards<span class="text-blue-500"> A Debt-</span><span class="text-yellow-500">Free Life.</span></h2></div><div class="md:hidden w-full flex-1 overflow-hidden mt-7 sm:mt-0"><div class="flex transition-transform duration-500 ease-in-out" style="transform: translateX(-100%);"><div class="w-full flex justify-center items-center px-4 flex-shrink-0"><div class="w-[360px] text-white rounded-2xl overflow-hidden flex flex-col px-6 py-4" style="background-color: rgb(11, 20, 55); height: 480px;"><div class="bg-white text-[#0B1437] w-10 h-10 flex items-center justify-center rounded-full font-medium mb-6" style="font-family: gilroy; font-weight: 500; align-self: flex-start;">01</div><div class="mb-4"><h3 class="text-2xl font-bold" style="font-family: Youth; font-weight: 900;">Fill Up the Form</h3></div><div class="mb-6 flex-1 flex items-start"><p class="text-sm text-gray-200 leading-snug" style="font-family: gilroy; font-weight: 400;">Start by providing your details through our easy-to-fill form to begin your journey.</p></div><div class="flex justify-end mt-auto"><img alt="Step 1" class="max-h-[160px] object-contain" src="/assets/Financial%20Assessment%20and%20Consultation-Cliv5gs6.png"></div></div></div><div class="w-full flex justify-center items-center px-4 flex-shrink-0"><div class="w-[360px] text-white rounded-2xl overflow-hidden flex flex-col px-6 py-4" style="background-color: rgb(51, 105, 227); height: 480px;"><div class="bg-white text-[#0B1437] w-10 h-10 flex items-center justify-center rounded-full font-medium mb-6" style="font-family: gilroy; font-weight: 500; align-self: flex-start;">02</div><div class="mb-4"><h3 class="text-2xl font-bold" style="font-family: Youth; font-weight: 900;">Financial Assessment and Consultation</h3></div><div class="mb-6 flex-1 flex items-start"><p class="text-sm text-gray-200 leading-snug" style="font-family: gilroy; font-weight: 400;">Next, we begin by understanding your financial situation through a comprehensive financial assessment. This involves a one-on-one discussion with our financial experts, where you can share details about your existing loans and financial obligations.</p></div><div class="flex justify-end mt-auto"><img alt="Step 2" class="max-h-[160px] object-contain" src="/assets/Progress%20Monitoring-Bt3ipMEj.png"></div></div></div><div class="w-full flex justify-center items-center px-4 flex-shrink-0"><div class="w-[360px] text-white rounded-2xl overflow-hidden flex flex-col px-6 py-4" style="background-color: rgb(11, 20, 55); height: 480px;"><div class="bg-white text-[#0B1437] w-10 h-10 flex items-center justify-center rounded-full font-medium mb-6" style="font-family: gilroy; font-weight: 500; align-self: flex-start;">03</div><div class="mb-4"><h3 class="text-2xl font-bold" style="font-family: Youth; font-weight: 900;">Eligibility Check</h3></div><div class="mb-6 flex-1 flex items-start"><p class="text-sm text-gray-200 leading-snug" style="font-family: gilroy; font-weight: 400;">Checking a client's eligibility typically involves assessing whether they meet the required criteria or not. This includes a comprehensive review of their financial history and a thorough analysis of their credit report.</p></div><div class="flex justify-end mt-auto"><img alt="Step 3" class="max-h-[160px] object-contain" src="/assets/CheckList-6QKTTjUS.png"></div></div></div><div class="w-full flex justify-center items-center px-4 flex-shrink-0"><div class="w-[360px] text-white rounded-2xl overflow-hidden flex flex-col px-6 py-4" style="background-color: rgb(51, 105, 227); height: 480px;"><div class="bg-white text-[#0B1437] w-10 h-10 flex items-center justify-center rounded-full font-medium mb-6" style="font-family: gilroy; font-weight: 500; align-self: flex-start;">04</div><div class="mb-4"><h3 class="text-2xl font-bold" style="font-family: Youth; font-weight: 900;">Onboarding</h3></div><div class="mb-6 flex-1 flex items-start"><p class="text-sm text-gray-200 leading-snug" style="font-family: gilroy; font-weight: 400;">Sign up with us. Our onboarding process involves signing a legal agreement designed to safeguard your interest.</p></div><div class="flex justify-end mt-auto"><img alt="Step 4" class="max-h-[160px] object-contain" src="/assets/Financial%20Assessment%20and%20Consultation-Cliv5gs6.png"></div></div></div><div class="w-full flex justify-center items-center px-4 flex-shrink-0"><div class="w-[360px] text-white rounded-2xl overflow-hidden flex flex-col px-6 py-4" style="background-color: rgb(11, 20, 55); height: 480px;"><div class="bg-white text-[#0B1437] w-10 h-10 flex items-center justify-center rounded-full font-medium mb-6" style="font-family: gilroy; font-weight: 500; align-self: flex-start;">05</div><div class="mb-4"><h3 class="text-2xl font-bold" style="font-family: Youth; font-weight: 900;">Savings and Negotiations</h3></div><div class="mb-6 flex-1 flex items-start"><p class="text-sm text-gray-200 leading-snug" style="font-family: gilroy; font-weight: 400;">You begin setting aside a portion of your income towards loan repayment, while our team of experts negotiates with banks and financial institutions to secure favourable terms aligned with your payment capacity.</p></div><div class="flex justify-end mt-auto"><img alt="Step 5" class="max-h-[160px] object-contain" src="/assets/Progress%20Monitoring-Bt3ipMEj.png"></div></div></div><div class="w-full flex justify-center items-center px-4 flex-shrink-0"><div class="w-[360px] text-white rounded-2xl overflow-hidden flex flex-col px-6 py-4" style="background-color: rgb(51, 105, 227); height: 480px;"><div class="bg-white text-[#0B1437] w-10 h-10 flex items-center justify-center rounded-full font-medium mb-6" style="font-family: gilroy; font-weight: 500; align-self: flex-start;">06</div><div class="mb-4"><h3 class="text-2xl font-bold" style="font-family: Youth; font-weight: 900;">Debt free status</h3></div><div class="mb-6 flex-1 flex items-start"><p class="text-sm text-gray-200 leading-snug" style="font-family: gilroy; font-weight: 400;">Once all settlements or restructuring agreements are successfully executed, you achieve a debt-free status, empowering you to take full control of your financial future.</p></div><div class="flex justify-end mt-auto"><img alt="Step 6" class="max-h-[160px] object-contain" src="/assets/CheckList-6QKTTjUS.png"></div></div></div></div></div><div class="hidden md:block w-full flex-1 overflow-x-auto flex-col scrollbar-hide"><div class="flex space-x-4 px-4 py-4 w-max transition-transform duration-500 ease-in-out" style="transform: translateX(-55vw);"><div class="min-w-[55vw] max-w-[60vw] text-white rounded-3xl p-6 flex relative overflow-hidden" style="background-color: rgb(11, 20, 55); height: 68vh;"><div class="absolute top-6 left-6 font-semibold text-2xl bg-white text-[#0B1437] w-12 h-12 flex items-center justify-center rounded-full z-10" style="font-family: gilroy; font-weight: 400; line-height: 100%; letter-spacing: 0%;">01</div><div class="flex-1 pl-6 pr-8 pt-20 flex flex-col max-w-[60%]"><div class="mb-6"><h3 class="text-2xl lg:text-3xl font-bold leading-tight" style="font-family: Youth; font-weight: 900; line-height: 110%; letter-spacing: 0%;">Fill Up the Form</h3></div><div class="flex-1 flex items-start overflow-hidden"><p class="text-lg lg:text-xl text-gray-300 leading-relaxed break-words" style="font-family: gilroy; font-weight: 400; line-height: 130%; letter-spacing: 0%; overflow-wrap: break-word; hyphens: auto;">Start by providing your details through our easy-to-fill form to begin your journey.</p></div></div><div class="flex-shrink-0 h-full flex items-end justify-end pr-4 pb-4 max-w-[40%]"><img alt="Step 1" class="h-[80%] w-auto object-contain" src="/assets/Financial%20Assessment%20and%20Consultation-Cliv5gs6.png"></div></div><div class="min-w-[55vw] max-w-[60vw] text-white rounded-3xl p-6 flex relative overflow-hidden" style="background-color: rgb(51, 105, 227); height: 68vh;"><div class="absolute top-6 left-6 font-semibold text-2xl bg-white text-[#0B1437] w-12 h-12 flex items-center justify-center rounded-full z-10" style="font-family: gilroy; font-weight: 400; line-height: 100%; letter-spacing: 0%;">02</div><div class="flex-1 pl-6 pr-8 pt-20 flex flex-col max-w-[60%]"><div class="mb-6"><h3 class="text-2xl lg:text-3xl font-bold leading-tight" style="font-family: Youth; font-weight: 900; line-height: 110%; letter-spacing: 0%;">Financial Assessment and Consultation</h3></div><div class="flex-1 flex items-start overflow-hidden"><p class="text-lg lg:text-xl text-gray-300 leading-relaxed break-words" style="font-family: gilroy; font-weight: 400; line-height: 130%; letter-spacing: 0%; overflow-wrap: break-word; hyphens: auto;">Next, we begin by understanding your financial situation through a comprehensive financial assessment. This involves a one-on-one discussion with our financial experts, where you can share details about your existing loans and financial obligations.</p></div></div><div class="flex-shrink-0 h-full flex items-end justify-end pr-4 pb-4 max-w-[40%]"><img alt="Step 2" class="h-[80%] w-auto object-contain" src="/assets/Progress%20Monitoring-Bt3ipMEj.png"></div></div><div class="min-w-[55vw] max-w-[60vw] text-white rounded-3xl p-6 flex relative overflow-hidden" style="background-color: rgb(11, 20, 55); height: 68vh;"><div class="absolute top-6 left-6 font-semibold text-2xl bg-white text-[#0B1437] w-12 h-12 flex items-center justify-center rounded-full z-10" style="font-family: gilroy; font-weight: 400; line-height: 100%; letter-spacing: 0%;">03</div><div class="flex-1 pl-6 pr-8 pt-20 flex flex-col max-w-[60%]"><div class="mb-6"><h3 class="text-2xl lg:text-3xl font-bold leading-tight" style="font-family: Youth; font-weight: 900; line-height: 110%; letter-spacing: 0%;">Eligibility Check</h3></div><div class="flex-1 flex items-start overflow-hidden"><p class="text-lg lg:text-xl text-gray-300 leading-relaxed break-words" style="font-family: gilroy; font-weight: 400; line-height: 130%; letter-spacing: 0%; overflow-wrap: break-word; hyphens: auto;">Checking a client's eligibility typically involves assessing whether they meet the required criteria or not. This includes a comprehensive review of their financial history and a thorough analysis of their credit report.</p></div></div><div class="flex-shrink-0 h-full flex items-end justify-end pr-4 pb-4 max-w-[40%]"><img alt="Step 3" class="h-[80%] w-auto object-contain" src="/assets/CheckList-6QKTTjUS.png"></div></div><div class="min-w-[55vw] max-w-[60vw] text-white rounded-3xl p-6 flex relative overflow-hidden" style="background-color: rgb(51, 105, 227); height: 68vh;"><div class="absolute top-6 left-6 font-semibold text-2xl bg-white text-[#0B1437] w-12 h-12 flex items-center justify-center rounded-full z-10" style="font-family: gilroy; font-weight: 400; line-height: 100%; letter-spacing: 0%;">04</div><div class="flex-1 pl-6 pr-8 pt-20 flex flex-col max-w-[60%]"><div class="mb-6"><h3 class="text-2xl lg:text-3xl font-bold leading-tight" style="font-family: Youth; font-weight: 900; line-height: 110%; letter-spacing: 0%;">Onboarding</h3></div><div class="flex-1 flex items-start overflow-hidden"><p class="text-lg lg:text-xl text-gray-300 leading-relaxed break-words" style="font-family: gilroy; font-weight: 400; line-height: 130%; letter-spacing: 0%; overflow-wrap: break-word; hyphens: auto;">Sign up with us. Our onboarding process involves signing a legal agreement designed to safeguard your interest.</p></div></div><div class="flex-shrink-0 h-full flex items-end justify-end pr-4 pb-4 max-w-[40%]"><img alt="Step 4" class="h-[80%] w-auto object-contain" src="/assets/Financial%20Assessment%20and%20Consultation-Cliv5gs6.png"></div></div><div class="min-w-[55vw] max-w-[60vw] text-white rounded-3xl p-6 flex relative overflow-hidden" style="background-color: rgb(11, 20, 55); height: 68vh;"><div class="absolute top-6 left-6 font-semibold text-2xl bg-white text-[#0B1437] w-12 h-12 flex items-center justify-center rounded-full z-10" style="font-family: gilroy; font-weight: 400; line-height: 100%; letter-spacing: 0%;">05</div><div class="flex-1 pl-6 pr-8 pt-20 flex flex-col max-w-[60%]"><div class="mb-6"><h3 class="text-2xl lg:text-3xl font-bold leading-tight" style="font-family: Youth; font-weight: 900; line-height: 110%; letter-spacing: 0%;">Savings and Negotiations</h3></div><div class="flex-1 flex items-start overflow-hidden"><p class="text-lg lg:text-xl text-gray-300 leading-relaxed break-words" style="font-family: gilroy; font-weight: 400; line-height: 130%; letter-spacing: 0%; overflow-wrap: break-word; hyphens: auto;">You begin setting aside a portion of your income towards loan repayment, while our team of experts negotiates with banks and financial institutions to secure favourable terms aligned with your payment capacity.</p></div></div><div class="flex-shrink-0 h-full flex items-end justify-end pr-4 pb-4 max-w-[40%]"><img alt="Step 5" class="h-[80%] w-auto object-contain" src="/assets/Progress%20Monitoring-Bt3ipMEj.png"></div></div><div class="min-w-[55vw] max-w-[60vw] text-white rounded-3xl p-6 flex relative overflow-hidden" style="background-color: rgb(51, 105, 227); height: 68vh;"><div class="absolute top-6 left-6 font-semibold text-2xl bg-white text-[#0B1437] w-12 h-12 flex items-center justify-center rounded-full z-10" style="font-family: gilroy; font-weight: 400; line-height: 100%; letter-spacing: 0%;">06</div><div class="flex-1 pl-6 pr-8 pt-20 flex flex-col max-w-[60%]"><div class="mb-6"><h3 class="text-2xl lg:text-3xl font-bold leading-tight" style="font-family: Youth; font-weight: 900; line-height: 110%; letter-spacing: 0%;">Debt free status</h3></div><div class="flex-1 flex items-start overflow-hidden"><p class="text-lg lg:text-xl text-gray-300 leading-relaxed break-words" style="font-family: gilroy; font-weight: 400; line-height: 130%; letter-spacing: 0%; overflow-wrap: break-word; hyphens: auto;">Once all settlements or restructuring agreements are successfully executed, you achieve a debt-free status, empowering you to take full control of your financial future.</p></div></div><div class="flex-shrink-0 h-full flex items-end justify-end pr-4 pb-4 max-w-[40%]"><img alt="Step 6" class="h-[80%] w-auto object-contain" src="/assets/CheckList-6QKTTjUS.png"></div></div></div></div><div class="flex justify-center space-x-2 py-4"><button class="w-3 h-3 rounded-full transition-colors duration-300 bg-gray-300"></button><button class="w-3 h-3 rounded-full transition-colors duration-300 bg-blue-500"></button><button class="w-3 h-3 rounded-full transition-colors duration-300 bg-gray-300"></button><button class="w-3 h-3 rounded-full transition-colors duration-300 bg-gray-300"></button><button class="w-3 h-3 rounded-full transition-colors duration-300 bg-gray-300"></button><button class="w-3 h-3 rounded-full transition-colors duration-300 bg-gray-300"></button></div></div><section class="sm:py-10 w-full px-4 sm:px-12 mx-auto"><div class="max-w-full"><h2 class="text-5xl font-bold text-center mb-12" style="font-family: Youth; font-weight: 900; line-height: 100%; letter-spacing: 0%;">Blog Section</h2><div class="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-10 w-full"><div class="bg-white rounded-3xl shadow-md overflow-hidden border border-gray-100 transition-transform duration-300 hover:shadow-lg hover:-translate-y-1 w-full"><div class="relative"><img alt="Loan Default Trouble? What to Do If You Get a Legal Notice from the Bank" class="w-full h-48 object-cover" src="/assets/blog1-CVmo9BPj.png"></div><div class="p-6"><div class="mb-3"><span class="text-blue-600 text-sm font-medium"></span></div><h3 class="text-lg font-bold mb-2 flex justify-between items-start"><span style="font-family: Youth; font-weight: 900; line-height: 100%; letter-spacing: 0%;">Loan Default Trouble? What to Do If You Get a Legal Notice from the Bank</span><div class="ml-2 text-gray-500 hover:text-blue-600 cursor-pointer"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.33301 12.6667L12.6663 3.33334M12.6663 3.33334H5.33301M12.6663 3.33334V10.6667" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></h3><p class="text-gray-600 mb-6" style="font-family: gilroy; font-weight: 400; line-height: 100%; letter-spacing: 0%;"></p><div class="flex items-center"><div class="w-8 h-8 rounded-full bg-gray-300 overflow-hidden flex-shrink-0"><div class="w-full h-full flex items-center justify-center bg-blue-100 text-blue-500">K</div></div><div class="ml-3"><p class="text-sm font-medium">Kanika Kalra</p><p class="text-xs text-gray-500">23 Jun 2025</p></div></div></div></div><div class="bg-white rounded-3xl shadow-md overflow-hidden border border-gray-100 transition-transform duration-300 hover:shadow-lg hover:-translate-y-1 w-full"><div class="relative"><img alt="Will Settlement Affect My CIBIL Score and How?" class="w-full h-48 object-cover" src="/assets/blog2-Xiz_SSPp.png"></div><div class="p-6"><div class="mb-3"><span class="text-blue-600 text-sm font-medium"></span></div><h3 class="text-lg font-bold mb-2 flex justify-between items-start"><span style="font-family: Youth; font-weight: 900; line-height: 100%; letter-spacing: 0%;">Will Settlement Affect My CIBIL Score and How?</span><div class="ml-2 text-gray-500 hover:text-blue-600 cursor-pointer"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.33301 12.6667L12.6663 3.33334M12.6663 3.33334H5.33301M12.6663 3.33334V10.6667" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></h3><p class="text-gray-600 mb-6" style="font-family: gilroy; font-weight: 400; line-height: 100%; letter-spacing: 0%;"></p><div class="flex items-center"><div class="w-8 h-8 rounded-full bg-gray-300 overflow-hidden flex-shrink-0"><div class="w-full h-full flex items-center justify-center bg-blue-100 text-blue-500">K</div></div><div class="ml-3"><p class="text-sm font-medium">Kanika Kalra</p><p class="text-xs text-gray-500">23 Jun 2025</p></div></div></div></div><div class="bg-white rounded-3xl shadow-md overflow-hidden border border-gray-100 transition-transform duration-300 hover:shadow-lg hover:-translate-y-1 w-full"><div class="relative"><img alt="What Can You Do If Recovery Agents Harass You?" class="w-full h-48 object-cover" src="/assets/blog3-CEuGVlSd.png"></div><div class="p-6"><div class="mb-3"><span class="text-blue-600 text-sm font-medium"></span></div><h3 class="text-lg font-bold mb-2 flex justify-between items-start"><span style="font-family: Youth; font-weight: 900; line-height: 100%; letter-spacing: 0%;">What Can You Do If Recovery Agents Harass You?</span><div class="ml-2 text-gray-500 hover:text-blue-600 cursor-pointer"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.33301 12.6667L12.6663 3.33334M12.6663 3.33334H5.33301M12.6663 3.33334V10.6667" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></h3><p class="text-gray-600 mb-6" style="font-family: gilroy; font-weight: 400; line-height: 100%; letter-spacing: 0%;"></p><div class="flex items-center"><div class="w-8 h-8 rounded-full bg-gray-300 overflow-hidden flex-shrink-0"><div class="w-full h-full flex items-center justify-center bg-blue-100 text-blue-500">S</div></div><div class="ml-3"><p class="text-sm font-medium">Shilpi Rani</p><p class="text-xs text-gray-500">23 Jun 2025</p></div></div></div></div><div class="bg-white rounded-3xl shadow-md overflow-hidden border border-gray-100 transition-transform duration-300 hover:shadow-lg hover:-translate-y-1 w-full"><div class="relative"><img alt="Is Debt Settlement Legal in India?" class="w-full h-48 object-cover" src="/assets/blog1-CVmo9BPj.png"></div><div class="p-6"><div class="mb-3"><span class="text-blue-600 text-sm font-medium"></span></div><h3 class="text-lg font-bold mb-2 flex justify-between items-start"><span style="font-family: Youth; font-weight: 900; line-height: 100%; letter-spacing: 0%;">Is Debt Settlement Legal in India?</span><div class="ml-2 text-gray-500 hover:text-blue-600 cursor-pointer"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.33301 12.6667L12.6663 3.33334M12.6663 3.33334H5.33301M12.6663 3.33334V10.6667" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></h3><p class="text-gray-600 mb-6" style="font-family: gilroy; font-weight: 400; line-height: 100%; letter-spacing: 0%;"></p><div class="flex items-center"><div class="w-8 h-8 rounded-full bg-gray-300 overflow-hidden flex-shrink-0"><div class="w-full h-full flex items-center justify-center bg-blue-100 text-blue-500">A</div></div><div class="ml-3"><p class="text-sm font-medium">Ashutosh Anand</p><p class="text-xs text-gray-500">23 Jun 2025</p></div></div></div></div></div><div class="md:hidden w-full"><div class="relative overflow-hidden"><div class="flex transition-transform duration-500 ease-in-out" style="transform: translateX(0%);"><div class="w-full flex-shrink-0 bg-white rounded-3xl shadow-md overflow-hidden border border-gray-100"><div class="relative"><img alt="Loan Default Trouble? What to Do If You Get a Legal Notice from the Bank" class="w-full h-48 object-cover" src="/assets/blog1-CVmo9BPj.png"></div><div class="p-6"><div class="mb-3"><span class="text-blue-600 text-sm font-medium"></span></div><h3 class="text-xl font-bold mb-2 flex justify-between items-start"><span>Loan Default Trouble? What to Do If You Get a Legal Notice from the Bank</span><a class="ml-2 text-gray-500 hover:text-blue-600"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.33301 12.6667L12.6663 3.33334M12.6663 3.33334H5.33301M12.6663 3.33334V10.6667" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></a></h3><p class="text-gray-600 mb-6"></p><div class="flex items-center"><div class="w-8 h-8 rounded-full bg-gray-300 overflow-hidden flex-shrink-0"><div class="w-full h-full flex items-center justify-center bg-blue-100 text-blue-500">K</div></div><div class="ml-3"><p class="text-sm font-medium">Kanika Kalra</p><p class="text-xs text-gray-500">23 Jun 2025</p></div></div></div></div><div class="w-full flex-shrink-0 bg-white rounded-3xl shadow-md overflow-hidden border border-gray-100"><div class="relative"><img alt="Will Settlement Affect My CIBIL Score and How?" class="w-full h-48 object-cover" src="/assets/blog2-Xiz_SSPp.png"></div><div class="p-6"><div class="mb-3"><span class="text-blue-600 text-sm font-medium"></span></div><h3 class="text-xl font-bold mb-2 flex justify-between items-start"><span>Will Settlement Affect My CIBIL Score and How?</span><a class="ml-2 text-gray-500 hover:text-blue-600"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.33301 12.6667L12.6663 3.33334M12.6663 3.33334H5.33301M12.6663 3.33334V10.6667" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></a></h3><p class="text-gray-600 mb-6"></p><div class="flex items-center"><div class="w-8 h-8 rounded-full bg-gray-300 overflow-hidden flex-shrink-0"><div class="w-full h-full flex items-center justify-center bg-blue-100 text-blue-500">K</div></div><div class="ml-3"><p class="text-sm font-medium">Kanika Kalra</p><p class="text-xs text-gray-500">23 Jun 2025</p></div></div></div></div><div class="w-full flex-shrink-0 bg-white rounded-3xl shadow-md overflow-hidden border border-gray-100"><div class="relative"><img alt="What Can You Do If Recovery Agents Harass You?" class="w-full h-48 object-cover" src="/assets/blog3-CEuGVlSd.png"></div><div class="p-6"><div class="mb-3"><span class="text-blue-600 text-sm font-medium"></span></div><h3 class="text-xl font-bold mb-2 flex justify-between items-start"><span>What Can You Do If Recovery Agents Harass You?</span><a class="ml-2 text-gray-500 hover:text-blue-600"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.33301 12.6667L12.6663 3.33334M12.6663 3.33334H5.33301M12.6663 3.33334V10.6667" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></a></h3><p class="text-gray-600 mb-6"></p><div class="flex items-center"><div class="w-8 h-8 rounded-full bg-gray-300 overflow-hidden flex-shrink-0"><div class="w-full h-full flex items-center justify-center bg-blue-100 text-blue-500">S</div></div><div class="ml-3"><p class="text-sm font-medium">Shilpi Rani</p><p class="text-xs text-gray-500">23 Jun 2025</p></div></div></div></div><div class="w-full flex-shrink-0 bg-white rounded-3xl shadow-md overflow-hidden border border-gray-100"><div class="relative"><img alt="Is Debt Settlement Legal in India?" class="w-full h-48 object-cover" src="/assets/blog1-CVmo9BPj.png"></div><div class="p-6"><div class="mb-3"><span class="text-blue-600 text-sm font-medium"></span></div><h3 class="text-xl font-bold mb-2 flex justify-between items-start"><span>Is Debt Settlement Legal in India?</span><a class="ml-2 text-gray-500 hover:text-blue-600"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.33301 12.6667L12.6663 3.33334M12.6663 3.33334H5.33301M12.6663 3.33334V10.6667" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></a></h3><p class="text-gray-600 mb-6"></p><div class="flex items-center"><div class="w-8 h-8 rounded-full bg-gray-300 overflow-hidden flex-shrink-0"><div class="w-full h-full flex items-center justify-center bg-blue-100 text-blue-500">A</div></div><div class="ml-3"><p class="text-sm font-medium">Ashutosh Anand</p><p class="text-xs text-gray-500">23 Jun 2025</p></div></div></div></div></div><div class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2"><button class="w-2 h-2 rounded-full bg-blue-600" aria-label="Go to slide 1"></button><button class="w-2 h-2 rounded-full bg-gray-300" aria-label="Go to slide 2"></button><button class="w-2 h-2 rounded-full bg-gray-300" aria-label="Go to slide 3"></button><button class="w-2 h-2 rounded-full bg-gray-300" aria-label="Go to slide 4"></button></div></div></div><div class="mt-10 text-center"><a class="inline-block text-blue-600 cursor-pointer font-medium hover:text-blue-800 transition-colors">See More</a></div></div></section><div class="w-full max-w-7xl mx-auto px-4 py-8"><div class="text-center mb-8"><h2 class="text-4xl sm:text-6xl font-bold text-navy-900 mb-2" style="font-family: Youth; font-weight: 900;">Frequently Asked Questions</h2><p class="text-base sm:text-lg text-gray-700"><span class="text-[#4575FE]">Got Questions?</span> We've Got Answers!</p></div><div class="mb-8 max-w-xl mx-auto"><div class="relative"><input placeholder="Search" class="w-full pl-5 pr-10 py-3 bg-gray-100 text-gray-600 rounded-full focus:outline-none" type="text" value=""><span class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85zm-5.242 1.656a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11z"></path></svg></span></div></div><div class="space-y-4 md:space-y-6"><div class="border-b border-gray-200 pb-4 hover:shadow-sm transition-shadow duration-200 rounded-lg"><button class="flex justify-between items-center w-full text-left py-4 px-2 sm:px-4 focus:outline-none" aria-expanded="true"><span class="text-base sm:text-lg font-bold text-navy-900 pr-2" style="font-family: Youth;">What is debt settlement and how does it work?</span><span class="text-black flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-minus"><circle cx="12" cy="12" r="10"></circle><path d="M8 12h8"></path></svg></span></button><div class="mt-2 px-2 sm:px-4 pb-4 text-gray-600 text-sm sm:text-lg" style="font-family: gilroy;"><p>Debt settlement is a process where we negotiate with your creditors to allow you to pay a lump sum that is less than the total amount you owe. This legally resolves the account as 'settled' and gets you out of the debt trap.</p></div></div><div class="border-b border-gray-200 pb-4 hover:shadow-sm transition-shadow duration-200 rounded-lg"><button class="flex justify-between items-center w-full text-left py-4 px-2 sm:px-4 focus:outline-none" aria-expanded="false"><span class="text-base sm:text-lg font-bold text-navy-900 pr-2" style="font-family: Youth;">Is Debtfrie a legitimate debt relief company in India?</span><span class="text-black flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus"><circle cx="12" cy="12" r="10"></circle><path d="M8 12h8"></path><path d="M12 8v8"></path></svg></span></button></div><div class="border-b border-gray-200 pb-4 hover:shadow-sm transition-shadow duration-200 rounded-lg"><button class="flex justify-between items-center w-full text-left py-4 px-2 sm:px-4 focus:outline-none" aria-expanded="false"><span class="text-base sm:text-lg font-bold text-navy-900 pr-2" style="font-family: Youth;">How long does the debt settlement process take?</span><span class="text-black flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus"><circle cx="12" cy="12" r="10"></circle><path d="M8 12h8"></path><path d="M12 8v8"></path></svg></span></button></div></div><div class="flex justify-center mt-8"><button class="w-full sm:w-auto px-6 py-2 bg-white hover:bg-gray-50 text-black rounded-full shadow-sm border border-gray-200"><span class="font-bold" style="font-family: Youth;">See More</span></button></div></div></div><footer class="bg-[#02102f] text-white"><div class="relative w-full"><div class="w-full h-100 bg-gray-800 relative"><img alt="Handshake" class="w-full h-full object-cover opacity-25" src="/assets/handShake-C9R54V3j.png"><div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4 py-12" style="font-family: Youth; font-weight: 900;"><h2 class="text-xl sm:text-3xl font-bold mb-6 max-w-4xl mx-auto tracking-widest">Transform Your Debt Struggles Into Financial <br class="hidden sm:inline"> Freedom And Lasting Peace Of Mind</h2><button class="bg-[#3369e3] hover:bg-blue-600 text-white px-6 py-3 rounded-xl font-medium flex items-center shadow-lg transform transition hover:scale-105" style="font-family: gilroy;">GET STARTED<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg></button></div></div></div><div class="container mx-auto px-6 md:px-12 py-12"><div class="grid grid-cols-1 md:grid-cols-6 gap-10"><div class="md:col-span-2"><h2 class="text-4xl md:text-5xl font-bold" style="font-family: Youth; font-weight: 900;">Debt<span class="text-yellow-500">frie</span></h2><p class="text-gray-400 text-sm mt-4 mb-6" style="font-family: gilroy;">Debtfrie is India's first legal-based fintech, empowering individuals to take control of their debt with expert guidance and trusted solutions.</p><div class="space-y-3 text-gray-300 text-sm mb-6" style="font-family: gilroy;"><div class="flex items-start gap-2"><span class="text-lg">📞</span><span>+91 9266990923 / +91 120-4210615</span></div><div class="flex items-start gap-2"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="whatsapp" class="svg-inline--fa fa-whatsapp text-green-500 text-lg mt-1" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"></path></svg><a href="https://wa.me/919266990923" target="_blank" rel="noreferrer" class="hover:underline">+91 92669 90923</a></div><div class="flex items-start gap-2"><span class="text-lg">📧</span><span>official@debtfrie.in</span></div><div class="flex items-start gap-2"><span class="text-lg">🏢</span><span>D-34 Sector 2 Noida,<br>Red FM Lane, 201301</span></div></div></div><div><h3 class="text-lg font-medium mb-4">Quick Links</h3><ul class="space-y-3 text-gray-400 text-sm" style="font-family: gilroy;"><li class="hover:text-white cursor-pointer">Home</li><li class="hover:text-white cursor-pointer">About Us</li><li class="hover:text-white cursor-pointer">Debt Resolution</li><li class="hover:text-white cursor-pointer">Debt Restructuring</li><li class="hover:text-white cursor-pointer">Reading Room</li><li class="hover:text-white cursor-pointer">Contact Us</li></ul></div><div><h3 class="text-lg font-medium mb-4">Our Services</h3><ul class="space-y-3 text-gray-400 text-sm" style="font-family: gilroy;"><li>Debt Resolution</li><li>Debt Restructuring</li><li>Debt Settlements</li><li>Legal Support</li><li>Anti-Harassment</li></ul></div><div><h3 class="text-lg font-medium mb-4">Library</h3><ul class="space-y-3 text-gray-400 text-sm" style="font-family: gilroy;"><li class="hover:text-white cursor-pointer">Blogs</li></ul></div><div><h3 class="text-lg font-medium mb-4">Social Media</h3><ul class="space-y-3 text-gray-400 text-sm" style="font-family: gilroy;"><li><a href="https://www.instagram.com/debtfrie" target="_blank" rel="noreferrer" class="hover:text-white">Instagram</a></li><li><a href="https://www.facebook.com/share/19Q4GZ7dTe" target="_blank" rel="noreferrer" class="hover:text-white">Facebook</a></li><li><a href="https://x.com/Debtfrie" target="_blank" rel="noreferrer" class="hover:text-white">Twitter</a></li><li><a href="https://www.linkedin.com/posts/debtfrie_struggling-to-pay-your-business-emis-or-bnpl-activity-7346870740043878401-cJP3" target="_blank" rel="noreferrer" class="hover:text-white">LinkedIn</a></li><li><a href="https://youtube.com/@debtfrie?si=mJlk4JGq7NIzB2U4" target="_blank" rel="noreferrer" class="hover:text-white">YouTube</a></li></ul><div class="flex space-x-4 mt-4"><a href="https://www.facebook.com/share/19Q4GZ7dTe" target="_blank" class="hover:scale-110 transition"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="facebook" class="svg-inline--fa fa-facebook fa-xl " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M512 256C512 114.6 397.4 0 256 0S0 114.6 0 256C0 376 82.7 476.8 194.2 504.5V334.2H141.4V256h52.8V222.3c0-87.1 39.4-127.5 125-127.5c16.2 0 44.2 3.2 55.7 6.4V172c-6-.6-16.5-1-29.6-1c-42 0-58.2 15.9-58.2 57.2V256h83.6l-14.4 78.2H287V510.1C413.8 494.8 512 386.9 512 256h0z"></path></svg></a><a href="https://x.com/Debtfrie" target="_blank" class="hover:scale-110 transition"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="x-twitter" class="svg-inline--fa fa-x-twitter fa-xl " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"></path></svg></a><a href="https://www.instagram.com/debtfrie" target="_blank" class="hover:scale-110 transition"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="instagram" class="svg-inline--fa fa-instagram fa-xl " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path></svg></a><a href="https://www.linkedin.com/posts/debtfrie_struggling-to-pay-your-business-emis-or-bnpl-activity-7346870740043878401-cJP3" target="_blank" class="hover:scale-110 transition"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="linkedin" class="svg-inline--fa fa-linkedin fa-xl " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"></path></svg></a><a href="https://youtube.com/@debtfrie?si=mJlk4JGq7NIzB2U4" target="_blank" class="hover:scale-110 transition"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="youtube" class="svg-inline--fa fa-youtube fa-xl " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"></path></svg></a></div></div></div></div><div class="border-t border-gray-800 bg-[#02102f] px-6 py-8"><h3 class="text-white text-lg md:text-xl font-semibold text-center mb-6" style="font-family: gilroy;">Awards &amp; Accreditations</h3><div class="flex flex-wrap justify-center items-center gap-6 mb-4"><img alt="Award 1" class="h-12 sm:h-16 object-contain" src="/assets/MCA_logo-DaRbSbMk.png"><img alt="ISO" class="h-10 sm:h-16 object-contain" src="/assets/SISA_Certificate-C40k3aQX.png"><img alt="PCI DSS" class="h-16 object-contain" src="/assets/ISO_Certificate-D0SYWUXf.png"><img alt="SISA" class="h-10 object-contain" src="/assets/PCI_Certificate-CM5XMjjR.png"><div class="text-center"><img alt="Award 2" class="h-12 sm:h-16 object-contain mx-auto" src="/assets/barCouncil%20logo-CWApr6MM.png"><p class="text-white text-xs mt-2" style="font-family: gilroy;">BCI Registered Advocates</p></div></div></div><div class="border-t border-gray-800 bg-[#02102f] text-center py-6 text-gray-400 text-sm" style="font-family: gilroy;">GSTIN: 09ABBCA5615N1ZF &nbsp;|&nbsp; Powered by Advocentia Financial Resolutions Pvt. Ltd. &nbsp;|&nbsp; © 2025 Design Mnks. All rights reserved.</div></footer></main></div></div>
+
+
+
+
+</body></html>
