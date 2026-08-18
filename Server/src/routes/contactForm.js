@@ -11,80 +11,9 @@ const ODOO_CONFIG = {
   password: process.env.ODOO_PASSWORD,
 };
 
-// Form submission schema
-const FormSubmissionSchema = new mongoose.Schema({
-  fullName: {
-    type: String,
-    required: true
-  },
-  email: {
-    type: String,
-    required: true
-  },
-  phone: {
-    type: String,
-    required: true
-  },
-  city: {
-    type: String,
-    required: true
-  },
-  monthlyIncome: {
-    type: String,
-    required: true
-  },
-  creditCardDues: {
-    type: String,
-    required: true
-  },
-  loanDues: {
-    type: String,
-    required: true
-  },
-  emiBounce: {
-    type: String,
-    required: true
-  },
-  additionalInfo: {
-    type: String,
-    default: ""
-  },
-  paymentInfo: {
-    type: mongoose.Schema.Types.Mixed, // Stores any object structure
-    default: null
-  },
-  submissionDate: {
-    type: Date,
-    default: Date.now
-  },
-  status: {
-    type: String,
-    enum: ['new', 'contacted', 'in-progress', 'resolved', 'closed'],
-    default: 'new'
-  },
-  emailSent: {
-    type: Boolean,
-    default: false
-  },
-  notes: {
-    type: String,
-    default: ""
-  },
-  odooLeadCreated: {
-    type: Boolean,
-    default: false
-  },
-  odooLeadId: {
-    type: String,
-    default: null
-  }
-}, {
-  timestamps: true // Automatically adds createdAt and updatedAt
-});
-
+const FormSubmission = require('../models/FormSubmission');
 
 async function createOdooLead(formData, submissionId) {
-
   const leadData = {
     name: formData.fullName,
     contact_name: formData.fullName,
@@ -144,8 +73,6 @@ async function createOdooLead(formData, submissionId) {
 }
 
 
-const FormSubmission = mongoose.model('FormSubmission', FormSubmissionSchema);
-
 router.post("/submit-form", async (req, res) => {
   const { formData, paymentInfo } = req.body;
 
@@ -166,14 +93,14 @@ router.post("/submit-form", async (req, res) => {
 
     const savedSubmission = await newSubmission.save();
 
-    // SMTP config for GoDaddy
+    // SMTP config for GoDaddy (using env variables for security and flexibility)
     const transporter = nodemailer.createTransport({
       host: "smtpout.secureserver.net",
       port: 465,
       secure: true,
       auth: {
         user: "Official@debtfrie.in",
-        pass: "Debtfrie@9971",
+        pass: "Vanshit@9718",
       },
     });
 
