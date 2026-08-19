@@ -76,6 +76,7 @@ async function createOdooLead(formData, submissionId) {
 router.post("/submit-form", async (req, res) => {
   const { formData, paymentInfo } = req.body;
 
+  let savedSubmission = null;
   try {
     // Save form data to database FIRST
     const newSubmission = new FormSubmission({
@@ -91,7 +92,7 @@ router.post("/submit-form", async (req, res) => {
       paymentInfo: paymentInfo
     });
 
-    const savedSubmission = await newSubmission.save();
+    savedSubmission = await newSubmission.save();
 
     // SMTP config for GoDaddy (using env variables for security and flexibility)
     const transporter = nodemailer.createTransport({

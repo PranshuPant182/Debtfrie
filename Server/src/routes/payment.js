@@ -5,15 +5,15 @@ const crypto = require('crypto');
 const router = express.Router();
 
 const razorpay = new Razorpay({
-    key_id: "rzp_live_Ck2ZwPRt71n7c5",
-    key_secret: "XKj0FnmoZhpi55BOW9D6Iwjq",
+    key_id: "rzp_live_TRfq8GnPhSFysW",
+    key_secret: "ohIm2s05Ep2dKg17GoiIugCw",
 });
 
 // Create order endpoint
 router.post('/create-order', async (req, res) => {
     const options = {
         amount: 4900, // 50 INR in rupees
-                // amount: 100, // 1 INR in rupee
+        // amount: 100, // 1 INR in rupee
         currency: 'INR',
         receipt: 'receipt_order_' + new Date().getTime(),
     };
@@ -34,28 +34,28 @@ router.post('/verify-payment', async (req, res) => {
         // Verify signature
         const sign = razorpay_order_id + "|" + razorpay_payment_id;
         const expectedSign = crypto
-            .createHmac("sha256", "XKj0FnmoZhpi55BOW9D6Iwjq")
+            .createHmac("sha256", "ohIm2s05Ep2dKg17GoiIugCw")
             .update(sign.toString())
             .digest("hex");
 
         if (razorpay_signature === expectedSign) {
             // Payment verified successfully
-            res.json({ 
-                success: true, 
+            res.json({
+                success: true,
                 message: "Payment verified successfully",
                 payment_id: razorpay_payment_id,
                 order_id: razorpay_order_id
             });
         } else {
-            res.status(400).json({ 
-                success: false, 
-                message: "Payment verification failed" 
+            res.status(400).json({
+                success: false,
+                message: "Payment verification failed"
             });
         }
     } catch (error) {
-        res.status(500).json({ 
-            success: false, 
-            error: error.message 
+        res.status(500).json({
+            success: false,
+            error: error.message
         });
     }
 });
@@ -66,15 +66,15 @@ router.get('/payment-status/:paymentId', async (req, res) => {
 
     try {
         const payment = await razorpay.payments.fetch(paymentId);
-        res.json({ 
-            success: true, 
+        res.json({
+            success: true,
             status: payment.status,
             payment: payment
         });
     } catch (error) {
-        res.status(500).json({ 
-            success: false, 
-            error: error.message 
+        res.status(500).json({
+            success: false,
+            error: error.message
         });
     }
 });
@@ -82,11 +82,11 @@ router.get('/payment-status/:paymentId', async (req, res) => {
 // Add this to check order status
 router.get('/order-status/:orderId', async (req, res) => {
     const { orderId } = req.params;
-    
+
     try {
         const order = await razorpay.orders.fetch(orderId);
         const payments = await razorpay.orders.fetchPayments(orderId);
-        
+
         res.json({
             success: true,
             order_status: order.status,
