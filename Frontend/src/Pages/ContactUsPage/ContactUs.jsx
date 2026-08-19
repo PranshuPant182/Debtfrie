@@ -217,37 +217,6 @@ function ContactUs() {
         },
 
         // Fine-tune UPI to remove QR
-        config: {
-          display: {
-            blocks: {
-              utib: {
-                name: 'Pay using UPI',
-                instruments: [
-                  {
-                    method: 'upi',
-                    flows: ['intent', 'collect'] // Only intent & collect, NO 'qr'
-                  }
-                ]
-              },
-              banks: {
-                name: 'Pay using Netbanking',
-                instruments: [
-                  { method: 'netbanking' }
-                ]
-              },
-              cards: {
-                name: 'Cards',
-                instruments: [
-                  { method: 'card' }
-                ]
-              }
-            },
-            sequence: ['block.utib', 'block.cards', 'block.banks'],
-            preferences: {
-              show_default_blocks: false // Use our custom blocks
-            }
-          }
-        },
 
         handler: async function (response) {
           // This handles successful payment (mainly for mobile)
