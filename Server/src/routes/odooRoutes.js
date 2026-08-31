@@ -1,10 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
-const FormSubmission = require('../models/FormSubmission');
-
-console.log("--- odooRoutes.js Module Loaded ---");
-console.log("Initial process.env.ODOO_URL check:", process.env.ODOO_URL ? "Defined" : "UNDEFINED");
 
 /**
  * Creates a lead in Odoo CRM
@@ -14,30 +10,6 @@ router.post('/create-lead', async (req, res) => {
 
     if (!formData) {
         return res.status(400).json({ success: false, error: 'Form data is required.' });
-    }
-
-    // 1. Save to MongoDB first to ensure we capture the lead data
-    let savedSubmission = null;
-    try {
-        const newSubmission = new FormSubmission({
-            fullName: formData.fullName,
-            email: formData.email,
-            phone: formData.phone,
-            city: formData.city || '',
-            monthlyIncome: formData.monthlyIncome || '',
-            creditCardDues: formData.creditCardDues || '',
-            loanDues: formData.loanDues || '',
-            emiBounce: formData.emiBounce || '',
-            additionalInfo: formData.additionalInfo || '',
-            paymentInfo: null, // Indicates a free lead
-            status: 'new',
-            emailSent: false,
-        });
-        savedSubmission = await newSubmission.save();
-        console.log(`Saved free lead to DB, ID: ${savedSubmission._id}`);
-    } catch (dbError) {
-        console.error('Failed to save free lead to database:', dbError.message);
-        // We log the error but still proceed with Odoo lead creation as lead data is critical
     }
 
     // Read config inside the handler to ensure environment variables are loaded
@@ -103,27 +75,9 @@ router.post('/create-lead', async (req, res) => {
         if (response.data.error) {
             console.error('Odoo API Internal Error:', JSON.stringify(response.data.error, null, 2));
 
-            // If DB save was successful, log the error details in DB notes
-            if (savedSubmission) {
-                await FormSubmission.findByIdAndUpdate(savedSubmission._id, {
-                    odooLeadCreated: false,
-                    notes: `Odoo error: ${response.data.error.message || 'Unknown Odoo Error'}`
-                });
-            }
-
             return res.status(500).json({
                 success: false,
                 error: response.data.error.data?.message || response.data.error.message || 'Odoo API Error',
-            });
-        }
-
-        const odooLeadId = Array.isArray(response.data.result) ? response.data.result[0] : response.data.result;
-
-        // If DB save was successful, update it with success status and ID
-        if (savedSubmission) {
-            await FormSubmission.findByIdAndUpdate(savedSubmission._id, {
-                odooLeadCreated: true,
-                odooLeadId: String(odooLeadId)
             });
         }
 
@@ -139,14 +93,6 @@ router.post('/create-lead', async (req, res) => {
             console.error('Error Response Status:', error.response.status);
         }
 
-        // If DB save was successful, log the failure in DB notes
-        if (savedSubmission) {
-            await FormSubmission.findByIdAndUpdate(savedSubmission._id, {
-                odooLeadCreated: false,
-                notes: `Odoo call failed: ${error.message}`
-            });
-        }
-
         res.status(500).json({
             success: false,
             error: 'Internal Server Error while communicating with Odoo',
@@ -155,4 +101,3 @@ router.post('/create-lead', async (req, res) => {
 });
 
 module.exports = router;
-
