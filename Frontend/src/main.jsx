@@ -35,7 +35,7 @@ createRoot(document.getElementById('root')).render(
         <ScrollToTop />
         <FacebookPixelTracker />
         <UTMTracker />
-        
+
         {/* Suspense wrapper with custom loader spinner */}
         <Suspense fallback={
             <div className="min-h-screen flex items-center justify-center bg-white">
@@ -44,7 +44,7 @@ createRoot(document.getElementById('root')).render(
         }>
             <Routes>
                 <Route path='/' element={<HomePage />} />
-                
+
                 {/* New SEO-friendly lowercase hyphenated URLs */}
                 <Route path='/contact-us' element={<ContactUs />} />
                 <Route path='/debt-resolution' element={<DebtResolution />} />
